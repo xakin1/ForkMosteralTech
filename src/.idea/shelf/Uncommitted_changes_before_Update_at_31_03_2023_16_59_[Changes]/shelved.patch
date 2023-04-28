@@ -1,0 +1,73 @@
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.MonsteralTech\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".AddProduct\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ProductDetail\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".SearchActivity\"\r\n            android:exported=\"false\"\r\n            android:label=\"@string/title_activity_search\"\r\n            android:theme=\"@style/Theme.MonsteralTech.NoActionBar\" />\r\n        <activity\r\n            android:name=\".FavoritesActivity\"\r\n            android:exported=\"false\"\r\n            android:label=\"@string/title_activity_favorites\"\r\n            android:theme=\"@style/Theme.MonsteralTech.NoActionBar\" />\r\n        <activity\r\n            android:name=\".RegisterActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".activity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ui.login.LoginActivity\"\r\n            android:exported=\"true\"\r\n            android:label=\"@string/app_name\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	
++++ b/app/src/main/AndroidManifest.xml	
+@@ -31,9 +31,6 @@
+             android:name=".RegisterActivity"
+             android:exported="false" />
+         <activity
+-            android:name=".MainActivity"
+-            android:exported="false" />
+-        <activity
+             android:name=".activity"
+             android:exported="false" />
+         <activity
+Index: app/src/main/java/com/apm/monsteraltech/MainActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/apm/monsteraltech/MainActivity.kt b/app/src/main/java/com/apm/monsteraltech/MainActivity.kt
+deleted file mode 100644
+--- a/app/src/main/java/com/apm/monsteraltech/MainActivity.kt	
++++ /dev/null	
+@@ -1,10 +0,0 @@
+-package com.apm.monsteraltech
+-
+-import androidx.appcompat.app.AppCompatActivity
+-import android.content.Intent
+-import android.os.Bundle
+-import android.view.View
+-
+-
+-class MainActivity : AppCompatActivity() {
+-}
+\ No newline at end of file
+Index: app/src/main/java/com/apm/monsteraltech/activity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.apm.monsteraltech\r\n\r\nimport android.content.Intent\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport android.os.Bundle\r\nimport android.util.Log\r\nimport android.view.View\r\nimport androidx.fragment.app.Fragment\r\nimport androidx.fragment.app.FragmentTransaction\r\nimport com.apm.monsteraltech.R\r\nimport com.apm.monsteraltech.databinding.FragmentMainActivityBinding\r\nimport com.apm.monsteraltech.ui.add.AddFragment\r\nimport com.apm.monsteraltech.ui.fav.FavFragment\r\nimport com.apm.monsteraltech.ui.home.HomeFragment\r\nimport com.apm.monsteraltech.ui.profile.ProfileFragment\r\nclass activity : AppCompatActivity() {\r\n\r\n    private lateinit var binding: FragmentMainActivityBinding\r\n\r\n\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        Log.d(\"TAG\", \"Mensaje a imprimir\");\r\n\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.fragment_main_activity)\r\n        binding = FragmentMainActivityBinding.inflate(layoutInflater)\r\n        setContentView(binding.root)\r\n        // Para la primera vez que lo carga necesitamos esto\r\n        replaceFragment(HomeFragment())\r\n\r\n        binding.bottomNavigationView.setOnItemSelectedListener { item ->\r\n            Log.d(\"Item\", item.toString());\r\n            when (item.itemId) {\r\n                R.id.home -> {\r\n                    replaceFragment(fragment = HomeFragment())\r\n                }\r\n                R.id.fav -> {\r\n                    Log.d(\"Fav\", \"CargoFav\");\r\n                    replaceFragment(fragment = FavFragment())\r\n                }\r\n                R.id.add -> {\r\n                    replaceFragment(fragment = AddFragment())\r\n\r\n                }\r\n                R.id.profile -> {\r\n                    replaceFragment(fragment = ProfileFragment())\r\n                }\r\n                else -> {\r\n                    //TODO: Poner algo aquí\r\n                }\r\n            }\r\n            true // Devuelve true si el elemento ha sido seleccionado correctamente, o false si no ha sido seleccionado\r\n        }\r\n    }\r\n\r\n\r\n    private fun replaceFragment(fragment : Fragment){\r\n        var fragmentTransaction: FragmentTransaction = supportFragmentManager.beginTransaction()\r\n        fragmentTransaction.replace(R.id.frame_layout, fragment)\r\n        fragmentTransaction.commit()\r\n    }\r\n\r\n}
+===================================================================
+diff --git a/app/src/main/java/com/apm/monsteraltech/activity.kt b/app/src/main/java/com/apm/monsteraltech/activity.kt
+--- a/app/src/main/java/com/apm/monsteraltech/activity.kt	
++++ b/app/src/main/java/com/apm/monsteraltech/activity.kt	
+@@ -17,15 +17,10 @@
+ 
+     private lateinit var binding: FragmentMainActivityBinding
+ 
+-
+-
+     override fun onCreate(savedInstanceState: Bundle?) {
+-        Log.d("TAG", "Mensaje a imprimir");
+-
+         super.onCreate(savedInstanceState)
+         setContentView(R.layout.fragment_main_activity)
+         binding = FragmentMainActivityBinding.inflate(layoutInflater)
+-        setContentView(binding.root)
+         // Para la primera vez que lo carga necesitamos esto
+         replaceFragment(HomeFragment())
+ 
+@@ -36,7 +31,6 @@
+                     replaceFragment(fragment = HomeFragment())
+                 }
+                 R.id.fav -> {
+-                    Log.d("Fav", "CargoFav");
+                     replaceFragment(fragment = FavFragment())
+                 }
+                 R.id.add -> {

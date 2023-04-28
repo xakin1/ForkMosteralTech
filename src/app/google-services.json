@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "630883605184",
+    "project_id": "monsteral-tech",
+    "storage_bucket": "monsteral-tech.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:630883605184:android:6cd56e7eecec7b1fdaab25",
+        "android_client_info": {
+          "package_name": "com.apm.monsteraltech"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "630883605184-uo83093pf5aigv38u3g0u9ddqekiei5b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.apm.monsteraltech",
+            "certificate_hash": "d4a59c9e9b19004540108de2f2de5376938621da"
+          }
+        },
+        {
+          "client_id": "630883605184-6u8umle8qsqcnr64g2lr6l29n4lu46gs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjwO_rxkK1UYNAuFHxBE88YMG20JrAb14"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "630883605184-6u8umle8qsqcnr64g2lr6l29n4lu46gs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

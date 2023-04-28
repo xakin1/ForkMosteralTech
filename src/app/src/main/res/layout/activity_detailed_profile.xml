@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.profile.DetailedProfileActivity">
+
+    <include
+        android:id="@+id/action_bar"
+        layout="@layout/activity_action_bar"
+        tools:context=".ActionBarActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/memberShip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/action_bar"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="15dp"
+        android:textColor="#000000"
+        android:text="Miembro desde"/>
+
+    <TextView
+        android:id="@+id/dateOfMemberShip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/memberShip"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="17 feb. 2023"/>
+
+    <View
+        style="@style/Divider"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/dateOfMemberShip" />
+
+    <TextView
+        android:id="@+id/text_info_verify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dateOfMemberShip"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="15dp"
+        android:textColor="#000000"
+        android:text="Información verificada"/>
+
+    <TextView
+        android:id="@+id/text_associated_with_facebook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_info_verify"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="Cuenta asociada con facebook"/>
+
+    <TextView
+        android:id="@+id/text_associated_with_google"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_associated_with_facebook"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="Cuenta asociada con Google"/>
+
+    <View
+        style="@style/Divider"
+        android:layout_marginTop="12dp"
+        android:layout_below="@id/text_associated_with_google" />
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_associated_with_google"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="15dp"
+        android:textColor="#000000"
+        android:text="Información de la cuenta"/>
+
+    <TextView
+        android:id="@+id/usersName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/info"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="15dp"
+        android:textColor="#000000"
+        android:text="Nombre del usuario"/>
+
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        android:layout_below="@id/usersName"
+        android:background="@drawable/circle"
+        android:src="@drawable/baseline_person_24"/>
+    <View
+        style="@style/Divider"
+        android:layout_above="@id/text_log_out" />
+
+    <TextView
+        android:id="@+id/text_log_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/log_out"
+        android:layout_marginTop="10dp"
+        android:textSize="30dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="10dp"
+        android:textColor="#000000"
+        android:text="Logout"/>
+
+    <Button
+        android:id="@+id/log_out"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/log_out_facebook"
+        android:text="sing out"
+        android:textColor="@android:color/white"
+        android:onClick="onClick"/>
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/log_out_facebook"
+        android:layout_above="@id/delete_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp">
+    </com.facebook.login.widget.LoginButton>
+
+    <View
+        style="@style/Divider"
+        android:layout_above="@id/delete_account"
+        android:layout_marginBottom="70dp" />
+
+    <TextView
+        android:id="@+id/text_delete_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/delete_account"
+        android:layout_marginTop="10dp"
+        android:textSize="30sp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="10dp"
+        android:textColor="#000000"
+        android:text="Borrar cuenta"/>
+
+    <Button
+        android:id="@+id/delete_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Borrar cuenta"
+        android:layout_marginBottom="15dp"
+        android:textColor="@android:color/white"
+        android:onClick="onClick"
+        android:backgroundTint="#FF0000"
+        android:layout_alignParentBottom="true"/>
+
+
+</RelativeLayout>

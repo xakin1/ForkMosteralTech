@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="4"
+        android:rowCount="2"
+        android:alignmentMode="alignMargins"
+        android:columnOrderPreserved="false"
+        android:padding="16dp"
+        android:useDefaultMargins="true"
+        android:layout_gravity="center">
+
+        <ImageButton
+            android:id="@+id/imageButton1"
+            android:tag="boton1"
+            android:layout_columnSpan="1"
+            android:layout_rowSpan="1"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="upLoadIamge"
+            android:layout_columnWeight="1"
+
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:tag="boton2"
+            android:layout_columnSpan="1"
+            android:layout_rowSpan="1"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_columnWeight="1"
+            android:onClick="upLoadIamge"
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_columnSpan="1"
+            android:tag="boton3"
+            android:layout_rowSpan="1"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_columnWeight="1"
+            android:onClick="upLoadIamge"
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_columnSpan="1"
+            android:tag="boton4"
+            android:layout_rowSpan="1"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_columnWeight="1"
+            android:onClick="upLoadIamge"
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+        <ImageButton
+            android:id="@+id/imageButton5"
+            android:layout_columnSpan="1"
+            android:tag="boton5"
+            android:layout_rowSpan="2"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_columnWeight="1"
+            android:onClick="upLoadIamge"
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+        <ImageButton
+            android:id="@+id/imageButton6"
+            android:layout_columnSpan="1"
+            android:tag="boton6"
+            android:layout_rowSpan="2"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_columnWeight="1"
+            android:onClick="upLoadIamge"
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+        <ImageButton
+            android:id="@+id/imageButton7"
+            android:layout_columnSpan="1"
+            android:tag="boton7"
+            android:layout_rowSpan="2"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_columnWeight="1"
+            android:onClick="upLoadIamge"
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+        <ImageButton
+            android:id="@+id/imageButton8"
+            android:layout_columnSpan="1"
+            android:tag="boton8"
+            android:layout_rowSpan="2"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_columnWeight="1"
+            android:onClick="upLoadIamge"
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+    </GridLayout>
+
+    <EditText
+        android:id="@+id/tv_title"
+        android:layout_below="@+id/gridLayout"
+        android:paddingTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Título" />
+
+    <EditText
+        android:id="@+id/et_description"
+        android:layout_below="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:hint="Descripción" />
+
+    <RelativeLayout
+        android:id="@+id/price_layout"
+        android:layout_below="@+id/et_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true">
+
+            <EditText
+                android:id="@+id/et_price"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:hint="Precio" />
+
+            <Spinner
+                android:id="@+id/spn_currency"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:entries="@array/currencies"
+                android:prompt="@string/currency_prompt" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <!-- Selector de Categoría -->
+
+    <!-- Vincular a página -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/button_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="end"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <!-- Botón de limpiar -->
+            <Button
+                android:id="@+id/btn_clear"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="Limpiar" />
+
+            <!-- Botón de subir -->
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:text="Subir" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/link_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spn_category"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal">
+
+            <!-- Icono 1 -->
+            <ImageView
+                android:id="@+id/img_link_1"
+                android:layout_width="189dp"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/link_1_description"
+                android:src="@drawable/wallapopicon" />
+
+            <!-- Icono 2 -->
+            <ImageView
+                android:id="@+id/img_link_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:contentDescription="@string/link_2_description"
+                android:src="@drawable/ebay_icon" />
+
+        </LinearLayout>
+
+        <Spinner
+            android:id="@+id/spn_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="25dp"
+            android:entries="@array/categories"
+            android:prompt="@string/category_prompt" />
+
+
+    </RelativeLayout>
+</LinearLayout >
