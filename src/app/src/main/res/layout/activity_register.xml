@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".RegisterActivity">
 <!--    TODO: Hacer que el tamaño de los layout no este hardcodeado-->
-    <TextView
+
+
+    <EditText
         android:id="@+id/nameRegister"
         android:layout_width="177dp"
         android:layout_height="22dp"
@@ -14,12 +16,13 @@
         android:layout_marginTop="100dp"
         android:layout_marginEnd="117dp"
         android:text="@string/prompt_name"
+        android:hint="@string/prompt_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <EditText
         android:id="@+id/lastNameRegister"
         android:layout_width="177dp"
         android:layout_height="22dp"
@@ -27,6 +30,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="117dp"
         android:text="@string/prompt_last_name"
+        android:hint="@string/prompt_last_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameRegister" />
