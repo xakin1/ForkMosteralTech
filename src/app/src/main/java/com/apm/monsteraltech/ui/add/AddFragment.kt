@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.InputFilter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +25,8 @@ class AddFragment : Fragment() {
     private lateinit var imageAdapter: ImageAdapter
     private lateinit var selectedImages: ArrayList<Uri>
     private var PICK_IMAGE_MULTIPLE = 8
+    private var MAX_DESCRIPTION_LENGTH = 200
+    private var MAX_TITLE_LENGTH = 50
 
     private val openGalleryForImages = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -69,6 +72,10 @@ class AddFragment : Fragment() {
         val priceEditText = view.findViewById<EditText>(R.id.price_edittext)
         val categorySpinner = view.findViewById<Spinner>(R.id.category_spinner)
         val addButton = view.findViewById<Button>(R.id.add_button)
+
+        descriptionEditText.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(MAX_DESCRIPTION_LENGTH))
+        nameEditText.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(MAX_TITLE_LENGTH))
+
         // Inicializa el adaptador de imágenes
         selectedImages = ArrayList()
         imageAdapter = ImageAdapter(requireContext(), selectedImages)
@@ -95,7 +102,16 @@ class AddFragment : Fragment() {
     private class ImageAdapter(private val context: Context, private val images: ArrayList<Uri>) : BaseAdapter() {
 
         var layoutInflater: LayoutInflater? = null
+        var MAX_IMAGES = 8
         override fun getCount(): Int {
+            if (images.size > MAX_IMAGES) {
+                Toast.makeText(
+                    context,
+                    "No puedes tener mas de 8 imagenes",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return MAX_IMAGES
+            }
             return images.size
         }
 
@@ -112,6 +128,7 @@ class AddFragment : Fragment() {
             if (view == null) {
                 view = LayoutInflater.from(context).inflate(R.layout.grid_item_image, parent, false)
             }
+
             val imageView = view!!.findViewById<ImageView>(R.id.ivImagen)
             val imageButton = view.findViewById<ImageButton>(R.id.ibtnEliminar)
             imageView.layoutParams = ViewGroup.LayoutParams(500, 500)
