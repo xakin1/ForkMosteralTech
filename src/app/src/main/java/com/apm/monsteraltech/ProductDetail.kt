@@ -1,5 +1,6 @@
 package com.apm.monsteraltech
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -17,10 +18,11 @@ class ProductDetail : ActionBarActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_detail)
         setToolBar()
-
+        //TODO: Si price o productDescription son null hay que recoger los datos de la base de datos
+        //TODO: Deberiamos pasarle un id de producto cuando lo tengamos
         val productName = intent.getStringExtra("Product")
         val productOwner = intent.getStringExtra("Owner")
-        val productPrice = intent.getStringExtra("Price")
+        val productPrice = intent.getStringExtra("Price") + " €"
         //val productDescription = intent.getStringExtra("Description")
         val productNameEditText = findViewById<TextView>(R.id.productTitle)
         val productOwnerButton = findViewById<TextView>(R.id.buttonOwner)

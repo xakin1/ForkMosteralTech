@@ -27,6 +27,7 @@ class UserDetail : ActionBarActivity() {
         setContentView(R.layout.activity_user_detail)
         setToolBar()
 
+        //TODO: Recoger un id de usuario
         val productOwner = intent.getStringExtra("Owner")
         val productOwnerEditText = findViewById<TextView>(R.id.profileName)
         productOwnerEditText.text = productOwner
@@ -76,9 +77,9 @@ class UserDetail : ActionBarActivity() {
             override fun onItemClick(position: Int) {
                 recyclerView.getChildAt(position)
                 val intent = Intent(this@UserDetail, ProductDetail::class.java)
-                //TODO: ver que información es necesario pasarle
                 intent.putExtra("Product", adapterProduct.getProduct(position).productName)
-                //TODO: ver si ponerle la flecha para volver atrás (la documentación no lo recomienda)
+                intent.putExtra("Owner", adapterProduct.getProduct(position).owner)
+                intent.putExtra("Price", adapterProduct.getProduct(position).price)
                 startActivity(intent)
             }
         })

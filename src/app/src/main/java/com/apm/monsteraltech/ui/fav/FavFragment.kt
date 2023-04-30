@@ -2,6 +2,7 @@ package com.apm.monsteraltech.ui.fav
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -32,9 +33,9 @@ class FavFragment : Fragment() {
             override fun onItemClick(position: Int) {
                 recyclerView.getChildAt(position)
                 val intent = Intent(requireContext(), ProductDetail::class.java)
-                //TODO: ver que información es necesario pasarle
                 intent.putExtra("Product", adapterProduct.getProduct(position).productName)
-                //TODO: ver si ponerle la flecha para volver atrás (la documentación no lo recomienda)
+                intent.putExtra("Owner", adapterProduct.getProduct(position).owner)
+                intent.putExtra("Price", adapterProduct.getProduct(position).price)
                 startActivity(intent)
             }
         })

@@ -64,39 +64,50 @@ tools:context=".ProductDetail">
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/productTitle" />
 
-<Button
-    android:id="@+id/buttonOwner"
-    android:layout_width="276dp"
-    android:layout_height="51dp"
-    android:layout_marginTop="10dp"
-    android:text="Propietario"
-    app:icon="@drawable/baseline_person_outline_24"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/productPrice"
-    app:rippleColor="@color/teal_700" />
+    <Button
+        android:id="@+id/buttonOwner"
+        android:layout_width="276dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="10dp"
+        android:text="Propietario"
+        app:icon="@drawable/baseline_person_outline_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/productPrice"
+        app:rippleColor="@color/teal_700" />
 
-<Button
-    android:id="@+id/buttonHistory"
-    android:layout_width="276dp"
-    android:layout_height="51dp"
-    android:layout_marginTop="4dp"
-    android:text="Ver historial"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.503"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/productDescription"
-    app:rippleColor="@color/teal_700" />
+    <TextView
+        android:id="@+id/productDescription"
+        android:layout_width="217dp"
+        android:layout_height="149dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        android:text="Informacion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonOwner" />
 
-<TextView
-    android:id="@+id/productDescription"
-    android:layout_width="217dp"
-    android:layout_height="149dp"
-    android:layout_marginTop="16dp"
-    android:background="@color/white"
-    android:text="Informacion"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/buttonOwner" />
+    <Button
+        android:id="@+id/buttonHistory"
+        android:layout_width="150dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="4dp"
+        android:text="Ver historial"
+        app:layout_constraintEnd_toStartOf="@+id/buttonBuy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/productDescription"
+        app:rippleColor="@color/teal_700" />
+
+    <Button
+        android:id="@+id/buttonBuy"
+        android:layout_width="150dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="4dp"
+        android:text="Comprar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonHistory"
+        app:layout_constraintTop_toBottomOf="@+id/productDescription"
+        app:rippleColor="@color/teal_700" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

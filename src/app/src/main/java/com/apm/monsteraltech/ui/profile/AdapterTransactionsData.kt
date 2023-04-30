@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.ProductDetail
 import com.apm.monsteraltech.R
+import com.apm.monsteraltech.UserDetail
 
 class AdapterTransactionsData(
     private val transactionList: ArrayList<Transactions>
@@ -32,7 +33,10 @@ class AdapterTransactionsData(
 
             val userSellerLink = object : ClickableSpan() {
                 override fun onClick(widget: View) {
-                    //TODO: FALTARIÍA CREAR UNA ACTIVIDAD PARA VER OTROS PERFILES
+                    val intent = Intent(widget.context, UserDetail::class.java)
+                    intent.putExtra("Owner", userSeller)
+                    widget.context.startActivity(intent)
+
 
                 }
 //          Añadir esto si nos interesa cambiar el color una vez pulsado
@@ -44,16 +48,17 @@ class AdapterTransactionsData(
 
             val userCustomerLink = object : ClickableSpan() {
                 override fun onClick(widget: View) {
-                    //TODO: FALTARIÍA CREAR UNA ACTIVIDAD PARA VER OTROS PERFILES
+                    val intent = Intent(widget.context, UserDetail::class.java)
+                    intent.putExtra("Owner", userCustomer)
+                    widget.context.startActivity(intent)
                 }
             }
 
             val itemLink = object : ClickableSpan() {
                 override fun onClick(widget: View) {
                     val intent = Intent(widget.context, ProductDetail::class.java)
-                    //TODO: ver que información es necesario pasarle
                     intent.putExtra("Product",item)
-                    //TODO: ver si ponerle la flecha para volver atrás (la documentación no lo recomienda)
+                    intent.putExtra("Owner", userCustomer)
                     widget.context.startActivity(intent)
                 }
             }
