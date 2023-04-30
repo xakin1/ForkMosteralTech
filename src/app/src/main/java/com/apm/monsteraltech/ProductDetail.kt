@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.bumptech.glide.Glide
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 
 class ProductDetail : ActionBarActivity() {
@@ -77,8 +78,11 @@ class ProductDetail : ActionBarActivity() {
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
             imageView.adjustViewBounds = true
-            imageView.scaleType = ImageView.ScaleType.CENTER_CROP
             imageView.setImageDrawable(imagenes[position])
+            Glide.with(container.context)
+                .load(imagenes[position])
+                .centerCrop()
+                .into(imageView)
             container.addView(imageView)
             return imageView
         }

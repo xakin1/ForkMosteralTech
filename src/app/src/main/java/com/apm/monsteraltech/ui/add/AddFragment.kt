@@ -15,6 +15,7 @@ import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.apm.monsteraltech.R
+import com.bumptech.glide.Glide
 
 //TODO: Limitar bien las fotos y los caracteres de la descripción y titulo.
 class AddFragment : Fragment() {
@@ -87,6 +88,7 @@ class AddFragment : Fragment() {
         addImageButton.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            intent.putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/*"))
             openGalleryForImages.launch(intent)
             Log.d("AddFragment", "Imagenes seleccionadas: ${selectedImages.size}")
         }
@@ -132,8 +134,13 @@ class AddFragment : Fragment() {
             val imageView = view!!.findViewById<ImageView>(R.id.ivImagen)
             val imageButton = view.findViewById<ImageButton>(R.id.ibtnEliminar)
             imageView.layoutParams = ViewGroup.LayoutParams(500, 500)
-            imageView.scaleType = ImageView.ScaleType.CENTER_CROP
-            imageView.setImageURI(images[position])
+            imageView.adjustViewBounds = true
+
+            Glide.with(context)
+                .load(images[position])
+                .centerCrop()
+                .into(imageView)
+
             imageButton.setOnClickListener {
                 images.removeAt(position)
                 notifyDataSetChanged()
