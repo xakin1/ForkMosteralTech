@@ -1,14 +1,15 @@
 package com.apm.monsteraltech
 
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
-import androidx.appcompat.widget.Toolbar
+import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 
 class ProductDetail : ActionBarActivity() {
@@ -17,6 +18,27 @@ class ProductDetail : ActionBarActivity() {
         setContentView(R.layout.activity_product_detail)
         setToolBar()
 
+        val productName = intent.getStringExtra("Product")
+        val productOwner = intent.getStringExtra("Owner")
+        val productPrice = intent.getStringExtra("Price")
+        //val productDescription = intent.getStringExtra("Description")
+        val productNameEditText = findViewById<TextView>(R.id.productTitle)
+        val productOwnerButton = findViewById<TextView>(R.id.buttonOwner)
+        val productDescriptionEditText = findViewById<TextView>(R.id.productDescription)
+        val productPriceEditText = findViewById<TextView>(R.id.productPrice)
+        val ownerButton = findViewById<Button>(R.id.buttonOwner)
+
+        ownerButton.setOnClickListener {
+            // Acción para cancelar el registro
+            val intent = Intent(this, UserDetail::class.java)
+            intent.putExtra("Owner", productOwner)
+            startActivity(intent)
+        }
+
+        productNameEditText.text = productName
+        productOwnerButton.text = productOwner
+        //productDescription.text = productDescription
+        productPriceEditText.text = productPrice
 
         // Obtener las imágenes del producto desde el servidor
         val imagenes = GetImagesOfProducts()

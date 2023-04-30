@@ -142,6 +142,11 @@
             android:screenOrientation="sensor"
             android:theme="@style/Theme.MonsteralTech.NoActionBar" />
         <activity
+            android:name=".UserDetail"
+            android:exported="false"
+            android:screenOrientation="sensor"
+            android:theme="@style/Theme.MonsteralTech.NoActionBar"/>
+        <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"
             android:screenOrientation="sensor">
