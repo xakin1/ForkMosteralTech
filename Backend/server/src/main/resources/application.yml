@@ -1,0 +1,82 @@
+spring:
+  datasource:
+    host: localhost
+    port: 5432
+    database: gema
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.database}
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+  quartz:
+    job-store-type: jdbc
+    properties:
+      org:
+        quartz:
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 10
+            threadsInheritContextClassLoaderOfInitializingThread: true
+          jobStore:
+            class: org.springframework.scheduling.quartz.LocalDataSourceJobStore
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+            useProperties: false
+  jpa:
+    defer-datasource-initialization: true
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.jdbc.lob.non_contextual_creation: true
+      hibernate.temp.use_jdbc_metadata_defaults: true
+      hibernate.dialect: org.hibernate.spatial.dialect.postgis.PostgisDialect
+  # Email server configuration
+  mail:
+    host: 127.0.0.1
+    username: dummy
+    password: dummy
+    port: 25
+    from: no-reply@dummyserver.es
+  # Email templates configuration
+  thymeleaf:
+    mode: HTML
+    cache: true
+  servlet:
+    multipart:
+      max-file-size: 250MB     # Set MAX_UPLOAD_FILE_SIZE in gulpfile.js
+      max-request-size: 260MB  # max-file-size + 10
+  sql:
+    init:
+      encoding: UTF-8
+      mode: always
+      continue-on-error: true
+server:
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
+    min-response-size: 1024
+  uploads: upload
+  temporaryUploads: temporary
+  #Default internal page size (Used for some high database usage methods)
+  pageSize: 3
+  port: 8080
+initDB:
+  defaultAdminUser: admin
+  defaultAdminPassword: admin
+  defaultAdminEmail: admin@localhost
+security-properties:
+  security:
+    jwtSecretKey: +hxpNwFEwpJWbZQnff+k6Lm2VOExdGoPgYxZg3zeoz97iOK/lL/ZctLRXQpoElRoXR841LImSZzmf+WtGTA9QGGxpgUkKV1/fSyXVIOVqsYZpdK/oj0NKfu1Eu665Tb6jgrsYjr5/fLKB1llmjPCjBAbIu9OW8UMrJTLD/MUyy4wPWoFCEf3uBmLaVBsU751Mpw1rJc9p/1TfbUf4lli5eJhPic1mdIRrwpclQ==
+    jwtValidity: 604800
+    shortJwtValidity: 3600
+logging:
+  level:
+    root: INFO
+    es.udc.lbd.gema.lps: DEBUG
+    es.udc.lbd.gema.lps.model.util.EnumConverter: ERROR
+properties:
+  clientHost: http://localhost:1234
+  gis:
+    defaultSrid: 4326
+  environment: dev

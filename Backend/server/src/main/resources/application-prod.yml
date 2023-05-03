@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    host: 172.17.0.1
+    port: 5432
+    database: gema
+    username: postgres
+    password: postgres
+  # Email server configuration
+  mail:
+    host: 127.0.0.1
+    username: dummy
+    password: dummy
+    port: 25
+    from: no-reply@dummyserver.es
+server:
+  uploads: upload
+  temporaryUploads: temporary
+  #Default internal page size (Used for some high database usage methods)
+  pageSize: 3
+  port: 8080
+initDB:
+  defaultAdminUser: admin
+  defaultAdminPassword: admin
+  defaultAdminEmail: admin@localhost
+security-properties:
+  security:
+    jwtSecretKey: +hxpNwFEwpJWbZQnff+k6Lm2VOExdGoPgYxZg3zeoz97iOK/lL/ZctLRXQpoElRoXR841LImSZzmf+WtGTA9QGGxpgUkKV1/fSyXVIOVqsYZpdK/oj0NKfu1Eu665Tb6jgrsYjr5/fLKB1llmjPCjBAbIu9OW8UMrJTLD/MUyy4wPWoFCEf3uBmLaVBsU751Mpw1rJc9p/1TfbUf4lli5eJhPic1mdIRrwpclQ==
+logging:
+  level:
+    root: INFO
+    es.udc.lbd.gema.lps: DEBUG
+    es.udc.lbd.gema.lps.model.util.EnumConverter: ERROR
+properties:
+  clientHost: http://localhost:1234
+  environment: prod

@@ -1,0 +1,23 @@
+package es.model.service;
+
+import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import es.model.service.dto.FurnitureDTO;
+import es.model.service.dto.FurnitureFullDTO;
+import es.model.service.exceptions.NotFoundException;
+import es.model.service.exceptions.OperationNotAllowedException;
+
+public interface FurnitureService {
+
+  Page<FurnitureDTO> getAll(Pageable pageable, List<String> filters, String search);
+
+  FurnitureFullDTO get(Long id) throws NotFoundException;
+
+  FurnitureFullDTO create(FurnitureFullDTO furniture) throws OperationNotAllowedException;
+
+  FurnitureFullDTO update(Long id, FurnitureFullDTO furniture) throws OperationNotAllowedException;
+
+  void delete(Long id);
+}
