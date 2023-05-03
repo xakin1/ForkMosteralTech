@@ -1,22 +1,19 @@
-package com.apm.monsteraltech.ui.profile
+package com.apm.monsteraltech
+
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.apm.monsteraltech.ProductDetail
-import com.apm.monsteraltech.R
+import com.apm.monsteraltech.ui.profile.*
 
-@Suppress("DEPRECATION")
-class ProfileFragment : Fragment() {
+class UserDetail : ActionBarActivity() {
+
     private lateinit var btnProducts: Button
     private lateinit var btnTransactions: Button
     private lateinit var profileLayout: ConstraintLayout
@@ -25,8 +22,15 @@ class ProfileFragment : Fragment() {
     private  var productList:  ArrayList<Product>? = null
     private  var transactionList: ArrayList<Transactions>? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val view = inflater.inflate(R.layout.fragment_profile, container, false)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_user_detail)
+        setToolBar()
+
+        //TODO: Recoger un id de usuario
+        val productOwner = intent.getStringExtra("Owner")
+        val productOwnerEditText = findViewById<TextView>(R.id.profileName)
+        productOwnerEditText.text = productOwner
 
         if (savedInstanceState != null) {
             // Si no estan inicializadas
@@ -36,29 +40,29 @@ class ProfileFragment : Fragment() {
                 ?.toList() ?: getTransactionList()) as ArrayList<Transactions>
         }
         // Inicializa los botones
-        btnProducts = view.findViewById(R.id.products_button)
-        btnTransactions = view.findViewById(R.id.transacciones_button)
+        btnProducts = findViewById(R.id.productButton)
+        btnTransactions = findViewById(R.id.transactionButton)
 
         // Necesitamos configurar un Layout al Recycler para que funcione
-        recyclerView = view.findViewById(R.id.recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView = findViewById(R.id.recycler_view)
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
         // Inicialmente muestra la lista de productos
         showProductList()
-        btnTransactions.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_700))
-        btnProducts.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
+        btnTransactions.setBackgroundColor( ContextCompat.getColor(this, R.color.teal_700) )
+        btnProducts.setBackgroundColor( ContextCompat.getColor(this, R.color.teal_200) )
 
         // Crea una instancia del OnClickListener para reutilizar la misma lógica en ambos botones
         val onClickListener = View.OnClickListener { viewRecycle->
             when (viewRecycle.id) {
-                R.id.products_button -> {
-                    btnTransactions.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_700))
-                    btnProducts.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
+                R.id.productButton -> {
+                    btnTransactions.setBackgroundColor( ContextCompat.getColor(this, R.color.teal_700) )
+                    btnProducts.setBackgroundColor( ContextCompat.getColor(this, R.color.teal_200) )
                     showProductList()
                 }
-                R.id.transacciones_button -> {
-                    btnProducts.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_700))
-                    btnTransactions.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
+                R.id.transactionButton -> {
+                    btnProducts.setBackgroundColor( ContextCompat.getColor(this, R.color.teal_700) )
+                    btnTransactions.setBackgroundColor( ContextCompat.getColor(this, R.color.teal_200) )
                     showTransactionList()
                 }
             }
@@ -72,20 +76,13 @@ class ProfileFragment : Fragment() {
         this.adapterProduct.setOnItemClickListener(object: AdapterProductsData.OnItemClickedListener{
             override fun onItemClick(position: Int) {
                 recyclerView.getChildAt(position)
-                val intent = Intent(requireContext(), ProductDetail::class.java)
+                val intent = Intent(this@UserDetail, ProductDetail::class.java)
                 intent.putExtra("Product", adapterProduct.getProduct(position).productName)
                 intent.putExtra("Owner", adapterProduct.getProduct(position).owner)
                 intent.putExtra("Price", adapterProduct.getProduct(position).price)
                 startActivity(intent)
             }
         })
-
-        profileLayout = view.findViewById(R.id.profile)
-        profileLayout.setOnClickListener {
-            val intent = Intent(requireContext(), DetailedProfileActivity::class.java)
-            startActivity(intent)
-        }
-        return view
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

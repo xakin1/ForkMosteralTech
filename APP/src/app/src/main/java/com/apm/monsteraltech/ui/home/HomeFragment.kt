@@ -3,6 +3,7 @@ package com.apm.monsteraltech.ui.home
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -98,6 +99,11 @@ class HomeFragment : Fragment(), Searchable {
                     com.apm.monsteraltech.ProductDetail::class.java)
                 //TODO: ver que información es necesario pasarle
                 intent.putExtra("Product", adapterProduct.getProduct(position)?.productName)
+                intent.putExtra("Owner", adapterProduct.getProduct(position)?.owner)
+                intent.putExtra("Price", adapterProduct.getProduct(position)?.price)
+                Log.d("HomeFragment", "Price: " + adapterProduct.getProduct(position)?.price)
+                Log.d("HomeFragment", "Owner: " + adapterProduct.getProduct(position)?.owner)
+                //intent.putExtra("Description", adapterProduct.getProduct(position)?.description)
                 startActivity(intent)
             }
         })
@@ -108,6 +114,8 @@ class HomeFragment : Fragment(), Searchable {
                 val intent = Intent(requireContext(), com.apm.monsteraltech.ProductDetail::class.java)
                 //TODO: ver que información es necesario pasarle
                 intent.putExtra("Product",adapterProduct.getProduct(position)?.productName)
+                intent.putExtra("Owner", adapterProduct.getProduct(position)?.owner)
+                intent.putExtra("Price", adapterProduct.getProduct(position)?.price)
                 //TODO: ver si ponerle la flecha para volver atrás (la documentación no lo recomienda)
                 startActivity(intent)
             }
