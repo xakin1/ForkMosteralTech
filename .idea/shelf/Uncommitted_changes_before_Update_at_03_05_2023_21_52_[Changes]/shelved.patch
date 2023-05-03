@@ -1,0 +1,1901 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+new file mode 100644
+--- /dev/null	(date 1683143416719)
++++ b/.idea/workspace.xml	(date 1683143416719)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
++  }
++}</component>
++</project>
+\ No newline at end of file
+Index: .idea/ForkMosteralTech.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/ForkMosteralTech.iml b/.idea/ForkMosteralTech.iml
+new file mode 100644
+--- /dev/null	(date 1683143469355)
++++ b/.idea/ForkMosteralTech.iml	(date 1683143469355)
+@@ -0,0 +1,9 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="JAVA_MODULE" version="4">
++  <component name="NewModuleRootManager" inherit-compiler-output="true">
++    <exclude-output />
++    <content url="file://$MODULE_DIR$" />
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_03_05_2023_21_51_[Changes]/shelved.patch
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_03_05_2023_21_51_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_03_05_2023_21_51_[Changes]/shelved.patch
+new file mode 100644
+--- /dev/null	(date 1683143508030)
++++ b/.idea/shelf/Uncommitted_changes_before_Update_at_03_05_2023_21_51_[Changes]/shelved.patch	(date 1683143508030)
+@@ -0,0 +1,1796 @@
++Index: APP/.idea/deploymentTargetDropDown.xml
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/APP/.idea/deploymentTargetDropDown.xml b/APP/.idea/deploymentTargetDropDown.xml
++new file mode 100644
++--- /dev/null	(date 1683143444182)
+++++ b/APP/.idea/deploymentTargetDropDown.xml	(date 1683143444182)
++@@ -0,0 +1,17 @@
+++<?xml version="1.0" encoding="UTF-8"?>
+++<project version="4">
+++  <component name="deploymentTargetDropDown">
+++    <runningDeviceTargetSelectedWithDropDown>
+++      <Target>
+++        <type value="RUNNING_DEVICE_TARGET" />
+++        <deviceKey>
+++          <Key>
+++            <type value="SERIAL_NUMBER" />
+++            <value value="IBAAWCF6EU8D7HGM" />
+++          </Key>
+++        </deviceKey>
+++      </Target>
+++    </runningDeviceTargetSelectedWithDropDown>
+++    <timeTargetWasSelectedWithDropDown value="2023-04-29T18:37:39.972445600Z" />
+++  </component>
+++</project>
++\ No newline at end of file
++Index: APP/src/app/src/main/res/layout/activity_user_detail.xml
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/APP/src/app/src/main/res/layout/activity_user_detail.xml b/APP/src/app/src/main/res/layout/activity_user_detail.xml
++new file mode 100644
++--- /dev/null	(date 1683143443061)
+++++ b/APP/src/app/src/main/res/layout/activity_user_detail.xml	(date 1683143443061)
++@@ -0,0 +1,135 @@
+++<?xml version="1.0" encoding="utf-8"?>
+++<RelativeLayout
+++    android:id="@+id/products_profile"
+++    xmlns:app="http://schemas.android.com/apk/res-auto"
+++    xmlns:android="http://schemas.android.com/apk/res/android"
+++    xmlns:tools="http://schemas.android.com/tools"
+++    android:layout_width="match_parent"
+++    android:layout_height="match_parent">
+++
+++    <!-- Cabecera -->
+++    <LinearLayout
+++        android:id="@+id/header_layout"
+++        android:layout_width="match_parent"
+++        android:layout_height="wrap_content"
+++        android:orientation="vertical">
+++
+++        <include
+++            android:id="@+id/actionBar"
+++            layout="@layout/activity_action_bar"
+++            tools:context=".ActionBarActivity"
+++            android:layout_width="match_parent"
+++            android:layout_height="wrap_content" />
+++
+++        <!-- Elementos de la cabecera aquí -->
+++
+++        <!-- Botones -->
+++        <androidx.constraintlayout.widget.ConstraintLayout
+++            android:id="@+id/profile"
+++            android:layout_width="match_parent"
+++            android:layout_height="match_parent">
+++
+++            <ImageView
+++                android:id="@+id/profileImage"
+++                android:layout_width="120dp"
+++                android:layout_height="120dp"
+++                android:layout_marginStart="16dp"
+++                android:layout_marginTop="36dp"
+++                android:background="@drawable/circle"
+++                android:src="@drawable/baseline_person_24"
+++                app:layout_constraintStart_toStartOf="parent"
+++                app:layout_constraintTop_toTopOf="parent" />
+++
+++            <TextView
+++                android:id="@+id/profileName"
+++                style="@style/Profile_name"
+++                android:layout_width="wrap_content"
+++                android:layout_height="wrap_content"
+++                android:layout_marginStart="32dp"
+++                android:layout_marginTop="25dp"
+++                android:text="Nombre del usuario"
+++                app:layout_constraintStart_toEndOf="@+id/profileImage"
+++                app:layout_constraintTop_toTopOf="parent" />
+++
+++            <TextView
+++                android:id="@+id/ubication"
+++                android:layout_width="wrap_content"
+++                android:layout_height="wrap_content"
+++                android:layout_marginStart="32dp"
+++                android:layout_marginTop="4dp"
+++                android:text="A coruña"
+++                app:layout_constraintStart_toEndOf="@+id/profileImage"
+++                app:layout_constraintTop_toBottomOf="@+id/profileName" />
+++
+++
+++            <TextView
+++                android:id="@+id/buys"
+++                android:layout_width="wrap_content"
+++                android:layout_height="wrap_content"
+++                android:layout_marginStart="32dp"
+++                android:layout_marginTop="12dp"
+++                android:text="Compras: 5"
+++                android:textStyle="bold"
+++                app:layout_constraintStart_toEndOf="@+id/profileImage"
+++                app:layout_constraintTop_toBottomOf="@+id/ubication" />
+++
+++            <TextView
+++                android:id="@+id/sales"
+++                android:layout_width="wrap_content"
+++                android:layout_height="wrap_content"
+++                android:layout_marginStart="32dp"
+++                android:layout_marginTop="8dp"
+++                android:text="Ventas: 8"
+++                android:textStyle="bold"
+++                app:layout_constraintStart_toEndOf="@+id/profileImage"
+++                app:layout_constraintTop_toBottomOf="@+id/buys" />
+++
+++        </androidx.constraintlayout.widget.ConstraintLayout>
+++
+++        <LinearLayout
+++            android:layout_width="match_parent"
+++            android:layout_height="wrap_content"
+++            android:orientation="horizontal"
+++            android:layout_marginLeft="16dp"
+++            android:layout_marginRight="22dp">
+++
+++            <Button
+++                android:id="@+id/productButton"
+++                android:layout_width="wrap_content"
+++                android:layout_height="wrap_content"
+++                android:layout_marginRight="16dp"
+++                android:layout_weight="1"
+++                android:onClick="onClick"
+++                android:text="Productos"
+++                android:textColor="@android:color/white" />
+++
+++            <Button
+++                android:id="@+id/transactionButton"
+++                android:layout_width="wrap_content"
+++                android:layout_height="wrap_content"
+++                android:layout_weight="1"
+++                android:text="Transacciones"
+++                android:layout_marginRight="16dp"
+++                android:textColor="@android:color/white"
+++                android:onClick="onClick"/>
+++
+++        </LinearLayout>
+++
+++    </LinearLayout>
+++
+++
+++    <ScrollView
+++        android:layout_width="match_parent"
+++        android:layout_height="match_parent"
+++        android:layout_below="@id/header_layout"
+++        android:layout_marginTop="-1dp">
+++
+++        <androidx.recyclerview.widget.RecyclerView
+++            android:id="@+id/recycler_view"
+++            android:layout_width="match_parent"
+++            android:layout_height="match_parent" />
+++
+++    </ScrollView>
+++
+++
+++</RelativeLayout>
++Index: APP/src/build.gradle
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+>buildscript {\r\n    repositories {\r\n        // Make sure that you have the following two repositories\r\n        google()  // Google's Maven repository\r\n        mavenCentral()  // Maven Central repository\r\n    }\r\n\r\n    dependencies {\r\n        // Add the dependency for the Google services Gradle plugin\r\n        classpath 'com.google.gms:google-services:4.3.15'\r\n    }\r\n}\r\n\r\n\r\nplugins {\r\n    id 'com.android.application' version '7.4.2' apply false\r\n    id 'com.android.library' version '7.4.2' apply false\r\n    id 'org.jetbrains.kotlin.android' version '1.8.0' apply false\r\n}\r\n\r\n
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/APP/src/build.gradle b/APP/src/build.gradle
++--- a/APP/src/build.gradle	(revision 69c37f57e0acdddec1eb752f164e947c3a314857)
+++++ b/APP/src/build.gradle	(date 1683143363878)
++@@ -11,7 +11,6 @@
++     }
++ }
++ 
++-
++ plugins {
++     id 'com.android.application' version '7.4.2' apply false
++     id 'com.android.library' version '7.4.2' apply false
++Index: APP/src/app/src/main/java/com/apm/monsteraltech/RegisterActivity.kt
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+>package com.apm.monsteraltech\r\n\r\nimport android.content.Intent\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport android.os.Bundle\r\nimport com.apm.monsteraltech.ui.login.LoginActivity\r\n\r\nclass RegisterActivity : AppCompatActivity() {\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_register)\r\n    }\r\n    fun onClickRegister() {\r\n        val intent = Intent(this, MainActivity::class.java)\r\n        startActivity(intent)\r\n    }\r\n\r\n    fun onClickCancel() {\r\n        val intent = Intent(this, LoginActivity::class.java)\r\n        startActivity(intent)\r\n    }\r\n}
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/APP/src/app/src/main/java/com/apm/monsteraltech/RegisterActivity.kt b/APP/src/app/src/main/java/com/apm/monsteraltech/RegisterActivity.kt
++--- a/APP/src/app/src/main/java/com/apm/monsteraltech/RegisterActivity.kt	(revision 69c37f57e0acdddec1eb752f164e947c3a314857)
+++++ b/APP/src/app/src/main/java/com/apm/monsteraltech/RegisterActivity.kt	(date 1683143363869)
++@@ -1,22 +1,106 @@
++ package com.apm.monsteraltech
++ 
+++import android.content.ContentValues.TAG
++ import android.content.Intent
++ import androidx.appcompat.app.AppCompatActivity
++ import android.os.Bundle
+++import android.util.Log
+++import android.widget.Button
+++import android.widget.EditText
+++import android.widget.Toast
++ import com.apm.monsteraltech.ui.login.LoginActivity
+++import com.google.firebase.auth.FirebaseAuth
+++import com.google.firebase.auth.FirebaseUser
+++import com.google.firebase.auth.ktx.auth
+++import com.google.firebase.ktx.Firebase
++ 
++ class RegisterActivity : AppCompatActivity() {
+++
+++    // [START declare_auth]
+++    private lateinit var auth: FirebaseAuth
+++    // [END declare_auth]
++     override fun onCreate(savedInstanceState: Bundle?) {
++         super.onCreate(savedInstanceState)
++         setContentView(R.layout.activity_register)
++-    }
++-    fun onClickRegister() {
++-        val intent = Intent(this, MainActivity::class.java)
++-        startActivity(intent)
++-    }
+++
+++        // [START initialize_auth]
+++        // Initialize Firebase Auth
+++        auth = Firebase.auth
+++        // [END initialize_auth]
+++
+++        val name = findViewById<EditText>(R.id.nameRegister)
+++        val lastName = findViewById<EditText>(R.id.lastNameRegister)
+++        val email = findViewById<EditText>(R.id.emailRegister)
+++        val confirmEmail = findViewById<EditText>(R.id.confirmEmailRegister)
+++        val password = findViewById<EditText>(R.id.passwordRegister)
+++        val confirmPassword = findViewById<EditText>(R.id.confirmPasswordRegister)
+++
+++        val buttonCancelar = findViewById<Button>(R.id.cancelButtonRegister)
+++        val buttonRegistrarse = findViewById<Button>(R.id.confirmButtonRegister)
+++
+++        buttonRegistrarse.setOnClickListener {
+++            if (email.text.toString() != confirmEmail.text.toString()) {
+++                Toast.makeText(this, "Los emails no coinciden", Toast.LENGTH_SHORT).show()
+++                return@setOnClickListener
+++            }
+++            if (password.text.toString() != confirmPassword.text.toString()) {
+++                Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
+++                return@setOnClickListener
+++            }
+++            createAccount(email.text.toString(), password.text.toString())
++ 
++-    fun onClickCancel() {
++-        val intent = Intent(this, LoginActivity::class.java)
+++            // Validar los datos del registro y enviarlos al servidor
+++        }
+++        buttonCancelar.setOnClickListener {
+++            // Acción para cancelar el registro
+++            val intent = Intent(this, LoginActivity::class.java)
+++            startActivity(intent)
+++        }
+++    }
+++
+++    // [START on_start_check_user]
+++    public override fun onStart() {
+++        super.onStart()
+++        // Check if user is signed in (non-null) and update UI accordingly.
+++        val currentUser = auth.currentUser
+++        if (currentUser != null) {
+++            reload()
+++        }
+++    }
+++
+++    fun createAccount(email: String, password: String) {
+++        // [START create_user_with_email]
+++        auth.createUserWithEmailAndPassword(email, password)
+++            .addOnCompleteListener(this) { task ->
+++                if (task.isSuccessful) {
+++                    // Sign in success, update UI with the signed-in user's information
+++                    Log.d(TAG, "createUserWithEmail:success")
+++                    val user = auth.currentUser
+++                    updateUI(user)
+++                } else {
+++                    // If sign in fails, display a message to the user.
+++                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
+++                    Toast.makeText(baseContext, "Authentication failed.",
+++                        Toast.LENGTH_SHORT).show()
+++                    updateUI(null)
+++                }
+++            }
+++        // [END create_user_with_email]
+++    }
+++
+++    fun updateUI(user: FirebaseUser?) {
+++        if(user != null) moveToMainMenu()
+++    }
+++
+++    private fun moveToMainMenu() {
+++        val intent = Intent(this, MainActivity::class.java)
++         startActivity(intent)
+++        finish()
+++    }
+++
+++    fun reload() {
+++        moveToMainMenu()
++     }
++-}
++\ No newline at end of file
+++
+++}
+++
++Index: APP/src/app/src/main/java/com/apm/monsteraltech/UserDetail.kt
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/APP/src/app/src/main/java/com/apm/monsteraltech/UserDetail.kt b/APP/src/app/src/main/java/com/apm/monsteraltech/UserDetail.kt
++new file mode 100644
++--- /dev/null	(date 1683143447334)
+++++ b/APP/src/app/src/main/java/com/apm/monsteraltech/UserDetail.kt	(date 1683143447334)
++@@ -0,0 +1,142 @@
+++package com.apm.monsteraltech
+++
+++
+++import android.content.Intent
+++import android.os.Bundle
+++import android.view.View
+++import android.widget.Button
+++import android.widget.TextView
+++import androidx.constraintlayout.widget.ConstraintLayout
+++import androidx.core.content.ContextCompat
+++import androidx.recyclerview.widget.LinearLayoutManager
+++import androidx.recyclerview.widget.RecyclerView
+++import com.apm.monsteraltech.ui.profile.*
+++
+++class UserDetail : ActionBarActivity() {
+++
+++    private lateinit var btnProducts: Button
+++    private lateinit var btnTransactions: Button
+++    private lateinit var profileLayout: ConstraintLayout
+++    private lateinit var recyclerView: RecyclerView
+++    private lateinit var adapterProduct: AdapterProductsData
+++    private  var productList:  ArrayList<Product>? = null
+++    private  var transactionList: ArrayList<Transactions>? = null
+++
+++    override fun onCreate(savedInstanceState: Bundle?) {
+++        super.onCreate(savedInstanceState)
+++        setContentView(R.layout.activity_user_detail)
+++        setToolBar()
+++
+++        //TODO: Recoger un id de usuario
+++        val productOwner = intent.getStringExtra("Owner")
+++        val productOwnerEditText = findViewById<TextView>(R.id.profileName)
+++        productOwnerEditText.text = productOwner
+++
+++        if (savedInstanceState != null) {
+++            // Si no estan inicializadas
+++            this.productList = (savedInstanceState.getParcelableArrayList<Product>("productList")
+++                ?.toList() ?: getProductList()) as ArrayList<Product>
+++            this.transactionList = (savedInstanceState.getParcelableArrayList<Transactions>("transactionList")
+++                ?.toList() ?: getTransactionList()) as ArrayList<Transactions>
+++        }
+++        // Inicializa los botones
+++        btnProducts = findViewById(R.id.productButton)
+++        btnTransactions = findViewById(R.id.transactionButton)
+++
+++        // Necesitamos configurar un Layout al Recycler para que funcione
+++        recyclerView = findViewById(R.id.recycler_view)
+++        recyclerView.layoutManager = LinearLayoutManager(this)
+++
+++        // Inicialmente muestra la lista de productos
+++        showProductList()
+++        btnTransactions.setBackgroundColor( ContextCompat.getColor(this, R.color.teal_700) )
+++        btnProducts.setBackgroundColor( ContextCompat.getColor(this, R.color.teal_200) )
+++
+++        // Crea una instancia del OnClickListener para reutilizar la misma lógica en ambos botones
+++        val onClickListener = View.OnClickListener { viewRecycle->
+++            when (viewRecycle.id) {
+++                R.id.productButton -> {
+++                    btnTransactions.setBackgroundColor( ContextCompat.getColor(this, R.color.teal_700) )
+++                    btnProducts.setBackgroundColor( ContextCompat.getColor(this, R.color.teal_200) )
+++                    showProductList()
+++                }
+++                R.id.transactionButton -> {
+++                    btnProducts.setBackgroundColor( ContextCompat.getColor(this, R.color.teal_700) )
+++                    btnTransactions.setBackgroundColor( ContextCompat.getColor(this, R.color.teal_200) )
+++                    showTransactionList()
+++                }
+++            }
+++        }
+++
+++        // Asigna el OnClickListener a los botones
+++        btnProducts.setOnClickListener(onClickListener)
+++        btnTransactions.setOnClickListener(onClickListener)
+++
+++        //LLamamos a la actividad producto detail
+++        this.adapterProduct.setOnItemClickListener(object: AdapterProductsData.OnItemClickedListener{
+++            override fun onItemClick(position: Int) {
+++                recyclerView.getChildAt(position)
+++                val intent = Intent(this@UserDetail, ProductDetail::class.java)
+++                intent.putExtra("Product", adapterProduct.getProduct(position).productName)
+++                intent.putExtra("Owner", adapterProduct.getProduct(position).owner)
+++                intent.putExtra("Price", adapterProduct.getProduct(position).price)
+++                startActivity(intent)
+++            }
+++        })
+++    }
+++
+++    override fun onSaveInstanceState(outState: Bundle) {
+++        super.onSaveInstanceState(outState)
+++        //TODO: revisar si al que haga una transacción en alguna otra actividad esto varia
+++        //por lo que a lo mejor esto no renta guardarlo
+++        // Only save the Parcelable arrays if they have been initialized
+++
+++        //Esto lp hacemos en caso de que una de las dos no este inicializada
+++        productList?.let {
+++            outState.putParcelableArrayList("productList", it)
+++        }
+++        transactionList?.let {
+++            outState.putParcelableArrayList("transactionList", it)
+++        }
+++    }
+++
+++
+++    private fun showProductList() {
+++        productList = productList ?: getProductList()
+++
+++        this.adapterProduct = AdapterProductsData(productList!!)
+++        recyclerView.adapter = adapterProduct
+++    }
+++
+++    private fun showTransactionList() {
+++        transactionList = transactionList ?: getTransactionList()
+++        recyclerView.adapter = AdapterTransactionsData(transactionList!!)
+++    }
+++
+++    private fun getTransactionList(): ArrayList<Transactions> {
+++        //TODO: Cargar los productos desde la base de datos o de otro recurso externo
+++        // Agrega algunas transacciones a la lista para mockear la respuesta
+++
+++        val transactionList: ArrayList<Transactions> = arrayListOf()
+++
+++        for (i in 0 until 9) {
+++            val transaction = Transactions("Usuario $i", "Usuario ${i+1}", "ObjetoX", "xx/yy/zzzz")
+++            transactionList.add(transaction)
+++        }
+++        return  transactionList
+++    }
+++
+++    private fun getProductList(): ArrayList<Product> {
+++        //TODO: Cargar los productos desde la base de datos o de otro recurso externo
+++        val productList: ArrayList<Product> = arrayListOf()
+++
+++        // Agrega algunos productos a la lista para mockear la respuesta
+++        for (i in 0 until 10) {
+++            val product = Product("Producto $i","", "Owner", "99.99")
+++            productList.add(product)
+++        }
+++
+++        return productList
+++    }
+++
+++}
++\ No newline at end of file
++Index: APP/src/app/src/main/res/layout/fragment_add.xml
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout  xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\">\r\n\r\n    <GridLayout\r\n        android:id=\"@+id/gridLayout\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:columnCount=\"4\"\r\n        android:rowCount=\"2\"\r\n        android:alignmentMode=\"alignMargins\"\r\n        android:columnOrderPreserved=\"false\"\r\n        android:padding=\"16dp\"\r\n        android:useDefaultMargins=\"true\"\r\n        android:layout_gravity=\"center\">\r\n\r\n        <ImageButton\r\n            android:id=\"@+id/imageButton1\"\r\n            android:tag=\"boton1\"\r\n            android:layout_columnSpan=\"1\"\r\n            android:layout_rowSpan=\"1\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_gravity=\"center\"\r\n            android:onClick=\"upLoadIamge\"\r\n            android:layout_columnWeight=\"1\"\r\n\r\n            app:srcCompat=\"@android:drawable/ic_menu_gallery\" />\r\n\r\n        <ImageButton\r\n            android:id=\"@+id/imageButton2\"\r\n            android:tag=\"boton2\"\r\n            android:layout_columnSpan=\"1\"\r\n            android:layout_rowSpan=\"1\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_gravity=\"center\"\r\n            android:layout_columnWeight=\"1\"\r\n            android:onClick=\"upLoadIamge\"\r\n            app:srcCompat=\"@android:drawable/ic_menu_gallery\" />\r\n\r\n        <ImageButton\r\n            android:id=\"@+id/imageButton3\"\r\n            android:layout_columnSpan=\"1\"\r\n            android:tag=\"boton3\"\r\n            android:layout_rowSpan=\"1\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_gravity=\"center\"\r\n            android:layout_columnWeight=\"1\"\r\n            android:onClick=\"upLoadIamge\"\r\n            app:srcCompat=\"@android:drawable/ic_menu_gallery\" />\r\n\r\n        <ImageButton\r\n            android:id=\"@+id/imageButton4\"\r\n            android:layout_columnSpan=\"1\"\r\n            android:tag=\"boton4\"\r\n            android:layout_rowSpan=\"1\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_gravity=\"center\"\r\n            android:layout_columnWeight=\"1\"\r\n            android:onClick=\"upLoadIamge\"\r\n            app:srcCompat=\"@android:drawable/ic_menu_gallery\" />\r\n\r\n        <ImageButton\r\n            android:id=\"@+id/imageButton5\"\r\n            android:layout_columnSpan=\"1\"\r\n            android:tag=\"boton5\"\r\n            android:layout_rowSpan=\"2\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_gravity=\"center\"\r\n            android:layout_columnWeight=\"1\"\r\n            android:onClick=\"upLoadIamge\"\r\n            app:srcCompat=\"@android:drawable/ic_menu_gallery\" />\r\n\r\n        <ImageButton\r\n            android:id=\"@+id/imageButton6\"\r\n            android:layout_columnSpan=\"1\"\r\n            android:tag=\"boton6\"\r\n            android:layout_rowSpan=\"2\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_gravity=\"center\"\r\n            android:layout_columnWeight=\"1\"\r\n            android:onClick=\"upLoadIamge\"\r\n            app:srcCompat=\"@android:drawable/ic_menu_gallery\" />\r\n\r\n        <ImageButton\r\n            android:id=\"@+id/imageButton7\"\r\n            android:layout_columnSpan=\"1\"\r\n            android:tag=\"boton7\"\r\n            android:layout_rowSpan=\"2\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_gravity=\"center\"\r\n            android:layout_columnWeight=\"1\"\r\n            android:onClick=\"upLoadIamge\"\r\n            app:srcCompat=\"@android:drawable/ic_menu_gallery\" />\r\n\r\n        <ImageButton\r\n            android:id=\"@+id/imageButton8\"\r\n            android:layout_columnSpan=\"1\"\r\n            android:tag=\"boton8\"\r\n            android:layout_rowSpan=\"2\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_gravity=\"center\"\r\n            android:layout_columnWeight=\"1\"\r\n            android:onClick=\"upLoadIamge\"\r\n            app:srcCompat=\"@android:drawable/ic_menu_gallery\" />\r\n\r\n    </GridLayout>\r\n\r\n    <EditText\r\n        android:id=\"@+id/tv_title\"\r\n        android:layout_below=\"@+id/gridLayout\"\r\n        android:paddingTop=\"10dp\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Título\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/et_description\"\r\n        android:layout_below=\"@+id/tv_title\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:inputType=\"textMultiLine\"\r\n        android:hint=\"Descripción\" />\r\n\r\n    <RelativeLayout\r\n        android:id=\"@+id/price_layout\"\r\n        android:layout_below=\"@+id/et_description\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"horizontal\"\r\n            android:layout_alignParentStart=\"true\"\r\n            android:layout_alignParentEnd=\"true\">\r\n\r\n            <EditText\r\n                android:id=\"@+id/et_price\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_weight=\"1\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:inputType=\"numberDecimal\"\r\n                android:hint=\"Precio\" />\r\n\r\n            <Spinner\r\n                android:id=\"@+id/spn_currency\"\r\n                android:layout_width=\"150dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_alignParentEnd=\"true\"\r\n                android:layout_centerVertical=\"true\"\r\n                android:entries=\"@array/currencies\"\r\n                android:prompt=\"@string/currency_prompt\" />\r\n\r\n        </LinearLayout>\r\n\r\n    </RelativeLayout>\r\n\r\n\r\n    <!-- Selector de Categoría -->\r\n\r\n    <!-- Vincular a página -->\r\n\r\n    <RelativeLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\">\r\n\r\n        <LinearLayout\r\n            android:id=\"@+id/button_layout\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_alignParentBottom=\"true\"\r\n            android:gravity=\"end\"\r\n            android:orientation=\"horizontal\"\r\n            android:padding=\"16dp\">\r\n\r\n            <!-- Botón de limpiar -->\r\n            <Button\r\n                android:id=\"@+id/btn_clear\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginEnd=\"8dp\"\r\n                android:layout_weight=\"1\"\r\n                android:onClick=\"onClick\"\r\n                android:text=\"Limpiar\" />\r\n\r\n            <!-- Botón de subir -->\r\n            <Button\r\n                android:id=\"@+id/btn_submit\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"8dp\"\r\n                android:layout_weight=\"1\"\r\n                android:onClick=\"onClick\"\r\n                android:text=\"Subir\" />\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:id=\"@+id/link_layout\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_below=\"@+id/spn_category\"\r\n            android:layout_marginTop=\"25dp\"\r\n            android:orientation=\"horizontal\">\r\n\r\n            <!-- Icono 1 -->\r\n            <ImageView\r\n                android:id=\"@+id/img_link_1\"\r\n                android:layout_width=\"189dp\"\r\n                android:layout_height=\"match_parent\"\r\n                android:contentDescription=\"@string/link_1_description\"\r\n                android:src=\"@drawable/wallapopicon\" />\r\n\r\n            <!-- Icono 2 -->\r\n            <ImageView\r\n                android:id=\"@+id/img_link_2\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_marginStart=\"16dp\"\r\n                android:contentDescription=\"@string/link_2_description\"\r\n                android:src=\"@drawable/ebay_icon\" />\r\n\r\n        </LinearLayout>\r\n\r\n        <Spinner\r\n            android:id=\"@+id/spn_category\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_alignParentTop=\"true\"\r\n            android:layout_marginTop=\"25dp\"\r\n            android:entries=\"@array/categories\"\r\n            android:prompt=\"@string/category_prompt\" />\r\n\r\n\r\n    </RelativeLayout>\r\n</LinearLayout >
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/APP/src/app/src/main/res/layout/fragment_add.xml b/APP/src/app/src/main/res/layout/fragment_add.xml
++--- a/APP/src/app/src/main/res/layout/fragment_add.xml	(revision 69c37f57e0acdddec1eb752f164e947c3a314857)
+++++ b/APP/src/app/src/main/res/layout/fragment_add.xml	(date 1683143363877)
++@@ -1,239 +1,82 @@
++ <?xml version="1.0" encoding="utf-8"?>
++-<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
++-    xmlns:app="http://schemas.android.com/apk/res-auto"
+++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
++     android:layout_width="match_parent"
++-    android:layout_height="match_parent"
++-    android:orientation="vertical">
+++    android:layout_height="match_parent">
++ 
++-    <GridLayout
++-        android:id="@+id/gridLayout"
++-        android:layout_width="match_parent"
+++    <TextView
+++        android:id="@+id/title_textview"
+++        android:layout_width="wrap_content"
++         android:layout_height="wrap_content"
++-        android:columnCount="4"
++-        android:rowCount="2"
++-        android:alignmentMode="alignMargins"
++-        android:columnOrderPreserved="false"
++-        android:padding="16dp"
++-        android:useDefaultMargins="true"
++-        android:layout_gravity="center">
+++        android:text="Agregar Producto"
+++        android:textSize="20sp"
+++        android:layout_alignParentTop="true"
+++        android:layout_centerHorizontal="true" />
++ 
++-        <ImageButton
++-            android:id="@+id/imageButton1"
++-            android:tag="boton1"
++-            android:layout_columnSpan="1"
++-            android:layout_rowSpan="1"
++-            android:layout_width="wrap_content"
++-            android:layout_gravity="center"
++-            android:onClick="upLoadIamge"
++-            android:layout_columnWeight="1"
+++    <Button
+++        android:id="@+id/add_image_button"
+++        android:layout_width="wrap_content"
+++        android:layout_height="wrap_content"
+++        android:text="Agregar imagen"
+++        android:layout_below="@id/title_textview"
+++        android:layout_alignParentEnd="true"
+++        android:layout_marginTop="16dp"
+++        android:layout_marginEnd="16dp" />
++ 
++-            app:srcCompat="@android:drawable/ic_menu_gallery" />
++-
++-        <ImageButton
++-            android:id="@+id/imageButton2"
++-            android:tag="boton2"
++-            android:layout_columnSpan="1"
++-            android:layout_rowSpan="1"
++-            android:layout_width="wrap_content"
++-            android:layout_gravity="center"
++-            android:layout_columnWeight="1"
++-            android:onClick="upLoadIamge"
++-            app:srcCompat="@android:drawable/ic_menu_gallery" />
++-
++-        <ImageButton
++-            android:id="@+id/imageButton3"
++-            android:layout_columnSpan="1"
++-            android:tag="boton3"
++-            android:layout_rowSpan="1"
++-            android:layout_width="wrap_content"
++-            android:layout_gravity="center"
++-            android:layout_columnWeight="1"
++-            android:onClick="upLoadIamge"
++-            app:srcCompat="@android:drawable/ic_menu_gallery" />
++-
++-        <ImageButton
++-            android:id="@+id/imageButton4"
++-            android:layout_columnSpan="1"
++-            android:tag="boton4"
++-            android:layout_rowSpan="1"
++-            android:layout_width="wrap_content"
++-            android:layout_gravity="center"
++-            android:layout_columnWeight="1"
++-            android:onClick="upLoadIamge"
++-            app:srcCompat="@android:drawable/ic_menu_gallery" />
++-
++-        <ImageButton
++-            android:id="@+id/imageButton5"
++-            android:layout_columnSpan="1"
++-            android:tag="boton5"
++-            android:layout_rowSpan="2"
++-            android:layout_width="wrap_content"
++-            android:layout_gravity="center"
++-            android:layout_columnWeight="1"
++-            android:onClick="upLoadIamge"
++-            app:srcCompat="@android:drawable/ic_menu_gallery" />
++-
++-        <ImageButton
++-            android:id="@+id/imageButton6"
++-            android:layout_columnSpan="1"
++-            android:tag="boton6"
++-            android:layout_rowSpan="2"
++-            android:layout_width="wrap_content"
++-            android:layout_gravity="center"
++-            android:layout_columnWeight="1"
++-            android:onClick="upLoadIamge"
++-            app:srcCompat="@android:drawable/ic_menu_gallery" />
++-
++-        <ImageButton
++-            android:id="@+id/imageButton7"
++-            android:layout_columnSpan="1"
++-            android:tag="boton7"
++-            android:layout_rowSpan="2"
++-            android:layout_width="wrap_content"
++-            android:layout_gravity="center"
++-            android:layout_columnWeight="1"
++-            android:onClick="upLoadIamge"
++-            app:srcCompat="@android:drawable/ic_menu_gallery" />
++-
++-        <ImageButton
++-            android:id="@+id/imageButton8"
++-            android:layout_columnSpan="1"
++-            android:tag="boton8"
++-            android:layout_rowSpan="2"
++-            android:layout_width="wrap_content"
++-            android:layout_gravity="center"
++-            android:layout_columnWeight="1"
++-            android:onClick="upLoadIamge"
++-            app:srcCompat="@android:drawable/ic_menu_gallery" />
++-
++-    </GridLayout>
+++    <GridView
+++        android:id="@+id/image_gridview"
+++        android:layout_width="wrap_content"
+++        android:layout_height="wrap_content"
+++        android:layout_below="@id/add_image_button"
+++        android:numColumns="4"
+++        android:rowCount="2"
+++        android:horizontalSpacing="2dp"
+++        android:verticalSpacing="2dp"
+++        android:padding="2dp"/>
++ 
++     <EditText
++-        android:id="@+id/tv_title"
++-        android:layout_below="@+id/gridLayout"
++-        android:paddingTop="10dp"
+++        android:id="@+id/name_edittext"
++         android:layout_width="match_parent"
++         android:layout_height="wrap_content"
++-        android:text="Título" />
+++        android:layout_below="@id/image_gridview"
+++        android:layout_marginStart="16dp"
+++        android:layout_marginEnd="16dp"
+++        android:hint="Nombre del producto" />
++ 
++     <EditText
++-        android:id="@+id/et_description"
++-        android:layout_below="@+id/tv_title"
+++        android:id="@+id/description_edittext"
++         android:layout_width="match_parent"
++         android:layout_height="wrap_content"
++-        android:inputType="textMultiLine"
++-        android:hint="Descripción" />
+++        android:layout_below="@id/name_edittext"
+++        android:layout_marginStart="16dp"
+++        android:layout_marginEnd="16dp"
+++        android:hint="Descripción del producto" />
++ 
++-    <RelativeLayout
++-        android:id="@+id/price_layout"
++-        android:layout_below="@+id/et_description"
+++    <EditText
+++        android:id="@+id/price_edittext"
++         android:layout_width="match_parent"
++-        android:layout_height="wrap_content">
++-
++-        <LinearLayout
++-            android:layout_width="match_parent"
++-            android:layout_height="wrap_content"
++-            android:orientation="horizontal"
++-            android:layout_alignParentStart="true"
++-            android:layout_alignParentEnd="true">
++-
++-            <EditText
++-                android:id="@+id/et_price"
++-                android:layout_width="wrap_content"
++-                android:layout_weight="1"
++-                android:layout_height="wrap_content"
++-                android:inputType="numberDecimal"
++-                android:hint="Precio" />
+++        android:layout_height="wrap_content"
+++        android:layout_below="@id/description_edittext"
+++        android:layout_marginStart="16dp"
+++        android:layout_marginEnd="16dp"
+++        android:inputType="numberDecimal"
+++        android:hint="Precio del producto" />
++ 
++-            <Spinner
++-                android:id="@+id/spn_currency"
++-                android:layout_width="150dp"
++-                android:layout_height="wrap_content"
++-                android:layout_alignParentEnd="true"
++-                android:layout_centerVertical="true"
++-                android:entries="@array/currencies"
++-                android:prompt="@string/currency_prompt" />
++-
++-        </LinearLayout>
++-
++-    </RelativeLayout>
++-
++-
++-    <!-- Selector de Categoría -->
++-
++-    <!-- Vincular a página -->
++-
++-    <RelativeLayout
+++    <Spinner
+++        android:id="@+id/category_spinner"
++         android:layout_width="match_parent"
++-        android:layout_height="match_parent">
++-
++-        <LinearLayout
++-            android:id="@+id/button_layout"
++-            android:layout_width="match_parent"
++-            android:layout_height="wrap_content"
++-            android:layout_alignParentBottom="true"
++-            android:gravity="end"
++-            android:orientation="horizontal"
++-            android:padding="16dp">
++-
++-            <!-- Botón de limpiar -->
++-            <Button
++-                android:id="@+id/btn_clear"
++-                android:layout_width="0dp"
++-                android:layout_height="wrap_content"
++-                android:layout_marginEnd="8dp"
++-                android:layout_weight="1"
++-                android:onClick="onClick"
++-                android:text="Limpiar" />
++-
++-            <!-- Botón de subir -->
++-            <Button
++-                android:id="@+id/btn_submit"
++-                android:layout_width="0dp"
++-                android:layout_height="wrap_content"
++-                android:layout_marginStart="8dp"
++-                android:layout_weight="1"
++-                android:onClick="onClick"
++-                android:text="Subir" />
++-
++-        </LinearLayout>
++-
++-        <LinearLayout
++-            android:id="@+id/link_layout"
++-            android:layout_width="match_parent"
++-            android:layout_height="wrap_content"
++-            android:layout_below="@+id/spn_category"
++-            android:layout_marginTop="25dp"
++-            android:orientation="horizontal">
++-
++-            <!-- Icono 1 -->
++-            <ImageView
++-                android:id="@+id/img_link_1"
++-                android:layout_width="189dp"
++-                android:layout_height="match_parent"
++-                android:contentDescription="@string/link_1_description"
++-                android:src="@drawable/wallapopicon" />
++-
++-            <!-- Icono 2 -->
++-            <ImageView
++-                android:id="@+id/img_link_2"
++-                android:layout_width="match_parent"
++-                android:layout_height="match_parent"
++-                android:layout_marginStart="16dp"
++-                android:contentDescription="@string/link_2_description"
++-                android:src="@drawable/ebay_icon" />
+++        android:layout_height="wrap_content"
+++        android:layout_below="@id/price_edittext"
+++        android:layout_marginStart="16dp"
+++        android:layout_marginEnd="16dp"
+++        android:entries="@array/categories" />
++ 
++-        </LinearLayout>
++-
++-        <Spinner
++-            android:id="@+id/spn_category"
++-            android:layout_width="match_parent"
++-            android:layout_height="wrap_content"
++-            android:layout_alignParentTop="true"
++-            android:layout_marginTop="25dp"
++-            android:entries="@array/categories"
++-            android:prompt="@string/category_prompt" />
+++    <Button
+++        android:id="@+id/add_button"
+++        android:layout_width="wrap_content"
+++        android:layout_height="wrap_content"
+++        android:text="Agregar"
+++        android:layout_below="@id/category_spinner"
+++        android:layout_alignParentEnd="true"
+++        android:layout_marginTop="16dp" />
++ 
++-
++-    </RelativeLayout>
++-</LinearLayout >
++\ No newline at end of file
+++</RelativeLayout>
++\ No newline at end of file
++Index: APP/src/app/src/main/res/layout/activity_product_detail.xml
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\nxmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\nxmlns:tools=\"http://schemas.android.com/tools\"\r\nandroid:layout_width=\"match_parent\"\r\nandroid:layout_height=\"match_parent\"\r\ntools:context=\".ProductDetail\">\r\n\r\n    <include\r\n        android:id=\"@+id/action_bar\"\r\n        layout=\"@layout/activity_action_bar\"\r\n        tools:context=\".ActionBarActivity\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\" />\r\n\r\n\r\n    <ImageView\r\n    android:id=\"@+id/imageView2\"\r\n    android:layout_width=\"413dp\"\r\n    android:layout_height=\"238dp\"\r\n    android:layout_marginTop=\"4dp\"\r\n    app:layout_constraintEnd_toEndOf=\"parent\"\r\n    app:layout_constraintHorizontal_bias=\"0.464\"\r\n    app:layout_constraintStart_toStartOf=\"parent\"\r\n    app:layout_constraintTop_toTopOf=\"parent\"\r\n    tools:srcCompat=\"@tools:sample/backgrounds/scenic\" />\r\n\r\n<TextView\r\n    android:id=\"@+id/textView4\"\r\n    android:layout_width=\"126dp\"\r\n    android:layout_height=\"40dp\"\r\n    android:layout_marginTop=\"12dp\"\r\n    android:text=\"Product\"\r\n    app:layout_constraintEnd_toEndOf=\"parent\"\r\n    app:layout_constraintHorizontal_bias=\"0.498\"\r\n    app:layout_constraintStart_toStartOf=\"parent\"\r\n    app:layout_constraintTop_toBottomOf=\"@+id/imageView2\" />\r\n\r\n<Button\r\n    android:id=\"@+id/button2\"\r\n    android:layout_width=\"276dp\"\r\n    android:layout_height=\"51dp\"\r\n    android:layout_marginTop=\"32dp\"\r\n    android:text=\"Propietario\"\r\n    app:icon=\"@drawable/baseline_person_outline_24\"\r\n    app:layout_constraintEnd_toEndOf=\"parent\"\r\n    app:layout_constraintStart_toStartOf=\"parent\"\r\n    app:layout_constraintTop_toBottomOf=\"@+id/textView4\"\r\n    app:rippleColor=\"@color/teal_700\" />\r\n\r\n<Button\r\n    android:id=\"@+id/button3\"\r\n    android:layout_width=\"276dp\"\r\n    android:layout_height=\"51dp\"\r\n    android:layout_marginTop=\"4dp\"\r\n    android:text=\"Ver historial\"\r\n    app:layout_constraintEnd_toEndOf=\"parent\"\r\n    app:layout_constraintHorizontal_bias=\"0.503\"\r\n    app:layout_constraintStart_toStartOf=\"parent\"\r\n    app:layout_constraintTop_toBottomOf=\"@+id/textView5\"\r\n    app:rippleColor=\"@color/teal_700\" />\r\n\r\n<TextView\r\n    android:id=\"@+id/textView5\"\r\n    android:layout_width=\"217dp\"\r\n    android:layout_height=\"149dp\"\r\n    android:layout_marginTop=\"16dp\"\r\n    android:background=\"@color/white\"\r\n    android:text=\"Informacion\"\r\n    app:layout_constraintEnd_toEndOf=\"parent\"\r\n    app:layout_constraintStart_toStartOf=\"parent\"\r\n    app:layout_constraintTop_toBottomOf=\"@+id/button2\" />\r\n\r\n<ImageButton\r\n    android:id=\"@+id/imageButton4\"\r\n    android:layout_width=\"54dp\"\r\n    android:layout_height=\"49dp\"\r\n    android:layout_marginTop=\"20dp\"\r\n    android:background=\"@color/white\"\r\n    app:layout_constraintEnd_toStartOf=\"@+id/imageButton\"\r\n    app:layout_constraintHorizontal_bias=\"0.691\"\r\n    app:layout_constraintStart_toStartOf=\"parent\"\r\n    app:layout_constraintTop_toBottomOf=\"@+id/button3\"\r\n    app:srcCompat=\"@drawable/wallapopicon\" />\r\n\r\n<ImageButton\r\n    android:id=\"@+id/imageButton\"\r\n    android:layout_width=\"62dp\"\r\n    android:layout_height=\"49dp\"\r\n    android:layout_marginTop=\"20dp\"\r\n    android:layout_marginEnd=\"120dp\"\r\n    android:background=\"@color/white\"\r\n    app:layout_constraintEnd_toEndOf=\"parent\"\r\n    app:layout_constraintTop_toBottomOf=\"@+id/button3\"\r\n    app:srcCompat=\"@drawable/ebay_icon\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/APP/src/app/src/main/res/layout/activity_product_detail.xml b/APP/src/app/src/main/res/layout/activity_product_detail.xml
++--- a/APP/src/app/src/main/res/layout/activity_product_detail.xml	(revision 69c37f57e0acdddec1eb752f164e947c3a314857)
+++++ b/APP/src/app/src/main/res/layout/activity_product_detail.xml	(date 1683143363876)
++@@ -7,91 +7,107 @@
++ tools:context=".ProductDetail">
++ 
++     <include
++-        android:id="@+id/action_bar"
+++        android:id="@+id/actionBar"
++         layout="@layout/activity_action_bar"
++         tools:context=".ActionBarActivity"
++         android:layout_width="match_parent"
++         android:layout_height="wrap_content" />
++ 
+++    <androidx.viewpager.widget.ViewPager
+++        android:id="@+id/viewPaperImages"
+++        android:layout_width="225dp"
+++        android:layout_height="225dp"
+++        android:layout_marginTop="20dp"
+++        app:layout_constraintEnd_toEndOf="@id/actionBar"
+++        app:layout_constraintHorizontal_bias="0.496"
+++        app:layout_constraintStart_toStartOf="@id/actionBar"
+++        app:layout_constraintTop_toBottomOf="@id/actionBar" />
++ 
++-    <ImageView
++-    android:id="@+id/imageView2"
++-    android:layout_width="413dp"
++-    android:layout_height="238dp"
++-    android:layout_marginTop="4dp"
++-    app:layout_constraintEnd_toEndOf="parent"
++-    app:layout_constraintHorizontal_bias="0.464"
++-    app:layout_constraintStart_toStartOf="parent"
++-    app:layout_constraintTop_toTopOf="parent"
++-    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+++    <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+++        android:id="@+id/wormDotsIndicator"
+++        android:layout_width="wrap_content"
+++        android:layout_height="wrap_content"
+++        app:dotsColor="@android:color/holo_blue_light"
+++        app:dotsStrokeColor="@android:color/holo_blue_dark"
+++        app:dotsCornerRadius="8dp"
+++        app:dotsSize="16dp"
+++        app:dotsSpacing="4dp"
+++        app:dotsStrokeWidth="2dp"
+++        app:layout_constraintEnd_toEndOf="parent"
+++        app:layout_constraintHorizontal_bias="0.498"
+++        app:layout_constraintStart_toStartOf="parent"
+++        app:layout_constraintTop_toBottomOf="@+id/viewPaperImages"
+++        />
++ 
++-<TextView
++-    android:id="@+id/textView4"
++-    android:layout_width="126dp"
++-    android:layout_height="40dp"
++-    android:layout_marginTop="12dp"
++-    android:text="Product"
++-    app:layout_constraintEnd_toEndOf="parent"
++-    app:layout_constraintHorizontal_bias="0.498"
++-    app:layout_constraintStart_toStartOf="parent"
++-    app:layout_constraintTop_toBottomOf="@+id/imageView2" />
++-
++-<Button
++-    android:id="@+id/button2"
++-    android:layout_width="276dp"
++-    android:layout_height="51dp"
++-    android:layout_marginTop="32dp"
++-    android:text="Propietario"
++-    app:icon="@drawable/baseline_person_outline_24"
++-    app:layout_constraintEnd_toEndOf="parent"
++-    app:layout_constraintStart_toStartOf="parent"
++-    app:layout_constraintTop_toBottomOf="@+id/textView4"
++-    app:rippleColor="@color/teal_700" />
+++    <TextView
+++        android:id="@+id/productTitle"
+++        android:layout_width="250dp"
+++        android:layout_height="40dp"
+++        android:layout_marginTop="12dp"
+++        android:text="Product"
+++        android:textSize="20sp"
+++        android:textAlignment="center"
+++        app:layout_constraintEnd_toEndOf="parent"
+++        app:layout_constraintHorizontal_bias="0.498"
+++        app:layout_constraintStart_toStartOf="parent"
+++        app:layout_constraintTop_toBottomOf="@+id/wormDotsIndicator" />
+++    <TextView
+++        android:id="@+id/productPrice"
+++        android:layout_width="250dp"
+++        android:layout_height="40dp"
+++        android:layout_marginTop="12dp"
+++        android:text="Precio"
+++        android:textSize="25sp"
+++        android:textAlignment="center"
+++        app:layout_constraintEnd_toEndOf="parent"
+++        app:layout_constraintHorizontal_bias="0.498"
+++        app:layout_constraintStart_toStartOf="parent"
+++        app:layout_constraintTop_toBottomOf="@+id/productTitle" />
++ 
++-<Button
++-    android:id="@+id/button3"
++-    android:layout_width="276dp"
++-    android:layout_height="51dp"
++-    android:layout_marginTop="4dp"
++-    android:text="Ver historial"
++-    app:layout_constraintEnd_toEndOf="parent"
++-    app:layout_constraintHorizontal_bias="0.503"
++-    app:layout_constraintStart_toStartOf="parent"
++-    app:layout_constraintTop_toBottomOf="@+id/textView5"
++-    app:rippleColor="@color/teal_700" />
+++    <Button
+++        android:id="@+id/buttonOwner"
+++        android:layout_width="276dp"
+++        android:layout_height="51dp"
+++        android:layout_marginTop="10dp"
+++        android:text="Propietario"
+++        app:icon="@drawable/baseline_person_outline_24"
+++        app:layout_constraintEnd_toEndOf="parent"
+++        app:layout_constraintStart_toStartOf="parent"
+++        app:layout_constraintTop_toBottomOf="@+id/productPrice"
+++        app:rippleColor="@color/teal_700" />
++ 
++-<TextView
++-    android:id="@+id/textView5"
++-    android:layout_width="217dp"
++-    android:layout_height="149dp"
++-    android:layout_marginTop="16dp"
++-    android:background="@color/white"
++-    android:text="Informacion"
++-    app:layout_constraintEnd_toEndOf="parent"
++-    app:layout_constraintStart_toStartOf="parent"
++-    app:layout_constraintTop_toBottomOf="@+id/button2" />
+++    <TextView
+++        android:id="@+id/productDescription"
+++        android:layout_width="217dp"
+++        android:layout_height="149dp"
+++        android:layout_marginTop="16dp"
+++        android:background="@color/white"
+++        android:text="Informacion"
+++        app:layout_constraintEnd_toEndOf="parent"
+++        app:layout_constraintStart_toStartOf="parent"
+++        app:layout_constraintTop_toBottomOf="@+id/buttonOwner" />
++ 
++-<ImageButton
++-    android:id="@+id/imageButton4"
++-    android:layout_width="54dp"
++-    android:layout_height="49dp"
++-    android:layout_marginTop="20dp"
++-    android:background="@color/white"
++-    app:layout_constraintEnd_toStartOf="@+id/imageButton"
++-    app:layout_constraintHorizontal_bias="0.691"
++-    app:layout_constraintStart_toStartOf="parent"
++-    app:layout_constraintTop_toBottomOf="@+id/button3"
++-    app:srcCompat="@drawable/wallapopicon" />
+++    <Button
+++        android:id="@+id/buttonHistory"
+++        android:layout_width="150dp"
+++        android:layout_height="51dp"
+++        android:layout_marginTop="4dp"
+++        android:text="Ver historial"
+++        app:layout_constraintEnd_toStartOf="@+id/buttonBuy"
+++        app:layout_constraintStart_toStartOf="parent"
+++        app:layout_constraintTop_toBottomOf="@+id/productDescription"
+++        app:rippleColor="@color/teal_700" />
++ 
++-<ImageButton
++-    android:id="@+id/imageButton"
++-    android:layout_width="62dp"
++-    android:layout_height="49dp"
++-    android:layout_marginTop="20dp"
++-    android:layout_marginEnd="120dp"
++-    android:background="@color/white"
++-    app:layout_constraintEnd_toEndOf="parent"
++-    app:layout_constraintTop_toBottomOf="@+id/button3"
++-    app:srcCompat="@drawable/ebay_icon" />
+++    <Button
+++        android:id="@+id/buttonBuy"
+++        android:layout_width="150dp"
+++        android:layout_height="51dp"
+++        android:layout_marginTop="4dp"
+++        android:text="Comprar"
+++        app:layout_constraintEnd_toEndOf="parent"
+++        app:layout_constraintStart_toEndOf="@+id/buttonHistory"
+++        app:layout_constraintTop_toBottomOf="@+id/productDescription"
+++        app:rippleColor="@color/teal_700" />
+++
++ 
++ </androidx.constraintlayout.widget.ConstraintLayout>
++\ No newline at end of file
++Index: APP/src/app/src/main/java/com/apm/monsteraltech/ui/login/LoginActivity.kt
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+>package com.apm.monsteraltech.ui.login\r\n\r\nimport android.app.Activity\r\nimport android.content.Intent\r\nimport android.os.Bundle\r\nimport android.text.Editable\r\nimport android.text.TextWatcher\r\nimport android.util.Log\r\nimport android.view.View\r\nimport android.view.inputmethod.EditorInfo\r\nimport android.widget.EditText\r\nimport android.widget.Toast\r\nimport androidx.annotation.StringRes\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport androidx.lifecycle.Observer\r\nimport androidx.lifecycle.ViewModelProvider\r\nimport com.apm.monsteraltech.MainActivity\r\nimport com.apm.monsteraltech.R\r\nimport com.apm.monsteraltech.RegisterActivity\r\nimport com.apm.monsteraltech.databinding.ActivityLoginBinding\r\nimport com.facebook.AccessToken\r\nimport com.facebook.CallbackManager\r\nimport com.facebook.FacebookCallback\r\nimport com.facebook.FacebookException\r\nimport com.facebook.login.widget.LoginButton\r\nimport com.google.android.gms.auth.api.signin.GoogleSignIn\r\nimport com.google.android.gms.auth.api.signin.GoogleSignInClient\r\nimport com.google.android.gms.auth.api.signin.GoogleSignInOptions\r\nimport com.google.android.gms.common.SignInButton\r\nimport com.google.android.gms.common.api.ApiException\r\nimport com.google.firebase.auth.FirebaseAuth\r\nimport com.google.firebase.auth.FirebaseUser\r\nimport com.google.firebase.auth.GoogleAuthProvider\r\nimport com.google.firebase.auth.ktx.auth\r\nimport com.google.firebase.ktx.Firebase\r\n\r\n\r\nclass LoginActivity : AppCompatActivity() {\r\n\r\n    private lateinit var loginViewModel: LoginViewModel\r\n    private lateinit var binding: ActivityLoginBinding\r\n    private val EMAIL = \"email\"\r\n    private lateinit var callbackManager: CallbackManager\r\n\r\n    private lateinit var auth: FirebaseAuth\r\n    // [END declare_auth]\r\n\r\n    private lateinit var googleSignInClient: GoogleSignInClient\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        callbackManager = CallbackManager.Factory.create()\r\n\r\n        val accessToken = AccessToken.getCurrentAccessToken()\r\n        val isLoggedIn = accessToken != null && !accessToken.isExpired\r\n\r\n        if(isLoggedIn) moveToMainMenu()\r\n\r\n        binding = ActivityLoginBinding.inflate(layoutInflater)\r\n        setContentView(binding.root)\r\n\r\n        val username = binding.username\r\n        val password = binding.password\r\n        val login = binding.login\r\n        val register = binding.register\r\n        val loading = binding.loading\r\n\r\n        loginViewModel = ViewModelProvider(this, LoginViewModelFactory())[LoginViewModel::class.java]\r\n\r\n        loginViewModel.loginFormState.observe(this@LoginActivity, Observer {\r\n            val loginState = it ?: return@Observer\r\n\r\n            // disable login button unless both username / password is valid\r\n            login.isEnabled = loginState.isDataValid\r\n\r\n            if (loginState.usernameError != null) {\r\n                username.error = getString(loginState.usernameError)\r\n            }\r\n            if (loginState.passwordError != null) {\r\n                password.error = getString(loginState.passwordError)\r\n            }\r\n        })\r\n\r\n        loginViewModel.loginResult.observe(this@LoginActivity, Observer {\r\n            val loginResult = it ?: return@Observer\r\n\r\n            loading.visibility = View.GONE\r\n            if (loginResult.error != null) {\r\n                showLoginFailed(loginResult.error)\r\n            }\r\n            if (loginResult.success != null) {\r\n                updateUiWithUser()\r\n            }\r\n            setResult(Activity.RESULT_OK)\r\n\r\n            //Complete and destroy login activity once successful\r\n            finish()\r\n        })\r\n\r\n        username.afterTextChanged {\r\n            loginViewModel.loginDataChanged(\r\n                username.text.toString(),\r\n                password.text.toString()\r\n            )\r\n        }\r\n\r\n        password.apply {\r\n            afterTextChanged {\r\n                loginViewModel.loginDataChanged(\r\n                    username.text.toString(),\r\n                    password.text.toString()\r\n                )\r\n            }\r\n\r\n            setOnEditorActionListener { _, actionId, _ ->\r\n                when (actionId) {\r\n                    EditorInfo.IME_ACTION_DONE ->\r\n                        loginViewModel.login(\r\n                            username.text.toString(),\r\n                            password.text.toString()\r\n                        )\r\n                }\r\n                false\r\n            }\r\n\r\n            login.setOnClickListener {\r\n                loading.visibility = View.VISIBLE\r\n                loginViewModel.login(username.text.toString(), password.text.toString())\r\n            }\r\n\r\n            register.setOnClickListener {\r\n                moveToRegister()\r\n            }\r\n        }\r\n        findViewById<SignInButton>(R.id.SigUpWithGoogle).setOnClickListener {\r\n            signIn()\r\n        }\r\n\r\n        // [START config_signin]\r\n        // Configure Google Sign In\r\n        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)\r\n            .requestIdToken(getString(R.string.default_web_client_id))\r\n            .requestEmail()\r\n            .build()\r\n\r\n        googleSignInClient = GoogleSignIn.getClient(this, gso)\r\n        // [END config_signin]\r\n\r\n\r\n        // [START initialize_auth]\r\n        // Initialize Firebase Auth\r\n        auth = Firebase.auth\r\n        // [END initialize_auth]\r\n        val loginButton = findViewById<LoginButton>(R.id.SigUpWithFacebook).also {\r\n\r\n            // Configura el registro de devolución de llamada\r\n            it.registerCallback(callbackManager, object : FacebookCallback<com.facebook.login.LoginResult> {\r\n                override fun onSuccess(loginResult: com.facebook.login.LoginResult) {\r\n                    // El usuario inició sesión con éxito, obtén el token de acceso de Facebook y realiza acciones adicionales si es necesario.\r\n                    this@LoginActivity.moveToMainMenu()\r\n                }\r\n\r\n                override fun onCancel() {\r\n\r\n                    // El usuario canceló el inicio de sesión\r\n                }\r\n\r\n                override fun onError(error: FacebookException) {\r\n                    // Se produjo un error durante el inicio de sesión\r\n                }\r\n            })\r\n        }\r\n\r\n\r\n    }\r\n\r\n    // [START on_start_check_user]\r\n    override fun onStart() {\r\n        super.onStart()\r\n        // Check if user is signed in (non-null) and update UI accordingly.\r\n        val currentUser = auth.currentUser\r\n        updateUI(currentUser)\r\n    }\r\n    // [END on_start_check_user]\r\n\r\n    // [START onactivityresult]\r\n    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {\r\n        super.onActivityResult(requestCode, resultCode, data)\r\n        callbackManager.onActivityResult(requestCode, resultCode, data)\r\n\r\n        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);\r\n        if (requestCode == RC_SIGN_IN) {\r\n            val task = GoogleSignIn.getSignedInAccountFromIntent(data)\r\n            try {\r\n                // Google Sign In was successful, authenticate with Firebase\r\n                val account = task.getResult(ApiException::class.java)!!\r\n                Log.d(TAG, \"firebaseAuthWithGoogle:\" + account.id)\r\n                firebaseAuthWithGoogle(account.idToken!!)\r\n            } catch (e: ApiException) {\r\n                // Google Sign In failed, update UI appropriately\r\n                Log.w(TAG, \"Google sign in failed\", e)\r\n            }\r\n        }\r\n    }\r\n    // [END onactivityresult]\r\n\r\n    // [START auth_with_google]\r\n    private fun firebaseAuthWithGoogle(idToken: String) {\r\n        val credential = GoogleAuthProvider.getCredential(idToken, null)\r\n        auth.signInWithCredential(credential)\r\n            .addOnCompleteListener(this) { task ->\r\n                if (task.isSuccessful) {\r\n                    // Sign in success, update UI with the signed-in user's information\r\n                    Log.d(TAG, \"signInWithCredential:success\")\r\n                    val user = auth.currentUser\r\n                    updateUI(user)\r\n                } else {\r\n                    // If sign in fails, display a message to the user.\r\n                    Log.w(TAG, \"signInWithCredential:failure\", task.exception)\r\n                    updateUI(null)\r\n                }\r\n            }\r\n    }\r\n    // [END auth_with_google]\r\n\r\n    // [START signin]\r\n    private fun signIn() {\r\n        val signInIntent = googleSignInClient.signInIntent\r\n        startActivityForResult(signInIntent, RC_SIGN_IN)\r\n    }\r\n    // [END signin]\r\n\r\n    private fun updateUI(user: FirebaseUser?) {\r\n        var currentUser : FirebaseUser? =  FirebaseAuth.getInstance().currentUser\r\n        if(currentUser != null) moveToMainMenu()\r\n    }\r\n\r\n    companion object {\r\n        private const val TAG = \"GoogleActivity\"\r\n        private const val RC_SIGN_IN = 9001\r\n    }\r\n\r\n    private fun updateUiWithUser() {\r\n        // TODO : initiate successful logged in experience\r\n        moveToMainMenu()\r\n    }\r\n\r\n    private fun showLoginFailed(@StringRes errorString: Int) {\r\n        Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()\r\n    }\r\n    private fun moveToMainMenu() {\r\n        val intent = Intent(this, MainActivity::class.java)\r\n        startActivity(intent)\r\n        finish()\r\n    }\r\n\r\n    private fun moveToRegister() {\r\n        val intent = Intent(this, RegisterActivity::class.java)\r\n        startActivity(intent)\r\n    }\r\n}\r\n\r\n/*var accessToken = AccessToken.getCurrentAccessToken()\r\nvar isLoggedIn = accessToken != null && !accessToken!!.isExpired*/\r\n\r\n\r\n/**\r\n * Extension function to simplify setting an afterTextChanged action to EditText components.\r\n */\r\nfun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {\r\n    this.addTextChangedListener(object : TextWatcher {\r\n        override fun afterTextChanged(editable: Editable?) {\r\n            afterTextChanged.invoke(editable.toString())\r\n        }\r\n\r\n        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}\r\n\r\n        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}\r\n    })\r\n\r\n\r\n}
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/APP/src/app/src/main/java/com/apm/monsteraltech/ui/login/LoginActivity.kt b/APP/src/app/src/main/java/com/apm/monsteraltech/ui/login/LoginActivity.kt
++--- a/APP/src/app/src/main/java/com/apm/monsteraltech/ui/login/LoginActivity.kt	(revision 69c37f57e0acdddec1eb752f164e947c3a314857)
+++++ b/APP/src/app/src/main/java/com/apm/monsteraltech/ui/login/LoginActivity.kt	(date 1683143363872)
++@@ -8,6 +8,7 @@
++ import android.util.Log
++ import android.view.View
++ import android.view.inputmethod.EditorInfo
+++import android.widget.Button
++ import android.widget.EditText
++ import android.widget.Toast
++ import androidx.annotation.StringRes
++@@ -111,27 +112,17 @@
++                     password.text.toString()
++                 )
++             }
++-
++-            setOnEditorActionListener { _, actionId, _ ->
++-                when (actionId) {
++-                    EditorInfo.IME_ACTION_DONE ->
++-                        loginViewModel.login(
++-                            username.text.toString(),
++-                            password.text.toString()
++-                        )
++-                }
++-                false
++-            }
+++        }
++ 
++-            login.setOnClickListener {
++-                loading.visibility = View.VISIBLE
++-                loginViewModel.login(username.text.toString(), password.text.toString())
++-            }
+++        login.setOnClickListener {
+++            moveToMainMenu()
+++            //signInEmailPassword(username.text.toString(), password.text.toString())
+++        }
++ 
++-            register.setOnClickListener {
++-                moveToRegister()
++-            }
+++        register.setOnClickListener {
+++            moveToRegister()
++         }
+++
++         findViewById<SignInButton>(R.id.SigUpWithGoogle).setOnClickListener {
++             signIn()
++         }
++@@ -174,6 +165,26 @@
++ 
++     }
++ 
+++    private fun signInEmailPassword(email: String, password: String) {
+++        // [START sign_in_with_email]
+++        auth.signInWithEmailAndPassword(email, password)
+++            .addOnCompleteListener(this) { task ->
+++                if (task.isSuccessful) {
+++                    // Sign in success, update UI with the signed-in user's information
+++                    Log.d(TAG, "signInWithEmail:success")
+++                    val user = auth.currentUser
+++                    updateUI(user)
+++                } else {
+++                    // If sign in fails, display a message to the user.
+++                    Log.w(TAG, "signInWithEmail:failure", task.exception)
+++                    Toast.makeText(baseContext, "Authentication failed.",
+++                        Toast.LENGTH_SHORT).show()
+++                    updateUI(null)
+++                }
+++            }
+++        // [END sign_in_with_email]
+++    }
+++
++     // [START on_start_check_user]
++     override fun onStart() {
++         super.onStart()
++@@ -226,6 +237,7 @@
++     // [START signin]
++     private fun signIn() {
++         val signInIntent = googleSignInClient.signInIntent
+++
++         startActivityForResult(signInIntent, RC_SIGN_IN)
++     }
++     // [END signin]
++Index: APP/src/app/src/main/res/layout/activity_register.xml
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".RegisterActivity\">\r\n<!--    TODO: Hacer que el tamaño de los layout no este hardcodeado-->\r\n    <TextView\r\n        android:id=\"@+id/nameRegister\"\r\n        android:layout_width=\"177dp\"\r\n        android:layout_height=\"22dp\"\r\n        android:layout_marginStart=\"117dp\"\r\n        android:layout_marginTop=\"100dp\"\r\n        android:layout_marginEnd=\"117dp\"\r\n        android:text=\"@string/prompt_name\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"1.0\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/lastNameRegister\"\r\n        android:layout_width=\"177dp\"\r\n        android:layout_height=\"22dp\"\r\n        android:layout_marginStart=\"117dp\"\r\n        android:layout_marginTop=\"40dp\"\r\n        android:layout_marginEnd=\"117dp\"\r\n        android:text=\"@string/prompt_last_name\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/nameRegister\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/passwordRegister\"\r\n        android:layout_width=\"177dp\"\r\n        android:layout_height=\"40dp\"\r\n        android:layout_marginStart=\"117dp\"\r\n        android:layout_marginTop=\"40dp\"\r\n        android:layout_marginEnd=\"117dp\"\r\n        android:ems=\"10\"\r\n        android:inputType=\"textPassword\"\r\n        android:text=\"@string/prompt_password\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/confirmEmailRegister\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/confirmPasswordRegister\"\r\n        android:layout_width=\"177dp\"\r\n        android:layout_height=\"40dp\"\r\n        android:layout_marginStart=\"117dp\"\r\n        android:layout_marginTop=\"40dp\"\r\n        android:layout_marginEnd=\"117dp\"\r\n        android:ems=\"10\"\r\n        android:inputType=\"textPassword\"\r\n        android:text=\"@string/prompt_confirm_password\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.0\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/passwordRegister\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/confirmButtonRegister\"\r\n        android:layout_width=\"201dp\"\r\n        android:layout_height=\"40dp\"\r\n        android:layout_marginStart=\"105dp\"\r\n        android:layout_marginTop=\"120dp\"\r\n        android:layout_marginEnd=\"105dp\"\r\n        android:layout_marginBottom=\"60dp\"\r\n        android:onClick=\"onClickRegister\"\r\n        android:text=\"@string/action_register\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/confirmPasswordRegister\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/cancelButtonRegister\"\r\n        android:layout_width=\"100dp\"\r\n        android:layout_height=\"40dp\"\r\n        android:layout_marginStart=\"105dp\"\r\n        android:layout_marginTop=\"80dp\"\r\n        android:layout_marginEnd=\"212dp\"\r\n        android:onClick=\"onClickCancel\"\r\n        android:text=\"@string/action_cancel\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/confirmPasswordRegister\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/emailRegister\"\r\n        android:layout_width=\"177dp\"\r\n        android:layout_height=\"40dp\"\r\n        android:layout_marginStart=\"117dp\"\r\n        android:layout_marginTop=\"40dp\"\r\n        android:layout_marginEnd=\"117dp\"\r\n        android:ems=\"10\"\r\n        android:inputType=\"textEmailAddress\"\r\n        android:text=\"@string/prompt_email\"\r\n        android:textSize=\"14sp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/lastNameRegister\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/confirmEmailRegister\"\r\n        android:layout_width=\"177dp\"\r\n        android:layout_height=\"40dp\"\r\n        android:layout_marginStart=\"117dp\"\r\n        android:layout_marginTop=\"40dp\"\r\n        android:layout_marginEnd=\"117dp\"\r\n        android:ems=\"10\"\r\n        android:inputType=\"textEmailAddress\"\r\n        android:text=\"@string/prompt_confirm_email\"\r\n        android:textSize=\"14sp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/emailRegister\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/APP/src/app/src/main/res/layout/activity_register.xml b/APP/src/app/src/main/res/layout/activity_register.xml
++--- a/APP/src/app/src/main/res/layout/activity_register.xml	(revision 69c37f57e0acdddec1eb752f164e947c3a314857)
+++++ b/APP/src/app/src/main/res/layout/activity_register.xml	(date 1683143363876)
++@@ -6,27 +6,29 @@
++     android:layout_height="match_parent"
++     tools:context=".RegisterActivity">
++ <!--    TODO: Hacer que el tamaño de los layout no este hardcodeado-->
++-    <TextView
+++
+++
+++    <EditText
++         android:id="@+id/nameRegister"
++         android:layout_width="177dp"
++         android:layout_height="22dp"
++         android:layout_marginStart="117dp"
++         android:layout_marginTop="100dp"
++         android:layout_marginEnd="117dp"
++-        android:text="@string/prompt_name"
+++        android:hint="@string/prompt_name"
++         app:layout_constraintEnd_toEndOf="parent"
++         app:layout_constraintHorizontal_bias="1.0"
++         app:layout_constraintStart_toStartOf="parent"
++         app:layout_constraintTop_toTopOf="parent" />
++ 
++-    <TextView
+++    <EditText
++         android:id="@+id/lastNameRegister"
++         android:layout_width="177dp"
++         android:layout_height="22dp"
++         android:layout_marginStart="117dp"
++         android:layout_marginTop="40dp"
++         android:layout_marginEnd="117dp"
++-        android:text="@string/prompt_last_name"
+++        android:hint="@string/prompt_last_name"
++         app:layout_constraintEnd_toEndOf="parent"
++         app:layout_constraintStart_toStartOf="parent"
++         app:layout_constraintTop_toBottomOf="@+id/nameRegister" />
++@@ -40,7 +42,7 @@
++         android:layout_marginEnd="117dp"
++         android:ems="10"
++         android:inputType="textPassword"
++-        android:text="@string/prompt_password"
+++        android:hint="@string/prompt_password"
++         app:layout_constraintEnd_toEndOf="parent"
++         app:layout_constraintStart_toStartOf="parent"
++         app:layout_constraintTop_toBottomOf="@+id/confirmEmailRegister" />
++@@ -54,7 +56,7 @@
++         android:layout_marginEnd="117dp"
++         android:ems="10"
++         android:inputType="textPassword"
++-        android:text="@string/prompt_confirm_password"
+++        android:hint="@string/prompt_confirm_password"
++         app:layout_constraintEnd_toEndOf="parent"
++         app:layout_constraintHorizontal_bias="0.0"
++         app:layout_constraintStart_toStartOf="parent"
++@@ -97,7 +99,7 @@
++         android:layout_marginEnd="117dp"
++         android:ems="10"
++         android:inputType="textEmailAddress"
++-        android:text="@string/prompt_email"
+++        android:hint="@string/prompt_email"
++         android:textSize="14sp"
++         app:layout_constraintEnd_toEndOf="parent"
++         app:layout_constraintStart_toStartOf="parent"
++@@ -112,7 +114,7 @@
++         android:layout_marginEnd="117dp"
++         android:ems="10"
++         android:inputType="textEmailAddress"
++-        android:text="@string/prompt_confirm_email"
+++        android:hint="@string/prompt_confirm_email"
++         android:textSize="14sp"
++         app:layout_constraintEnd_toEndOf="parent"
++         app:layout_constraintStart_toStartOf="parent"
++Index: APP/src/app/src/main/res/layout/activity_login.xml
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/container\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:paddingLeft=\"@dimen/activity_horizontal_margin\"\r\n    android:paddingTop=\"@dimen/activity_vertical_margin\"\r\n    android:paddingRight=\"@dimen/activity_horizontal_margin\"\r\n    android:paddingBottom=\"@dimen/activity_vertical_margin\"\r\n    tools:context=\".ui.login.LoginActivity\">\r\n\r\n    <EditText\r\n        android:id=\"@+id/username\"\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"324dp\"\r\n        android:autofillHints=\"@string/prompt_email\"\r\n        android:hint=\"@string/prompt_email\"\r\n        android:inputType=\"textEmailAddress\"\r\n        android:selectAllOnFocus=\"true\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/password\"\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"24dp\"\r\n        android:autofillHints=\"@string/prompt_password\"\r\n        android:hint=\"@string/prompt_password\"\r\n        android:imeActionLabel=\"@string/action_sign_in_short\"\r\n        android:imeOptions=\"actionDone\"\r\n        android:inputType=\"textPassword\"\r\n        android:selectAllOnFocus=\"true\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/username\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/login\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"50dp\"\r\n        android:layout_gravity=\"start\"\r\n        android:layout_marginStart=\"100dp\"\r\n        android:layout_marginTop=\"16dp\"\r\n        android:layout_marginBottom=\"64dp\"\r\n        android:enabled=\"false\"\r\n        android:text=\"@string/action_sign_in_short\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/password\"\r\n        app:layout_constraintVertical_bias=\"0.122\" />\r\n\r\n    <ProgressBar\r\n        android:id=\"@+id/loading\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_gravity=\"center\"\r\n        android:layout_marginTop=\"64dp\"\r\n        android:layout_marginBottom=\"64dp\"\r\n        android:visibility=\"gone\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"@+id/password\"\r\n        app:layout_constraintStart_toStartOf=\"@+id/password\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.3\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/appNameLoginView\"\r\n        android:layout_width=\"166dp\"\r\n        android:layout_height=\"22dp\"\r\n        android:layout_marginStart=\"90dp\"\r\n        android:layout_marginEnd=\"90dp\"\r\n        android:layout_marginBottom=\"68dp\"\r\n        android:ems=\"10\"\r\n        android:inputType=\"textPersonName\"\r\n        android:text=\"@string/app_name\"\r\n        android:textAlignment=\"center\"\r\n        app:layout_constraintBottom_toTopOf=\"@+id/username\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.476\"\r\n        app:layout_constraintStart_toStartOf=\"parent\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/imageView\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"0dp\"\r\n        android:layout_marginStart=\"120dp\"\r\n        android:layout_marginEnd=\"120dp\"\r\n        android:layout_marginBottom=\"20dp\"\r\n        app:layout_constraintBottom_toTopOf=\"@+id/appNameLoginView\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.488\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        tools:srcCompat=\"@tools:sample/avatars\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/register\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"50dp\"\r\n        android:layout_marginStart=\"40dp\"\r\n        android:layout_marginTop=\"16dp\"\r\n        android:layout_marginEnd=\"100dp\"\r\n        android:layout_marginBottom=\"64dp\"\r\n        android:text=\"@string/action_sign_up\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.707\"\r\n        app:layout_constraintStart_toEndOf=\"@+id/login\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/password\"\r\n        app:layout_constraintVertical_bias=\"0.108\" />\r\n\r\n    <com.google.android.gms.common.SignInButton\r\n        android:id=\"@+id/SigUpWithGoogle\"\r\n        android:layout_width=\"213dp\"\r\n        android:layout_height=\"38dp\"\r\n        android:layout_marginStart=\"40dp\"\r\n        android:layout_marginTop=\"16dp\"\r\n        android:layout_marginEnd=\"100dp\"\r\n        android:layout_marginBottom=\"64dp\"\r\n        android:text=\"@string/action_sign_up\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.873\"\r\n        app:layout_constraintStart_toEndOf=\"@+id/login\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/password\"\r\n        app:layout_constraintVertical_bias=\"0.804\" />\r\n\r\n    <com.facebook.login.widget.LoginButton\r\n        android:id=\"@+id/SigUpWithFacebook\"\r\n        android:layout_width=\"205dp\"\r\n        android:layout_height=\"27dp\"\r\n        android:layout_gravity=\"center_horizontal\"\r\n        android:layout_marginTop=\"30dp\"\r\n        android:layout_marginEnd=\"72dp\"\r\n        android:layout_marginBottom=\"30dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/SigUpWithGoogle\"\r\n        app:layout_constraintVertical_bias=\"1.0\" />\r\n</androidx.constraintlayout.widget.ConstraintLayout>
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/APP/src/app/src/main/res/layout/activity_login.xml b/APP/src/app/src/main/res/layout/activity_login.xml
++--- a/APP/src/app/src/main/res/layout/activity_login.xml	(revision 69c37f57e0acdddec1eb752f164e947c3a314857)
+++++ b/APP/src/app/src/main/res/layout/activity_login.xml	(date 1683143363875)
++@@ -39,20 +39,6 @@
++         app:layout_constraintStart_toStartOf="parent"
++         app:layout_constraintTop_toBottomOf="@+id/username" />
++ 
++-    <Button
++-        android:id="@+id/login"
++-        android:layout_width="wrap_content"
++-        android:layout_height="50dp"
++-        android:layout_gravity="start"
++-        android:layout_marginStart="100dp"
++-        android:layout_marginTop="16dp"
++-        android:layout_marginBottom="64dp"
++-        android:enabled="false"
++-        android:text="@string/action_sign_in_short"
++-        app:layout_constraintBottom_toBottomOf="parent"
++-        app:layout_constraintStart_toStartOf="parent"
++-        app:layout_constraintTop_toBottomOf="@+id/password"
++-        app:layout_constraintVertical_bias="0.122" />
++ 
++     <ProgressBar
++         android:id="@+id/loading"
++@@ -97,14 +83,30 @@
++         app:layout_constraintStart_toStartOf="parent"
++         tools:srcCompat="@tools:sample/avatars" />
++ 
+++    <Button
+++        android:id="@+id/login"
+++        android:layout_width="130dp"
+++        android:layout_height="50dp"
+++        android:layout_gravity="start"
+++        android:layout_marginStart="50dp"
+++        android:layout_marginTop="16dp"
+++        android:layout_marginBottom="64dp"
+++        android:enabled="false"
+++        android:text="@string/action_sign_in_short"
+++        app:layout_constraintBottom_toBottomOf="parent"
+++        app:layout_constraintStart_toStartOf="parent"
+++        app:layout_constraintTop_toBottomOf="@+id/password"
+++        app:layout_constraintVertical_bias="0.122" />
+++
+++
++     <Button
++         android:id="@+id/register"
++-        android:layout_width="wrap_content"
+++        android:layout_width="130dp"
++         android:layout_height="50dp"
++-        android:layout_marginStart="40dp"
+++        android:layout_marginStart="50dp"
++         android:layout_marginTop="16dp"
++-        android:layout_marginEnd="100dp"
++-        android:layout_marginBottom="64dp"
+++        android:layout_marginEnd="50dp"
+++        android:layout_marginBottom="54dp"
++         android:text="@string/action_sign_up"
++         app:layout_constraintBottom_toBottomOf="parent"
++         app:layout_constraintEnd_toEndOf="parent"
++Index: APP/src/app/src/main/AndroidManifest.xml
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.MonsteralTech.NoActionBar\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".ui.profile.DetailedProfileActivity\"\r\n            android:exported=\"false\"\r\n            android:parentActivityName=\".MainActivity\"\r\n            android:screenOrientation=\"sensor\">\r\n            <meta-data\r\n                android:name=\"android.support.PARENT_ACTIVITY\"\r\n                android:value=\".MainActivity\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".ui.home.filters.FurnitureFilterActivity\"\r\n            android:exported=\"false\"\r\n            android:parentActivityName=\".ui.home.filters.ShowFurnitureActivity\">\r\n            <meta-data\r\n                android:name=\"android.support.PARENT_ACTIVITY\"\r\n                android:value=\".ui.home.filters.ShowFurnitureActivity\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".ui.home.filters.ElectronicFilterActivity\"\r\n            android:exported=\"false\"\r\n            android:parentActivityName=\".ui.home.filters.ShowElectronicActivity\">\r\n            <meta-data\r\n                android:name=\"android.support.PARENT_ACTIVITY\"\r\n                android:value=\".ui.home.filters.ShowElectronicActivity\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".ui.home.filters.HouseFilterActivity\"\r\n            android:exported=\"false\"\r\n            android:parentActivityName=\".ui.home.filters.ShowHouseActivity\">\r\n            <meta-data\r\n                android:name=\"android.support.PARENT_ACTIVITY\"\r\n                android:value=\".ui.home.filters.ShowHouseActivity\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".ui.home.filters.CarFilterActivity\"\r\n            android:exported=\"false\"\r\n            android:parentActivityName=\".ui.home.filters.ShowCarActivity\">\r\n            <meta-data\r\n                android:name=\"android.support.PARENT_ACTIVITY\"\r\n                android:value=\".ui.home.filters.ShowCarActivity\" />\r\n        </activity>\r\n\r\n        <meta-data\r\n            android:name=\"com.facebook.sdk.ApplicationId\"\r\n            android:value=\"@string/facebook_app_id\" />\r\n        <meta-data\r\n            android:name=\"com.facebook.sdk.ClientToken\"\r\n            android:value=\"@string/facebook_client_token\" />\r\n\r\n        <activity\r\n            android:name=\".ui.home.filters.ShowCarActivity\"\r\n            android:exported=\"false\"\r\n            android:parentActivityName=\".MainActivity\"\r\n            android:screenOrientation=\"sensor\">\r\n            <meta-data\r\n                android:name=\"android.support.PARENT_ACTIVITY\"\r\n                android:value=\".MainActivity\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".ui.home.filters.ShowElectronicActivity\"\r\n            android:exported=\"false\"\r\n            android:parentActivityName=\".MainActivity\"\r\n            android:screenOrientation=\"sensor\">\r\n            <meta-data\r\n                android:name=\"android.support.PARENT_ACTIVITY\"\r\n                android:value=\".MainActivity\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".ui.home.filters.ShowFurnitureActivity\"\r\n            android:exported=\"false\"\r\n            android:parentActivityName=\".MainActivity\"\r\n            android:screenOrientation=\"sensor\">\r\n            <meta-data\r\n                android:name=\"android.support.PARENT_ACTIVITY\"\r\n                android:value=\".MainActivity\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".ui.home.filters.ShowHouseActivity\"\r\n            android:exported=\"false\"\r\n            android:parentActivityName=\".MainActivity\"\r\n            android:screenOrientation=\"sensor\">\r\n            <meta-data\r\n                android:name=\"android.support.PARENT_ACTIVITY\"\r\n                android:value=\".MainActivity\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\"com.facebook.FacebookActivity\"\r\n            android:configChanges=\"keyboard|keyboardHidden|screenLayout|screenSize|orientation\" />\r\n        <activity\r\n            android:name=\"com.facebook.CustomTabActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.VIEW\" />\r\n\r\n                <category android:name=\"android.intent.category.DEFAULT\" />\r\n                <category android:name=\"android.intent.category.BROWSABLE\" />\r\n\r\n                <data android:scheme=\"@string/fb_login_protocol_scheme\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity\r\n            android:name=\".ActionBarActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ProductDetail\"\r\n            android:exported=\"false\"\r\n            android:screenOrientation=\"sensor\" />\r\n        <activity\r\n            android:name=\".SearchActivity\"\r\n            android:exported=\"false\"\r\n            android:label=\"@string/title_activity_search\"\r\n            android:screenOrientation=\"sensor\"\r\n            android:theme=\"@style/Theme.MonsteralTech.NoActionBar\" />\r\n        <activity\r\n            android:name=\".FavoritesActivity\"\r\n            android:exported=\"false\"\r\n            android:label=\"@string/title_activity_favorites\"\r\n            android:screenOrientation=\"sensor\"\r\n            android:theme=\"@style/Theme.MonsteralTech.NoActionBar\" />\r\n        <activity\r\n            android:name=\".RegisterActivity\"\r\n            android:exported=\"false\"\r\n            android:screenOrientation=\"sensor\" />\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"false\"\r\n            android:screenOrientation=\"sensor\"\r\n            android:theme=\"@style/Theme.MonsteralTech.NoActionBar\" />\r\n        <activity\r\n            android:name=\".ui.login.LoginActivity\"\r\n            android:exported=\"true\"\r\n            android:screenOrientation=\"sensor\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/APP/src/app/src/main/AndroidManifest.xml b/APP/src/app/src/main/AndroidManifest.xml
++--- a/APP/src/app/src/main/AndroidManifest.xml	(revision 69c37f57e0acdddec1eb752f164e947c3a314857)
+++++ b/APP/src/app/src/main/AndroidManifest.xml	(date 1683143363868)
++@@ -142,6 +142,11 @@
++             android:screenOrientation="sensor"
++             android:theme="@style/Theme.MonsteralTech.NoActionBar" />
++         <activity
+++            android:name=".UserDetail"
+++            android:exported="false"
+++            android:screenOrientation="sensor"
+++            android:theme="@style/Theme.MonsteralTech.NoActionBar"/>
+++        <activity
++             android:name=".ui.login.LoginActivity"
++             android:exported="true"
++             android:screenOrientation="sensor">
++Index: gradle.properties
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>ISO-8859-1
++===================================================================
++diff --git a/gradle.properties b/gradle.properties
++new file mode 100644
++--- /dev/null	(date 1683143363878)
+++++ b/gradle.properties	(date 1683143363878)
++@@ -0,0 +1,2 @@
+++android.enableJetifier=true
+++android.useAndroidX=true
++\ No newline at end of file
++Index: APP/src/app/src/main/java/com/apm/monsteraltech/ui/home/HomeFragment.kt
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+>package com.apm.monsteraltech.ui.home\r\n\r\nimport android.content.Context\r\nimport android.content.Intent\r\nimport android.os.Bundle\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport android.widget.Toast\r\nimport androidx.fragment.app.Fragment\r\nimport androidx.recyclerview.widget.GridLayoutManager\r\nimport androidx.recyclerview.widget.LinearLayoutManager\r\nimport androidx.recyclerview.widget.RecyclerView\r\nimport com.apm.monsteraltech.R\r\nimport com.apm.monsteraltech.Searchable\r\nimport com.apm.monsteraltech.ui.home.filters.*\r\nimport java.util.*\r\n\r\n\r\n@Suppress(\"DEPRECATION\")\r\nclass HomeFragment : Fragment(), Searchable {\r\n    private lateinit var filterRecyclerView: RecyclerView\r\n    private lateinit var productRecyclerView: RecyclerView\r\n    private lateinit var productsList: ArrayList<Product?>\r\n    private lateinit var adapterProduct: AdapterProductsHome\r\n\r\n    private var context: Context? = null\r\n\r\n    override fun onAttach(context: Context) {\r\n        super.onAttach(context)\r\n        this.context = context\r\n    }\r\n\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater, container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View {\r\n        val view : View = inflater.inflate(R.layout.fragment_home, container, false)\r\n\r\n        if (savedInstanceState != null) {\r\n            //La no deprecada requiere API 33\r\n            productsList = savedInstanceState.getParcelableArrayList<Product>(\"productList\")!!\r\n        }else{\r\n            setProdructs(view)\r\n        }\r\n        setFilters(view)\r\n        return view\r\n    }\r\n\r\n    fun setFilters(view: View){\r\n        val adapterFilter = AdapterFilters(getFilterList())\r\n\r\n        //Inicializamos la vista de filtros\r\n        filterRecyclerView = view.findViewById(R.id.RecyclerViewFilters )\r\n        filterRecyclerView.adapter = adapterFilter\r\n        filterRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)\r\n\r\n\r\n        adapterFilter.setOnItemClickListener(object: AdapterFilters.OnItemClickedListener{\r\n            override fun onItemClick(position: Int) {\r\n                var sendIntent: Intent\r\n                when (adapterFilter.getFilter(position).filterName) {\r\n                    \"Coches\" -> {\r\n                        sendIntent = Intent(requireContext(), ShowCarActivity::class.java)\r\n                        startActivity(sendIntent)\r\n                    }\r\n                    \"Electrodomésticos\"-> {\r\n                        sendIntent = Intent(requireContext(), ShowElectronicActivity::class.java)\r\n                        startActivity(sendIntent)\r\n                    }\r\n                    \"Muebles\" -> {\r\n                        sendIntent = Intent(requireContext(), ShowFurnitureActivity::class.java)\r\n                        startActivity(sendIntent)\r\n                    }\r\n                    \"Casas\" -> {\r\n                        sendIntent = Intent(requireContext(), ShowHouseActivity::class.java)\r\n                        startActivity(sendIntent)\r\n                    }\r\n                    else -> {\r\n                        //TODO: Poner algo aquí\r\n                    }\r\n                }\r\n            }\r\n        })\r\n    }\r\n\r\n    fun setProdructs(view: View){\r\n        this.productsList = getProductList()\r\n        val layoutManager = GridLayoutManager(requireContext(), 2)\r\n        this.adapterProduct = AdapterProductsHome(productsList)\r\n        productRecyclerView = view.findViewById(R.id.RecyclerViewProducts)\r\n        productRecyclerView.adapter = this.adapterProduct\r\n        productRecyclerView.layoutManager = layoutManager\r\n\r\n        adapterProduct.setOnItemClickListener(object: AdapterProductsHome.OnItemClickedListener {\r\n            override fun onItemClick(position: Int) {\r\n                val intent = Intent(requireContext(),\r\n                    com.apm.monsteraltech.ProductDetail::class.java)\r\n                //TODO: ver que información es necesario pasarle\r\n                intent.putExtra(\"Product\", adapterProduct.getProduct(position)?.productName)\r\n                startActivity(intent)\r\n            }\r\n        })\r\n\r\n        //LLamamos a la actividad producto detail\r\n        adapterProduct.setOnItemClickListener(object: AdapterProductsHome.OnItemClickedListener{\r\n            override fun onItemClick(position: Int) {\r\n                val intent = Intent(requireContext(), com.apm.monsteraltech.ProductDetail::class.java)\r\n                //TODO: ver que información es necesario pasarle\r\n                intent.putExtra(\"Product\",adapterProduct.getProduct(position)?.productName)\r\n                //TODO: ver si ponerle la flecha para volver atrás (la documentación no lo recomienda)\r\n                startActivity(intent)\r\n            }\r\n        })\r\n    }\r\n    override fun onSaveInstanceState(outState: Bundle) {\r\n        super.onSaveInstanceState(outState)\r\n        outState.putParcelableArrayList(\"productList\", productsList)\r\n    }\r\n\r\n    private fun getFilterList(): ArrayList<Filter> {\r\n        //TODO: Cargar los productos desde la base de datos o de otro recurso externo\r\n\r\n        val filterList: ArrayList<Filter> = arrayListOf()\r\n\r\n        filterList.add(Filter(\"Coches\"))\r\n        filterList.add(Filter(\"Casas\"))\r\n        filterList.add(Filter(\"Electrodomésticos\"))\r\n        filterList.add(Filter(\"Muebles\"))\r\n        return filterList\r\n    }\r\n\r\n    private fun getProductList(): ArrayList<Product?> {\r\n        //TODO: Cargar los productos desde la base de datos o de otro recurso externo\r\n        val productList: ArrayList<Product?> = arrayListOf()\r\n        val category = ArrayList<String>()\r\n        category.add(\"Coches\")\r\n        category.add(\"Casas\")\r\n        category.add(\"Electrodomésticos\")\r\n        category.add(\"Muebles\")\r\n        val productNames = arrayListOf(\r\n            \"Auriculares inalámbricos\",\r\n            \"Reloj inteligente\",\r\n            \"Sofá cama\",\r\n            \"Camiseta de algodón\",\r\n            \"Bicicleta de montaña\",\r\n            \"Herramientas de jardinería\",\r\n            \"Juego de sábanas de seda\",\r\n            \"Cafetera de goteo\",\r\n            \"Barbacoa de carbón\",\r\n            \"Zapatillas deportivas\"\r\n        )\r\n        // Agrega algunos productos a la lista para mockear la respuesta\r\n        for (i in 0 until 10) {\r\n            val productName = productNames[(0 until productNames.size).random()]\r\n            val productPrice = (1..1000).random().toDouble()\r\n            val product = Product(productName, \"\", \"Owner\", productPrice.toString(),\r\n                category[(0 until category.size).random()]\r\n            )\r\n            productList.add(product)\r\n        }\r\n\r\n        return productList\r\n    }\r\n\r\n    // filtramos por nombre del producto destacado\r\n    override fun onSearch(query: String?) {\r\n        // Aquí filtramos por los productos destacados pero pienso que habría que buscar sobre el total\r\n        // de productos que podamos obtener\r\n\r\n        val filteredlist = ArrayList<Product?>()\r\n        for (item in productsList) {\r\n            if (item != null) {\r\n                if (query != null) {\r\n                    if (item.productName.lowercase(Locale.getDefault()).contains(query.lowercase(Locale.getDefault()))) {\r\n                        filteredlist.add(item)\r\n                    }\r\n                }\r\n            }\r\n        }\r\n        if (filteredlist.isEmpty()) {\r\n            Toast.makeText(requireContext(), \"No Data Found..\", Toast.LENGTH_SHORT).show()\r\n        } else {\r\n            adapterProduct.filterList(filteredlist)\r\n        }\r\n    }\r\n\r\n\r\n}
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/APP/src/app/src/main/java/com/apm/monsteraltech/ui/home/HomeFragment.kt b/APP/src/app/src/main/java/com/apm/monsteraltech/ui/home/HomeFragment.kt
++--- a/APP/src/app/src/main/java/com/apm/monsteraltech/ui/home/HomeFragment.kt	(revision 69c37f57e0acdddec1eb752f164e947c3a314857)
+++++ b/APP/src/app/src/main/java/com/apm/monsteraltech/ui/home/HomeFragment.kt	(date 1683143363872)
++@@ -3,6 +3,7 @@
++ import android.content.Context
++ import android.content.Intent
++ import android.os.Bundle
+++import android.util.Log
++ import android.view.LayoutInflater
++ import android.view.View
++ import android.view.ViewGroup
++@@ -98,6 +99,11 @@
++                     com.apm.monsteraltech.ProductDetail::class.java)
++                 //TODO: ver que información es necesario pasarle
++                 intent.putExtra("Product", adapterProduct.getProduct(position)?.productName)
+++                intent.putExtra("Owner", adapterProduct.getProduct(position)?.owner)
+++                intent.putExtra("Price", adapterProduct.getProduct(position)?.price)
+++                Log.d("HomeFragment", "Price: " + adapterProduct.getProduct(position)?.price)
+++                Log.d("HomeFragment", "Owner: " + adapterProduct.getProduct(position)?.owner)
+++                //intent.putExtra("Description", adapterProduct.getProduct(position)?.description)
++                 startActivity(intent)
++             }
++         })
++@@ -108,6 +114,8 @@
++                 val intent = Intent(requireContext(), com.apm.monsteraltech.ProductDetail::class.java)
++                 //TODO: ver que información es necesario pasarle
++                 intent.putExtra("Product",adapterProduct.getProduct(position)?.productName)
+++                intent.putExtra("Owner", adapterProduct.getProduct(position)?.owner)
+++                intent.putExtra("Price", adapterProduct.getProduct(position)?.price)
++                 //TODO: ver si ponerle la flecha para volver atrás (la documentación no lo recomienda)
++                 startActivity(intent)
++             }
++Index: APP/src/app/build.gradle
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+>plugins {\r\n    id 'com.android.application'\r\n    id 'org.jetbrains.kotlin.android'\r\n    id 'com.google.gms.google-services'\r\n}\r\n\r\nandroid {\r\n    namespace 'com.apm.monsteraltech'\r\n    compileSdk 33\r\n\r\n    defaultConfig {\r\n        applicationId \"com.apm.monsteraltech\"\r\n        minSdk 29\r\n        targetSdk 33\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n    kotlinOptions {\r\n        jvmTarget = '1.8'\r\n    }\r\n    buildFeatures {\r\n        viewBinding true\r\n    }\r\n}\r\n\r\ndependencies {\r\n    implementation platform('com.google.firebase:firebase-bom:31.5.0')\r\n    implementation 'com.google.firebase:firebase-analytics-ktx'\r\n    implementation 'com.google.firebase:firebase-auth-ktx'\r\n    implementation 'com.google.firebase:firebase-firestore-ktx'\r\n    implementation \"androidx.cardview:cardview:1.0.0\"\r\n    implementation 'androidx.core:core-ktx:1.10.0'\r\n    implementation 'androidx.appcompat:appcompat:1.6.1'\r\n    implementation 'com.google.android.material:material:1.8.0'\r\n    implementation 'androidx.annotation:annotation:1.6.0'\r\n    implementation 'androidx.appcompat:appcompat:1.6.1'\r\n    implementation 'com.google.android.material:material:<version>'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'\r\n    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'\r\n    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'\r\n    implementation 'com.google.android.gms:play-services-auth:20.5.0'\r\n    implementation 'com.facebook.android:facebook-login:latest.release'\r\n    testImplementation 'junit:junit:4.13.2'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.5'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'\r\n}
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/APP/src/app/build.gradle b/APP/src/app/build.gradle
++--- a/APP/src/app/build.gradle	(revision 69c37f57e0acdddec1eb752f164e947c3a314857)
+++++ b/APP/src/app/build.gradle	(date 1683143363868)
++@@ -53,6 +53,10 @@
++     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
++     implementation 'com.google.android.gms:play-services-auth:20.5.0'
++     implementation 'com.facebook.android:facebook-login:latest.release'
+++    implementation 'com.github.bumptech.glide:glide:4.15.1'
+++    implementation 'com.tbuonomo:dotsindicator:4.3'
+++    implementation 'androidx.appcompat:appcompat:1.0.0'
+++    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
++     testImplementation 'junit:junit:4.13.2'
++     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
++     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
++Index: APP/src/app/src/main/java/com/apm/monsteraltech/ui/add/AddFragment.kt
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+>package com.apm.monsteraltech.ui.add\r\n\r\nimport android.os.Bundle\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport android.widget.Button\r\nimport android.widget.ImageButton\r\nimport android.widget.Toast\r\nimport androidx.fragment.app.Fragment\r\nimport com.apm.monsteraltech.R\r\n\r\n\r\nclass AddFragment : Fragment() {\r\n    private lateinit var btnSubmit: Button\r\n    private lateinit var btnClear: Button\r\n\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater, container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View? {\r\n        val view = inflater.inflate(R.layout.fragment_add, container, false)\r\n\r\n        btnSubmit = view.findViewById(R.id.btn_submit)\r\n        btnClear = view.findViewById(R.id.btn_clear)\r\n\r\n        // Asigna el OnClickListener a los botones\r\n        btnSubmit.setOnClickListener {\r\n            Toast.makeText(\r\n                requireContext(),\r\n                \"La imagen se ha subido correctamente\",\r\n                Toast.LENGTH_SHORT\r\n            ).show()\r\n        }\r\n        btnClear.setOnClickListener{\r\n            Toast.makeText(\r\n                requireContext(),\r\n            \"Formulario borrado correctamente\",\r\n                Toast.LENGTH_SHORT\r\n            ).show()\r\n        }\r\n\r\n        for (i in 1..8) {\r\n            val id = resources.getIdentifier(\"imageButton$i\", \"id\", requireContext().packageName)\r\n            val button: ImageButton = view.findViewById(id)\r\n            val tag = button.tag as String\r\n\r\n            // Agrega el listener a cada botón\r\n            if (tag.startsWith(\"boton\")) {\r\n                button.setOnClickListener {upLoadIamge() }\r\n            }\r\n        }\r\n\r\n        // Inflate the layout for this fragment\r\n        return view\r\n\r\n    }\r\n\r\n    private fun upLoadIamge() {\r\n        Toast.makeText(\r\n            requireContext(),\r\n            \"Estamos trabajando en ello\",\r\n            Toast.LENGTH_SHORT\r\n        ).show()\r\n\r\n    }\r\n\r\n}
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/APP/src/app/src/main/java/com/apm/monsteraltech/ui/add/AddFragment.kt b/APP/src/app/src/main/java/com/apm/monsteraltech/ui/add/AddFragment.kt
++--- a/APP/src/app/src/main/java/com/apm/monsteraltech/ui/add/AddFragment.kt	(revision 69c37f57e0acdddec1eb752f164e947c3a314857)
+++++ b/APP/src/app/src/main/java/com/apm/monsteraltech/ui/add/AddFragment.kt	(date 1683143363870)
++@@ -1,19 +1,63 @@
++ package com.apm.monsteraltech.ui.add
++ 
+++import android.app.Activity.RESULT_OK
+++import android.content.Context
+++import android.content.Intent
+++import android.net.Uri
++ import android.os.Bundle
+++import android.provider.MediaStore
+++import android.text.InputFilter
+++import android.util.Log
++ import android.view.LayoutInflater
++ import android.view.View
++ import android.view.ViewGroup
++-import android.widget.Button
++-import android.widget.ImageButton
++-import android.widget.Toast
+++import android.widget.*
+++import androidx.activity.result.contract.ActivityResultContracts
++ import androidx.fragment.app.Fragment
++ import com.apm.monsteraltech.R
+++import com.bumptech.glide.Glide
++ 
++-
+++//TODO: Limitar bien las fotos y los caracteres de la descripción y titulo.
++ class AddFragment : Fragment() {
++-    private lateinit var btnSubmit: Button
++-    private lateinit var btnClear: Button
+++/*    private lateinit var btnSubmit: Button
+++    private lateinit var btnClear: Button*/
+++
+++    private lateinit var imageGridView: GridView
+++    private lateinit var imageAdapter: ImageAdapter
+++    private lateinit var selectedImages: ArrayList<Uri>
+++    private var PICK_IMAGE_MULTIPLE = 8
+++    private var MAX_DESCRIPTION_LENGTH = 200
+++    private var MAX_TITLE_LENGTH = 50
+++
+++    private val openGalleryForImages = registerForActivityResult(
+++        ActivityResultContracts.StartActivityForResult()
+++    ) { result ->
+++        if (result.resultCode == RESULT_OK) {
+++            val data = result.data
+++            if (data?.clipData != null) {
+++                val count = data.clipData!!.itemCount
+++                if (count > PICK_IMAGE_MULTIPLE) {
+++                    Toast.makeText(
+++                        requireContext(),
+++                        "No puedes seleccionar más de 8 imágenes",
+++                        Toast.LENGTH_SHORT
+++                    ).show()
+++                    return@registerForActivityResult
+++                } else {
+++                    for (i in 0 until count) {
+++                        val imageUri = data.clipData!!.getItemAt(i).uri
+++                        selectedImages.add(imageUri)
+++                    }
+++                }
+++
+++            } else if (data?.data != null) {
+++                val imageUri = data.data!!
+++                selectedImages.add(imageUri)
+++            }
+++            Log.d("AddFragment", "Imagenes seleccionadas: ${selectedImages[0]}")
+++            imageAdapter.notifyDataSetChanged()
+++        }
+++    }
++ 
++     override fun onCreateView(
++         inflater: LayoutInflater, container: ViewGroup?,
++@@ -21,47 +65,88 @@
++     ): View? {
++         val view = inflater.inflate(R.layout.fragment_add, container, false)
++ 
++-        btnSubmit = view.findViewById(R.id.btn_submit)
++-        btnClear = view.findViewById(R.id.btn_clear)
+++        // Inicializa los componentes de la UI
+++        val addImageButton = view.findViewById<Button>(R.id.add_image_button)
+++        imageGridView = view.findViewById<GridView>(R.id.image_gridview)
+++        val nameEditText = view.findViewById<EditText>(R.id.name_edittext)
+++        val descriptionEditText = view.findViewById<EditText>(R.id.description_edittext)
+++        val priceEditText = view.findViewById<EditText>(R.id.price_edittext)
+++        val categorySpinner = view.findViewById<Spinner>(R.id.category_spinner)
+++        val addButton = view.findViewById<Button>(R.id.add_button)
++ 
++-        // Asigna el OnClickListener a los botones
++-        btnSubmit.setOnClickListener {
++-            Toast.makeText(
++-                requireContext(),
++-                "La imagen se ha subido correctamente",
++-                Toast.LENGTH_SHORT
++-            ).show()
++-        }
++-        btnClear.setOnClickListener{
++-            Toast.makeText(
++-                requireContext(),
++-            "Formulario borrado correctamente",
++-                Toast.LENGTH_SHORT
++-            ).show()
++-        }
+++        descriptionEditText.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(MAX_DESCRIPTION_LENGTH))
+++        nameEditText.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(MAX_TITLE_LENGTH))
++ 
++-        for (i in 1..8) {
++-            val id = resources.getIdentifier("imageButton$i", "id", requireContext().packageName)
++-            val button: ImageButton = view.findViewById(id)
++-            val tag = button.tag as String
+++        // Inicializa el adaptador de imágenes
+++        selectedImages = ArrayList()
+++        imageAdapter = ImageAdapter(requireContext(), selectedImages)
+++        imageGridView.adapter = imageAdapter
++ 
++-            // Agrega el listener a cada botón
++-            if (tag.startsWith("boton")) {
++-                button.setOnClickListener {upLoadIamge() }
++-            }
+++
+++
+++        // Controlamos el boton de agregar imagenes
+++        addImageButton.setOnClickListener {
+++            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+++            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+++            intent.putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/*"))
+++            openGalleryForImages.launch(intent)
+++            Log.d("AddFragment", "Imagenes seleccionadas: ${selectedImages.size}")
++         }
+++
++ 
++         // Inflate the layout for this fragment
++         return view
++ 
+++
+++
++     }
++ 
++-    private fun upLoadIamge() {
++-        Toast.makeText(
++-            requireContext(),
++-            "Estamos trabajando en ello",
++-            Toast.LENGTH_SHORT
++-        ).show()
+++    private class ImageAdapter(private val context: Context, private val images: ArrayList<Uri>) : BaseAdapter() {
+++
+++        var layoutInflater: LayoutInflater? = null
+++        var MAX_IMAGES = 8
+++        override fun getCount(): Int {
+++            if (images.size > MAX_IMAGES) {
+++                Toast.makeText(
+++                    context,
+++                    "No puedes tener mas de 8 imagenes",
+++                    Toast.LENGTH_SHORT
+++                ).show()
+++                return MAX_IMAGES
+++            }
+++            return images.size
+++        }
+++
+++        override fun getItem(position: Int): Any {
+++            return images[position]
+++        }
+++
+++        override fun getItemId(position: Int): Long {
+++            return position.toLong()
+++        }
+++
+++        override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
+++            var view = convertView
+++            if (view == null) {
+++                view = LayoutInflater.from(context).inflate(R.layout.grid_item_image, parent, false)
+++            }
+++
+++            val imageView = view!!.findViewById<ImageView>(R.id.ivImagen)
+++            val imageButton = view.findViewById<ImageButton>(R.id.ibtnEliminar)
+++            imageView.layoutParams = ViewGroup.LayoutParams(500, 500)
+++            imageView.adjustViewBounds = true
+++
+++            Glide.with(context)
+++                .load(images[position])
+++                .centerCrop()
+++                .into(imageView)
+++
+++            imageButton.setOnClickListener {
+++                images.removeAt(position)
+++                notifyDataSetChanged()
+++            }
+++            return view
+++        }
++ 
++     }
++ 
++Index: APP/src/app/src/main/java/com/apm/monsteraltech/ui/fav/FavFragment.kt
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+>package com.apm.monsteraltech.ui.fav\r\n\r\nimport android.content.Intent\r\nimport android.os.Bundle\r\nimport androidx.fragment.app.Fragment\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport androidx.recyclerview.widget.LinearLayoutManager\r\nimport androidx.recyclerview.widget.RecyclerView\r\nimport com.apm.monsteraltech.ProductDetail\r\nimport com.apm.monsteraltech.R\r\nimport com.apm.monsteraltech.ui.profile.AdapterProductsData\r\nimport com.apm.monsteraltech.ui.profile.Product\r\n\r\nclass FavFragment : Fragment() {\r\n    private lateinit var recyclerView: RecyclerView\r\n    private lateinit var adapterProduct: AdapterProductsData\r\n\r\n    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {\r\n        val view = inflater.inflate(R.layout.fragment_fav, container, false)\r\n\r\n        // Necesitamos configurar un Layout al Recycler para que funcione\r\n        recyclerView = view.findViewById(R.id.recycler_view)\r\n        recyclerView.layoutManager = LinearLayoutManager(context)\r\n\r\n        // Inicialmente muestra la lista de productos\r\n        showProductList()\r\n\r\n        //LLamamos a la actividad producto detail\r\n        this.adapterProduct.setOnItemClickListener(object: AdapterProductsData.OnItemClickedListener{\r\n            override fun onItemClick(position: Int) {\r\n                recyclerView.getChildAt(position)\r\n                val intent = Intent(requireContext(), ProductDetail::class.java)\r\n                //TODO: ver que información es necesario pasarle\r\n                intent.putExtra(\"Product\", adapterProduct.getProduct(position).productName)\r\n                //TODO: ver si ponerle la flecha para volver atrás (la documentación no lo recomienda)\r\n                startActivity(intent)\r\n            }\r\n        })\r\n\r\n        return view\r\n    }\r\n\r\n    private fun showProductList() {\r\n        this.adapterProduct = AdapterProductsData(getProductList())\r\n        recyclerView.adapter = adapterProduct\r\n    }\r\n\r\n    private fun getProductList(): ArrayList<Product> {\r\n        //TODO: Cargar los productos desde la base de datos o de otro recurso externo\r\n        val productList: ArrayList<Product> = arrayListOf()\r\n\r\n        // Agrega algunos productos a la lista para mockear la respuesta\r\n        for (i in 0 until 10) {\r\n            val product = Product(\"Producto $i\",\"\", \"Owner\", \"99.99\")\r\n            productList.add(product)\r\n        }\r\n\r\n        return productList\r\n    }\r\n}
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/APP/src/app/src/main/java/com/apm/monsteraltech/ui/fav/FavFragment.kt b/APP/src/app/src/main/java/com/apm/monsteraltech/ui/fav/FavFragment.kt
++--- a/APP/src/app/src/main/java/com/apm/monsteraltech/ui/fav/FavFragment.kt	(revision 69c37f57e0acdddec1eb752f164e947c3a314857)
+++++ b/APP/src/app/src/main/java/com/apm/monsteraltech/ui/fav/FavFragment.kt	(date 1683143363871)
++@@ -2,6 +2,7 @@
++ 
++ import android.content.Intent
++ import android.os.Bundle
+++import android.util.Log
++ import androidx.fragment.app.Fragment
++ import android.view.LayoutInflater
++ import android.view.View
++@@ -32,9 +33,9 @@
++             override fun onItemClick(position: Int) {
++                 recyclerView.getChildAt(position)
++                 val intent = Intent(requireContext(), ProductDetail::class.java)
++-                //TODO: ver que información es necesario pasarle
++                 intent.putExtra("Product", adapterProduct.getProduct(position).productName)
++-                //TODO: ver si ponerle la flecha para volver atrás (la documentación no lo recomienda)
+++                intent.putExtra("Owner", adapterProduct.getProduct(position).owner)
+++                intent.putExtra("Price", adapterProduct.getProduct(position).price)
++                 startActivity(intent)
++             }
++         })
++Index: APP/src/app/src/main/java/com/apm/monsteraltech/ui/profile/ProfileFragment.kt
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+>package com.apm.monsteraltech.ui.profile\r\n\r\nimport android.content.Intent\r\nimport android.os.Bundle\r\nimport androidx.fragment.app.Fragment\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport android.widget.Button\r\nimport androidx.constraintlayout.widget.ConstraintLayout\r\nimport androidx.core.content.ContextCompat\r\nimport androidx.recyclerview.widget.LinearLayoutManager\r\nimport androidx.recyclerview.widget.RecyclerView\r\nimport com.apm.monsteraltech.ProductDetail\r\nimport com.apm.monsteraltech.R\r\n\r\n@Suppress(\"DEPRECATION\")\r\nclass ProfileFragment : Fragment() {\r\n    private lateinit var btnProducts: Button\r\n    private lateinit var btnTransactions: Button\r\n    private lateinit var profileLayout: ConstraintLayout\r\n    private lateinit var recyclerView: RecyclerView\r\n    private lateinit var adapterProduct: AdapterProductsData\r\n    private  var productList:  ArrayList<Product>? = null\r\n    private  var transactionList: ArrayList<Transactions>? = null\r\n\r\n    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {\r\n        val view = inflater.inflate(R.layout.fragment_profile, container, false)\r\n\r\n        if (savedInstanceState != null) {\r\n            // Si no estan inicializadas\r\n            this.productList = (savedInstanceState.getParcelableArrayList<Product>(\"productList\")\r\n                ?.toList() ?: getProductList()) as ArrayList<Product>\r\n            this.transactionList = (savedInstanceState.getParcelableArrayList<Transactions>(\"transactionList\")\r\n                ?.toList() ?: getTransactionList()) as ArrayList<Transactions>\r\n        }\r\n        // Inicializa los botones\r\n        btnProducts = view.findViewById(R.id.products_button)\r\n        btnTransactions = view.findViewById(R.id.transacciones_button)\r\n\r\n        // Necesitamos configurar un Layout al Recycler para que funcione\r\n        recyclerView = view.findViewById(R.id.recycler_view)\r\n        recyclerView.layoutManager = LinearLayoutManager(context)\r\n\r\n        // Inicialmente muestra la lista de productos\r\n        showProductList()\r\n        btnTransactions.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_700))\r\n        btnProducts.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_200))\r\n\r\n        // Crea una instancia del OnClickListener para reutilizar la misma lógica en ambos botones\r\n        val onClickListener = View.OnClickListener { viewRecycle->\r\n            when (viewRecycle.id) {\r\n                R.id.products_button -> {\r\n                    btnTransactions.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_700))\r\n                    btnProducts.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_200))\r\n                    showProductList()\r\n                }\r\n                R.id.transacciones_button -> {\r\n                    btnProducts.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_700))\r\n                    btnTransactions.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_200))\r\n                    showTransactionList()\r\n                }\r\n            }\r\n        }\r\n\r\n        // Asigna el OnClickListener a los botones\r\n        btnProducts.setOnClickListener(onClickListener)\r\n        btnTransactions.setOnClickListener(onClickListener)\r\n\r\n        //LLamamos a la actividad producto detail\r\n        this.adapterProduct.setOnItemClickListener(object: AdapterProductsData.OnItemClickedListener{\r\n            override fun onItemClick(position: Int) {\r\n                recyclerView.getChildAt(position)\r\n                val intent = Intent(requireContext(), ProductDetail::class.java)\r\n                //TODO: ver que información es necesario pasarle\r\n                intent.putExtra(\"Product\", adapterProduct.getProduct(position).productName)\r\n                //TODO: ver si ponerle la flecha para volver atrás (la documentación no lo recomienda)\r\n                startActivity(intent)\r\n            }\r\n        })\r\n\r\n        profileLayout = view.findViewById(R.id.profile)\r\n        profileLayout.setOnClickListener {\r\n            val intent = Intent(requireContext(), DetailedProfileActivity::class.java)\r\n            startActivity(intent)\r\n        }\r\n        return view\r\n    }\r\n\r\n    override fun onSaveInstanceState(outState: Bundle) {\r\n        super.onSaveInstanceState(outState)\r\n        //TODO: revisar si al que haga una transacción en alguna otra actividad esto varia\r\n        //por lo que a lo mejor esto no renta guardarlo\r\n        // Only save the Parcelable arrays if they have been initialized\r\n\r\n        //Esto lp hacemos en caso de que una de las dos no este inicializada\r\n        productList?.let {\r\n            outState.putParcelableArrayList(\"productList\", it)\r\n        }\r\n        transactionList?.let {\r\n            outState.putParcelableArrayList(\"transactionList\", it)\r\n        }\r\n    }\r\n\r\n\r\n    private fun showProductList() {\r\n        productList = productList ?: getProductList()\r\n\r\n        this.adapterProduct = AdapterProductsData(productList!!)\r\n        recyclerView.adapter = adapterProduct\r\n    }\r\n\r\n    private fun showTransactionList() {\r\n        transactionList = transactionList ?: getTransactionList()\r\n        recyclerView.adapter = AdapterTransactionsData(transactionList!!)\r\n    }\r\n\r\n    private fun getTransactionList(): ArrayList<Transactions> {\r\n        //TODO: Cargar los productos desde la base de datos o de otro recurso externo\r\n        // Agrega algunas transacciones a la lista para mockear la respuesta\r\n\r\n        val transactionList: ArrayList<Transactions> = arrayListOf()\r\n\r\n        for (i in 0 until 9) {\r\n            val transaction = Transactions(\"Usuario $i\", \"Usuario ${i+1}\", \"ObjetoX\", \"xx/yy/zzzz\")\r\n            transactionList.add(transaction)\r\n        }\r\n        return  transactionList\r\n    }\r\n\r\n    private fun getProductList(): ArrayList<Product> {\r\n        //TODO: Cargar los productos desde la base de datos o de otro recurso externo\r\n        val productList: ArrayList<Product> = arrayListOf()\r\n\r\n        // Agrega algunos productos a la lista para mockear la respuesta\r\n        for (i in 0 until 10) {\r\n            val product = Product(\"Producto $i\",\"\", \"Owner\", \"99.99\")\r\n            productList.add(product)\r\n        }\r\n\r\n        return productList\r\n    }\r\n\r\n}\r\n
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/APP/src/app/src/main/java/com/apm/monsteraltech/ui/profile/ProfileFragment.kt b/APP/src/app/src/main/java/com/apm/monsteraltech/ui/profile/ProfileFragment.kt
++--- a/APP/src/app/src/main/java/com/apm/monsteraltech/ui/profile/ProfileFragment.kt	(revision 69c37f57e0acdddec1eb752f164e947c3a314857)
+++++ b/APP/src/app/src/main/java/com/apm/monsteraltech/ui/profile/ProfileFragment.kt	(date 1683143363874)
++@@ -2,6 +2,7 @@
++ 
++ import android.content.Intent
++ import android.os.Bundle
+++import android.util.Log
++ import androidx.fragment.app.Fragment
++ import android.view.LayoutInflater
++ import android.view.View
++@@ -72,9 +73,9 @@
++             override fun onItemClick(position: Int) {
++                 recyclerView.getChildAt(position)
++                 val intent = Intent(requireContext(), ProductDetail::class.java)
++-                //TODO: ver que información es necesario pasarle
++                 intent.putExtra("Product", adapterProduct.getProduct(position).productName)
++-                //TODO: ver si ponerle la flecha para volver atrás (la documentación no lo recomienda)
+++                intent.putExtra("Owner", adapterProduct.getProduct(position).owner)
+++                intent.putExtra("Price", adapterProduct.getProduct(position).price)
++                 startActivity(intent)
++             }
++         })
++Index: APP/src/app/src/main/java/com/apm/monsteraltech/ui/profile/AdapterProductsData.kt
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+>package com.apm.monsteraltech.ui.profile\r\n\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport android.widget.ImageView\r\nimport android.widget.TextView\r\nimport androidx.recyclerview.widget.RecyclerView\r\nimport com.apm.monsteraltech.R\r\n\r\nclass AdapterProductsData(private val productList: ArrayList<Product>): RecyclerView.Adapter<AdapterProductsData.ViewHolder>() {\r\n    private lateinit var listener: OnItemClickedListener\r\n\r\n    interface OnItemClickedListener{\r\n        fun onItemClick(position: Int)\r\n    }\r\n\r\n    fun setOnItemClickListener(listener: OnItemClickedListener){\r\n        this.listener = listener\r\n    }\r\n    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {\r\n        private val textProductName: TextView = itemView.findViewById(R.id.product_name)\r\n        private val imageProduct: ImageView = itemView.findViewById(R.id.product_image_imageview)\r\n        private val textOwner: TextView = itemView.findViewById(R.id.product_owner)\r\n        private val textPrice: TextView = itemView.findViewById(R.id.product_price)\r\n\r\n        fun setData(product: Product) {\r\n            textProductName.text = product.productName\r\n            //TODO: Cargar imagenes de los productos aquí\r\n            textOwner.text = product.owner\r\n            // Si hicieramos \"$${product.price}\" tendríamos una vulnerabilidad de inyección de código\r\n            textPrice.text = itemView.context.getString(R.string.product_price, product.price)\r\n        }\r\n    }\r\n\r\n    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {\r\n        val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_profile_products, parent, false)\r\n        return ViewHolder(view)\r\n    }\r\n\r\n    override fun onBindViewHolder(holder: ViewHolder, position: Int) {\r\n        holder.setData(productList[position])\r\n\r\n        holder.itemView.setOnClickListener {\r\n            listener.onItemClick(position)\r\n        }\r\n    }\r\n\r\n    fun getProduct(position: Int): Product {\r\n        return productList[position]\r\n    }\r\n\r\n    override fun getItemCount(): Int {\r\n        return productList.size\r\n    }\r\n}
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/APP/src/app/src/main/java/com/apm/monsteraltech/ui/profile/AdapterProductsData.kt b/APP/src/app/src/main/java/com/apm/monsteraltech/ui/profile/AdapterProductsData.kt
++--- a/APP/src/app/src/main/java/com/apm/monsteraltech/ui/profile/AdapterProductsData.kt	(revision 69c37f57e0acdddec1eb752f164e947c3a314857)
+++++ b/APP/src/app/src/main/java/com/apm/monsteraltech/ui/profile/AdapterProductsData.kt	(date 1683143363873)
++@@ -1,5 +1,6 @@
++ package com.apm.monsteraltech.ui.profile
++ 
+++import android.content.Context
++ import android.view.LayoutInflater
++ import android.view.View
++ import android.view.ViewGroup
++Index: APP/src/app/src/main/java/com/apm/monsteraltech/ProductDetail.kt
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+>package com.apm.monsteraltech\r\n\r\nimport android.os.Bundle\r\nimport android.view.View\r\nimport androidx.appcompat.widget.Toolbar\r\n\r\nclass ProductDetail : ActionBarActivity() {\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_product_detail)\r\n        setToolBar()\r\n    }\r\n}
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/APP/src/app/src/main/java/com/apm/monsteraltech/ProductDetail.kt b/APP/src/app/src/main/java/com/apm/monsteraltech/ProductDetail.kt
++--- a/APP/src/app/src/main/java/com/apm/monsteraltech/ProductDetail.kt	(revision 69c37f57e0acdddec1eb752f164e947c3a314857)
+++++ b/APP/src/app/src/main/java/com/apm/monsteraltech/ProductDetail.kt	(date 1683143363869)
++@@ -1,13 +1,103 @@
++ package com.apm.monsteraltech
++ 
+++import android.annotation.SuppressLint
+++import android.content.Intent
+++import android.graphics.drawable.Drawable
++ import android.os.Bundle
++ import android.view.View
++-import androidx.appcompat.widget.Toolbar
+++import android.view.ViewGroup
+++import android.widget.Button
+++import android.widget.ImageView
+++import android.widget.TextView
+++import androidx.viewpager.widget.PagerAdapter
+++import androidx.viewpager.widget.ViewPager
+++import com.bumptech.glide.Glide
+++import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
++ 
++ class ProductDetail : ActionBarActivity() {
++     override fun onCreate(savedInstanceState: Bundle?) {
++         super.onCreate(savedInstanceState)
++         setContentView(R.layout.activity_product_detail)
++         setToolBar()
+++        //TODO: Si price o productDescription son null hay que recoger los datos de la base de datos
+++        //TODO: Deberiamos pasarle un id de producto cuando lo tengamos
+++        val productName = intent.getStringExtra("Product")
+++        val productOwner = intent.getStringExtra("Owner")
+++        val productPrice = intent.getStringExtra("Price") + " €"
+++        //val productDescription = intent.getStringExtra("Description")
+++        val productNameEditText = findViewById<TextView>(R.id.productTitle)
+++        val productOwnerButton = findViewById<TextView>(R.id.buttonOwner)
+++        val productDescriptionEditText = findViewById<TextView>(R.id.productDescription)
+++        val productPriceEditText = findViewById<TextView>(R.id.productPrice)
+++        val ownerButton = findViewById<Button>(R.id.buttonOwner)
+++
+++        ownerButton.setOnClickListener {
+++            // Acción para cancelar el registro
+++            val intent = Intent(this, UserDetail::class.java)
+++            intent.putExtra("Owner", productOwner)
+++            startActivity(intent)
+++        }
+++
+++        productNameEditText.text = productName
+++        productOwnerButton.text = productOwner
+++        //productDescription.text = productDescription
+++        productPriceEditText.text = productPrice
+++
+++        // Obtener las imágenes del producto desde el servidor
+++        val imagenes = GetImagesOfProducts()
+++
+++        // Crear el adaptador del ViewPager
+++        val viewPaperAdapter = ViewPaperAdapter(imagenes)
+++
+++        // Configurar el ViewPager y los dots
+++        val viewPager = findViewById<ViewPager>(R.id.viewPaperImages)
+++        val dotsIndicator = findViewById<WormDotsIndicator>(R.id.wormDotsIndicator)
+++        viewPager.adapter = viewPaperAdapter
+++        dotsIndicator.attachTo(viewPager)
++     }
++-}
++\ No newline at end of file
+++
+++    private fun GetImagesOfProducts(): List<Drawable> {
+++        val imagenes = ArrayList<Drawable>()
+++
+++        // Agregar las imágenes del producto a la lista recuperandolas del servidor
+++        getDrawable(R.drawable.recyclerbin)?.let { imagenes.add(it) }
+++        getDrawable(R.drawable.ebay_icon)?.let { imagenes.add(it) }
+++        getDrawable(R.drawable.wallapopicon)?.let { imagenes.add(it) }
+++
+++        return imagenes
+++    }
+++
+++
+++    private class ViewPaperAdapter(private val imagenes: List<Drawable>) :
+++        PagerAdapter() {
+++
+++        override fun instantiateItem(container: ViewGroup, position: Int): Any {
+++            val imageView = ImageView(container.context)
+++            imageView.layoutParams = ViewGroup.LayoutParams(
+++                ViewGroup.LayoutParams.MATCH_PARENT,
+++                ViewGroup.LayoutParams.WRAP_CONTENT
+++            )
+++            imageView.adjustViewBounds = true
+++            imageView.setImageDrawable(imagenes[position])
+++            Glide.with(container.context)
+++                .load(imagenes[position])
+++                .centerCrop()
+++                .into(imageView)
+++            container.addView(imageView)
+++            return imageView
+++        }
+++
+++        override fun destroyItem(container: ViewGroup, position: Int, obj: Any) {
+++            container.removeView(obj as View)
+++        }
+++
+++        override fun getCount(): Int {
+++            return imagenes.size
+++        }
+++
+++        override fun isViewFromObject(view: View, obj: Any): Boolean {
+++            return view === obj
+++        }
+++    }
+++
+++}
++Index: APP/src/app/src/main/res/layout/grid_item_image.xml
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/APP/src/app/src/main/res/layout/grid_item_image.xml b/APP/src/app/src/main/res/layout/grid_item_image.xml
++new file mode 100644
++--- /dev/null	(date 1683143444801)
+++++ b/APP/src/app/src/main/res/layout/grid_item_image.xml	(date 1683143444801)
++@@ -0,0 +1,32 @@
+++<?xml version="1.0" encoding="utf-8"?>
+++<androidx.constraintlayout.widget.ConstraintLayout
+++    xmlns:android="http://schemas.android.com/apk/res/android"
+++    xmlns:app="http://schemas.android.com/apk/res-auto"
+++    android:orientation="vertical"
+++    android:layout_width="match_parent"
+++    android:layout_height="match_parent">
+++
+++    <ImageView
+++        android:id="@+id/ivImagen"
+++        android:layout_width="match_parent"
+++        android:layout_height="150dp"
+++        android:scaleType="centerCrop"
+++        app:layout_constraintBottom_toBottomOf="parent"
+++        app:layout_constraintEnd_toEndOf="parent"
+++        app:layout_constraintStart_toStartOf="parent"
+++        app:layout_constraintTop_toTopOf="parent"
+++        />
+++
+++    <ImageButton
+++        android:id="@+id/ibtnEliminar"
+++        android:layout_width="25dp"
+++        android:layout_height="25dp"
+++        android:layout_marginTop="15dp"
+++        android:layout_marginEnd="15dp"
+++        android:background="@android:color/transparent"
+++        android:scaleType="centerCrop"
+++        android:src="@drawable/recyclerbin"
+++        app:layout_constraintEnd_toEndOf="parent"
+++        app:layout_constraintTop_toTopOf="parent" />
+++
+++</androidx.constraintlayout.widget.ConstraintLayout>
++\ No newline at end of file
++Index: APP/src/app/src/main/java/com/apm/monsteraltech/ui/profile/AdapterTransactionsData.kt
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+>package com.apm.monsteraltech.ui.profile\r\n\r\nimport android.content.Context\r\nimport android.content.Intent\r\nimport android.text.SpannableString\r\nimport android.text.Spanned\r\nimport android.text.method.LinkMovementMethod\r\nimport android.text.style.ClickableSpan\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport android.widget.TextView\r\nimport androidx.recyclerview.widget.RecyclerView\r\nimport com.apm.monsteraltech.ProductDetail\r\nimport com.apm.monsteraltech.R\r\n\r\nclass AdapterTransactionsData(\r\n    private val transactionList: ArrayList<Transactions>\r\n): RecyclerView.Adapter<AdapterTransactionsData.ViewHolder>() {\r\n\r\n\r\n    class ViewHolder(itemView: View, val context: Context) : RecyclerView.ViewHolder(itemView) {\r\n\r\n        fun setData(transaction: Transactions) {\r\n            val userSeller = transaction.seller\r\n            val userCustomer = transaction.customer\r\n            val item = transaction.item\r\n            val date = transaction.date\r\n            val transactionMessage = context.getString(R.string.transaction_template, userSeller, userCustomer, item, date)\r\n\r\n            val spannableString = SpannableString(transactionMessage)\r\n\r\n            val userSellerLink = object : ClickableSpan() {\r\n                override fun onClick(widget: View) {\r\n                    //TODO: FALTARIÍA CREAR UNA ACTIVIDAD PARA VER OTROS PERFILES\r\n\r\n                }\r\n//          Añadir esto si nos interesa cambiar el color una vez pulsado\r\n/*                override fun updateDrawState(ds: TextPaint) {\r\n                    super.updateDrawState(ds)\r\n                    ds.color = Color.RED\r\n                }*/\r\n            }\r\n\r\n            val userCustomerLink = object : ClickableSpan() {\r\n                override fun onClick(widget: View) {\r\n                    //TODO: FALTARIÍA CREAR UNA ACTIVIDAD PARA VER OTROS PERFILES\r\n                }\r\n            }\r\n\r\n            val itemLink = object : ClickableSpan() {\r\n                override fun onClick(widget: View) {\r\n                    val intent = Intent(widget.context, ProductDetail::class.java)\r\n                    //TODO: ver que información es necesario pasarle\r\n                    intent.putExtra(\"Product\",item)\r\n                    //TODO: ver si ponerle la flecha para volver atrás (la documentación no lo recomienda)\r\n                    widget.context.startActivity(intent)\r\n                }\r\n            }\r\n\r\n            val dateLink = object : ClickableSpan() {\r\n                override fun onClick(widget: View) {\r\n                    //TODO: FALTARIÍA VER SI ESTO TIENE QUE SER UN CLICKABLE Y SI SÍ QUE MUESTRA\r\n                }\r\n            }\r\n\r\n            //  SPAN_EXCLUSIVE_EXCLUSIVE indica que el ClickableSpan solo se aplicará al rango de texto especificado y no se extenderá automáticamente si se agrega más texto alrededor del mismo.\r\n            spannableString.setSpan(userSellerLink, transactionMessage.indexOf(userSeller), transactionMessage.indexOf(userSeller) + userSeller.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)\r\n            //Por si hay que cambiarle el color sería así\r\n            //spannableString.setSpan(ForegroundColorSpan(Color.RED), transactionMessage.indexOf(userSeller), transactionMessage.indexOf(userSeller) + userSeller.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)\r\n            spannableString.setSpan(userCustomerLink, transactionMessage.indexOf(userCustomer), transactionMessage.indexOf(userCustomer) + userCustomer.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)\r\n            spannableString.setSpan(itemLink, transactionMessage.indexOf(item), transactionMessage.indexOf(item) + item.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)\r\n            spannableString.setSpan(dateLink, transactionMessage.indexOf(date), transactionMessage.indexOf(date) + date.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)\r\n\r\n\r\n            transactionMessageTextView.text = spannableString\r\n            // Para hacer que los enlaces sean clickables\r\n            transactionMessageTextView.movementMethod = LinkMovementMethod.getInstance()\r\n        }\r\n\r\n        private val transactionMessageTextView: TextView = itemView.findViewById(R.id.transaction_message)\r\n    }\r\n\r\n    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {\r\n        val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_profile_transactions, parent, false)\r\n        return ViewHolder(view, parent.context)\r\n    }\r\n\r\n    override fun onBindViewHolder(holder: ViewHolder, position: Int) {\r\n        holder.setData(transactionList[position])\r\n    }\r\n\r\n    override fun getItemCount(): Int {\r\n        return transactionList.size\r\n    }\r\n}\r\n
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/APP/src/app/src/main/java/com/apm/monsteraltech/ui/profile/AdapterTransactionsData.kt b/APP/src/app/src/main/java/com/apm/monsteraltech/ui/profile/AdapterTransactionsData.kt
++--- a/APP/src/app/src/main/java/com/apm/monsteraltech/ui/profile/AdapterTransactionsData.kt	(revision 69c37f57e0acdddec1eb752f164e947c3a314857)
+++++ b/APP/src/app/src/main/java/com/apm/monsteraltech/ui/profile/AdapterTransactionsData.kt	(date 1683143363873)
++@@ -13,6 +13,7 @@
++ import androidx.recyclerview.widget.RecyclerView
++ import com.apm.monsteraltech.ProductDetail
++ import com.apm.monsteraltech.R
+++import com.apm.monsteraltech.UserDetail
++ 
++ class AdapterTransactionsData(
++     private val transactionList: ArrayList<Transactions>
++@@ -32,7 +33,10 @@
++ 
++             val userSellerLink = object : ClickableSpan() {
++                 override fun onClick(widget: View) {
++-                    //TODO: FALTARIÍA CREAR UNA ACTIVIDAD PARA VER OTROS PERFILES
+++                    val intent = Intent(widget.context, UserDetail::class.java)
+++                    intent.putExtra("Owner", userSeller)
+++                    widget.context.startActivity(intent)
+++
++ 
++                 }
++ //          Añadir esto si nos interesa cambiar el color una vez pulsado
++@@ -44,16 +48,17 @@
++ 
++             val userCustomerLink = object : ClickableSpan() {
++                 override fun onClick(widget: View) {
++-                    //TODO: FALTARIÍA CREAR UNA ACTIVIDAD PARA VER OTROS PERFILES
+++                    val intent = Intent(widget.context, UserDetail::class.java)
+++                    intent.putExtra("Owner", userCustomer)
+++                    widget.context.startActivity(intent)
++                 }
++             }
++ 
++             val itemLink = object : ClickableSpan() {
++                 override fun onClick(widget: View) {
++                     val intent = Intent(widget.context, ProductDetail::class.java)
++-                    //TODO: ver que información es necesario pasarle
++                     intent.putExtra("Product",item)
++-                    //TODO: ver si ponerle la flecha para volver atrás (la documentación no lo recomienda)
+++                    intent.putExtra("Owner", userCustomer)
++                     widget.context.startActivity(intent)
++                 }
++             }
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_03_05_2023_21_51__Changes_.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_03_05_2023_21_51__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_03_05_2023_21_51__Changes_.xml
+new file mode 100644
+--- /dev/null	(date 1683143519451)
++++ b/.idea/shelf/Uncommitted_changes_before_Update_at_03_05_2023_21_51__Changes_.xml	(date 1683143519451)
+@@ -0,0 +1,9 @@
++<changelist name="Uncommitted_changes_before_Update_at_03_05_2023_21_51_[Changes]" date="1683143508057" recycled="false" toDelete="true">
++  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03_05_2023_21_51_[Changes]/shelved.patch" />
++  <option name="DESCRIPTION" value="Uncommitted changes before Update at 03/05/2023 21:51 [Changes]" />
++  <binary>
++    <option name="BEFORE_PATH" />
++    <option name="AFTER_PATH" value="APP/src/app/src/main/res/drawable/recyclerbin.png" />
++    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03_05_2023_21_51_[Changes]/recyclerbin.png" />
++  </binary>
++</changelist>
+\ No newline at end of file
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1683143469383)
++++ b/.idea/vcs.xml	(date 1683143469383)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+new file mode 100644
+--- /dev/null	(date 1683143469374)
++++ b/.idea/modules.xml	(date 1683143469374)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/ForkMosteralTech.iml" filepath="$PROJECT_DIR$/.idea/ForkMosteralTech.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
