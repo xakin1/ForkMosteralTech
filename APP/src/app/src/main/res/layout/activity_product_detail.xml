@@ -71,10 +71,20 @@ tools:context=".ProductDetail">
         android:layout_marginTop="10dp"
         android:text="Propietario"
         app:icon="@drawable/baseline_person_outline_24"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/productPrice"
+        app:layout_constraintEnd_toStartOf="@id/buttonLike"
         app:rippleColor="@color/teal_700" />
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/buttonLike"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/buttonOwner"
+        app:layout_constraintTop_toBottomOf="@+id/productPrice"
+        app:srcCompat="@drawable/like_empty" />
 
     <TextView
         android:id="@+id/productDescription"
