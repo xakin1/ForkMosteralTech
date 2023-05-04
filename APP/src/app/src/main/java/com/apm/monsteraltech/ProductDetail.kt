@@ -1,5 +1,7 @@
 package com.apm.monsteraltech
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.drawable.Drawable
@@ -11,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 
@@ -29,9 +32,13 @@ class ProductDetail : ActionBarActivity() {
         val productOwnerButton = findViewById<TextView>(R.id.buttonOwner)
         val productDescriptionEditText = findViewById<TextView>(R.id.productDescription)
         val productPriceEditText = findViewById<TextView>(R.id.productPrice)
-        val ownerButton = findViewById<Button>(R.id.buttonOwner)
+        val likeButton = findViewById<LottieAnimationView>(R.id.buttonLike)
+        var liked = false
+        likeButton.setOnClickListener {
+            liked = likeAnimation(likeButton, R.raw.bandai_dokkan, liked)
+        }
 
-        ownerButton.setOnClickListener {
+        productOwnerButton.setOnClickListener {
             // Acción para cancelar el registro
             val intent = Intent(this, UserDetail::class.java)
             intent.putExtra("Owner", productOwner)
@@ -54,6 +61,32 @@ class ProductDetail : ActionBarActivity() {
         val dotsIndicator = findViewById<WormDotsIndicator>(R.id.wormDotsIndicator)
         viewPager.adapter = viewPaperAdapter
         dotsIndicator.attachTo(viewPager)
+    }
+
+    private fun likeAnimation(imageView: LottieAnimationView,
+                              animation: Int,
+                              like: Boolean) : Boolean {
+
+        if (!like) {
+            imageView.setAnimation(animation)
+            imageView.playAnimation()
+        } else {
+            imageView.animate()
+                .alpha(0f)
+                .setDuration(200)
+                .setListener(object : AnimatorListenerAdapter() {
+
+                    override fun onAnimationEnd(animator: Animator) {
+
+                        imageView.setImageResource(R.drawable.like_empty)
+                        imageView.alpha = 1f
+                    }
+
+                })
+
+        }
+
+        return !like
     }
 
     private fun GetImagesOfProducts(): List<Drawable> {
