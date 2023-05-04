@@ -2,9 +2,9 @@ spring:
   datasource:
     host: localhost
     port: 5432
-    database: gema
+    database: MonsteralTech
     username: postgres
-    password: postgres
+    password: admin1234.
     url: jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.database}
     hikari:
       connectionTimeout: 20000
@@ -30,7 +30,7 @@ spring:
     properties:
       hibernate.jdbc.lob.non_contextual_creation: true
       hibernate.temp.use_jdbc_metadata_defaults: true
-      hibernate.dialect: org.hibernate.spatial.dialect.postgis.PostgisDialect
+     # hibernate.dialect: org.hibernate.spatial.dialect.postgis.PostgisDialect
   # Email server configuration
   mail:
     host: 127.0.0.1
