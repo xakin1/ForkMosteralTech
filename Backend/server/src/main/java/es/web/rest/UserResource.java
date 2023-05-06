@@ -74,6 +74,15 @@ public class UserResource {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
   }
+  
+  @GetMapping("firebaseToken/{firebase_token}")
+  public ResponseEntity<UserFullDTO> getToken(@PathVariable String firebase_token) {
+    try {
+      return new ResponseEntity<>(userService.getFirebaseToken(firebase_token), HttpStatus.OK);
+    } catch (NotFoundException e) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+  }
 
   @PostMapping
   public ResponseEntity<?> create(@Valid @RequestBody UserFullDTO user, Errors errors)

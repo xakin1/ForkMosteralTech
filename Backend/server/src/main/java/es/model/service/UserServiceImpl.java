@@ -102,4 +102,16 @@ public class UserServiceImpl implements UserService {
         .findById(id)
         .orElseThrow(() -> new NotFoundException("Cannot find User with id " + id));
   }
+
+  @Override
+  public UserFullDTO getFirebaseToken(String token) throws NotFoundException {
+	    AppUser user = findByFirebaseToken(token);
+	    return new UserFullDTO(user);
+  }
+
+  private AppUser findByFirebaseToken(String token) throws NotFoundException {
+    return userRepository
+            .findByFirebaseToken(token)
+            .orElseThrow(() -> new NotFoundException("Cannot find User with id " + token));
+  }
 }

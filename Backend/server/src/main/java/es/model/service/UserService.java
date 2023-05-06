@@ -17,6 +17,8 @@ public interface UserService {
   FeatureCollectionJSON getLocation(Boolean properties, List<String> filters);
 
   UserFullDTO get(Long id) throws NotFoundException;
+  
+  UserFullDTO getFirebaseToken(String token) throws NotFoundException;
 
   UserFullDTO create(UserFullDTO user) throws OperationNotAllowedException;
 
