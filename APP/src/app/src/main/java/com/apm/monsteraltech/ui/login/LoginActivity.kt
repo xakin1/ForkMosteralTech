@@ -7,8 +7,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.view.inputmethod.EditorInfo
-import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
@@ -19,6 +17,8 @@ import com.apm.monsteraltech.MainActivity
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.RegisterActivity
 import com.apm.monsteraltech.databinding.ActivityLoginBinding
+import com.apm.monsteraltech.services.ServiceFactory
+import com.apm.monsteraltech.services.UserService
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -34,6 +34,10 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.Response
 
 
 class LoginActivity : AppCompatActivity() {
@@ -42,6 +46,8 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val EMAIL = "email"
     private lateinit var callbackManager: CallbackManager
+    private val serviceFactory = ServiceFactory()
+    private val userService = serviceFactory.createService(UserService::class.java)
 
     private lateinit var auth: FirebaseAuth
     // [END declare_auth]
@@ -224,7 +230,11 @@ class LoginActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
                     val user = auth.currentUser
-                    updateUI(user)
+                    CoroutineScope(Dispatchers.IO).launch {
+                        var userBd =userService.getUserById(2)
+                        Log.d(TAG, userBd.toString())
+                        updateUI(user)
+                    }
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
@@ -260,6 +270,7 @@ class LoginActivity : AppCompatActivity() {
     private fun showLoginFailed(@StringRes errorString: Int) {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
     }
+
     private fun moveToMainMenu() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)

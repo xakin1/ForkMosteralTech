@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.Searchable
+import com.apm.monsteraltech.services.ProductService
+import com.apm.monsteraltech.services.ServiceFactory
 import com.apm.monsteraltech.ui.home.filters.*
 import java.util.*
 
@@ -24,6 +26,8 @@ class HomeFragment : Fragment(), Searchable {
     private lateinit var productRecyclerView: RecyclerView
     private lateinit var productsList: ArrayList<Product?>
     private lateinit var adapterProduct: AdapterProductsHome
+    private val serviceFactory = ServiceFactory()
+    private val productService = serviceFactory.createService(ProductService::class.java)
 
     private var context: Context? = null
 
@@ -121,6 +125,7 @@ class HomeFragment : Fragment(), Searchable {
             }
         })
     }
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putParcelableArrayList("productList", productsList)
