@@ -24,8 +24,8 @@ public class Transactions {
   private Product product;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "user")
-  private User user;
+  @JoinColumn(name = "appuser")
+  private AppUser appuser;
 
   public Transactions() {}
 
@@ -61,11 +61,11 @@ public class Transactions {
     this.product = product;
   }
 
-  public User getUser() {
-    return user;
+  public AppUser getAppUser() {
+    return appuser;
   }
 
-  public void setUser(User user) {
-    this.user = user;
+  public void setAppUser(AppUser user) {
+    this.appuser = user;
   }
 }

@@ -7,11 +7,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-import es.model.domain.User;
+import es.model.domain.AppUser;
 
-public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
+public interface UserRepository extends JpaRepository<AppUser, Long>, JpaSpecificationExecutor<AppUser> {
 
-  Optional<User> findById(Long pk);
+  Optional<AppUser> findById(Long pk);
 
-  Page<User> findByIdIn(List<Long> pk, Pageable pageable);
+  Page<AppUser> findByIdIn(List<Long> pk, Pageable pageable);
 }

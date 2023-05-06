@@ -5,9 +5,9 @@ import javax.persistence.*;
 import javax.persistence.Column;
 import org.locationtech.jts.geom.Point;
 
-@Entity(name = "t_user")
-@Table(name = "t_user")
-public class User {
+@Entity(name = "appuser")
+@Table(name = "appuser")
+public class AppUser {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", unique = true)
@@ -18,6 +18,9 @@ public class User {
 
   @Column(name = "surname")
   private String surname;
+  
+  @Column(name = "firebaseToken")
+  private String firebaseToken;
 
   @Column(name = "location", columnDefinition = "geometry(Point, 4326)")
   private Point location;
@@ -25,13 +28,13 @@ public class User {
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
   private List<Product> products;
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "appuser")
   private List<Favourites> favourites;
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "appuser")
   private List<Transactions> transactions;
 
-  public User() {}
+  public AppUser() {}
 
   public Long getId() {
     return id;

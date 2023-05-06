@@ -19,8 +19,8 @@ public class FavouritesDTO {
     if (favourites.getProduct() != null) {
       this.product = new ProductDTO(favourites.getProduct());
     }
-    if (favourites.getUser() != null) {
-      this.user = new UserDTO(favourites.getUser());
+    if (favourites.getAppUser() != null) {
+      this.user = new UserDTO(favourites.getAppUser());
     }
   }
 
@@ -64,7 +64,7 @@ public class FavouritesDTO {
       favourites.setProduct(this.getProduct().toProduct());
     }
     if (this.getUser() != null) {
-      favourites.setUser(this.getUser().toUser());
+      favourites.setAppUser(this.getUser().toUser());
     }
     return favourites;
   }

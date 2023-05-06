@@ -1,6 +1,6 @@
 package es.model.service;
 
-import es.model.domain.User;
+import es.model.domain.AppUser;
 import es.model.repository.UserRepository;
 import es.model.service.dto.UserDTO;
 import es.model.service.dto.UserFullDTO;
@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
   @Inject private UserRepository userRepository;
 
   public Page<UserDTO> getAll(Pageable pageable, List<String> filters, String search) {
-    Page<User> page;
+    Page<AppUser> page;
     if (search != null && !search.isEmpty()) {
       page = userRepository.findAll(UserSpecification.searchAll(search), pageable);
     } else {
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
   }
 
   public FeatureCollectionJSON getLocation(Boolean properties, List<String> filters) {
-    List<User> list =
+    List<AppUser> list =
         userRepository.findAll(SpecificationUtil.getSpecificationFromFilters(filters, false));
 
     List<FeatureJSON> ret =
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
                 e -> {
                   FeatureJSON geoJSON = new FeatureJSON();
                   if (properties) {
-                    geoJSON = new FeatureJSON(User.class, e);
+                    geoJSON = new FeatureJSON(AppUser.class, e);
                   } else {
                     geoJSON.setProperties(new HashMap());
                   }
@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
   }
 
   public UserFullDTO get(Long id) throws NotFoundException {
-    User user = findById(id);
+    AppUser user = findById(id);
     return new UserFullDTO(user);
   }
 
@@ -72,8 +72,8 @@ public class UserServiceImpl implements UserService {
     if (userDto.getId() != null) {
       throw new OperationNotAllowedException("user.error.id-exists");
     }
-    User userEntity = userDto.toUser();
-    User userSaved = userRepository.save(userEntity);
+    AppUser userEntity = userDto.toUser();
+    AppUser userSaved = userRepository.save(userEntity);
     return new UserFullDTO(userSaved);
   }
 
@@ -85,12 +85,12 @@ public class UserServiceImpl implements UserService {
     if (!id.equals(userDto.getId())) {
       throw new OperationNotAllowedException("user.error.id-dont-match");
     }
-    User user =
+    AppUser user =
         userRepository
             .findById(id)
             .orElseThrow(() -> new OperationNotAllowedException("user.error.id-not-exists"));
-    User userToUpdate = userDto.toUser();
-    User userUpdated = userRepository.save(userToUpdate);
+    AppUser userToUpdate = userDto.toUser();
+    AppUser userUpdated = userRepository.save(userToUpdate);
     return new UserFullDTO(userUpdated);
   }
 
@@ -100,7 +100,7 @@ public class UserServiceImpl implements UserService {
   }
 
   /** PRIVATE METHODS * */
-  private User findById(Long id) throws NotFoundException {
+  private AppUser findById(Long id) throws NotFoundException {
     return userRepository
         .findById(id)
         .orElseThrow(() -> new NotFoundException("Cannot find User with id " + id));

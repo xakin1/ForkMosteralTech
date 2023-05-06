@@ -20,7 +20,7 @@ public class UserFullDTO {
 
   public UserFullDTO() {}
 
-  public UserFullDTO(User user) {
+  public UserFullDTO(AppUser user) {
     this.id = user.getId();
     this.name = user.getName();
     this.surname = user.getSurname();
@@ -59,8 +59,8 @@ public class UserFullDTO {
     this.location = location;
   }
 
-  public User toUser() {
-    User user = new User();
+  public AppUser toUser() {
+    AppUser user = new AppUser();
     user.setId(this.getId());
     user.setName(this.getName());
     user.setSurname(this.getSurname());

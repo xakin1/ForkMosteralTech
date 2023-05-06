@@ -20,8 +20,8 @@ public class TransactionsFullDTO {
     if (transactions.getProduct() != null) {
       this.product = new ProductDTO(transactions.getProduct());
     }
-    if (transactions.getUser() != null) {
-      this.user = new UserDTO(transactions.getUser());
+    if (transactions.getAppUser() != null) {
+      this.user = new UserDTO(transactions.getAppUser());
     }
   }
 
@@ -74,7 +74,7 @@ public class TransactionsFullDTO {
       transactions.setProduct(this.getProduct().toProduct());
     }
     if (this.getUser() != null) {
-      transactions.setUser(this.getUser().toUser());
+      transactions.setAppUser(this.getUser().toUser());
     }
     return transactions;
   }

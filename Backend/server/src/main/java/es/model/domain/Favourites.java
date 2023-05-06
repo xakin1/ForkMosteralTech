@@ -20,8 +20,8 @@ public class Favourites {
   private Product product;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "user")
-  private User user;
+  @JoinColumn(name = "appuser")
+  private AppUser appuser;
 
   public Favourites() {}
 
@@ -49,11 +49,11 @@ public class Favourites {
     this.product = product;
   }
 
-  public User getUser() {
-    return user;
+  public AppUser getAppUser() {
+    return appuser;
   }
 
-  public void setUser(User user) {
-    this.user = user;
+  public void setAppUser(AppUser user) {
+    this.appuser = user;
   }
 }

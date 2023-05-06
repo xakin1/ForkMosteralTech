@@ -73,8 +73,8 @@ security-properties:
 logging:
   level:
     root: INFO
-    es.udc.lbd.gema.lps: DEBUG
-    es.udc.lbd.gema.lps.model.util.EnumConverter: ERROR
+    es: DEBUG
+    es.model.util.EnumConverter: ERROR
 properties:
   clientHost: http://localhost:1234
   gis:

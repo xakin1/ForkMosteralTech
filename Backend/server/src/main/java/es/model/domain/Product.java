@@ -1,15 +1,28 @@
 package es.model.domain;
 
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
-import javax.persistence.Column;
-import org.locationtech.jts.geom.Point;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.locationtech.jts.geom.Point;
 @Entity(name = "t_product")
 @Table(name = "t_product")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Product {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", unique = true)
   private Long id;
 
@@ -21,17 +34,20 @@ public class Product {
 
   @Column(name = "description")
   private String description;
-
+  
   @Enumerated(EnumType.STRING)
   @Column(name = "state")
   private State state;
+  
+  @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<ProductImage> images = new ArrayList<>();
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
   private List<Transactions> transactions;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "owner")
-  private User owner;
+  private AppUser owner;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
   private List<Favourites> favourites;
@@ -86,11 +102,11 @@ public class Product {
     this.transactions = transactions;
   }
 
-  public User getOwner() {
+  public AppUser getOwner() {
     return owner;
   }
 
-  public void setOwner(User owner) {
+  public void setOwner(AppUser owner) {
     this.owner = owner;
   }
 
@@ -101,4 +117,13 @@ public class Product {
   public void setFavourites(List<Favourites> favourites) {
     this.favourites = favourites;
   }
+  
+   
+  public List<ProductImage> getImages() {
+  	return images;
+  }
+  
+  public void setImages(List<ProductImage> images) {
+  	this.images = images;
+  } 
 }

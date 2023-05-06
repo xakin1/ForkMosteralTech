@@ -10,7 +10,7 @@ public class UserDTO {
 
   public UserDTO() {}
 
-  public UserDTO(User user) {
+  public UserDTO(AppUser user) {
     this.id = user.getId();
     this.name = user.getName();
     this.surname = user.getSurname();
@@ -40,8 +40,8 @@ public class UserDTO {
     this.surname = surname;
   }
 
-  public User toUser() {
-    User user = new User();
+  public AppUser toUser() {
+    AppUser user = new AppUser();
     user.setId(this.getId());
     user.setName(this.getName());
     user.setSurname(this.getSurname());
