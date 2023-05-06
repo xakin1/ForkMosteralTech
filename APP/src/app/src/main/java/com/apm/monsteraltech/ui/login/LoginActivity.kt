@@ -121,8 +121,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         login.setOnClickListener {
-            moveToMainMenu()
-            //signInEmailPassword(username.text.toString(), password.text.toString())
+            //moveToMainMenu()
+            signInEmailPassword(username.text.toString(), password.text.toString())
         }
 
         register.setOnClickListener {
