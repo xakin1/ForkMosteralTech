@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(FavouritesResource.FAVOURITES_RESOURCE_URL)
 public class FavouritesResource {
-  public static final String FAVOURITES_RESOURCE_URL = "/api/entities/favouritess";
+  public static final String FAVOURITES_RESOURCE_URL = "/api/entities/favourites";
 
   private static final Logger logger = LoggerFactory.getLogger(FavouritesResource.class);
 

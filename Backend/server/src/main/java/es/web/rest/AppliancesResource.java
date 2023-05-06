@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(AppliancesResource.APPLIANCES_RESOURCE_URL)
 public class AppliancesResource {
-  public static final String APPLIANCES_RESOURCE_URL = "/api/entities/appliancess";
+  public static final String APPLIANCES_RESOURCE_URL = "/api/entities/appliances";
 
   private static final Logger logger = LoggerFactory.getLogger(AppliancesResource.class);
 
