@@ -33,6 +33,7 @@ public class FurnitureFullDTO extends ProductFullDTO {
     if (this.getOwner() != null) {
       furniture.setOwner(this.getOwner().toUser());
     }
+    furniture.setPrice(this.getPrice());
     return furniture;
   }
 }

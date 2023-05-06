@@ -1,5 +1,7 @@
 package es.model.service.dto;
 
+import org.locationtech.jts.geom.Point;
+
 import es.model.domain.*;
 
 public class ProductDTO {
@@ -9,6 +11,7 @@ public class ProductDTO {
   private String description;
   private State state;
   private UserDTO owner;
+  private Double price;
 
   public ProductDTO() {}
 
@@ -20,6 +23,7 @@ public class ProductDTO {
     if (product.getOwner() != null) {
       this.owner = new UserDTO(product.getOwner());
     }
+    this.price = product.getPrice();
   }
 
   public Long getId() {
@@ -62,7 +66,15 @@ public class ProductDTO {
     this.owner = owner;
   }
 
-  public Product toProduct() {
+  public Double getPrice() {
+	return price;
+ }
+
+ public void setPrice(Double price) {
+	this.price = price;
+ }
+
+ public Product toProduct() {
     Product product = new Product();
     product.setId(this.getId());
     product.setName(this.getName());
@@ -71,6 +83,7 @@ public class ProductDTO {
     if (this.getOwner() != null) {
       product.setOwner(this.getOwner().toUser());
     }
+    product.setPrice(this.getPrice());
     return product;
   }
 }

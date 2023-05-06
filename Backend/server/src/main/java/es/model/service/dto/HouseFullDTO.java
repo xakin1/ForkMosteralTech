@@ -33,6 +33,7 @@ public class HouseFullDTO extends ProductFullDTO {
     if (this.getOwner() != null) {
       house.setOwner(this.getOwner().toUser());
     }
+    house.setPrice(this.getPrice());
     return house;
   }
 }

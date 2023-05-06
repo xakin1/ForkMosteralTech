@@ -9,6 +9,7 @@ public class FurnitureDTO {
   private String description;
   private State state;
   private UserDTO owner;
+  private Double price;
 
   public FurnitureDTO() {}
 
@@ -20,6 +21,7 @@ public class FurnitureDTO {
     if (furniture.getOwner() != null) {
       this.owner = new UserDTO(furniture.getOwner());
     }
+    this.price = furniture.getPrice();
   }
 
   public Long getId() {
@@ -61,8 +63,18 @@ public class FurnitureDTO {
   public void setOwner(UserDTO owner) {
     this.owner = owner;
   }
+  
+  
 
-  public Furniture toFurniture() {
+  public Double getPrice() {
+	return price;
+  } 
+
+  public void setPrice(Double price) {
+	this.price = price;
+  }
+
+public Furniture toFurniture() {
     Furniture furniture = new Furniture();
     furniture.setId(this.getId());
     furniture.setName(this.getName());
@@ -71,6 +83,7 @@ public class FurnitureDTO {
     if (this.getOwner() != null) {
       furniture.setOwner(this.getOwner().toUser());
     }
+    furniture.setPrice(this.getPrice());
     return furniture;
   }
 }

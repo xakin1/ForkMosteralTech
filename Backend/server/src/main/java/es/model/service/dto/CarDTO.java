@@ -9,7 +9,8 @@ public class CarDTO {
   private String description;
   private State state;
   private UserDTO owner;
-
+  private Double price;
+  
   public CarDTO() {}
 
   public CarDTO(Car car) {
@@ -20,6 +21,7 @@ public class CarDTO {
     if (car.getOwner() != null) {
       this.owner = new UserDTO(car.getOwner());
     }
+    this.price = car.getPrice();
   }
 
   public Long getId() {

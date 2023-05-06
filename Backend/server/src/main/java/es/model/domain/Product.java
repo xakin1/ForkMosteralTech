@@ -31,6 +31,9 @@ public class Product {
 
   @Column(name = "name")
   private String name;
+  
+  @Column(name = "price")
+  private Double price;
 
   @Column(name = "location", columnDefinition = "geometry(Point, 4326)")
   private Point location;
@@ -128,5 +131,13 @@ public class Product {
   
   public void setImages(List<ProductImage> images) {
   	this.images = images;
-  } 
+  }
+
+  public Double getPrice() {
+	return price;
+  }
+
+  public void setPrice(Double price) {
+	this.price = price;
+  }
 }

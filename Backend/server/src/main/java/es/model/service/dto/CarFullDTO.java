@@ -33,6 +33,7 @@ public class CarFullDTO extends ProductFullDTO {
     if (this.getOwner() != null) {
       car.setOwner(this.getOwner().toUser());
     }
+    car.setPrice(this.getPrice());
     return car;
   }
 }

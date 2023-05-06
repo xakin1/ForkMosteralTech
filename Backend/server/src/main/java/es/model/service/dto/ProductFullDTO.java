@@ -20,6 +20,7 @@ public class ProductFullDTO {
   private String description;
   private State state;
   private UserDTO owner;
+  private Double price;
 
   public ProductFullDTO() {}
 
@@ -32,6 +33,7 @@ public class ProductFullDTO {
     if (product.getOwner() != null) {
       this.owner = new UserDTO(product.getOwner());
     }
+    this.price = product.getPrice();
   }
 
   public Long getId() {
@@ -82,7 +84,15 @@ public class ProductFullDTO {
     this.owner = owner;
   }
 
-  public Product toProduct() {
+  public Double getPrice() {
+	return price;
+ }
+
+ public void setPrice(Double price) {
+	this.price = price;
+ }
+
+ public Product toProduct() {
     Product product = new Product();
     product.setId(this.getId());
     product.setName(this.getName());
@@ -92,6 +102,7 @@ public class ProductFullDTO {
     if (this.getOwner() != null) {
       product.setOwner(this.getOwner().toUser());
     }
+    product.setPrice(this.getPrice());
     return product;
   }
 }

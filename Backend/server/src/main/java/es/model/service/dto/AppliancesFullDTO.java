@@ -33,6 +33,7 @@ public class AppliancesFullDTO extends ProductFullDTO {
     if (this.getOwner() != null) {
       appliances.setOwner(this.getOwner().toUser());
     }
+    appliances.setPrice(this.getPrice());
     return appliances;
   }
 }

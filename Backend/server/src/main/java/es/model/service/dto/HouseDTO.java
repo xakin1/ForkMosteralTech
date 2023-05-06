@@ -9,7 +9,7 @@ public class HouseDTO {
   private String description;
   private State state;
   private UserDTO owner;
-
+  private Double price;
   public HouseDTO() {}
 
   public HouseDTO(House house) {
@@ -20,6 +20,7 @@ public class HouseDTO {
     if (house.getOwner() != null) {
       this.owner = new UserDTO(house.getOwner());
     }
+    this.price = house.getPrice();
   }
 
   public Long getId() {
@@ -61,8 +62,16 @@ public class HouseDTO {
   public void setOwner(UserDTO owner) {
     this.owner = owner;
   }
+  
+  public Double getPrice() {
+	return price;
+  }
 
-  public House toHouse() {
+  public void setPrice(Double price) {
+	this.price = price;
+  }
+
+public House toHouse() {
     House house = new House();
     house.setId(this.getId());
     house.setName(this.getName());
@@ -71,6 +80,8 @@ public class HouseDTO {
     if (this.getOwner() != null) {
       house.setOwner(this.getOwner().toUser());
     }
+    house.setPrice(this.getPrice());
+
     return house;
   }
 }

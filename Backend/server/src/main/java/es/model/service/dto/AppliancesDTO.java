@@ -9,6 +9,7 @@ public class AppliancesDTO {
   private String description;
   private State state;
   private UserDTO owner;
+  private Double price;
 
   public AppliancesDTO() {}
 
@@ -20,6 +21,7 @@ public class AppliancesDTO {
     if (appliances.getOwner() != null) {
       this.owner = new UserDTO(appliances.getOwner());
     }
+    this.price = appliances.getPrice();
   }
 
   public Long getId() {
@@ -62,7 +64,15 @@ public class AppliancesDTO {
     this.owner = owner;
   }
 
-  public Appliances toAppliances() {
+  public Double getPrice() {
+	return price;
+  }
+
+  public void setPrice(Double price) {
+	this.price = price;
+  }
+
+public Appliances toAppliances() {
     Appliances appliances = new Appliances();
     appliances.setId(this.getId());
     appliances.setName(this.getName());
@@ -71,6 +81,7 @@ public class AppliancesDTO {
     if (this.getOwner() != null) {
       appliances.setOwner(this.getOwner().toUser());
     }
+    appliances.setPrice(this.getPrice());
     return appliances;
   }
 }
