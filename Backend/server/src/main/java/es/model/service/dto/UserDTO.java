@@ -1,6 +1,8 @@
 package es.model.service.dto;
 
-import es.model.domain.*;
+import java.time.LocalDate;
+
+import es.model.domain.AppUser;
 
 public class UserDTO {
 
@@ -8,6 +10,7 @@ public class UserDTO {
   private String name;
   private String surname;
   private String firebaseToken;
+  private LocalDate expirationDatefirebaseToken;
 
   public UserDTO() {}
 
@@ -16,6 +19,7 @@ public class UserDTO {
     this.name = user.getName();
     this.surname = user.getSurname();
     this.firebaseToken = user.getFirebaseToken();
+    this.expirationDatefirebaseToken = user.getExpirationDatefirebaseToken();
   }
 
   public String getId() {
@@ -44,11 +48,19 @@ public class UserDTO {
 
   public String getFirebaseToken() {
 	return firebaseToken;
- }
+  }
 
- public void setFirebaseToken(String firebaseToken) {
+  public void setFirebaseToken(String firebaseToken) {
 	this.firebaseToken = firebaseToken;
- }
+  }
+ 
+  public LocalDate getExpirationDatefirebaseToken() {
+	return expirationDatefirebaseToken;
+  }
+
+  public void setExpirationDatefirebaseToken(LocalDate expirationDatefirebaseToken) {
+	this.expirationDatefirebaseToken = expirationDatefirebaseToken;
+  }
 
 public AppUser toUser() {
     AppUser user = new AppUser();
@@ -56,6 +68,7 @@ public AppUser toUser() {
     user.setName(this.getName());
     user.setFirebaseToken(this.getFirebaseToken());
     user.setSurname(this.getSurname());
+    user.setExpirationDatefirebaseToken(this.getExpirationDatefirebaseToken());
     return user;
   }
 }

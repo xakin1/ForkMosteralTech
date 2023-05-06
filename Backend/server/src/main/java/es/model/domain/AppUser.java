@@ -1,5 +1,6 @@
 package es.model.domain;
 
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.*;
 import javax.persistence.Column;
@@ -18,8 +19,11 @@ public class AppUser {
   @Column(name = "surname")
   private String surname;
   
-  @Column(name = "firebaseToken")
+  @Column(name = "firebaseToken", length =1500)
   private String firebaseToken;
+  
+  @Column(name = "expirationDatefirebaseToken")
+  private LocalDate expirationDatefirebaseToken;
 
   @Column(name = "location", columnDefinition = "geometry(Point, 4326)")
   private Point location;
@@ -97,5 +101,13 @@ public class AppUser {
 
   public void setFirebaseToken(String firebaseToken) {
 	this.firebaseToken = firebaseToken;
+  }
+
+  public LocalDate getExpirationDatefirebaseToken() {
+	return expirationDatefirebaseToken;
+  }
+
+  public void setExpirationDatefirebaseToken(LocalDate expirationDatefirebaseToken) {
+	this.expirationDatefirebaseToken = expirationDatefirebaseToken;
   }
 }
