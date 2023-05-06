@@ -1,6 +1,7 @@
 package com.apm.monsteraltech.ui.login
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -11,8 +12,12 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.apm.monsteraltech.MainActivity
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.RegisterActivity
@@ -37,8 +42,8 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
+val Context.dataStore by preferencesDataStore(name = "USER")
 
 class LoginActivity : AppCompatActivity() {
 
@@ -54,6 +59,8 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var googleSignInClient: GoogleSignInClient
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         callbackManager = CallbackManager.Factory.create()
@@ -61,7 +68,14 @@ class LoginActivity : AppCompatActivity() {
         val accessToken = AccessToken.getCurrentAccessToken()
         val isLoggedIn = accessToken != null && !accessToken.isExpired
 
-        if(isLoggedIn) moveToMainMenu()
+
+
+        if(isLoggedIn) {
+            val userUid = auth.currentUser.let { it?.uid.toString() }
+            val userUid2 = Firebase.auth.let { it.uid.toString() }
+            getKeyFromDatabase(auth.currentUser)
+            moveToMainMenu()
+        }
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -121,7 +135,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         login.setOnClickListener {
-            //moveToMainMenu()
+
             signInEmailPassword(username.text.toString(), password.text.toString())
         }
 
@@ -153,6 +167,7 @@ class LoginActivity : AppCompatActivity() {
             // Configura el registro de devolución de llamada
             it.registerCallback(callbackManager, object : FacebookCallback<com.facebook.login.LoginResult> {
                 override fun onSuccess(loginResult: com.facebook.login.LoginResult) {
+                    getKeyFromDatabase(Firebase.auth.currentUser)
                     // El usuario inició sesión con éxito, obtén el token de acceso de Facebook y realiza acciones adicionales si es necesario.
                     this@LoginActivity.moveToMainMenu()
                 }
@@ -171,6 +186,34 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
+    private fun getKeyFromDatabase(user: FirebaseUser?) {
+        CoroutineScope(Dispatchers.IO).launch {
+
+            val response = user?.let { userService.getUserById(it.uid) }
+            if (response != null) {
+
+                user.getIdToken(true).addOnSuccessListener { result ->
+                    val idToken = result.token.toString()
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            saveUserOnDatastore(response.name, response.surname, idToken)
+                            //userService.updateUserToken(userKey, idToken)
+                        }
+                }
+            }
+        }
+
+    }
+
+    private suspend fun saveUserOnDatastore(userName: String, userLastname: String, userFirebaseKey: String) {
+        dataStore.edit { preferences ->
+            preferences[stringPreferencesKey("userName")] = userName
+            preferences[stringPreferencesKey("userLastname")] = userLastname
+            preferences[stringPreferencesKey("userFirebaseKey")] = userFirebaseKey
+        }
+    }
+
+
+
     private fun signInEmailPassword(email: String, password: String) {
         // [START sign_in_with_email]
         auth.signInWithEmailAndPassword(email, password)
@@ -179,6 +222,8 @@ class LoginActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithEmail:success")
                     val user = auth.currentUser
+                    val userUid = auth.currentUser.let { it?.uid.toString() }
+                    val userUid2 = Firebase.auth.currentUser.let { it?.uid.toString() }
                     updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
@@ -231,7 +276,7 @@ class LoginActivity : AppCompatActivity() {
                     Log.d(TAG, "signInWithCredential:success")
                     val user = auth.currentUser
                     CoroutineScope(Dispatchers.IO).launch {
-                        var userBd =userService.getUserById(2)
+                        var userBd =userService.getUserById(user?.uid.toString())
                         Log.d(TAG, userBd.toString())
                         updateUI(user)
                     }
@@ -253,8 +298,11 @@ class LoginActivity : AppCompatActivity() {
     // [END signin]
 
     private fun updateUI(user: FirebaseUser?) {
-        var currentUser : FirebaseUser? =  FirebaseAuth.getInstance().currentUser
-        if(currentUser != null) moveToMainMenu()
+        if(user != null) {
+            val userId = user.uid
+            getKeyFromDatabase(user)
+            moveToMainMenu()
+        }
     }
 
     companion object {
@@ -264,6 +312,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun updateUiWithUser() {
         // TODO : initiate successful logged in experience
+        getKeyFromDatabase(Firebase.auth.currentUser)
         moveToMainMenu()
     }
 
@@ -300,6 +349,5 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
 
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
     })
-
 
 }

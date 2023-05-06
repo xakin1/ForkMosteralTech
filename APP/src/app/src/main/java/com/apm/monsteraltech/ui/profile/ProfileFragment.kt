@@ -8,12 +8,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.ProductDetail
 import com.apm.monsteraltech.R
+import com.apm.monsteraltech.dto.User
+import com.apm.monsteraltech.services.ServiceFactory
+import com.apm.monsteraltech.services.UserService
+import com.apm.monsteraltech.ui.login.dataStore
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @Suppress("DEPRECATION")
 class ProfileFragment : Fragment() {
@@ -24,9 +36,23 @@ class ProfileFragment : Fragment() {
     private lateinit var adapterProduct: AdapterProductsData
     private  var productList:  ArrayList<Product>? = null
     private  var transactionList: ArrayList<Transactions>? = null
+    private val serviceFactory = ServiceFactory()
+    private val userService = serviceFactory.createService(UserService::class.java)
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
+        val profileNameEditText = view.findViewById<TextView>(R.id.profile_name)
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            withContext(Dispatchers.Main) {
+            getUserDataFromDatastore()?.collect {
+                    profileNameEditText.text = it.name + " " + it.surname
+                }
+            }
+        }
+
+
 
         if (savedInstanceState != null) {
             // Si no estan inicializadas
@@ -140,6 +166,16 @@ class ProfileFragment : Fragment() {
         }
 
         return productList
+    }
+
+    private fun getUserDataFromDatastore() = context?.dataStore?.data?.map { preferences ->
+        User(
+            id = "",
+            name = preferences[stringPreferencesKey("userName")].orEmpty(),
+            surname = preferences[stringPreferencesKey("userLastname")].orEmpty(),
+            firebaseToken = preferences[stringPreferencesKey("userFirebaseKey")].orEmpty(),
+            location = null
+        )
     }
 
 }

@@ -30,7 +30,9 @@ data class Sort(
 )
 
 data class User(
-    val id: Int,
+    val id: String,
     val name: String,
-    val surname: String
+    val surname: String,
+    val firebaseToken: String,
+    val location: String?
 )
