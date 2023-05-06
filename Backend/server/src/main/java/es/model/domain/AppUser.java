@@ -9,7 +9,6 @@ import org.locationtech.jts.geom.Point;
 @Table(name = "appuser")
 public class AppUser {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", unique = true)
   private Long id;
 
@@ -90,5 +89,13 @@ public class AppUser {
 
   public void setTransactions(List<Transactions> transactions) {
     this.transactions = transactions;
+  }
+
+  public String getFirebaseToken() {
+	return firebaseToken;
+  }
+
+  public void setFirebaseToken(String firebaseToken) {
+	this.firebaseToken = firebaseToken;
   }
 }

@@ -13,7 +13,8 @@ public class UserFullDTO {
   private Long id;
   private String name;
   private String surname;
-
+  private String firebaseToken;
+  
   @JsonSerialize(using = CustomGeometrySerializer.class)
   @JsonDeserialize(using = CustomGeometryDeserializer.class)
   private Point location;
@@ -25,6 +26,7 @@ public class UserFullDTO {
     this.name = user.getName();
     this.surname = user.getSurname();
     this.location = user.getLocation();
+    this.firebaseToken = user.getFirebaseToken();
   }
 
   public Long getId() {
@@ -59,12 +61,22 @@ public class UserFullDTO {
     this.location = location;
   }
 
-  public AppUser toUser() {
+  
+  public String getFirebaseToken() {
+	return firebaseToken;
+  }
+
+  public void setFirebaseToken(String firebaseToken) {
+	this.firebaseToken = firebaseToken;
+  }
+
+public AppUser toUser() {
     AppUser user = new AppUser();
     user.setId(this.getId());
     user.setName(this.getName());
     user.setSurname(this.getSurname());
     user.setLocation(this.getLocation());
+    this.setFirebaseToken(this.getFirebaseToken());
     return user;
   }
 }

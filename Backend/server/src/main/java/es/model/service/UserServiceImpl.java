@@ -69,9 +69,6 @@ public class UserServiceImpl implements UserService {
 
   @Transactional(readOnly = false, rollbackFor = Exception.class)
   public UserFullDTO create(UserFullDTO userDto) throws OperationNotAllowedException {
-    if (userDto.getId() != null) {
-      throw new OperationNotAllowedException("user.error.id-exists");
-    }
     AppUser userEntity = userDto.toUser();
     AppUser userSaved = userRepository.save(userEntity);
     return new UserFullDTO(userSaved);

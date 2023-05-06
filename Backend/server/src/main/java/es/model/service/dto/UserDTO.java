@@ -7,6 +7,7 @@ public class UserDTO {
   private Long id;
   private String name;
   private String surname;
+  private String firebaseToken;
 
   public UserDTO() {}
 
@@ -14,6 +15,7 @@ public class UserDTO {
     this.id = user.getId();
     this.name = user.getName();
     this.surname = user.getSurname();
+    this.firebaseToken = user.getFirebaseToken();
   }
 
   public Long getId() {
@@ -40,10 +42,19 @@ public class UserDTO {
     this.surname = surname;
   }
 
-  public AppUser toUser() {
+  public String getFirebaseToken() {
+	return firebaseToken;
+ }
+
+ public void setFirebaseToken(String firebaseToken) {
+	this.firebaseToken = firebaseToken;
+ }
+
+public AppUser toUser() {
     AppUser user = new AppUser();
     user.setId(this.getId());
     user.setName(this.getName());
+    user.setFirebaseToken(this.getFirebaseToken());
     user.setSurname(this.getSurname());
     return user;
   }
