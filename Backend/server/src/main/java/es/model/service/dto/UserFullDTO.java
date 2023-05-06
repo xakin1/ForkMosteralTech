@@ -10,7 +10,7 @@ import es.model.util.jackson.CustomGeometrySerializer;
 import org.locationtech.jts.geom.Point;
 
 public class UserFullDTO {
-  private Long id;
+  private String id;
   private String name;
   private String surname;
   private String firebaseToken;
@@ -29,11 +29,11 @@ public class UserFullDTO {
     this.firebaseToken = user.getFirebaseToken();
   }
 
-  public Long getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void String(String id) {
     this.id = id;
   }
 

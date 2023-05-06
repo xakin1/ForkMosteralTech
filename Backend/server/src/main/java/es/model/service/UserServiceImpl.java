@@ -52,8 +52,8 @@ public class UserServiceImpl implements UserService {
                   } else {
                     geoJSON.setProperties(new HashMap());
                   }
-                  geoJSON.setId(e.getId());
-                  geoJSON.getProperties().put("displayString", "" + e.getId() + "");
+//                  geoJSON.setId(e.getId());
+//                  geoJSON.getProperties().put("displayString", "" + e.getId() + "");
                   geoJSON.setGeometry(e.getLocation());
                   return geoJSON;
                 })

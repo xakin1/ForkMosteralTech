@@ -10,7 +10,7 @@ import org.locationtech.jts.geom.Point;
 public class AppUser {
   @Id
   @Column(name = "id", unique = true)
-  private Long id;
+  private String id;
 
   @Column(name = "name")
   private String name;
@@ -35,11 +35,11 @@ public class AppUser {
 
   public AppUser() {}
 
-  public Long getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(String id) {
     this.id = id;
   }
 
