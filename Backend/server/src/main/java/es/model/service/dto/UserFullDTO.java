@@ -76,7 +76,7 @@ public AppUser toUser() {
     user.setName(this.getName());
     user.setSurname(this.getSurname());
     user.setLocation(this.getLocation());
-    this.setFirebaseToken(this.getFirebaseToken());
+    user.setFirebaseToken(this.getFirebaseToken());
     return user;
   }
 }
