@@ -51,7 +51,7 @@
                 android:layout_marginTop="4dp"
                 android:text="A coruña"
                 app:layout_constraintStart_toEndOf="@+id/profile_image"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toBottomOf="@+id/profile_name" />
 
 
             <ImageView
@@ -66,26 +66,26 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/textPurchases"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="12dp"
-                android:text="Compras: 5"
+                android:text="@string/purchases"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/profile_image"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
             <TextView
-                android:id="@+id/buttonFoward"
+                android:id="@+id/textSales"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
-                android:text="Ventas: 8"
+                android:text="@string/sales"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/profile_image"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                app:layout_constraintTop_toBottomOf="@+id/textPurchases" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

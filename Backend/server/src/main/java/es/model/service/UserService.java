@@ -22,7 +22,7 @@ public interface UserService {
 
   UserFullDTO create(UserFullDTO user) throws OperationNotAllowedException;
 
-  UserFullDTO update(Long id, UserFullDTO user) throws OperationNotAllowedException;
+  UserFullDTO update(String id, UserFullDTO user) throws OperationNotAllowedException;
 
   void delete(Long id);
 }

@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Transactional(readOnly = false, rollbackFor = Exception.class)
-  public UserFullDTO update(Long id, UserFullDTO userDto) throws OperationNotAllowedException {
+  public UserFullDTO update(String id, UserFullDTO userDto) throws OperationNotAllowedException {
     if (userDto.getId() == null) {
       throw new OperationNotAllowedException("user.error.id-not-exists");
     }

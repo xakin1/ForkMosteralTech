@@ -189,15 +189,16 @@ class LoginActivity : AppCompatActivity() {
     private fun getKeyFromDatabase(user: FirebaseUser?) {
         CoroutineScope(Dispatchers.IO).launch {
 
-            val response = user?.let { userService.getUserById(it.uid) }
+            var response = user?.let { userService.getUserById(it.uid) }
             if (response != null) {
-
-                user.getIdToken(true).addOnSuccessListener { result ->
+                user?.getIdToken(true)?.addOnSuccessListener { result ->
                     val idToken = result.token.toString()
-                        lifecycleScope.launch(Dispatchers.IO) {
-                            saveUserOnDatastore(response.name, response.surname, idToken)
-                            //userService.updateUserToken(userKey, idToken)
-                        }
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        response.firebaseToken = idToken
+                        userService.updateUser(response.id,response)
+                        saveUserOnDatastore(response.name, response.surname, idToken)
+                        //userService.updateUserToken(userKey, idToken)
+                    }
                 }
             }
         }
@@ -276,8 +277,7 @@ class LoginActivity : AppCompatActivity() {
                     Log.d(TAG, "signInWithCredential:success")
                     val user = auth.currentUser
                     CoroutineScope(Dispatchers.IO).launch {
-                        var userBd =userService.getUserById(user?.uid.toString())
-                        Log.d(TAG, userBd.toString())
+                        userService.getUserById(user?.uid.toString())
                         updateUI(user)
                     }
                 } else {

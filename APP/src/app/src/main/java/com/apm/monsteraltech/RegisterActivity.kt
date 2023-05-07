@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.lifecycleScope
-import com.apm.monsteraltech.dto.User
+import com.apm.monsteraltech.data.dto.User
 import com.apm.monsteraltech.services.ServiceFactory
 import com.apm.monsteraltech.services.UserService
 import com.apm.monsteraltech.ui.login.LoginActivity

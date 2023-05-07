@@ -105,7 +105,7 @@ public class UserResource {
 
   @PutMapping("/{id}")
   public ResponseEntity<?> update(
-      @PathVariable Long id, @Valid @RequestBody UserFullDTO user, Errors errors) {
+      @PathVariable String id, @Valid @RequestBody UserFullDTO user, Errors errors) {
     if (errors.hasErrors()) {
       return ResponseEntity.badRequest().body(ValidationErrorUtils.getValidationErrors(errors));
     }

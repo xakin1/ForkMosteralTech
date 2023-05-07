@@ -1,4 +1,4 @@
-package com.apm.monsteraltech.dto
+package com.apm.monsteraltech.data.dto
 
 data class UserResponse(
     val content: List<User>,
@@ -33,6 +33,6 @@ data class User(
     val id: String,
     val name: String,
     val surname: String,
-    val firebaseToken: String,
+    var firebaseToken: String,
     val location: String?
 )

@@ -35,6 +35,8 @@
     <string name="product_price">Precio: $%1$s</string>
     <string name="search">$%1$s</string>
     <string name="transaction_template">El usuario %1$s vendió a %2$s el artículo %3$s el día %4$s</string>
+    <string name="purchases">Compras: %1$s</string>
+    <string name="sales">Ventas: %1$s</string>
     <string name="category_prompt">Seleccione una categoría</string>
     <string name="currency_prompt">Seleccione una moneda</string>
     <array name="currencies">

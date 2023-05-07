@@ -1,5 +1,6 @@
 package com.apm.monsteraltech.ui.profile
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -18,14 +19,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.ProductDetail
 import com.apm.monsteraltech.R
-import com.apm.monsteraltech.dto.User
+import com.apm.monsteraltech.data.dto.User
 import com.apm.monsteraltech.services.ServiceFactory
+import com.apm.monsteraltech.services.TransactionsService
 import com.apm.monsteraltech.services.UserService
 import com.apm.monsteraltech.ui.login.dataStore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.prefs.Preferences
 
 @Suppress("DEPRECATION")
 class ProfileFragment : Fragment() {
@@ -38,16 +41,27 @@ class ProfileFragment : Fragment() {
     private  var transactionList: ArrayList<Transactions>? = null
     private val serviceFactory = ServiceFactory()
     private val userService = serviceFactory.createService(UserService::class.java)
+    private val transactionsService = serviceFactory.createService(TransactionsService::class.java)
 
 
+    @SuppressLint("StringFormatMatches")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
         val profileNameEditText = view.findViewById<TextView>(R.id.profile_name)
+        val textPurchases = view.findViewById<TextView>(R.id.textPurchases)
+        val textSales = view.findViewById<TextView>(R.id.textSales)
+        val countPurchases = 5
+        val countSales = 5
 
         lifecycleScope.launch(Dispatchers.IO) {
             withContext(Dispatchers.Main) {
-            getUserDataFromDatastore()?.collect {
-                    profileNameEditText.text = it.name + " " + it.surname
+                getUserDataFromDatastore()?.collect { userData : User ->
+                        profileNameEditText.text = userData.name + " " + userData.surname
+                        var userBd = userService.getUserByToken(userData.firebaseToken)
+                        textPurchases.text=
+                            context?.getString(R.string.purchases,transactionsService.countPurchases(userBd.id).toString())
+                        textSales.text=
+                            context?.getString(R.string.sales,transactionsService.countSales(userBd.id).toString())
                 }
             }
         }
@@ -168,7 +182,7 @@ class ProfileFragment : Fragment() {
         return productList
     }
 
-    private fun getUserDataFromDatastore() = context?.dataStore?.data?.map { preferences ->
+    private fun getUserDataFromDatastore()  = context?.dataStore?.data?.map { preferences  ->
         User(
             id = "",
             name = preferences[stringPreferencesKey("userName")].orEmpty(),
