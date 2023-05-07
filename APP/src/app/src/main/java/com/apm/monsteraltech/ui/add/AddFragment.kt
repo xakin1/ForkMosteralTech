@@ -1,8 +1,10 @@
 package com.apm.monsteraltech.ui.add
 
 import android.app.Activity.RESULT_OK
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -13,9 +15,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.apm.monsteraltech.CameraActivity
 import com.apm.monsteraltech.R
+import com.apm.monsteraltech.RegisterActivity
 import com.bumptech.glide.Glide
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
+import kotlin.collections.ArrayList
 
 //TODO: Limitar bien las fotos y los caracteres de la descripción y titulo.
 class AddFragment : Fragment() {
@@ -28,6 +46,7 @@ class AddFragment : Fragment() {
     private var PICK_IMAGE_MULTIPLE = 8
     private var MAX_DESCRIPTION_LENGTH = 200
     private var MAX_TITLE_LENGTH = 50
+
 
     private val openGalleryForImages = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -59,6 +78,7 @@ class AddFragment : Fragment() {
         }
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -84,14 +104,36 @@ class AddFragment : Fragment() {
 
 
 
+
         // Controlamos el boton de agregar imagenes
         addImageButton.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-            intent.putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/*"))
-            openGalleryForImages.launch(intent)
-            Log.d("AddFragment", "Imagenes seleccionadas: ${selectedImages.size}")
+            val options = arrayOf<CharSequence>("Tomar foto", "Seleccionar de la galería", "Cancelar")
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle("Elige una opción")
+            builder.setItems(options) { dialog, item ->
+                when {
+                    options[item] == "Tomar foto" -> {
+                        val intent = Intent(requireContext(), CameraActivity::class.java)
+                        startActivity(intent)
+                    }
+                    options[item] == "Seleccionar de la galería" -> {
+                        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+                        intent.putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/*"))
+                        openGalleryForImages.launch(intent)
+                        Log.d("AddFragment", "Imagenes seleccionadas: ${selectedImages.size}")
+                    }
+                    else -> {
+                        dialog.dismiss()
+                    }
+                }
+            }
+            builder.show()
+
         }
+
+
+
 
 
         // Inflate the layout for this fragment
