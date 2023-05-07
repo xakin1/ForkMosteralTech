@@ -18,7 +18,7 @@ interface TransactionsService {
     suspend fun getSales(@Query("page") page: Int, @Query("size") size: Int,
                                @Query("userId") userId: String): List<Transaction>
 
-    @GET("/api/entities/transactions/sales/{userId}")
+    @GET("/api/entities/transactions/purchases/{userId}")
     suspend fun countPurchases(@Path("userId") userId: String): Number
 
     @GET("/api/entities/transactions/sales/{userId}")
