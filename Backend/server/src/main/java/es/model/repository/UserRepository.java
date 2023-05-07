@@ -11,7 +11,7 @@ import es.model.domain.AppUser;
 
 public interface UserRepository extends JpaRepository<AppUser, Long>, JpaSpecificationExecutor<AppUser> {
 
-  Optional<AppUser> findById(Long pk);
+  Optional<AppUser> findById(String pk);
   
   Optional<AppUser> findByFirebaseToken(String token);
 

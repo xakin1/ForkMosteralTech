@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
     return new FeatureCollectionJSON(ret);
   }
 
-  public UserFullDTO get(Long id) throws NotFoundException {
+  public UserFullDTO get(String id) throws NotFoundException {
     AppUser user = findById(id);
     return new UserFullDTO(user);
   }
@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
   }
 
   /** PRIVATE METHODS * */
-  private AppUser findById(Long id) throws NotFoundException {
+  private AppUser findById(String id) throws NotFoundException {
     return userRepository
         .findById(id)
         .orElseThrow(() -> new NotFoundException("Cannot find User with id " + id));

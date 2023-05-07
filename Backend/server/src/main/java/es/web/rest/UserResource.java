@@ -46,7 +46,7 @@ public class UserResource {
    * @param filters Static filters to apply
    * @return Paginated entities
    */
-  @GetMapping
+  @GetMapping("/all")
   public ResponseEntity<Page<UserDTO>> getAll(
       @PageableDefault(page = 0, size = 100000, sort = "id") Pageable pageable,
       @RequestParam(value = "filters", required = false) List<String> filters,
@@ -66,8 +66,8 @@ public class UserResource {
     return new ResponseEntity<>(featureCollection, HttpStatus.OK);
   }
 
-  @GetMapping("/{id}")
-  public ResponseEntity<UserFullDTO> get(@PathVariable Long id) {
+  @GetMapping
+  public ResponseEntity<UserFullDTO> get(@RequestParam String id) {
     try {
       return new ResponseEntity<>(userService.get(id), HttpStatus.OK);
     } catch (NotFoundException e) {
@@ -75,8 +75,8 @@ public class UserResource {
     }
   }
   
-  @GetMapping("firebaseToken/{firebase_token}")
-  public ResponseEntity<UserFullDTO> getToken(@PathVariable String firebase_token) {
+  @GetMapping("/firebaseToken{firebase_token}")
+  public ResponseEntity<UserFullDTO> getToken(@RequestParam String firebase_token) {
     try {
       return new ResponseEntity<>(userService.getFirebaseToken(firebase_token), HttpStatus.OK);
     } catch (NotFoundException e) {
