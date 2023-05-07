@@ -41,7 +41,7 @@ public class AppUser {
   private List<Favourites> favourites;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller")
-  private List<Transactions> selletTransactions;
+  private List<Transactions> sellerTransactions;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "buyer")
   private List<Transactions> buyerTransactions;
@@ -112,11 +112,11 @@ public class AppUser {
   }
 
   public List<Transactions> getSelletTransactions() {
-	return selletTransactions;
+	return sellerTransactions;
   }
 
   public void setSelletTransactions(List<Transactions> selletTransactions) {
-	this.selletTransactions = selletTransactions;
+	this.sellerTransactions = selletTransactions;
   }
 
   public List<Transactions> getBuyerTransactions() {

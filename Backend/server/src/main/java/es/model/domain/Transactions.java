@@ -1,10 +1,11 @@
 package es.model.domain;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +15,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.locationtech.jts.geom.Point;
 
 @Entity(name = "t_transactions")
 @Table(name = "t_transactions")
@@ -26,6 +29,13 @@ public class Transactions {
 
   @Column(name = "date")
   private LocalDateTime date;
+  
+  @Column(name = "price")
+  private Double price;
+  
+  @Enumerated(EnumType.STRING)
+  @Column(name = "state")
+  private State state;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "product")
@@ -38,6 +48,15 @@ public class Transactions {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "buyer")
   private AppUser buyer;
+  
+  @Column(name = "location", columnDefinition = "geometry(Point, 4326)")
+  private Point location;
+
+  @Column(name = "description")
+  private String description;
+  
+  @Column(name = "name")
+  private String name;
 
   public Transactions() {}
 
@@ -80,6 +99,45 @@ public class Transactions {
   public void setBuyer(AppUser buyer) {
 	this.buyer = buyer;
   }
-  
+
+  public Double getPrice() {
+	return price;
+  }
+
+  public void setPrice(Double price) {
+	this.price = price;
+  }
+
+  public State getState() {
+	return state;
+  }
+
+  public void setState(State state) {
+	this.state = state;
+  }
+
+  public Point getLocation() {
+	return location;
+  }
+
+  public void setLocation(Point location) {
+	this.location = location;
+  }
+
+  public String getDescription() {
+	return description;
+  }
+
+  public void setDescription(String description) {
+	this.description = description;
+  }
+
+  public String getName() {
+	return name;
+  }
+
+  public void setName(String name) {
+	this.name = name;
+  } 
   
 }

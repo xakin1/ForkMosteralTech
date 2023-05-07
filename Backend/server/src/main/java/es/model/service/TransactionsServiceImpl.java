@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,6 +45,16 @@ public class TransactionsServiceImpl implements TransactionsService {
     Transactions transactions = findById(id);
     return new TransactionsFullDTO(transactions);
   }
+  
+  public Page<TransactionsFullDTO> getTransactionsByProduct(Long productId, int page, int size) throws NotFoundException {
+	    Pageable pageable = PageRequest.of(page, size);
+	    Page<Transactions> transactions = findByProduct(productId, pageable);
+	    if (transactions.isEmpty()) {
+	        throw new NotFoundException("No se encontraron transacciones para el producto con ID " + productId);
+	    }
+	    return transactions.map(TransactionsFullDTO::new);
+	}
+
 
   @Transactional(readOnly = false, rollbackFor = Exception.class)
   public TransactionsFullDTO create(TransactionsFullDTO transactionsDto)
@@ -56,7 +67,6 @@ public class TransactionsServiceImpl implements TransactionsService {
     ProductFullDTO product = productService.get(productId);
     product.setOwner(buyer);
     productService.update(productId, product);
-    transactionsDto.getProduct().setOwner(buyer);
     Transactions transactionsEntity = transactionsDto.toTransactions();
     Transactions transactionsSaved = transactionsRepository.save(transactionsEntity);
     return new TransactionsFullDTO(transactionsSaved);
@@ -86,11 +96,46 @@ public class TransactionsServiceImpl implements TransactionsService {
     transactionsRepository.deleteById(id);
   }
 
+  @Override
+  public Page<TransactionsFullDTO> getTransactionsBySeller(String userId, int page, int size) throws NotFoundException {
+	    Pageable pageable = PageRequest.of(page, size);
+	    Page<Transactions> transactions = findBySeller(userId, pageable);
+	    if (transactions.isEmpty()) {
+	        throw new NotFoundException("No se encontraron transacciones para el vendedor con ID " + userId);
+	    }
+	    return transactions.map(TransactionsFullDTO::new);
+  }
+
+  @Override
+  public Page<TransactionsFullDTO> getTransactionsByBuyer(String userId, int page, int size) throws NotFoundException {
+	    Pageable pageable = PageRequest.of(page, size);
+	    Page<Transactions> transactions = findByBuyer(userId, pageable);
+	    if (transactions.isEmpty()) {
+	        throw new NotFoundException("No se encontraron transacciones para el comprador con ID " + userId);
+	    }
+	    return transactions.map(TransactionsFullDTO::new);
+  }
+  
   /** PRIVATE METHODS * */
   private Transactions findById(Long id) throws NotFoundException {
     return transactionsRepository
         .findById(id)
         .orElseThrow(() -> new NotFoundException("Cannot find Transactions with id " + id));
+  }
+  
+  private Page<Transactions> findByProduct(Long productId, Pageable pageable) throws NotFoundException {
+    return transactionsRepository
+        .findByProductId(productId, pageable);
+  }
+  
+  private Page<Transactions> findBySeller(String userId, Pageable pageable) throws NotFoundException {
+    return transactionsRepository
+        .findBySellerId(userId, pageable);
+  }
+  
+  private Page<Transactions> findByBuyer(String userId, Pageable pageable) throws NotFoundException {
+	    return transactionsRepository
+	        .findByBuyerId(userId, pageable);
   }
 
 }

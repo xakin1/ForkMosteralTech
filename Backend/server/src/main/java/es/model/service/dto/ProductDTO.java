@@ -1,17 +1,15 @@
 package es.model.service.dto;
 
-import org.locationtech.jts.geom.Point;
-
-import es.model.domain.*;
+import es.model.domain.Product;
+import es.model.domain.State;
 
 public class ProductDTO {
 
   private Long id;
   private String name;
   private String description;
-  private State state;
-  private UserDTO owner;
   private Double price;
+  private State state;
 
   public ProductDTO() {}
 
@@ -20,9 +18,6 @@ public class ProductDTO {
     this.name = product.getName();
     this.description = product.getDescription();
     this.state = product.getState();
-    if (product.getOwner() != null) {
-      this.owner = new UserDTO(product.getOwner());
-    }
     this.price = product.getPrice();
   }
 
@@ -58,31 +53,20 @@ public class ProductDTO {
     this.state = state;
   }
 
-  public UserDTO getOwner() {
-    return owner;
-  }
-
-  public void setOwner(UserDTO owner) {
-    this.owner = owner;
-  }
-
-  public Double getPrice() {
+   public Double getPrice() {
 	return price;
- }
+  }
 
- public void setPrice(Double price) {
+  public void setPrice(Double price) {
 	this.price = price;
- }
+  }
 
- public Product toProduct() {
+public Product toProduct() {
     Product product = new Product();
     product.setId(this.getId());
     product.setName(this.getName());
     product.setDescription(this.getDescription());
     product.setState(this.getState());
-    if (this.getOwner() != null) {
-      product.setOwner(this.getOwner().toUser());
-    }
     product.setPrice(this.getPrice());
     return product;
   }

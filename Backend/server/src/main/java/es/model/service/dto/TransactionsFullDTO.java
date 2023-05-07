@@ -1,6 +1,5 @@
 package es.model.service.dto;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import es.model.domain.Transactions;
@@ -11,12 +10,19 @@ public class TransactionsFullDTO {
   private ProductDTO product;
   private UserDTO seller;
   private UserDTO buyer;
-
+  private Double price;
+  private String name;
+  private String description;
+  
   public TransactionsFullDTO() {}
 
   public TransactionsFullDTO(Transactions transactions) {
     this.id = transactions.getId();
     this.date = transactions.getDate();
+    this.price = transactions.getProduct().getPrice();
+    this.name = transactions.getProduct().getName();
+    this.description = transactions.getProduct().getDescription();
+
     if (transactions.getProduct() != null) {
       this.product = new ProductDTO(transactions.getProduct());
     }
@@ -67,11 +73,38 @@ public class TransactionsFullDTO {
   public void setBuyer(UserDTO buyer) {
 	this.buyer = buyer;
   }
+  
+  public Double getPrice() {
+	return price;
+  }
 
-  public Transactions toTransactions() {
+  public void setPrice(Double price) {
+	this.price = price;
+  }
+  
+  public String getName() {
+	return name;
+  }
+
+  public void setName(String name) {
+	this.name = name;
+  }
+
+  public String getDescription() {
+	return description;
+  }
+
+  public void setDescription(String description) {
+	this.description = description;
+  }
+
+public Transactions toTransactions() {
     Transactions transactions = new Transactions();
     transactions.setId(this.getId());
     transactions.setDate(this.getDate());
+    transactions.setPrice(this.getPrice());
+    transactions.setDescription(this.getDescription());
+    transactions.setName(this.getName());
     if (this.getProduct() != null) {
       transactions.setProduct(this.getProduct().toProduct());
     }

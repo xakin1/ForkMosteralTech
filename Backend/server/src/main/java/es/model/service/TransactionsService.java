@@ -15,6 +15,8 @@ public interface TransactionsService {
   Page<TransactionsDTO> getAll(Pageable pageable, List<String> filters, String search);
 
   TransactionsFullDTO get(Long id) throws NotFoundException;
+  
+  Page<TransactionsFullDTO> getTransactionsByProduct(Long id, int page, int size) throws NotFoundException;
 
   TransactionsFullDTO create(TransactionsFullDTO transactions) throws OperationNotAllowedException, NotFoundException;
 
@@ -22,4 +24,8 @@ public interface TransactionsService {
       throws OperationNotAllowedException;
 
   void delete(Long id);
+
+Page<TransactionsFullDTO> getTransactionsBySeller(String userId, int page, int size) throws NotFoundException;
+
+Page<TransactionsFullDTO> getTransactionsByBuyer(String userId, int page, int size) throws NotFoundException;
 }
