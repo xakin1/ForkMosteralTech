@@ -25,6 +25,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.apm.monsteraltech.ui.add.AddFragment
 import com.bumptech.glide.Glide
 import java.io.File
 import java.text.SimpleDateFormat
@@ -105,6 +106,7 @@ class CameraActivity : AppCompatActivity() {
 
         imageRecyclerView = findViewById(R.id.image_recycler_view)
 
+
         // Inicializa el adaptador de imágenes
         selectedImages = ArrayList()
         imageRecyclerView.adapter = null
@@ -154,7 +156,9 @@ class CameraActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.ok_button).setOnClickListener {
-
+            //Pasar selectedImages al fragmento addProduct
+            val intent = Intent(this, AddFragment::class.java)
+            startActivity(intent)
         }
 
         outputDirectory = getOutputDirectory()

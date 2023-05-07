@@ -48,42 +48,12 @@ class AddFragment : Fragment() {
     private var MAX_TITLE_LENGTH = 50
 
 
-    private val openGalleryForImages = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == RESULT_OK) {
-            val data = result.data
-            if (data?.clipData != null) {
-                val count = data.clipData!!.itemCount
-                if (count > PICK_IMAGE_MULTIPLE) {
-                    Toast.makeText(
-                        requireContext(),
-                        "No puedes seleccionar más de 8 imágenes",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return@registerForActivityResult
-                } else {
-                    for (i in 0 until count) {
-                        val imageUri = data.clipData!!.getItemAt(i).uri
-                        selectedImages.add(imageUri)
-                    }
-                }
-
-            } else if (data?.data != null) {
-                val imageUri = data.data!!
-                selectedImages.add(imageUri)
-            }
-            Log.d("AddFragment", "Imagenes seleccionadas: ${selectedImages[0]}")
-            imageAdapter.notifyDataSetChanged()
-        }
-    }
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_add, container, false)
+
 
         // Inicializa los componentes de la UI
         val addImageButton = view.findViewById<Button>(R.id.add_image_button)
@@ -107,29 +77,8 @@ class AddFragment : Fragment() {
 
         // Controlamos el boton de agregar imagenes
         addImageButton.setOnClickListener {
-            val options = arrayOf<CharSequence>("Tomar foto", "Seleccionar de la galería", "Cancelar")
-            val builder = AlertDialog.Builder(requireContext())
-            builder.setTitle("Elige una opción")
-            builder.setItems(options) { dialog, item ->
-                when {
-                    options[item] == "Tomar foto" -> {
-                        val intent = Intent(requireContext(), CameraActivity::class.java)
-                        startActivity(intent)
-                    }
-                    options[item] == "Seleccionar de la galería" -> {
-                        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-                        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-                        intent.putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/*"))
-                        openGalleryForImages.launch(intent)
-                        Log.d("AddFragment", "Imagenes seleccionadas: ${selectedImages.size}")
-                    }
-                    else -> {
-                        dialog.dismiss()
-                    }
-                }
-            }
-            builder.show()
-
+            val intent = Intent(requireContext(), CameraActivity::class.java)
+            startActivity(intent)
         }
 
 
