@@ -21,6 +21,7 @@ import androidx.lifecycle.lifecycleScope
 import com.apm.monsteraltech.MainActivity
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.RegisterActivity
+import com.apm.monsteraltech.data.dto.User
 import com.apm.monsteraltech.databinding.ActivityLoginBinding
 import com.apm.monsteraltech.services.ServiceFactory
 import com.apm.monsteraltech.services.UserService
@@ -189,12 +190,13 @@ class LoginActivity : AppCompatActivity() {
     private fun getKeyFromDatabase(user: FirebaseUser?) {
         CoroutineScope(Dispatchers.IO).launch {
 
-            var response = user?.let { userService.getUserById(it.uid) }
+            var response: User = user?.let { userService.getUserById(it.uid) } as User
             if (response != null) {
                 user?.getIdToken(true)?.addOnSuccessListener { result ->
                     val idToken = result.token.toString()
                     lifecycleScope.launch(Dispatchers.IO) {
                         response.firebaseToken = idToken
+                        response.name ="me cago en mi reputisima madre"
                         userService.updateUser(response.id,response)
                         saveUserOnDatastore(response.name, response.surname, idToken)
                         //userService.updateUserToken(userKey, idToken)

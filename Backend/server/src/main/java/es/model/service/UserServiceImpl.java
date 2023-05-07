@@ -90,6 +90,8 @@ public class UserServiceImpl implements UserService {
     AppUser userUpdated = userRepository.save(userToUpdate);
     return new UserFullDTO(userUpdated);
   }
+  
+  
 
   @Transactional(readOnly = false, rollbackFor = Exception.class)
   public void delete(Long id) {

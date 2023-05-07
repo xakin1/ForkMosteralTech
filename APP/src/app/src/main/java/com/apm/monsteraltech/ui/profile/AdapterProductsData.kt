@@ -1,6 +1,5 @@
 package com.apm.monsteraltech.ui.profile
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.R
 
-class AdapterProductsData(private val productList: ArrayList<Product>): RecyclerView.Adapter<AdapterProductsData.ViewHolder>() {
+class AdapterProductsData(private val productList: ArrayList<com.apm.monsteraltech.data.dto.Product>): RecyclerView.Adapter<AdapterProductsData.ViewHolder>() {
     private lateinit var listener: OnItemClickedListener
 
     interface OnItemClickedListener{

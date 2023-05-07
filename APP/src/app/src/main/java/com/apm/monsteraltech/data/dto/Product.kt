@@ -49,7 +49,5 @@ data class Product(
     val description: String,
     val state: State,
     val images: List<ProductImage>,
-    val transactions: List<Transactions>,
     val owner: User,
-    val favourites: List<Favourites>
 )

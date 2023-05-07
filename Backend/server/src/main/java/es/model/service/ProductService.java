@@ -17,6 +17,8 @@ public interface ProductService {
   FeatureCollectionJSON getLocation(Boolean properties, List<String> filters);
 
   ProductFullDTO get(Long id) throws NotFoundException;
+  
+  Page<ProductFullDTO> getByUserId(String userId, int page, int size) throws NotFoundException;
 
   ProductFullDTO create(ProductFullDTO product) throws OperationNotAllowedException;
 

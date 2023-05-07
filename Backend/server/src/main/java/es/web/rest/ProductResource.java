@@ -1,21 +1,12 @@
 package es.web.rest;
 
-import es.model.service.ProductService;
-import es.model.service.dto.ProductDTO;
-import es.model.service.dto.ProductFullDTO;
-import es.model.service.exceptions.NotFoundException;
-import es.model.service.exceptions.OperationNotAllowedException;
-import es.web.rest.custom.FeatureCollectionJSON;
-import es.web.rest.custom.ValidationErrorUtils;
-import es.web.rest.util.HeaderUtil;
-import es.web.rest.util.PaginationUtil;
-import es.web.rest.util.specification_utils.*;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+
 import javax.inject.Inject;
 import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -25,7 +16,25 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import es.model.service.ProductService;
+import es.model.service.dto.ProductDTO;
+import es.model.service.dto.ProductFullDTO;
+import es.model.service.exceptions.NotFoundException;
+import es.model.service.exceptions.OperationNotAllowedException;
+import es.web.rest.custom.FeatureCollectionJSON;
+import es.web.rest.custom.ValidationErrorUtils;
+import es.web.rest.util.HeaderUtil;
+import es.web.rest.util.PaginationUtil;
 
 @RestController
 @RequestMapping(ProductResource.PRODUCT_RESOURCE_URL)
@@ -70,6 +79,17 @@ public class ProductResource {
   public ResponseEntity<ProductFullDTO> get(@PathVariable Long id) {
     try {
       return new ResponseEntity<>(productService.get(id), HttpStatus.OK);
+    } catch (NotFoundException e) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+  }
+  
+  @GetMapping("all/{userId}")
+  public ResponseEntity<Page<ProductFullDTO>> getByUserId(@PathVariable String userId, 
+      @RequestParam(defaultValue = "0") int page,
+      @RequestParam(defaultValue = "10") int size){
+    try {
+      return new ResponseEntity<>(productService.getByUserId(userId,page,size), HttpStatus.OK);
     } catch (NotFoundException e) {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

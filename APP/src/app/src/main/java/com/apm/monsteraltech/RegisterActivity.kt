@@ -117,7 +117,7 @@ class RegisterActivity : AppCompatActivity() {
 
     suspend fun createUserDataBase(name: String, lastName: String, uid: String, idToken: String)
     {
-        val userDto = User(uid, name, lastName, idToken, null)
+        val userDto = User(uid, name, lastName, idToken, null, null,)
         userService.addUser(userDto)
 
         Log.d("User", userDto.firebaseToken)

@@ -80,6 +80,19 @@ public class TransactionsResource {
       }
   }
   
+  @GetMapping("/all/{userId}")
+  public ResponseEntity<Page<TransactionsFullDTO>> getAllTransactions(
+		    @PathVariable String userId,
+	        @RequestParam(defaultValue = "0") int page,
+	        @RequestParam(defaultValue = "10") int size) {
+      try {
+          Page<TransactionsFullDTO> transactions = transactionsService.getTransactionsBySeller(userId, page, size);
+          return new ResponseEntity<>(transactions, HttpStatus.OK);
+      } catch (NotFoundException e) {
+          return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+      }
+  }
+  
   @GetMapping("/purchases")
   public ResponseEntity<Page<TransactionsFullDTO>> getAllPurchasesTransactions(
 		    @RequestParam String userId,

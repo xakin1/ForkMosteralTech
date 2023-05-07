@@ -1,5 +1,7 @@
 package com.apm.monsteraltech.data.dto
 
+import java.time.LocalDate
+
 data class UserResponse(
     val content: List<User>,
     val pageable: Pageable,
@@ -31,8 +33,9 @@ data class Sort(
 
 data class User(
     val id: String,
-    val name: String,
+    var name: String,
     val surname: String,
     var firebaseToken: String,
-    val location: String?
+    val location: String?,
+    val expirationDatefirebaseToken: LocalDate?
 )

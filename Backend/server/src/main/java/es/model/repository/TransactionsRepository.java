@@ -33,4 +33,7 @@ public interface TransactionsRepository
   
   @Query("SELECT COUNT(t) FROM t_transactions t WHERE t.buyer.id = :userId")
   Long countByBuyerId(@Param("userId") String userId);
+
+  @Query("SELECT COUNT(t) FROM t_transactions t WHERE t.buyer.id = :userId OR t.seller.id = :userId")
+  Page<Transactions> findById(String userId, Pageable pageable);
 }

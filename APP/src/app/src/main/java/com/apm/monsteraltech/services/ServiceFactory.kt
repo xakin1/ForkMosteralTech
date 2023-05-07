@@ -1,5 +1,6 @@
 package com.apm.monsteraltech.services
 
+import android.util.Log
 import com.apm.monsteraltech.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -12,10 +13,20 @@ import java.util.concurrent.TimeUnit
 class ServiceFactory {
     private val BASE_URL = "http://192.168.1.144:8080/"
 
+    val loggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+        override fun log(message: String) {
+            Log.d("OkHttp", message)
+        }
+    }).apply {
+        level = HttpLoggingInterceptor.Level.BODY
+    }
+
+
     private val okHttpClient = OkHttpClient.Builder()
-        .connectTimeout(30, TimeUnit.SECONDS)
-        .readTimeout(30, TimeUnit.SECONDS)
-        .writeTimeout(30, TimeUnit.SECONDS)
+        .connectTimeout(60, TimeUnit.SECONDS)
+        .readTimeout(60, TimeUnit.SECONDS)
+        .writeTimeout(60, TimeUnit.SECONDS)
+        .addInterceptor(loggingInterceptor)
         .build()
 
 
@@ -26,7 +37,7 @@ class ServiceFactory {
         .also { builder ->
             if (BuildConfig.DEBUG) {
                 val logging = HttpLoggingInterceptor()
-                logging.setLevel(HttpLoggingInterceptor.Level.HEADERS)
+                logging.setLevel(HttpLoggingInterceptor.Level.BODY)
                 builder.client(
                     OkHttpClient.Builder()
                         .addInterceptor(logging)

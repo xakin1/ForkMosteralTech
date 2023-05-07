@@ -110,6 +110,31 @@ public class UserResource {
       return ResponseEntity.badRequest().body(ValidationErrorUtils.getValidationErrors(errors));
     }
     try {
+  	  if (user.getExpirationDatefirebaseToken() == null) {
+  		user.setExpirationDatefirebaseToken(null);
+  	  }
+  	  if( user.getLocation() == null) {
+  		  user.setLocation(null);
+  	  }
+      UserFullDTO result = userService.update(id, user);
+      return ResponseEntity.ok().body(result);
+    } catch (OperationNotAllowedException e) {
+      return ResponseEntity.badRequest()
+          .headers(HeaderUtil.createError(e.getMessage(), null))
+          .body(null);
+    }
+  }
+  
+  @PutMapping("/{id}/firebaseToken")
+  public ResponseEntity<?> updateFirebaseToken(
+      @PathVariable String id, @Valid @RequestBody String firebsaToken, Errors errors) throws NotFoundException {
+    if (errors.hasErrors()) {
+      return ResponseEntity.badRequest().body(ValidationErrorUtils.getValidationErrors(errors));
+    }
+    try {
+
+      UserFullDTO user = userService.get(id);
+      user.setFirebaseToken(firebsaToken);
       UserFullDTO result = userService.update(id, user);
       return ResponseEntity.ok().body(result);
     } catch (OperationNotAllowedException e) {

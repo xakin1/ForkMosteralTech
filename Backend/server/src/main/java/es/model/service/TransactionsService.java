@@ -32,4 +32,6 @@ Page<TransactionsFullDTO> getTransactionsByBuyer(String userId, int page, int si
 Long countTransactionsByBuyer(String userId);
 
 Long countTransactionsBySeller(String userId);
+
+Page<TransactionsFullDTO> getAllTransactions(String userId, int page, int size) throws NotFoundException;
 }

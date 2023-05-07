@@ -3,13 +3,11 @@ package com.apm.monsteraltech.ui.profile
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -19,16 +17,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.ProductDetail
 import com.apm.monsteraltech.R
+import com.apm.monsteraltech.data.dto.Transaction
 import com.apm.monsteraltech.data.dto.User
+import com.apm.monsteraltech.services.ProductService
 import com.apm.monsteraltech.services.ServiceFactory
 import com.apm.monsteraltech.services.TransactionsService
 import com.apm.monsteraltech.services.UserService
 import com.apm.monsteraltech.ui.login.dataStore
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.util.prefs.Preferences
 
 @Suppress("DEPRECATION")
 class ProfileFragment : Fragment() {
@@ -37,11 +34,13 @@ class ProfileFragment : Fragment() {
     private lateinit var profileLayout: ConstraintLayout
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapterProduct: AdapterProductsData
-    private  var productList:  ArrayList<Product>? = null
+    private lateinit var userBd: User
+    private  var productList:  ArrayList<com.apm.monsteraltech.data.dto.Product>? = null
     private  var transactionList: ArrayList<Transactions>? = null
     private val serviceFactory = ServiceFactory()
     private val userService = serviceFactory.createService(UserService::class.java)
     private val transactionsService = serviceFactory.createService(TransactionsService::class.java)
+    private val productService = serviceFactory.createService(ProductService::class.java)
 
 
     @SuppressLint("StringFormatMatches")
@@ -50,14 +49,12 @@ class ProfileFragment : Fragment() {
         val profileNameEditText = view.findViewById<TextView>(R.id.profile_name)
         val textPurchases = view.findViewById<TextView>(R.id.textPurchases)
         val textSales = view.findViewById<TextView>(R.id.textSales)
-        val countPurchases = 5
-        val countSales = 5
 
         lifecycleScope.launch(Dispatchers.IO) {
             withContext(Dispatchers.Main) {
                 getUserDataFromDatastore()?.collect { userData : User ->
                         profileNameEditText.text = userData.name + " " + userData.surname
-                        var userBd = userService.getUserByToken(userData.firebaseToken)
+                        userBd = userService.getUserByToken(userData.firebaseToken)
                         textPurchases.text=
                             context?.getString(R.string.purchases,transactionsService.countPurchases(userBd.id).toString())
                         textSales.text=
@@ -70,10 +67,11 @@ class ProfileFragment : Fragment() {
 
         if (savedInstanceState != null) {
             // Si no estan inicializadas
-            this.productList = (savedInstanceState.getParcelableArrayList<Product>("productList")
+            //TODO: Mirar estas optimizaciones
+/*            this.productList = (savedInstanceState.getParcelableArrayList<Product>("productList")
                 ?.toList() ?: getProductList()) as ArrayList<Product>
             this.transactionList = (savedInstanceState.getParcelableArrayList<Transactions>("transactionList")
-                ?.toList() ?: getTransactionList()) as ArrayList<Transactions>
+                ?.toList() ?: getTransactionList()) as ArrayList<Transactions>*/
         }
         // Inicializa los botones
         btnProducts = view.findViewById(R.id.products_button)
@@ -84,7 +82,9 @@ class ProfileFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         // Inicialmente muestra la lista de productos
-        showProductList()
+        lifecycleScope.launch(Dispatchers.IO) {
+            showProductList()
+        }
         btnTransactions.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_700))
         btnProducts.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
 
@@ -92,14 +92,40 @@ class ProfileFragment : Fragment() {
         val onClickListener = View.OnClickListener { viewRecycle->
             when (viewRecycle.id) {
                 R.id.products_button -> {
-                    btnTransactions.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_700))
-                    btnProducts.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
-                    showProductList()
+                    lifecycleScope.launch(Dispatchers.IO) {
+
+                        btnTransactions.setBackgroundColor(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.teal_700
+                            )
+                        )
+                        btnProducts.setBackgroundColor(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.teal_200
+                            )
+                        )
+                        showProductList()
+                    }
                 }
                 R.id.transacciones_button -> {
-                    btnProducts.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_700))
-                    btnTransactions.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
-                    showTransactionList()
+                    lifecycleScope.launch(Dispatchers.IO) {
+
+                        btnProducts.setBackgroundColor(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.teal_700
+                            )
+                        )
+                        btnTransactions.setBackgroundColor(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.teal_200
+                            )
+                        )
+                        showTransactionList()
+                    }
                 }
             }
         }
@@ -135,51 +161,81 @@ class ProfileFragment : Fragment() {
         // Only save the Parcelable arrays if they have been initialized
 
         //Esto lp hacemos en caso de que una de las dos no este inicializada
-        productList?.let {
+        //TODO: mIRAR ESTO
+/*        productList?.let {
             outState.putParcelableArrayList("productList", it)
-        }
+        }*/
         transactionList?.let {
             outState.putParcelableArrayList("transactionList", it)
         }
     }
 
 
-    private fun showProductList() {
-        productList = productList ?: getProductList()
+    private suspend fun showProductList() {
+        productList = productList ?: getProductList().await()
 
         this.adapterProduct = AdapterProductsData(productList!!)
         recyclerView.adapter = adapterProduct
     }
 
-    private fun showTransactionList() {
-        transactionList = transactionList ?: getTransactionList()
+    private suspend fun showTransactionList() {
+        transactionList = transactionList ?: getTransactionList().await()
         recyclerView.adapter = AdapterTransactionsData(transactionList!!)
     }
 
-    private fun getTransactionList(): ArrayList<Transactions> {
+    private fun getTransactionList(): Deferred<ArrayList<Transactions>> {
         //TODO: Cargar los productos desde la base de datos o de otro recurso externo
         // Agrega algunas transacciones a la lista para mockear la respuesta
 
-        val transactionList: ArrayList<Transactions> = arrayListOf()
+        return lifecycleScope.async(Dispatchers.IO) {
+            val transactionList: ArrayList<Transactions> = ArrayList()
 
-        for (i in 0 until 9) {
-            val transaction = Transactions("Usuario $i", "Usuario ${i+1}", "ObjetoX", "xx/yy/zzzz")
-            transactionList.add(transaction)
+            // Obtiene las transacciones del usuario
+            val userTransactions: List<Transaction> =
+                userBd.let { transactionsService.getAllTransactions(0, 10, it.id) }
+
+            // Agrega las transacciones del usuario a la lista
+            for (transaction in userTransactions) {
+                val transactionItem = Transactions(
+                    transaction.buyer.name,
+                    transaction.seller.name,
+                    transaction.product.name,
+                    transaction.date.toString()
+                )
+                transactionList.add(transactionItem)
+            }
+            // Devuelve la lista completa
+            transactionList
         }
-        return  transactionList
     }
 
-    private fun getProductList(): ArrayList<Product> {
+    private fun getProductList(): Deferred<ArrayList<com.apm.monsteraltech.data.dto.Product>> {
         //TODO: Cargar los productos desde la base de datos o de otro recurso externo
-        val productList: ArrayList<Product> = arrayListOf()
+        // Agrega algunas transacciones a la lista para mockear la respuesta
 
-        // Agrega algunos productos a la lista para mockear la respuesta
-        for (i in 0 until 10) {
-            val product = Product("Producto $i","", "Owner", "99.99")
-            productList.add(product)
+        return lifecycleScope.async(Dispatchers.IO) {
+            val productList: ArrayList<com.apm.monsteraltech.data.dto.Product> = ArrayList()
+
+            // Obtiene las transacciones del usuario
+            val userProducts: List<com.apm.monsteraltech.data.dto.Product> =
+                userBd.let { productService.getallProducts(it.id,0, 10) }
+
+            // Agrega las transacciones del usuario a la lista
+            for (product in userProducts) {
+                val productItem = com.apm.monsteraltech.data.dto.Product(
+                    product.id,
+                    product.name,
+                    product.price,
+                    product.description,
+                    product.state,
+                    product.images,
+                    product.owner
+                )
+                productList.add(productItem)
+            }
+            // Devuelve la lista completa
+            productList
         }
-
-        return productList
     }
 
     private fun getUserDataFromDatastore()  = context?.dataStore?.data?.map { preferences  ->
@@ -188,7 +244,8 @@ class ProfileFragment : Fragment() {
             name = preferences[stringPreferencesKey("userName")].orEmpty(),
             surname = preferences[stringPreferencesKey("userLastname")].orEmpty(),
             firebaseToken = preferences[stringPreferencesKey("userFirebaseKey")].orEmpty(),
-            location = null
+            location = null,
+            expirationDatefirebaseToken = null
         )
     }
 
