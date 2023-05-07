@@ -28,4 +28,8 @@ public interface TransactionsService {
 Page<TransactionsFullDTO> getTransactionsBySeller(String userId, int page, int size) throws NotFoundException;
 
 Page<TransactionsFullDTO> getTransactionsByBuyer(String userId, int page, int size) throws NotFoundException;
+
+Long countTransactionsByBuyer(String userId);
+
+Long countTransactionsBySeller(String userId);
 }

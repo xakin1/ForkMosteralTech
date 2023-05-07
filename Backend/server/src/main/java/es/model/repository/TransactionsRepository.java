@@ -27,4 +27,10 @@ public interface TransactionsRepository
   
   @Query("SELECT t FROM t_transactions t WHERE t.buyer.id = :userId")
   Page<Transactions> findByBuyerId(@Param("userId") String userId, Pageable pageable);
+  
+  @Query("SELECT COUNT(t) FROM t_transactions t WHERE t.seller.id = :userId")
+  Long countBySellerId(@Param("userId") String userId);
+  
+  @Query("SELECT COUNT(t) FROM t_transactions t WHERE t.buyer.id = :userId")
+  Long countByBuyerId(@Param("userId") String userId);
 }

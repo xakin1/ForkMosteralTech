@@ -93,6 +93,18 @@ public class TransactionsResource {
       }
   }
   
+  @GetMapping("/sales/{userId}")
+  public ResponseEntity<Long> countAllSalesTransactions(@PathVariable String userId) {
+      Long transactions = transactionsService.countTransactionsBySeller(userId);
+      return new ResponseEntity<>(transactions, HttpStatus.OK);
+  }
+  
+  @GetMapping("/purchases/{userId}")
+  public ResponseEntity<Long> countAllPurchasesTransactions(@PathVariable String userId) {
+      Long transactions = transactionsService.countTransactionsByBuyer(userId);
+      return new ResponseEntity<>(transactions, HttpStatus.OK);
+  }
+  
   @GetMapping("/product/{productId}/transactions")
   public ResponseEntity<Page<TransactionsFullDTO>> getAllProductTransactions(
 	        @PathVariable Long productId,

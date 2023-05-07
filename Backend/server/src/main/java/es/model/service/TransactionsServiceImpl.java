@@ -116,6 +116,16 @@ public class TransactionsServiceImpl implements TransactionsService {
 	    return transactions.map(TransactionsFullDTO::new);
   }
   
+  @Override
+  public Long countTransactionsByBuyer(String userId) {
+  	return countByBuyer(userId);
+  }
+
+  @Override
+  public Long countTransactionsBySeller(String userId) {
+  	return countBySeller(userId);
+  }
+  
   /** PRIVATE METHODS * */
   private Transactions findById(Long id) throws NotFoundException {
     return transactionsRepository
@@ -137,5 +147,17 @@ public class TransactionsServiceImpl implements TransactionsService {
 	    return transactionsRepository
 	        .findByBuyerId(userId, pageable);
   }
+  
+  private Long countBySeller(String userId){
+    return transactionsRepository
+        .countBySellerId(userId);
+  }
+  
+  private Long countByBuyer(String userId) {
+	    return transactionsRepository
+	        .countByBuyerId(userId);
+  }
+
+
 
 }
