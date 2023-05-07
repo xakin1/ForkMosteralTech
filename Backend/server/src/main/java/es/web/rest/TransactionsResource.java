@@ -1,20 +1,12 @@
 package es.web.rest;
 
-import es.model.service.TransactionsService;
-import es.model.service.dto.TransactionsDTO;
-import es.model.service.dto.TransactionsFullDTO;
-import es.model.service.exceptions.NotFoundException;
-import es.model.service.exceptions.OperationNotAllowedException;
-import es.web.rest.custom.ValidationErrorUtils;
-import es.web.rest.util.HeaderUtil;
-import es.web.rest.util.PaginationUtil;
-import es.web.rest.util.specification_utils.*;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+
 import javax.inject.Inject;
 import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -24,7 +16,24 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import es.model.service.TransactionsService;
+import es.model.service.dto.TransactionsDTO;
+import es.model.service.dto.TransactionsFullDTO;
+import es.model.service.exceptions.NotFoundException;
+import es.model.service.exceptions.OperationNotAllowedException;
+import es.web.rest.custom.ValidationErrorUtils;
+import es.web.rest.util.HeaderUtil;
+import es.web.rest.util.PaginationUtil;
 
 @RestController
 @RequestMapping(TransactionsResource.TRANSACTIONS_RESOURCE_URL)
@@ -68,7 +77,7 @@ public class TransactionsResource {
   @PostMapping
   public ResponseEntity<?> create(
       @Valid @RequestBody TransactionsFullDTO transactions, Errors errors)
-      throws URISyntaxException {
+      throws URISyntaxException, NotFoundException {
 
     if (errors.hasErrors()) {
       return ResponseEntity.badRequest().body(ValidationErrorUtils.getValidationErrors(errors));

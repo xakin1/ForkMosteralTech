@@ -2,8 +2,14 @@ package es.model.domain;
 
 import java.time.LocalDate;
 import java.util.List;
-import javax.persistence.*;
+
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import org.locationtech.jts.geom.Point;
 
 @Entity(name = "appuser")
@@ -34,9 +40,11 @@ public class AppUser {
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "appuser")
   private List<Favourites> favourites;
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "appuser")
-  private List<Transactions> transactions;
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller")
+  private List<Transactions> selletTransactions;
 
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "buyer")
+  private List<Transactions> buyerTransactions;
   public AppUser() {}
 
   public String getId() {
@@ -87,14 +95,6 @@ public class AppUser {
     this.favourites = favourites;
   }
 
-  public List<Transactions> getTransactions() {
-    return transactions;
-  }
-
-  public void setTransactions(List<Transactions> transactions) {
-    this.transactions = transactions;
-  }
-
   public String getFirebaseToken() {
 	return firebaseToken;
   }
@@ -110,4 +110,22 @@ public class AppUser {
   public void setExpirationDatefirebaseToken(LocalDate expirationDatefirebaseToken) {
 	this.expirationDatefirebaseToken = expirationDatefirebaseToken;
   }
+
+  public List<Transactions> getSelletTransactions() {
+	return selletTransactions;
+  }
+
+  public void setSelletTransactions(List<Transactions> selletTransactions) {
+	this.selletTransactions = selletTransactions;
+  }
+
+  public List<Transactions> getBuyerTransactions() {
+	return buyerTransactions;
+  }
+
+  public void setBuyerTransactions(List<Transactions> buyerTransactions) {
+	this.buyerTransactions = buyerTransactions;
+  }
+  
+  
 }

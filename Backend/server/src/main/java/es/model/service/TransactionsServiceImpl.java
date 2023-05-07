@@ -1,27 +1,33 @@
 package es.model.service;
 
-import es.model.domain.Transactions;
-import es.model.repository.TransactionsRepository;
-import es.model.service.dto.TransactionsDTO;
-import es.model.service.dto.TransactionsFullDTO;
-import es.model.service.exceptions.NotFoundException;
-import es.model.service.exceptions.OperationNotAllowedException;
-import es.web.rest.specifications.TransactionsSpecification;
-import es.web.rest.util.specification_utils.*;
-
 import java.util.List;
+
 import javax.inject.Inject;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import es.model.domain.Transactions;
+import es.model.repository.TransactionsRepository;
+import es.model.service.dto.ProductFullDTO;
+import es.model.service.dto.TransactionsDTO;
+import es.model.service.dto.TransactionsFullDTO;
+import es.model.service.dto.UserDTO;
+import es.model.service.exceptions.NotFoundException;
+import es.model.service.exceptions.OperationNotAllowedException;
+import es.web.rest.specifications.TransactionsSpecification;
+import es.web.rest.util.specification_utils.SpecificationUtil;
 
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
 public class TransactionsServiceImpl implements TransactionsService {
 
   @Inject private TransactionsRepository transactionsRepository;
+  @Inject private ProductService productService;
 
+  
   public Page<TransactionsDTO> getAll(Pageable pageable, List<String> filters, String search) {
     Page<Transactions> page;
     if (search != null && !search.isEmpty()) {
@@ -41,10 +47,16 @@ public class TransactionsServiceImpl implements TransactionsService {
 
   @Transactional(readOnly = false, rollbackFor = Exception.class)
   public TransactionsFullDTO create(TransactionsFullDTO transactionsDto)
-      throws OperationNotAllowedException {
+      throws OperationNotAllowedException, NotFoundException {
     if (transactionsDto.getId() != null) {
       throw new OperationNotAllowedException("transactions.error.id-exists");
     }
+    Long productId = transactionsDto.getProduct().getId();
+    UserDTO  buyer = transactionsDto.getBuyer();
+    ProductFullDTO product = productService.get(productId);
+    product.setOwner(buyer);
+    productService.update(productId, product);
+    transactionsDto.getProduct().setOwner(buyer);
     Transactions transactionsEntity = transactionsDto.toTransactions();
     Transactions transactionsSaved = transactionsRepository.save(transactionsEntity);
     return new TransactionsFullDTO(transactionsSaved);
@@ -80,4 +92,5 @@ public class TransactionsServiceImpl implements TransactionsService {
         .findById(id)
         .orElseThrow(() -> new NotFoundException("Cannot find Transactions with id " + id));
   }
+
 }

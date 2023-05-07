@@ -1,6 +1,7 @@
 package es.model.service;
 
 import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -15,7 +16,7 @@ public interface TransactionsService {
 
   TransactionsFullDTO get(Long id) throws NotFoundException;
 
-  TransactionsFullDTO create(TransactionsFullDTO transactions) throws OperationNotAllowedException;
+  TransactionsFullDTO create(TransactionsFullDTO transactions) throws OperationNotAllowedException, NotFoundException;
 
   TransactionsFullDTO update(Long id, TransactionsFullDTO transactions)
       throws OperationNotAllowedException;

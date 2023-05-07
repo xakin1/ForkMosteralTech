@@ -1,28 +1,31 @@
 package es.model.service.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-import es.model.domain.*;
+import es.model.domain.Transactions;
 
 public class TransactionsDTO {
 
   private Long id;
-  private LocalDate date;
-  private TransactionActions action;
+  private LocalDateTime date;
   private ProductDTO product;
-  private UserDTO user;
+  private UserDTO seller;
+  private UserDTO buyer;
 
   public TransactionsDTO() {}
 
   public TransactionsDTO(Transactions transactions) {
     this.id = transactions.getId();
     this.date = transactions.getDate();
-    this.action = transactions.getAction();
     if (transactions.getProduct() != null) {
       this.product = new ProductDTO(transactions.getProduct());
     }
-    if (transactions.getAppUser() != null) {
-      this.user = new UserDTO(transactions.getAppUser());
+    if (transactions.getBuyer() != null) {
+      this.buyer = new UserDTO(transactions.getBuyer());
+    }
+    if (transactions.getSeller() != null) {
+        this.buyer = new UserDTO(transactions.getSeller());
     }
   }
 
@@ -34,20 +37,12 @@ public class TransactionsDTO {
     this.id = id;
   }
 
-  public LocalDate getDate() {
+  public LocalDateTime getDate() {
     return date;
   }
 
-  public void setDate(LocalDate date) {
+  public void setDate(LocalDateTime date) {
     this.date = date;
-  }
-
-  public TransactionActions getAction() {
-    return action;
-  }
-
-  public void setAction(TransactionActions action) {
-    this.action = action;
   }
 
   public ProductDTO getProduct() {
@@ -57,25 +52,38 @@ public class TransactionsDTO {
   public void setProduct(ProductDTO product) {
     this.product = product;
   }
+  
+  
 
-  public UserDTO getUser() {
-    return user;
+  public UserDTO getSeller() {
+	return seller;
   }
 
-  public void setUser(UserDTO user) {
-    this.user = user;
+  public void setSeller(UserDTO seller) {
+	this.seller = seller;
   }
 
-  public Transactions toTransactions() {
+  public UserDTO getBuyer() {
+	return buyer;
+  }
+
+  public void setBuyer(UserDTO buyer) {
+	this.buyer = buyer;
+  }
+
+public Transactions toTransactions() {
     Transactions transactions = new Transactions();
     transactions.setId(this.getId());
     transactions.setDate(this.getDate());
-    transactions.setAction(this.getAction());
     if (this.getProduct() != null) {
       transactions.setProduct(this.getProduct().toProduct());
     }
-    if (this.getUser() != null) {
-      transactions.setAppUser(this.getUser().toUser());
+    if (this.getBuyer() != null) {
+      transactions.setBuyer(this.getBuyer().toUser());
+    }
+    
+    if (this.getSeller() != null) {
+        transactions.setSeller(this.getSeller().toUser());
     }
     return transactions;
   }

@@ -1,11 +1,23 @@
 package es.model.domain;
 
 import java.time.LocalDate;
-import javax.persistence.*;
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity(name = "t_transactions")
 @Table(name = "t_transactions")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Transactions {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,19 +25,19 @@ public class Transactions {
   private Long id;
 
   @Column(name = "date")
-  private LocalDate date;
-
-  @Enumerated(EnumType.STRING)
-  @Column(name = "action")
-  private TransactionActions action;
+  private LocalDateTime date;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "product")
   private Product product;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "appuser")
-  private AppUser appuser;
+  @JoinColumn(name = "seller")
+  private AppUser seller;
+  
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "buyer")
+  private AppUser buyer;
 
   public Transactions() {}
 
@@ -37,20 +49,12 @@ public class Transactions {
     this.id = id;
   }
 
-  public LocalDate getDate() {
+  public LocalDateTime getDate() {
     return date;
   }
 
-  public void setDate(LocalDate date) {
+  public void setDate(LocalDateTime date) {
     this.date = date;
-  }
-
-  public TransactionActions getAction() {
-    return action;
-  }
-
-  public void setAction(TransactionActions action) {
-    this.action = action;
   }
 
   public Product getProduct() {
@@ -61,11 +65,21 @@ public class Transactions {
     this.product = product;
   }
 
-  public AppUser getAppUser() {
-    return appuser;
+  public AppUser getSeller() {
+	return seller;
   }
 
-  public void setAppUser(AppUser user) {
-    this.appuser = user;
+  public void setSeller(AppUser seller) {
+	this.seller = seller;
   }
+
+  public AppUser getBuyer() {
+	return buyer;
+  }
+
+  public void setBuyer(AppUser buyer) {
+	this.buyer = buyer;
+  }
+  
+  
 }
