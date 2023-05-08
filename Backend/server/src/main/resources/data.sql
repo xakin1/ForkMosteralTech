@@ -14,7 +14,7 @@ VALUES (LASTVAL());
 
 -- Casa 2
 INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Casa en la monta√±a', 'Acogedora casa en la monta√±a con vista panor√°mica', 'NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 200000.00);
+VALUES ('Casa en la montaÒa', 'Acogedora casa en la monta√±a con vista panor·mica', 'NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 200000.00);
 INSERT INTO t_house (id)
 VALUES (LASTVAL());
 
@@ -62,7 +62,7 @@ VALUES (LASTVAL());
 
 -- Casa 10
 INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Casa en la ciudad', 'Casa ubicada en el centro de la ciudad con f√°cil acceso a todos los servicios', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 300000.00);
+VALUES ('Casa en la ciudad', 'Casa ubicada en el centro de la ciudad con f·cil acceso a todos los servicios', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 300000.00);
 INSERT INTO t_house (id)
 VALUES (LASTVAL());
 
@@ -77,7 +77,7 @@ VALUES (LASTVAL());
 
 -- Mueble 1
 INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Sof√° gris', 'Sof√° de 3 plazas en color gris', 'SEMI_NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 350.00);
+VALUES ('Sof· gris', 'Sof· de 3 plazas en color gris', 'SEMI_NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 350.00);
 INSERT INTO t_furniture (id)
 VALUES (LASTVAL());
 
@@ -107,7 +107,7 @@ VALUES (LASTVAL());
 
 --  Mueble 6
 INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Sof√° cama', 'Sof√° cama en color beige', 'NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 400.00);
+VALUES ('Sof· cama', 'Sof· cama en color beige', 'NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 400.00);
 INSERT INTO t_furniture (id)
 VALUES (LASTVAL());
 
@@ -134,7 +134,7 @@ VALUES (LASTVAL());
 -- Mueble 10
 
 INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Sof√° de cuero', 'Sof√° grande de cuero negro', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 250.00);
+VALUES ('Sof· de cuero', 'Sof· grande de cuero negro', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 250.00);
 
 INSERT INTO t_furniture (id)
 VALUES (LASTVAL());
@@ -220,7 +220,7 @@ VALUES (LASTVAL());
 
 
 INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Lavadora Samsung', 'Lavadora autom√°tica de carga frontal', 'SEMI_NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 800.00);
+VALUES ('Lavadora Samsung', 'Lavadora autom·tica de carga frontal', 'SEMI_NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 800.00);
 
 INSERT INTO t_appliances (id)
 VALUES (LASTVAL());

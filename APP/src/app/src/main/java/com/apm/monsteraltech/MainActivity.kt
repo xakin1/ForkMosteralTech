@@ -133,8 +133,8 @@ class MainActivity : ActionBarActivity(){
 
         // Mostrar u ocultar el SearchView según el fragmento
         when (fragment) {
-            is HomeFragment ->{
-                this.currentFragment = fragment
+            is Searchable ->{
+                this.searchableFragment = fragment
                 menu?.findItem(R.id.action_search)?.isVisible = true
             }
             else -> {

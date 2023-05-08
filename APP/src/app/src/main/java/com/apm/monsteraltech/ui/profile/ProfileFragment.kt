@@ -143,7 +143,7 @@ class ProfileFragment : Fragment() {
                 recyclerView.getChildAt(position)
                 val intent = Intent(requireContext(), ProductDetail::class.java)
                 intent.putExtra("Product", adapterProduct.getProduct(position).name)
-                intent.putExtra("Owner", adapterProduct.getProduct(position).owner.name)
+                intent.putExtra("Owner", adapterProduct.getProduct(position).owner?.name)
                 intent.putExtra("Price", adapterProduct.getProduct(position).price)
                 startActivity(intent)
             }
@@ -228,7 +228,7 @@ class ProfileFragment : Fragment() {
 
             // Obtiene las transacciones del usuario
             val userProducts: List<Product> =
-                userBd.let { productService.getAllProducts(it.id,0, 10) }
+                userBd.let { productService.getAllProductsOfUser(it.id,0, 10) }
 
             // Agrega las transacciones del usuario a la lista
             for (product in userProducts) {

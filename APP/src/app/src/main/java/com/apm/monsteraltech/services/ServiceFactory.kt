@@ -11,13 +11,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 class ServiceFactory {
-    private val BASE_URL = "http://10.20.37.79:8080/"
+    private val BASE_URL = "http://192.168.1.144:8080/"
 
-    val loggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
-        override fun log(message: String) {
-            Log.d("OkHttp", message)
-        }
-    }).apply {
+    val loggingInterceptor = HttpLoggingInterceptor { message -> Log.d("OkHttp", message) }.apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
 

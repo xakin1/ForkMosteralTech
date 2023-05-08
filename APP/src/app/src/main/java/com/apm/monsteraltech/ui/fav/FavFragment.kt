@@ -33,7 +33,7 @@ class FavFragment : Fragment() {
                 recyclerView.getChildAt(position)
                 val intent = Intent(requireContext(), ProductDetail::class.java)
                 intent.putExtra("Product", adapterProduct.getProduct(position).name)
-                intent.putExtra("Owner", adapterProduct.getProduct(position).owner.name)
+                intent.putExtra("Owner", adapterProduct.getProduct(position).owner?.name)
                 intent.putExtra("Price", adapterProduct.getProduct(position).price)
                 startActivity(intent)
             }

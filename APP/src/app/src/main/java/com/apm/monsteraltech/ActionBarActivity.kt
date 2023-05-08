@@ -58,8 +58,6 @@ abstract class ActionBarActivity : AppCompatActivity() {
                 performSearch(newText)
                 return true
             }
-
-
         }
         searchView.setOnQueryTextListener(queryTextListener)
         searchItem.isVisible = true

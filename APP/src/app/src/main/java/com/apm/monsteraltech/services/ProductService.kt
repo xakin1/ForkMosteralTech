@@ -8,7 +8,10 @@ import retrofit2.http.Query
 
 interface ProductService {
     @GET("/api/entities/products/{userId}")
-    suspend fun getAllProducts(@Path("userId") userId: String, @Query("page") page: Number, @Query("size") size: Number): List<Product>
+    suspend fun getAllProductsOfUser(@Path("userId") userId: String, @Query("page") page: Number, @Query("size") size: Number): List<Product>
+
+    @GET("/api/entities/products")
+    suspend fun getAllProducts(@Query("page") page: Number, @Query("size") size: Number): ProductResponse
 
     @GET("/api/entities/houses")
     suspend fun getAllHouses(@Query("page") page: Number, @Query("size") size: Number): ProductResponse

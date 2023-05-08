@@ -28,7 +28,7 @@ class AdapterProductsData(private val productList: ArrayList<com.apm.monsteralte
         fun setData(product: Product) {
             textProductName.text = product.name
             //TODO: Cargar imagenes de los productos aquí
-            textOwner.text = product.owner.name
+            textOwner.text = product.owner?.name
             // Si hicieramos "$${product.price}" tendríamos una vulnerabilidad de inyección de código
             textPrice.text = itemView.context.getString(R.string.product_price, product.price)
         }

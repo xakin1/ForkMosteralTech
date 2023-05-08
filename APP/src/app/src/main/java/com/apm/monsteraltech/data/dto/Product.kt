@@ -61,5 +61,9 @@ data class Product(
     val description: String?,
     val state: State?,
     val images: List<ProductImage>?,
-    val owner: User,
-)
+    val owner: User?,
+){
+    constructor(id: Long, name: String, price: Double, description: String?, state: State?) :
+            this(id, name, price, description, state, null, null)
+}
+

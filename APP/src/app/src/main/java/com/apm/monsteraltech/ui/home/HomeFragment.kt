@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.Searchable
 import com.apm.monsteraltech.data.dto.Product
+import com.apm.monsteraltech.data.dto.ProductResponse
 import com.apm.monsteraltech.data.dto.User
 import com.apm.monsteraltech.services.ProductService
 import com.apm.monsteraltech.services.ServiceFactory
@@ -34,11 +35,9 @@ import java.util.*
 class HomeFragment : Fragment(), Searchable {
     private lateinit var filterRecyclerView: RecyclerView
     private lateinit var productRecyclerView: RecyclerView
-    private lateinit var productsList: List<Product>
+    private lateinit var productsList: ArrayList<Product>
     private lateinit var adapterProduct: AdapterProductsHome
-    private lateinit var userBd: User
     private val serviceFactory = ServiceFactory()
-    private val userService = serviceFactory.createService(UserService::class.java)
     private val productService = serviceFactory.createService(ProductService::class.java)
 
     private var context: Context? = null
@@ -54,21 +53,11 @@ class HomeFragment : Fragment(), Searchable {
     ): View {
         val view : View = inflater.inflate(R.layout.fragment_home, container, false)
 
-        if (savedInstanceState != null) {
-            //La no deprecada requiere API 33
-/*
-            productsList = savedInstanceState.getParcelableArrayList<Product>("productList")!!
-*/
-        }else{
-            lifecycleScope.launch(Dispatchers.IO) {
-                withContext(Dispatchers.Main) {
-                    getUserDataFromDatastore()?.collect { userData: User ->
-                        userBd = userData.firebaseToken.let { userService.getUserByToken(it) }
-                    }
-                }
-                setProdructs(view)
-            }
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            setProdructs(view)
         }
+
         setFilters(view)
         return view
     }
@@ -124,7 +113,7 @@ class HomeFragment : Fragment(), Searchable {
                     com.apm.monsteraltech.ProductDetail::class.java)
                 //TODO: ver que información es necesario pasarle
                 intent.putExtra("Product", adapterProduct.getProduct(position).name)
-                intent.putExtra("Owner", adapterProduct.getProduct(position).owner.name)
+                intent.putExtra("Owner", adapterProduct.getProduct(position).owner?.name)
                 intent.putExtra("Price", adapterProduct.getProduct(position).price)
                 Log.d("HomeFragment", "Price: " + adapterProduct.getProduct(position).price)
                 Log.d("HomeFragment", "Owner: " + adapterProduct.getProduct(position).owner)
@@ -139,7 +128,7 @@ class HomeFragment : Fragment(), Searchable {
                 val intent = Intent(requireContext(), com.apm.monsteraltech.ProductDetail::class.java)
                 //TODO: ver que información es necesario pasarle
                 intent.putExtra("Product", adapterProduct.getProduct(position).name)
-                intent.putExtra("Owner", adapterProduct.getProduct(position).owner.name)
+                intent.putExtra("Owner", adapterProduct.getProduct(position).owner?.name)
                 intent.putExtra("Price", adapterProduct.getProduct(position).price)
                 //TODO: ver si ponerle la flecha para volver atrás (la documentación no lo recomienda)
                 startActivity(intent)
@@ -165,25 +154,20 @@ class HomeFragment : Fragment(), Searchable {
     }
 
     private suspend fun getProductList(): ArrayList<Product> {
-        //TODO: Cargar los productos desde la base de datos o de otro recurso externo
         return withContext(lifecycleScope.coroutineContext + Dispatchers.IO) {
             val productList: ArrayList<Product> = ArrayList()
 
             // Obtiene las transacciones del usuario
-            val userProducts: List<Product> =
-                userBd.let { productService.getAllProducts(it.id, 0, 10) }
+            val userProducts: ProductResponse = productService.getAllProducts(0, 10)
 
             // Agrega las transacciones del usuario a la lista
-            for (product in userProducts) {
+            for (product in userProducts.content) {
                 val productItem = Product(
                     product.id,
                     product.name,
                     product.price,
                     product.description,
-                    product.state,
-                    product.images,
-                    product.owner
-                )
+                    product.state)
                 productList.add(productItem)
             }
             // Devuelve la lista completa
@@ -191,11 +175,7 @@ class HomeFragment : Fragment(), Searchable {
         }
     }
 
-    // filtramos por nombre del producto destacado
     override fun onSearch(query: String?) {
-        // Aquí filtramos por los productos destacados pero pienso que habría que buscar sobre el total
-        // de productos que podamos obtener
-
         val filteredlist = ArrayList<Product>()
         for (item in productsList) {
             if (query != null) {
@@ -210,16 +190,4 @@ class HomeFragment : Fragment(), Searchable {
             adapterProduct.filterList(filteredlist)
         }
     }
-
-    private fun getUserDataFromDatastore()  = context?.dataStore?.data?.map { preferences  ->
-        User(
-            id = "",
-            name = preferences[stringPreferencesKey("userName")].orEmpty(),
-            surname = preferences[stringPreferencesKey("userLastname")].orEmpty(),
-            firebaseToken = preferences[stringPreferencesKey("userFirebaseKey")].orEmpty(),
-            location = null,
-            expirationDatefirebaseToken = null
-        )
-    }
-
 }
