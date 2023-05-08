@@ -41,7 +41,6 @@ class AdapterProductsData(private val productList: ArrayList<com.apm.monsteralte
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.setData(productList[position])
-
         holder.itemView.setOnClickListener {
             listener.onItemClick(position)
         }
