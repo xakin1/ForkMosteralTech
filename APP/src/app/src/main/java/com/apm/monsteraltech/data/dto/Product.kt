@@ -40,12 +40,26 @@ data class ProductImage(
     }
 }
 
+data class ProductResponse(
+    val content: List<Product>,
+    val pageable: Pageable,
+    val last: Boolean,
+    val totalPages: Int,
+    val totalElements: Long,
+    val size: Int,
+    val number: Int,
+    val numberOfElements: Int,
+    val sort: Sort,
+    val first: Boolean,
+    val empty: Boolean
+)
+
 data class Product(
-    val id: Long?,
+    val id: Long,
     val name: String,
     val price: Double,
-    val description: String,
-    val state: State,
-    val images: List<ProductImage>,
+    val description: String?,
+    val state: State?,
+    val images: List<ProductImage>?,
     val owner: User,
 )

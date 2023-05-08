@@ -199,18 +199,20 @@ class ProfileFragment : Fragment() {
             // Agrega las transacciones del usuario a la lista
             for (transaction in userTransaction) {
                 val transactionItem = transaction.product.description.let {
-                    Transaction(
-                        transaction.id,
-                        transaction.date,
-                        transaction.price,
-                        transaction.state,
-                        transaction.product,
-                        transaction.seller,
-                        transaction.buyer,
-                        it,
-                        transaction.date.toString()
-                    )
-                }
+                    if (it != null) {
+                        Transaction(
+                            transaction.id,
+                            transaction.date,
+                            transaction.price,
+                            transaction.state,
+                            transaction.product,
+                            transaction.seller,
+                            transaction.buyer,
+                            it,
+                            transaction.date.toString()
+                        )
+                    }
+                } as Transaction
                 transactionList.add(transactionItem)
             }
             // Devuelve la lista completa
@@ -219,7 +221,6 @@ class ProfileFragment : Fragment() {
     }
 
     private fun getProductList(): Deferred<ArrayList<Product>> {
-        //TODO: Cargar los productos desde la base de datos o de otro recurso externo
         // Agrega algunas transacciones a la lista para mockear la respuesta
 
         return lifecycleScope.async(Dispatchers.IO) {
@@ -227,7 +228,7 @@ class ProfileFragment : Fragment() {
 
             // Obtiene las transacciones del usuario
             val userProducts: List<Product> =
-                userBd.let { productService.getallProducts(it.id,0, 10) }
+                userBd.let { productService.getAllProducts(it.id,0, 10) }
 
             // Agrega las transacciones del usuario a la lista
             for (product in userProducts) {

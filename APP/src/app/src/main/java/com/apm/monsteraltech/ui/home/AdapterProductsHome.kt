@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.data.dto.Product
 
-class AdapterProductsHome(private var productList: java.util.ArrayList<Product?>): RecyclerView.Adapter<AdapterProductsHome.ViewHolder>() {
+class AdapterProductsHome(private var productList: List<Product>): RecyclerView.Adapter<AdapterProductsHome.ViewHolder>() {
     private lateinit var listener: OnItemClickedListener
 
     interface OnItemClickedListener{
@@ -39,13 +39,12 @@ class AdapterProductsHome(private var productList: java.util.ArrayList<Product?>
         return ViewHolder(view)
     }
 
-    fun filterList(filterList: ArrayList<Product?>) {
+    fun filterList(filterList: List<Product>) {
         productList = filterList
-        notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        productList[position]?.let { holder.setData(it) }
+        productList[position].let { holder.setData(it) }
 
         holder.itemView.setOnClickListener {
             listener.onItemClick(position)
@@ -57,7 +56,7 @@ class AdapterProductsHome(private var productList: java.util.ArrayList<Product?>
         return productList.size
     }
 
-    fun getProduct(position: Int): Product? {
+    fun getProduct(position: Int): Product {
         return productList[position]
     }
 }

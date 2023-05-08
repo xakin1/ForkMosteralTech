@@ -80,6 +80,7 @@ class UserDetail : ActionBarActivity() {
         })
     }
 
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         //TODO: revisar si al que haga una transacción en alguna otra actividad esto varia

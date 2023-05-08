@@ -191,16 +191,13 @@ class LoginActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
 
             var response: User = user?.let { userService.getUserById(it.uid) } as User
-            if (response != null) {
-                user?.getIdToken(true)?.addOnSuccessListener { result ->
-                    val idToken = result.token.toString()
-                    lifecycleScope.launch(Dispatchers.IO) {
-                        response.firebaseToken = idToken
-                        response.name ="me cago en mi reputisima madre"
-                        response.id?.let { userService.updateUser(it,response) }
-                        response.surname?.let { saveUserOnDatastore(response.name!!, it, idToken) }
-                        //userService.updateUserToken(userKey, idToken)
-                    }
+            user.getIdToken(true)?.addOnSuccessListener { result ->
+                val idToken = result.token.toString()
+                lifecycleScope.launch(Dispatchers.IO) {
+                    response.firebaseToken = idToken
+                    response.id.let { userService.updateUser(it,response) }
+                    response.surname.let { saveUserOnDatastore(response.name, it, idToken) }
+                    //userService.updateUserToken(userKey, idToken)
                 }
             }
         }

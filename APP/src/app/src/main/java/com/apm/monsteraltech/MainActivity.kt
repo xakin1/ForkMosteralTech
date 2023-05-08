@@ -105,7 +105,7 @@ class MainActivity : ActionBarActivity(){
         return true
     }
 
-    private fun performSearch(query: String?) {
+    override fun  performSearch(query: String?) {
         searchableFragment?.onSearch(query)
     }
 

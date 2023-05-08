@@ -10,15 +10,15 @@ interface TransactionService {
     suspend fun getTransactions(): List<Transaction>
 
     @GET("/api/entities/transactions/purchases")
-    suspend fun getPurchases(@Query("page") page: Int, @Query("size") size: Int,
+    suspend fun getPurchases(@Query("page") page: Number, @Query("size") size: Number,
                                @Query("userId") userId: String): List<Transaction>
 
     @GET("/api/entities/transactions/sales")
-    suspend fun getSales(@Query("page") page: Int, @Query("size") size: Int,
+    suspend fun getSales(@Query("page") page: Number, @Query("size") size: Number,
                                @Query("userId") userId: String): List<Transaction>
 
     @GET("/api/entities/transactions/all/{userId}")
-    suspend fun getAllTransactions(@Query("page") page: Int, @Query("size") size: Int,
+    suspend fun getAllTransactions(@Query("page") page: Number, @Query("size") size: Number,
                          @Path("userId") userId: String): List<Transaction>
 
     @GET("/api/entities/transactions/purchases/{userId}")
