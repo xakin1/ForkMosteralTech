@@ -1,12 +1,11 @@
 package com.apm.monsteraltech.services
 
-import com.apm.monsteraltech.ui.home.Product
 import com.apm.monsteraltech.data.dto.Transaction
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface TransactionsService {
+interface TransactionService {
     @GET("/api/entities/products")
     suspend fun getTransactions(): List<Transaction>
 

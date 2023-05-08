@@ -197,8 +197,8 @@ class LoginActivity : AppCompatActivity() {
                     lifecycleScope.launch(Dispatchers.IO) {
                         response.firebaseToken = idToken
                         response.name ="me cago en mi reputisima madre"
-                        userService.updateUser(response.id,response)
-                        saveUserOnDatastore(response.name, response.surname, idToken)
+                        response.id?.let { userService.updateUser(it,response) }
+                        response.surname?.let { saveUserOnDatastore(response.name!!, it, idToken) }
                         //userService.updateUserToken(userKey, idToken)
                     }
                 }

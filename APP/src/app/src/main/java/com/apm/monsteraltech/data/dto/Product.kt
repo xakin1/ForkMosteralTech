@@ -1,8 +1,6 @@
 package com.apm.monsteraltech.data.dto
 
 import com.apm.monsteraltech.enumerados.State
-import com.apm.monsteraltech.ui.profile.Transactions
-
 
 data class ProductImage(
     val id: Long?,

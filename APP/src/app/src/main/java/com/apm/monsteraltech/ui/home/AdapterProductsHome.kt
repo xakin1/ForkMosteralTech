@@ -1,5 +1,6 @@
 package com.apm.monsteraltech.ui.home
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.R
+import com.apm.monsteraltech.data.dto.Product
 
 class AdapterProductsHome(private var productList: java.util.ArrayList<Product?>): RecyclerView.Adapter<AdapterProductsHome.ViewHolder>() {
     private lateinit var listener: OnItemClickedListener
@@ -23,8 +25,9 @@ class AdapterProductsHome(private var productList: java.util.ArrayList<Product?>
         private val imageProduct: ImageView = itemView.findViewById(R.id.product_image_imageview)
         private val textPrice: TextView = itemView.findViewById(R.id.product_price)
 
+        @SuppressLint("StringFormatMatches")
         fun setData(product: Product) {
-            textProductName.text = product.productName
+            textProductName.text = product.name
             //TODO: Cargar imagenes de los productos aquí
             // Si hicieramos "$${product.price}" tendríamos una vulnerabilidad de inyección de código
             textPrice.text = itemView.context.getString(R.string.product_price, product.price)

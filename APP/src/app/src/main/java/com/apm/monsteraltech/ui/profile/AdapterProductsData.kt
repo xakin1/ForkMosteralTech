@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.R
+import com.apm.monsteraltech.data.dto.Product
 
 class AdapterProductsData(private val productList: ArrayList<com.apm.monsteraltech.data.dto.Product>): RecyclerView.Adapter<AdapterProductsData.ViewHolder>() {
     private lateinit var listener: OnItemClickedListener
@@ -25,9 +26,9 @@ class AdapterProductsData(private val productList: ArrayList<com.apm.monsteralte
         private val textPrice: TextView = itemView.findViewById(R.id.product_price)
 
         fun setData(product: Product) {
-            textProductName.text = product.productName
+            textProductName.text = product.name
             //TODO: Cargar imagenes de los productos aquí
-            textOwner.text = product.owner
+            textOwner.text = product.owner.name
             // Si hicieramos "$${product.price}" tendríamos una vulnerabilidad de inyección de código
             textPrice.text = itemView.context.getString(R.string.product_price, product.price)
         }

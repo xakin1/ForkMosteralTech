@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.Searchable
+import com.apm.monsteraltech.data.dto.Product
 import com.apm.monsteraltech.services.ProductService
 import com.apm.monsteraltech.services.ServiceFactory
 import com.apm.monsteraltech.ui.home.filters.*
@@ -44,7 +45,9 @@ class HomeFragment : Fragment(), Searchable {
 
         if (savedInstanceState != null) {
             //La no deprecada requiere API 33
+/*
             productsList = savedInstanceState.getParcelableArrayList<Product>("productList")!!
+*/
         }else{
             setProdructs(view)
         }
@@ -102,8 +105,8 @@ class HomeFragment : Fragment(), Searchable {
                 val intent = Intent(requireContext(),
                     com.apm.monsteraltech.ProductDetail::class.java)
                 //TODO: ver que información es necesario pasarle
-                intent.putExtra("Product", adapterProduct.getProduct(position)?.productName)
-                intent.putExtra("Owner", adapterProduct.getProduct(position)?.owner)
+                intent.putExtra("Product", adapterProduct.getProduct(position)?.name)
+                intent.putExtra("Owner", adapterProduct.getProduct(position)?.owner?.name)
                 intent.putExtra("Price", adapterProduct.getProduct(position)?.price)
                 Log.d("HomeFragment", "Price: " + adapterProduct.getProduct(position)?.price)
                 Log.d("HomeFragment", "Owner: " + adapterProduct.getProduct(position)?.owner)
@@ -117,8 +120,8 @@ class HomeFragment : Fragment(), Searchable {
             override fun onItemClick(position: Int) {
                 val intent = Intent(requireContext(), com.apm.monsteraltech.ProductDetail::class.java)
                 //TODO: ver que información es necesario pasarle
-                intent.putExtra("Product",adapterProduct.getProduct(position)?.productName)
-                intent.putExtra("Owner", adapterProduct.getProduct(position)?.owner)
+                intent.putExtra("Product",adapterProduct.getProduct(position)?.name)
+                intent.putExtra("Owner", adapterProduct.getProduct(position)?.owner?.name)
                 intent.putExtra("Price", adapterProduct.getProduct(position)?.price)
                 //TODO: ver si ponerle la flecha para volver atrás (la documentación no lo recomienda)
                 startActivity(intent)
@@ -128,7 +131,7 @@ class HomeFragment : Fragment(), Searchable {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putParcelableArrayList("productList", productsList)
+        // outState.putParcelableArrayList("productList", productsList)
     }
 
     private fun getFilterList(): ArrayList<Filter> {
@@ -146,32 +149,6 @@ class HomeFragment : Fragment(), Searchable {
     private fun getProductList(): ArrayList<Product?> {
         //TODO: Cargar los productos desde la base de datos o de otro recurso externo
         val productList: ArrayList<Product?> = arrayListOf()
-        val category = ArrayList<String>()
-        category.add("Coches")
-        category.add("Casas")
-        category.add("Electrodomésticos")
-        category.add("Muebles")
-        val productNames = arrayListOf(
-            "Auriculares inalámbricos",
-            "Reloj inteligente",
-            "Sofá cama",
-            "Camiseta de algodón",
-            "Bicicleta de montaña",
-            "Herramientas de jardinería",
-            "Juego de sábanas de seda",
-            "Cafetera de goteo",
-            "Barbacoa de carbón",
-            "Zapatillas deportivas"
-        )
-        // Agrega algunos productos a la lista para mockear la respuesta
-        for (i in 0 until 10) {
-            val productName = productNames[(0 until productNames.size).random()]
-            val productPrice = (1..1000).random().toDouble()
-            val product = Product(productName, "", "Owner", productPrice.toString(),
-                category[(0 until category.size).random()]
-            )
-            productList.add(product)
-        }
 
         return productList
     }
@@ -185,7 +162,7 @@ class HomeFragment : Fragment(), Searchable {
         for (item in productsList) {
             if (item != null) {
                 if (query != null) {
-                    if (item.productName.lowercase(Locale.getDefault()).contains(query.lowercase(Locale.getDefault()))) {
+                    if (item.name?.lowercase(Locale.getDefault())?.contains(query.lowercase(Locale.getDefault())) == true) {
                         filteredlist.add(item)
                     }
                 }

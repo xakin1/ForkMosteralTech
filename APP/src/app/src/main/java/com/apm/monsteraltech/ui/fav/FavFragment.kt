@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.ProductDetail
 import com.apm.monsteraltech.R
+import com.apm.monsteraltech.data.dto.Product
 import com.apm.monsteraltech.ui.profile.AdapterProductsData
-import com.apm.monsteraltech.ui.profile.Product
 
 class FavFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
@@ -32,8 +32,8 @@ class FavFragment : Fragment() {
             override fun onItemClick(position: Int) {
                 recyclerView.getChildAt(position)
                 val intent = Intent(requireContext(), ProductDetail::class.java)
-                intent.putExtra("Product", adapterProduct.getProduct(position).productName)
-                intent.putExtra("Owner", adapterProduct.getProduct(position).owner)
+                intent.putExtra("Product", adapterProduct.getProduct(position).name)
+                intent.putExtra("Owner", adapterProduct.getProduct(position).owner.name)
                 intent.putExtra("Price", adapterProduct.getProduct(position).price)
                 startActivity(intent)
             }
@@ -52,10 +52,10 @@ class FavFragment : Fragment() {
         val productList: ArrayList<Product> = arrayListOf()
 
         // Agrega algunos productos a la lista para mockear la respuesta
-        for (i in 0 until 10) {
+/*        for (i in 0 until 10) {
             val product = Product("Producto $i","", "Owner", "99.99")
             productList.add(product)
-        }
+        }*/
 
         return productList
     }

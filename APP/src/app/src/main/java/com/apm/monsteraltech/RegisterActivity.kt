@@ -22,9 +22,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.text.DateFormat
-import java.text.DateFormat.getDateTimeInstance
-import java.util.*
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -119,8 +116,6 @@ class RegisterActivity : AppCompatActivity() {
     {
         val userDto = User(uid, name, lastName, idToken, null, null,)
         userService.addUser(userDto)
-
-        Log.d("User", userDto.firebaseToken)
     }
 
     fun updateUI(user: FirebaseUser?) {

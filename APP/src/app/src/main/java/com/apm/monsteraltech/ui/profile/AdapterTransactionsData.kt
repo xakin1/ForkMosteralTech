@@ -14,18 +14,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.ProductDetail
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.UserDetail
+import com.apm.monsteraltech.data.dto.Transaction
 
-class AdapterTransactionsData(
-    private val transactionList: ArrayList<Transactions>
-): RecyclerView.Adapter<AdapterTransactionsData.ViewHolder>() {
+class AdapterTransactionData(
+    private val transactionList: ArrayList<Transaction>
+): RecyclerView.Adapter<AdapterTransactionData.ViewHolder>() {
 
 
     class ViewHolder(itemView: View, val context: Context) : RecyclerView.ViewHolder(itemView) {
 
-        fun setData(transaction: Transactions) {
-            val userSeller = transaction.seller
-            val userCustomer = transaction.customer
-            val item = transaction.item
+        fun setData(transaction: Transaction) {
+            val userSeller = transaction.seller.name
+            val userCustomer = transaction.buyer.name
+            val item = transaction.product?.name
             val date = transaction.date
             val transactionMessage = context.getString(R.string.transaction_template, userSeller, userCustomer, item, date)
 
@@ -74,8 +75,11 @@ class AdapterTransactionsData(
             //Por si hay que cambiarle el color sería así
             //spannableString.setSpan(ForegroundColorSpan(Color.RED), transactionMessage.indexOf(userSeller), transactionMessage.indexOf(userSeller) + userSeller.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             spannableString.setSpan(userCustomerLink, transactionMessage.indexOf(userCustomer), transactionMessage.indexOf(userCustomer) + userCustomer.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            spannableString.setSpan(itemLink, transactionMessage.indexOf(item), transactionMessage.indexOf(item) + item.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            spannableString.setSpan(dateLink, transactionMessage.indexOf(date), transactionMessage.indexOf(date) + date.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            item?.let { transactionMessage.indexOf(it) }?.let {
+                spannableString.setSpan(itemLink,
+                    it, transactionMessage.indexOf(item) + item.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
+            spannableString.setSpan(dateLink, transactionMessage.indexOf(date.toString()), transactionMessage.indexOf(date.toString()) + date.toString().length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
 
             transactionMessageTextView.text = spannableString

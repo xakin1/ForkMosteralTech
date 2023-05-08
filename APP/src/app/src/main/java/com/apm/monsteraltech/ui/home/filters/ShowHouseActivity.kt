@@ -4,15 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.ActionBarActivity
 import com.apm.monsteraltech.R
+import com.apm.monsteraltech.data.dto.Product
 import com.apm.monsteraltech.ui.home.AdapterProductsHome
-import com.apm.monsteraltech.ui.home.Product
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -87,7 +86,7 @@ class ShowHouseActivity : ActionBarActivity() {
                     com.apm.monsteraltech.ProductDetail::class.java
                 )
                 //TODO: ver que información es necesario pasarle
-                intent.putExtra("Product", adapterProduct.getProduct(position)?.productName)
+                intent.putExtra("Product", adapterProduct.getProduct(position)?.name)
                 startActivity(intent)
             }
         })
@@ -98,8 +97,9 @@ class ShowHouseActivity : ActionBarActivity() {
         for (item in productsList) {
             if (item != null) {
                 if (query != null) {
-                    if (item.productName.lowercase(Locale.getDefault()).contains(query.lowercase(
-                            Locale.getDefault()))) {
+                    if (item.name?.lowercase(Locale.getDefault())?.contains(query.lowercase(
+                            Locale.getDefault()))!!
+                    ) {
                         filteredlist.add(item)
                     }
                 }
@@ -115,36 +115,6 @@ class ShowHouseActivity : ActionBarActivity() {
     private fun getProductList(): ArrayList<Product?> {
         //TODO: Cargar los productos desde la base de datos o de otro recurso externo
         val productList: ArrayList<Product?> = arrayListOf()
-        val category = ArrayList<String>()
-        category.add("Audi")
-        category.add("Bentley")
-        category.add("bmw")
-        category.add("chevrolet")
-        category.add("Citroen")
-        category.add("Dacia")
-        category.add("Ford")
-        category.add("Fiat")
-        val productNames = arrayListOf(
-            "Audi e-tron GT",
-            " Audi A1",
-            "ford fiesta 2000",
-            "Citroen C4",
-            "Fiat casero",
-            "Dacia sanchez",
-            "Bentley nadie va a leer esto",
-            "bmw coche para ricos",
-            "bmw coches para todavía más ricos",
-            "Citroen run run"
-        )
-        // Agrega algunos productos a la lista para mockear la respuesta
-        for (i in 0 until 10) {
-            val productName = productNames[(0 until productNames.size).random()]
-            val productPrice = (1..1000).random().toDouble()
-            val product = Product(productName, "", "Owner", productPrice.toString(),
-                category[(0 until category.size).random()]
-            )
-            productList.add(product)
-        }
 
         return productList
     }
