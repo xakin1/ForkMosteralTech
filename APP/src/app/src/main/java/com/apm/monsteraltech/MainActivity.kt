@@ -138,7 +138,7 @@ class MainActivity : ActionBarActivity(){
                 menu?.findItem(R.id.action_search)?.isVisible = true
             }
             else -> {
-                menu?.findItem(R.id.action_search)?.isVisible = false
+                menu?.findItem(R.id.action_search)?.isVisible = false 
             }
         }
     }
