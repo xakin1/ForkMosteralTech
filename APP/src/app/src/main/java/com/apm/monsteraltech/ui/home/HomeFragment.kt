@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,14 +18,10 @@ import com.apm.monsteraltech.R
 import com.apm.monsteraltech.Searchable
 import com.apm.monsteraltech.data.dto.Product
 import com.apm.monsteraltech.data.dto.ProductResponse
-import com.apm.monsteraltech.data.dto.User
 import com.apm.monsteraltech.services.ProductService
 import com.apm.monsteraltech.services.ServiceFactory
-import com.apm.monsteraltech.services.UserService
 import com.apm.monsteraltech.ui.home.filters.*
-import com.apm.monsteraltech.ui.login.dataStore
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
@@ -103,9 +99,11 @@ class HomeFragment : Fragment(), Searchable {
         this.productsList = getProductList()
         val layoutManager = GridLayoutManager(requireContext(), 2)
         this.adapterProduct = AdapterProductsHome(productsList)
-        productRecyclerView = view.findViewById(R.id.RecyclerViewProducts)
+        productRecyclerView = view.findViewById(R.id.recycler_view_products)
         productRecyclerView.adapter = this.adapterProduct
         productRecyclerView.layoutManager = layoutManager
+        var currentPage = 1;
+        var pageSize: Number = 10;
 
         adapterProduct.setOnItemClickListener(object: AdapterProductsHome.OnItemClickedListener {
             override fun onItemClick(position: Int) {
@@ -132,6 +130,26 @@ class HomeFragment : Fragment(), Searchable {
                 intent.putExtra("Price", adapterProduct.getProduct(position).price)
                 //TODO: ver si ponerle la flecha para volver atrás (la documentación no lo recomienda)
                 startActivity(intent)
+            }
+        })
+
+        productRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(@NonNull recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                // Comprobar si el usuario ha llegado al final de la lista
+                if (!recyclerView.canScrollVertically(1)) {
+                    currentPage ++
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        // Cargar más elementos y actualizar el adaptador
+                        val newData: ProductResponse =
+                            productService.getAllProducts(currentPage, pageSize)
+                        productsList.addAll(newData.content)
+                        productRecyclerView.post {
+                            adapterProduct.notifyDataSetChanged()
+                        }
+                    }
+                }
             }
         })
     }

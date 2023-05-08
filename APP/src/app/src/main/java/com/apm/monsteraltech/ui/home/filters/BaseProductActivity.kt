@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.appcompat.widget.SearchView
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.lifecycleScope
@@ -82,23 +83,47 @@ abstract class BaseProductsActivity : ActionBarActivity() {
     suspend fun setProducts(){
         this.productsList = getProductList()
 
-        val layoutManager = GridLayoutManager(this, 2)
-        this.adapterProduct = AdapterProductsHome(productsList)
-        productRecyclerView = recyclerViewProducts
-        productRecyclerView.adapter = this.adapterProduct
-        productRecyclerView.layoutManager = layoutManager
+        withContext(Dispatchers.Main) {
+            val layoutManager = GridLayoutManager(context, 2)
+            adapterProduct = AdapterProductsHome(productsList)
+            productRecyclerView = recyclerViewProducts
+            productRecyclerView.adapter = adapterProduct
+            productRecyclerView.layoutManager = layoutManager
+            var currentPage = 1;
+            var pageSize: Number = 10;
 
-        adapterProduct.setOnItemClickListener(object: AdapterProductsHome.OnItemClickedListener {
-            override fun onItemClick(position: Int) {
-                val intent = Intent(
-                    context,
-                    com.apm.monsteraltech.ProductDetail::class.java
-                )
-                //TODO: ver que información es necesario pasarle
-                intent.putExtra("Product", adapterProduct.getProduct(position).name)
-                startActivity(intent)
-            }
-        })
+            adapterProduct.setOnItemClickListener(object: AdapterProductsHome.OnItemClickedListener {
+                override fun onItemClick(position: Int) {
+                    val intent = Intent(
+                        context,
+                        com.apm.monsteraltech.ProductDetail::class.java
+                    )
+                    //TODO: ver que información es necesario pasarle
+                    intent.putExtra("Product", adapterProduct.getProduct(position).name)
+                    startActivity(intent)
+                }
+            })
+
+            productRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(@NonNull recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+
+                    // Comprobar si el usuario ha llegado al final de la lista
+                    if (!recyclerView.canScrollVertically(1)) {
+                        currentPage ++
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            // Cargar más elementos y actualizar el adaptador
+                            val newData: ProductResponse =
+                                getSpecificProducts(currentPage, pageSize)
+                            productsList.addAll(newData.content)
+                            productRecyclerView.post {
+                                adapterProduct.notifyDataSetChanged()
+                            }
+                        }
+                    }
+                }
+            })
+        }
     }
 
     override fun performSearch(newText: String?) {
