@@ -1,5 +1,6 @@
 package com.apm.monsteraltech
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -32,6 +33,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import kotlin.properties.Delegates
 
 class CameraActivity : AppCompatActivity() {
 
@@ -44,6 +46,7 @@ class CameraActivity : AppCompatActivity() {
     private var PICK_IMAGE_MULTIPLE = 8
     private var MAX_DESCRIPTION_LENGTH = 200
     private var MAX_TITLE_LENGTH = 50
+    private val returnIntent = Intent()
 
 
     private val openGalleryForImages = registerForActivityResult(
@@ -106,6 +109,7 @@ class CameraActivity : AppCompatActivity() {
 
         imageRecyclerView = findViewById(R.id.image_recycler_view)
 
+        PICK_IMAGE_MULTIPLE = intent.getIntExtra("MAX_IMAGES", 8)
 
         // Inicializa el adaptador de imágenes
         selectedImages = ArrayList()
@@ -156,9 +160,12 @@ class CameraActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.ok_button).setOnClickListener {
-            //Pasar selectedImages al fragmento addProduct
-            val intent = Intent(this, AddFragment::class.java)
-            startActivity(intent)
+            //Devolver los valores de selectedimages a addfragment
+            Log.d("CameraActivity", "Imagenes seleccionadas: ${selectedImages.size}")
+
+            returnIntent.putExtra("selectedImages", selectedImages)
+            setResult(Activity.RESULT_OK, returnIntent)
+            finish()
         }
 
         outputDirectory = getOutputDirectory()
@@ -166,6 +173,7 @@ class CameraActivity : AppCompatActivity() {
         cameraExecutor = Executors.newSingleThreadExecutor()
 
     }
+
 
     private fun takePhoto() {
 

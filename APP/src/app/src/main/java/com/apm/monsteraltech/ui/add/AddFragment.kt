@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.InputFilter
@@ -17,6 +18,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
@@ -44,17 +46,25 @@ class AddFragment : Fragment() {
 
     private lateinit var imageGridView: GridView
     private lateinit var imageAdapter: ImageAdapter
-    private lateinit var selectedImages: ArrayList<Uri>
+    private var selectedImages: ArrayList<Uri> = ArrayList()
     private var PICK_IMAGE_MULTIPLE = 8
     private var MAX_DESCRIPTION_LENGTH = 200
     private var MAX_TITLE_LENGTH = 50
 
 
-    val startForResult = registerForActivityResult(
+    private val startForResult = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result: ActivityResult ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            Log.d("AddFragment", "onActivityResult: ${result.data?.data}")
+        if (result.resultCode == RESULT_OK) {
+            val data = result.data
+            data?.let { intentData ->
+                val images = intentData.getParcelableArrayListExtra<Uri>("selectedImages")
+                if (images != null) {
+                    selectedImages.addAll(images)
+                    imageAdapter.notifyDataSetChanged()
+                }
+            }
+            Log.d("AddFragment", "Imagenes seleccionadas: ${selectedImages.size}")
         }
     }
 
@@ -87,8 +97,20 @@ class AddFragment : Fragment() {
 
         // Controlamos el boton de agregar imagenes
         addImageButton.setOnClickListener {
-            val intent = Intent(requireContext(), CameraActivity::class.java)
-            startForResult.launch(intent)
+            if (selectedImages.size >= PICK_IMAGE_MULTIPLE) {
+                Toast.makeText(
+                    requireContext(),
+                    "No puedes tener más de 8 imágenes",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            } else {
+                val intent = Intent(requireContext(), CameraActivity::class.java)
+                intent.putExtra("MAX_IMAGES", PICK_IMAGE_MULTIPLE - selectedImages.size)
+                startForResult.launch(intent)
+            }
+
+
         }
 
 
