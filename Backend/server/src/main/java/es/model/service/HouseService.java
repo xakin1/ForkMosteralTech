@@ -2,6 +2,7 @@ package es.model.service;
 
 import es.model.service.dto.HouseDTO;
 import es.model.service.dto.HouseFullDTO;
+import es.model.service.dto.ProductFullDTO;
 import es.model.service.exceptions.NotFoundException;
 import es.model.service.exceptions.OperationNotAllowedException;
 import java.util.List;
@@ -11,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 public interface HouseService {
 
   Page<HouseDTO> getAll(Pageable pageable, List<String> filters, String search);
+  
+  Page<HouseDTO> getAllHousesWithFavourites (String userId, Pageable pageable) throws NotFoundException;
 
   HouseFullDTO get(Long id) throws NotFoundException;
 

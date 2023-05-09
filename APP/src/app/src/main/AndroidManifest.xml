@@ -25,48 +25,48 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".CameraActivity"
+            android:name=".ui.activities.camera.CameraActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.profile.DetailedProfileActivity"
+            android:name=".ui.activities.user.detailUserProfile.DetailedProfileActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".ui.activities.main.MainActivity"
             android:screenOrientation="sensor">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".ui.activities.main.MainActivity" />
         </activity>
         <activity
-            android:name=".ui.home.filters.FurnitureFilterActivity"
+            android:name=".ui.activities.main.fragments.products.categories.filters.FurnitureFilterActivity"
             android:exported="false"
-            android:parentActivityName=".ui.home.filters.ShowFurnitureActivity">
+            android:parentActivityName=".ui.activities.main.fragments.products.categories.ShowFurnitureActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.home.filters.ShowFurnitureActivity" />
+                android:value=".ui.activities.main.fragments.products.categories.ShowFurnitureActivity" />
         </activity>
         <activity
-            android:name=".ui.home.filters.ElectronicFilterActivity"
+            android:name=".ui.activities.main.fragments.products.categories.filters.ElectronicFilterActivity"
             android:exported="false"
-            android:parentActivityName=".ui.home.filters.ShowElectronicActivity">
+            android:parentActivityName=".ui.activities.main.fragments.products.categories.ShowElectronicActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.home.filters.ShowElectronicActivity" />
+                android:value=".ui.activities.main.fragments.products.categories.ShowElectronicActivity" />
         </activity>
         <activity
-            android:name=".ui.home.filters.HouseFilterActivity"
+            android:name=".ui.activities.main.fragments.products.categories.filters.HouseFilterActivity"
             android:exported="false"
-            android:parentActivityName=".ui.home.filters.ShowHouseActivity">
+            android:parentActivityName=".ui.activities.main.fragments.products.categories.ShowHouseActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.home.filters.ShowHouseActivity" />
+                android:value=".ui.activities.main.fragments.products.categories.ShowHouseActivity" />
         </activity>
         <activity
-            android:name=".ui.home.filters.CarFilterActivity"
+            android:name=".ui.activities.main.fragments.products.categories.filters.CarFilterActivity"
             android:exported="false"
-            android:parentActivityName=".ui.home.filters.ShowCarActivity">
+            android:parentActivityName=".ui.activities.main.fragments.products.categories.ShowCarActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.home.filters.ShowCarActivity" />
+                android:value=".ui.activities.main.fragments.products.categories.ShowCarActivity" />
         </activity>
 
         <meta-data
@@ -77,40 +77,40 @@
             android:value="@string/facebook_client_token" />
 
         <activity
-            android:name=".ui.home.filters.ShowCarActivity"
+            android:name=".ui.activities.main.fragments.products.categories.ShowCarActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".ui.activities.main.MainActivity"
             android:screenOrientation="sensor">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".ui.activities.main.MainActivity" />
         </activity>
         <activity
-            android:name=".ui.home.filters.ShowElectronicActivity"
+            android:name=".ui.activities.main.fragments.products.categories.ShowElectronicActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".ui.activities.main.MainActivity"
             android:screenOrientation="sensor">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".ui.activities.main.MainActivity" />
         </activity>
         <activity
-            android:name=".ui.home.filters.ShowFurnitureActivity"
+            android:name=".ui.activities.main.fragments.products.categories.ShowFurnitureActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".ui.activities.main.MainActivity"
             android:screenOrientation="sensor">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".ui.activities.main.MainActivity" />
         </activity>
         <activity
-            android:name=".ui.home.filters.ShowHouseActivity"
+            android:name=".ui.activities.main.fragments.products.categories.ShowHouseActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".ui.activities.main.MainActivity"
             android:screenOrientation="sensor">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".ui.activities.main.MainActivity" />
         </activity>
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -128,40 +128,40 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ActionBarActivity"
+            android:name=".ui.activities.actionBar.ActionBarActivity"
             android:exported="false" />
         <activity
-            android:name=".ProductDetail"
+            android:name=".ui.activities.productDetail.ProductDetail"
             android:exported="false"
             android:screenOrientation="sensor" />
         <activity
-            android:name=".SearchActivity"
+            android:name=".ui.activities.actionBar.SearchActivity"
             android:exported="false"
             android:label="@string/title_activity_search"
             android:screenOrientation="sensor"
             android:theme="@style/Theme.MonsteralTech.NoActionBar" />
         <activity
-            android:name=".FavoritesActivity"
+            android:name=".ui.activities.favorites.FavoritesActivity"
             android:exported="false"
             android:label="@string/title_activity_favorites"
             android:screenOrientation="sensor"
             android:theme="@style/Theme.MonsteralTech.NoActionBar" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".ui.activities.login.register.RegisterActivity"
             android:exported="false"
             android:screenOrientation="sensor" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activities.main.MainActivity"
             android:exported="false"
             android:screenOrientation="sensor"
             android:theme="@style/Theme.MonsteralTech.NoActionBar" />
         <activity
-            android:name=".UserDetail"
+            android:name=".ui.activities.user.userDetail.UserDetail"
             android:exported="false"
             android:screenOrientation="sensor"
             android:theme="@style/Theme.MonsteralTech.NoActionBar" />
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name=".ui.activities.login.login.LoginActivity"
             android:exported="true"
             android:screenOrientation="sensor">
             <intent-filter>

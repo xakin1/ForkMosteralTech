@@ -17,7 +17,7 @@
         <include
             android:id="@+id/actionBar"
             layout="@layout/activity_action_bar"
-            tools:context=".ActionBarActivity"
+            tools:context=".ui.activities.actionBar.ActionBarActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

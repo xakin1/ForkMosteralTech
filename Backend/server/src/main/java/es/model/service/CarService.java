@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 public interface CarService {
 
   Page<CarDTO> getAll(Pageable pageable, List<String> filters, String search);
+  
+  Page<CarDTO> getAllCarWithFavourites (String userId, Pageable pageable) throws NotFoundException;
 
   CarFullDTO get(Long id) throws NotFoundException;
 

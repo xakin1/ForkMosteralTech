@@ -61,6 +61,16 @@ public class ProductResource {
     HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, PRODUCT_RESOURCE_URL);
     return new ResponseEntity<>(page, headers, HttpStatus.OK);
   }
+  
+  @GetMapping("all/favourites/{userId}")
+  public ResponseEntity<Page<ProductDTO>> getProductsWithFavourites(
+		  @PathVariable String userId,
+      @PageableDefault(page = 0, size = 100000, sort = "id") Pageable pageable) throws NotFoundException {
+    Page<ProductDTO> page = productService.getProductsWithFavourites(userId, pageable);
+    HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, PRODUCT_RESOURCE_URL);
+    return new ResponseEntity<>(page, headers, HttpStatus.OK);
+  }
+
 
   @GetMapping("/geom/location")
   public ResponseEntity<FeatureCollectionJSON> getLocation(

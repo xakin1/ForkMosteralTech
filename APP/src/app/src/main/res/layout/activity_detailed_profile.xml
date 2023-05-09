@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profile.DetailedProfileActivity">
+    tools:context=".ui.activities.user.detailUserProfile.DetailedProfileActivity">
 
     <include
         android:id="@+id/action_bar"
         layout="@layout/activity_action_bar"
-        tools:context=".ActionBarActivity"
+        tools:context=".ui.activities.actionBar.ActionBarActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

@@ -37,6 +37,7 @@ dependencies {
   implementation "org.springframework.boot:spring-boot-starter-web"
   implementation "org.springframework.boot:spring-boot-starter-security"
   implementation "org.springframework.security:spring-security-data"
+ 
   implementation "io.jsonwebtoken:jjwt-api:0.11.5"
   implementation "io.jsonwebtoken:jjwt-impl:0.11.5"
   implementation "io.jsonwebtoken:jjwt-orgjson:0.11.5"
@@ -47,8 +48,6 @@ dependencies {
   implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
   implementation "org.thymeleaf:thymeleaf"
   implementation "org.thymeleaf:thymeleaf-spring5"
-  implementation "org.quartz-scheduler:quartz:2.3.2"
-  implementation "org.springframework.boot:spring-boot-starter-quartz"
   implementation "org.hibernate:hibernate-spatial:5.6.9.Final"
   implementation "org.geotools:gt-geojson:26.4"
   implementation "org.geotools:gt-shapefile:26.4"

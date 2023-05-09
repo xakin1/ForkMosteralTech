@@ -1,6 +1,8 @@
 package es.model.service.dto;
 
-import es.model.domain.*;
+import es.model.domain.Appliances;
+import es.model.domain.State;
+import es.model.repository.AppliancesRepository.AppliancesProjection;
 
 public class AppliancesDTO {
 
@@ -10,69 +12,82 @@ public class AppliancesDTO {
   private State state;
   private UserDTO owner;
   private Double price;
+private Boolean isFavourite;
 
   public AppliancesDTO() {}
+  
+  public AppliancesDTO(AppliancesProjection product) {
+	    this.isFavourite = product.getIsFavourite();
+	  }
 
   public AppliancesDTO(Appliances appliances) {
     this.id = appliances.getId();
     this.name = appliances.getName();
     this.description = appliances.getDescription();
     this.state = appliances.getState();
-    if (appliances.getOwner() != null) {
-      this.owner = new UserDTO(appliances.getOwner());
-    }
-    this.price = appliances.getPrice();
-  }
+	if (appliances.getOwner() != null) {
+		this.owner = new UserDTO(appliances.getOwner());
+	}
+	this.price = appliances.getPrice();
+}
 
-  public Long getId() {
-    return id;
-  }
+public Long getId() {
+	return id;
+}
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+public void setId(Long id) {
+	this.id = id;
+}
 
-  public String getName() {
-    return name;
-  }
+public String getName() {
+	return name;
+}
 
-  public void setName(String name) {
-    this.name = name;
-  }
+public void setName(String name) {
+	this.name = name;
+}
 
-  public String getDescription() {
-    return description;
-  }
+public String getDescription() {
+	return description;
+}
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
+public void setDescription(String description) {
+	this.description = description;
+}
 
-  public State getState() {
-    return state;
-  }
+public State getState() {
+	return state;
+}
 
-  public void setState(State state) {
-    this.state = state;
-  }
+public void setState(State state) {
+	this.state = state;
+}
 
-  public UserDTO getOwner() {
-    return owner;
-  }
+public UserDTO getOwner() {
+	return owner;
+}
 
-  public void setOwner(UserDTO owner) {
-    this.owner = owner;
-  }
+public void setOwner(UserDTO owner) {
+	this.owner = owner;
+}
 
-  public Double getPrice() {
-    return price;
-  }
+public Double getPrice() {
+	return price;
+}
 
-  public void setPrice(Double price) {
-    this.price = price;
-  }
+public void setPrice(Double price) {
+	this.price = price;
+}
 
-  public Appliances toAppliances() {
+public Boolean getIsFavourite() {
+	return isFavourite;
+}
+
+public void setIsFavourite(Boolean isFavourite) {
+	this.isFavourite = isFavourite;
+}
+
+public Appliances toAppliances() {
     Appliances appliances = new Appliances();
     appliances.setId(this.getId());
     appliances.setName(this.getName());

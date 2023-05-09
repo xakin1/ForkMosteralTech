@@ -8,6 +8,10 @@ android {
     namespace 'com.apm.monsteraltech'
     compileSdk 33
 
+    buildFeatures {
+        viewBinding true
+    }
+
     defaultConfig {
         applicationId "com.apm.monsteraltech"
         minSdk 29
@@ -30,9 +34,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
-    }
-    buildFeatures {
-        viewBinding true
     }
 }
 

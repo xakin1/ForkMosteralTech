@@ -1,19 +1,23 @@
 package es.model.service;
 
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import es.model.domain.House;
 import es.model.repository.HouseRepository;
+import es.model.repository.HouseRepository.HouseProjection;
 import es.model.service.dto.HouseDTO;
 import es.model.service.dto.HouseFullDTO;
 import es.model.service.exceptions.NotFoundException;
 import es.model.service.exceptions.OperationNotAllowedException;
 import es.web.rest.specifications.HouseSpecification;
-import es.web.rest.util.specification_utils.*;
-import java.util.List;
-import javax.inject.Inject;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import es.web.rest.util.specification_utils.SpecificationUtil;
 
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
@@ -31,6 +35,14 @@ public class HouseServiceImpl implements HouseService {
               SpecificationUtil.getSpecificationFromFilters(filters, false), pageable);
     }
     return page.map(HouseDTO::new);
+  }
+  
+  public Page<HouseDTO> getAllHousesWithFavourites(String userId, Pageable pageable) throws NotFoundException {
+    Page<HouseProjection> products = findProductsWithFavourites(userId,pageable);
+    if (products.isEmpty()) {
+        throw new NotFoundException("No se encontraron transacciones para el comprador con ID " + userId);
+    }
+    return products.map(HouseDTO::new);
   }
 
   public HouseFullDTO get(Long id) throws NotFoundException {
@@ -75,5 +87,10 @@ public class HouseServiceImpl implements HouseService {
     return houseRepository
         .findById(id)
         .orElseThrow(() -> new NotFoundException("Cannot find House with id " + id));
+  }
+  
+  private Page<HouseProjection> findProductsWithFavourites(String userId, Pageable pageable) throws NotFoundException {
+	    return houseRepository
+	        .findHousesWithFavouritesByUserId(userId, pageable);
   }
 }

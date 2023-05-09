@@ -5,12 +5,12 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.activities.main.MainActivity">
 
     <include
         android:id="@+id/action_bar"
         layout="@layout/activity_action_bar"
-        tools:context=".ActionBarActivity"
+        tools:context=".ui.activities.actionBar.ActionBarActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

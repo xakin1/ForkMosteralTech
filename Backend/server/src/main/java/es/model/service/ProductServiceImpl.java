@@ -1,7 +1,22 @@
 package es.model.service;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.inject.Inject;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import es.model.domain.Product;
 import es.model.repository.ProductRepository;
+import es.model.repository.ProductRepository.ProductProjection;
 import es.model.service.dto.ProductDTO;
 import es.model.service.dto.ProductFullDTO;
 import es.model.service.exceptions.NotFoundException;
@@ -37,6 +52,15 @@ public class ProductServiceImpl implements ProductService {
     }
     return page.map(ProductDTO::new);
   }
+    
+  public Page<ProductDTO> getProductsWithFavourites(String userId, Pageable pageable) throws NotFoundException {
+	    Page<ProductProjection> products = findProductsWithFavourites(userId, pageable);
+	    if (products.isEmpty()) {
+	        return new PageImpl<>(Collections.emptyList(), pageable, 0);
+	    }
+	    return products.map(ProductDTO::new);
+
+	}
 
   public FeatureCollectionJSON getLocation(Boolean properties, List<String> filters) {
     List<Product> list =
@@ -128,5 +152,10 @@ public class ProductServiceImpl implements ProductService {
 
   private Page<Product> findByUserId(String userId, Pageable pageable) throws NotFoundException {
     return productRepository.findByUserId(userId, pageable);
+  }
+  
+  private Page<ProductProjection> findProductsWithFavourites(String userId, Pageable pageable) throws NotFoundException {
+	    return productRepository
+	        .findProductsWithFavouritesByUserId(userId, pageable);
   }
 }

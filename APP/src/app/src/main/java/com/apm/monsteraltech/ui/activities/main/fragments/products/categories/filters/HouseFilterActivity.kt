@@ -1,0 +1,50 @@
+package com.apm.monsteraltech.ui.activities.main.fragments.products.categories.filters
+
+import android.content.Intent
+import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import com.apm.monsteraltech.R
+import com.apm.monsteraltech.ui.activities.actionBar.ActionBarActivity
+import com.apm.monsteraltech.ui.activities.main.fragments.products.categories.ShowHouseActivity
+import com.google.android.material.button.MaterialButtonToggleGroup
+
+class HouseFilterActivity : ActionBarActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_home_filter)
+        setToolBar()
+        var button = findViewById<Button>(R.id.applyFilter)
+        button.setOnClickListener{applyFilter()}
+    }
+
+    private fun applyFilter() {
+        val editPrecioDesde = findViewById<EditText>(R.id.edit_precio_desde)
+        val editPrecioHasta = findViewById<EditText>(R.id.edit_precio_hasta)
+        val segmentedButtonGroupOpciones = (findViewById<View>(R.id.segmentedButtonGroup_opciones) as MaterialButtonToggleGroup)
+
+        //TODO: mirar si al final usamos ubicación
+        val editTamañoDesde = findViewById<EditText>(R.id.edit_tamaño_desde)
+        val editTamañoHasta = findViewById<EditText>(R.id.edit_tamaño_hasta)
+
+        val precioDesde = editPrecioDesde.text.toString().toIntOrNull() ?: 0
+        val precioHasta = editPrecioHasta.text.toString().toIntOrNull() ?: Int.MAX_VALUE
+
+        val tamañoDesde = editTamañoDesde.text.toString().toIntOrNull() ?: 0
+        val tamañoHasta = editTamañoHasta.text.toString().toIntOrNull() ?: Int.MAX_VALUE
+
+        val estado = when (segmentedButtonGroupOpciones.checkedButtonId) {
+            R.id.btn_nuevo -> "Nuevo"
+            R.id.btn_seminuevo -> "Reacondicionado"
+            else -> null
+        }
+        val intent = Intent(this, ShowHouseActivity::class.java)
+        intent.putExtra("precio_desde", precioDesde)
+        intent.putExtra("precio_hasta", precioHasta)
+        intent.putExtra("precio_desde", tamañoDesde)
+        intent.putExtra("precio_hasta", tamañoHasta)
+        intent.putExtra("estado_coche", estado)
+        startActivity(intent)
+    }
+}

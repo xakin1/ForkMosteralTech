@@ -5,23 +5,13 @@ spring:
     database: MonsteralTech
     username: postgres
     password: admin1234.
-    url: jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.database}
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.database}?characterEncoding=UTF-8
     hikari:
       connectionTimeout: 20000
       maximumPoolSize: 5
-  quartz:
-    job-store-type: jdbc
-    properties:
-      org:
-        quartz:
-          threadPool:
-            class: org.quartz.simpl.SimpleThreadPool
-            threadCount: 10
-            threadsInheritContextClassLoaderOfInitializingThread: true
-          jobStore:
-            class: org.springframework.scheduling.quartz.LocalDataSourceJobStore
-            driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
-            useProperties: false
+    encoding: UTF8
+   
   jpa:
     defer-datasource-initialization: true
     open-in-view: false
@@ -30,6 +20,7 @@ spring:
     properties:
       hibernate.jdbc.lob.non_contextual_creation: true
       hibernate.temp.use_jdbc_metadata_defaults: true
+      hibernate.connection.charSet: utf-8
      # hibernate.dialect: org.hibernate.spatial.dialect.postgis.PostgisDialect
   # Email server configuration
   mail:
@@ -65,11 +56,6 @@ initDB:
   defaultAdminUser: admin
   defaultAdminPassword: admin
   defaultAdminEmail: admin@localhost
-security-properties:
-  security:
-    jwtSecretKey: +hxpNwFEwpJWbZQnff+k6Lm2VOExdGoPgYxZg3zeoz97iOK/lL/ZctLRXQpoElRoXR841LImSZzmf+WtGTA9QGGxpgUkKV1/fSyXVIOVqsYZpdK/oj0NKfu1Eu665Tb6jgrsYjr5/fLKB1llmjPCjBAbIu9OW8UMrJTLD/MUyy4wPWoFCEf3uBmLaVBsU751Mpw1rJc9p/1TfbUf4lli5eJhPic1mdIRrwpclQ==
-    jwtValidity: 604800
-    shortJwtValidity: 3600
 logging:
   level:
     root: INFO

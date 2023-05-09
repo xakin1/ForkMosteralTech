@@ -4,12 +4,12 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".ProductDetail">
+tools:context=".ui.activities.productDetail.ProductDetail">
 
     <include
         android:id="@+id/actionBar"
         layout="@layout/activity_action_bar"
-        tools:context=".ActionBarActivity"
+        tools:context=".ui.activities.actionBar.ActionBarActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

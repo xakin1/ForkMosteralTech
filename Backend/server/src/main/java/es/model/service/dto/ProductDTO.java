@@ -2,6 +2,7 @@ package es.model.service.dto;
 
 import es.model.domain.Product;
 import es.model.domain.State;
+import es.model.repository.ProductRepository.ProductProjection;
 
 public class ProductDTO {
 
@@ -10,15 +11,21 @@ public class ProductDTO {
   private String description;
   private Double price;
   private State state;
+  private boolean isFavourite;
 
   public ProductDTO() {}
 
+  public ProductDTO(ProductProjection product) {
+    this(product.getProduct());
+    this.isFavourite = product.getIsFavourite();
+  }
+  
   public ProductDTO(Product product) {
-    this.id = product.getId();
-    this.name = product.getName();
-    this.description = product.getDescription();
-    this.state = product.getState();
-    this.price = product.getPrice();
+	    this.id = product.getId();
+	    this.name = product.getName();
+	    this.description = product.getDescription();
+	    this.state = product.getState();
+	    this.price = product.getPrice();
   }
 
   public Long getId() {
@@ -59,6 +66,14 @@ public class ProductDTO {
 
   public void setPrice(Double price) {
     this.price = price;
+  }
+ 
+  public boolean isFavourite() {
+	return isFavourite;
+  }
+
+  public void setFavourite(boolean isFavourite) {
+	this.isFavourite = isFavourite;
   }
 
   public Product toProduct() {

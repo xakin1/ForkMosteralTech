@@ -3,6 +3,7 @@ package es.web.rest;
 import es.model.service.HouseService;
 import es.model.service.dto.HouseDTO;
 import es.model.service.dto.HouseFullDTO;
+import es.model.service.dto.ProductDTO;
 import es.model.service.exceptions.NotFoundException;
 import es.model.service.exceptions.OperationNotAllowedException;
 import es.web.rest.custom.ValidationErrorUtils;
@@ -50,6 +51,15 @@ public class HouseResource {
       @RequestParam(value = "filters", required = false) List<String> filters,
       @RequestParam(value = "search", required = false) String search) {
     Page<HouseDTO> page = houseService.getAll(pageable, filters, search);
+    HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, HOUSE_RESOURCE_URL);
+    return new ResponseEntity<>(page, headers, HttpStatus.OK);
+  }
+  
+  @GetMapping("all/favourites/{userId}")
+  public ResponseEntity<Page<HouseDTO>> getProductsWithFavourites(
+		  @PathVariable String userId,
+      @PageableDefault(page = 0, size = 100000, sort = "id") Pageable pageable) throws NotFoundException {
+    Page<HouseDTO> page = houseService.getAllHousesWithFavourites(userId, pageable);
     HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, HOUSE_RESOURCE_URL);
     return new ResponseEntity<>(page, headers, HttpStatus.OK);
   }

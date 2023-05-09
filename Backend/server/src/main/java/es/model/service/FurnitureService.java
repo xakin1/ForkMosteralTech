@@ -2,6 +2,7 @@ package es.model.service;
 
 import es.model.service.dto.FurnitureDTO;
 import es.model.service.dto.FurnitureFullDTO;
+import es.model.service.dto.HouseDTO;
 import es.model.service.exceptions.NotFoundException;
 import es.model.service.exceptions.OperationNotAllowedException;
 import java.util.List;
@@ -11,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 public interface FurnitureService {
 
   Page<FurnitureDTO> getAll(Pageable pageable, List<String> filters, String search);
+  
+  Page<FurnitureDTO> getAllFurnituresWithFavourites (String userId, Pageable pageable) throws NotFoundException;
 
   FurnitureFullDTO get(Long id) throws NotFoundException;
 

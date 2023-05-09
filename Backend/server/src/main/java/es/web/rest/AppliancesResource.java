@@ -3,6 +3,7 @@ package es.web.rest;
 import es.model.service.AppliancesService;
 import es.model.service.dto.AppliancesDTO;
 import es.model.service.dto.AppliancesFullDTO;
+import es.model.service.dto.CarDTO;
 import es.model.service.exceptions.NotFoundException;
 import es.model.service.exceptions.OperationNotAllowedException;
 import es.web.rest.custom.ValidationErrorUtils;
@@ -52,6 +53,15 @@ public class AppliancesResource {
     Page<AppliancesDTO> page = appliancesService.getAll(pageable, filters, search);
     HttpHeaders headers =
         PaginationUtil.generatePaginationHttpHeaders(page, APPLIANCES_RESOURCE_URL);
+    return new ResponseEntity<>(page, headers, HttpStatus.OK);
+  }
+  
+  @GetMapping("all/favourites/{userId}")
+  public ResponseEntity<Page<AppliancesDTO>> getProductsWithFavourites(
+		  @PathVariable String userId,
+      @PageableDefault(page = 0, size = 100000, sort = "id") Pageable pageable) throws NotFoundException {
+    Page<AppliancesDTO> page = appliancesService.getAllAppliancesWithFavourites(userId, pageable);
+    HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, APPLIANCES_RESOURCE_URL);
     return new ResponseEntity<>(page, headers, HttpStatus.OK);
   }
 

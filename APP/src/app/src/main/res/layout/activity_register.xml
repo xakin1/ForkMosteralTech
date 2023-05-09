@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    tools:context=".ui.activities.login.register.RegisterActivity">
 <!--    TODO: Hacer que el tamaño de los layout no este hardcodeado-->
 
 

@@ -24,6 +24,6 @@ class Transaction(
     val product: Product,
     val seller: User,
     val buyer: User,
-    val description: String,
+    val description: String?,
     val name: String
 )

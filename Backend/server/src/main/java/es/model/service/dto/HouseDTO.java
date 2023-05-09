@@ -1,6 +1,8 @@
 package es.model.service.dto;
 
-import es.model.domain.*;
+import es.model.domain.House;
+import es.model.domain.State;
+import es.model.repository.HouseRepository.HouseProjection;
 
 public class HouseDTO {
 
@@ -10,8 +12,13 @@ public class HouseDTO {
   private State state;
   private UserDTO owner;
   private Double price;
-
+  private Boolean isFavourite;
   public HouseDTO() {}
+  
+  public HouseDTO(HouseProjection product) {
+    this(product.getProduct());
+    this.isFavourite = product.getIsFavourite();
+  }
 
   public HouseDTO(House house) {
     this.id = house.getId();
@@ -71,8 +78,18 @@ public class HouseDTO {
   public void setPrice(Double price) {
     this.price = price;
   }
+  
+  
 
-  public House toHouse() {
+public Boolean getIsFavourite() {
+	return isFavourite;
+}
+
+public void setIsFavourite(Boolean isFavourite) {
+	this.isFavourite = isFavourite;
+}
+
+public House toHouse() {
     House house = new House();
     house.setId(this.getId());
     house.setName(this.getName());

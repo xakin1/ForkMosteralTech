@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view_product"
+    android:layout_width="match_parent"
+    android:layout_height="234dp"
+    android:layout_margin="16dp"
+    app:cardBackgroundColor="#fff"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    android:clickable="true"
+    app:cardUseCompatPadding="true">
+
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:rowCount="2"
+        android:columnCount="6"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/product_image_imageview"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_rowSpan="2"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background" />
+
+        <RelativeLayout
+            android:id="@+id/name_price_layout"
+            android:layout_row="0"
+            android:layout_marginLeft="10dp"
+            android:layout_width="170dp"
+            android:layout_column="1"
+            android:layout_columnSpan="1"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/product_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Product Name"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/product_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product_name"
+                android:layout_marginTop="8dp"
+                android:text="Price: 9.99 €"
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/product_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product_price"
+                android:layout_marginTop="8dp"
+                android:text="Status: In stock"
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/product_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product_status"
+                android:layout_marginTop="8dp"
+                android:text="Product description"
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/product_like_button"
+            android:layout_row="0"
+            android:layout_column="3"
+            android:layout_rowSpan="1"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="-20dp"
+            android:layout_marginLeft="-22dp"
+            android:layout_marginBottom="12dp"
+            app:srcCompat="@drawable/like_empty" />
+
+    </GridLayout>
+
+</androidx.cardview.widget.CardView>

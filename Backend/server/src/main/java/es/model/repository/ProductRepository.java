@@ -19,4 +19,12 @@ public interface ProductRepository
 
   @Query("SELECT t FROM t_product t WHERE t.owner.id = :userId")
   Page<Product> findByUserId(@Param("userId") String userId, Pageable pageable);
+  
+  @Query("SELECT p as product, CASE WHEN f.id IS NOT NULL THEN TRUE ELSE FALSE END AS isFavourite FROM t_product p LEFT JOIN t_favourites f ON f.product.id = p.id AND f.appuser.id = :userId")
+
+  Page<ProductProjection> findProductsWithFavouritesByUserId(@Param("userId") String userId, Pageable pageable);
+  public interface ProductProjection {
+	    Product getProduct();
+	    Boolean getIsFavourite();
+	}
 }
