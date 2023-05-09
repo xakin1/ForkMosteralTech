@@ -18,25 +18,11 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.Preview
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.camera.view.PreviewView
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+
 import androidx.fragment.app.Fragment
 import com.apm.monsteraltech.CameraActivity
 import com.apm.monsteraltech.R
-import com.apm.monsteraltech.RegisterActivity
 import com.bumptech.glide.Glide
-import java.io.File
-import java.text.SimpleDateFormat
-import java.util.*
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 import kotlin.collections.ArrayList
 
 //TODO: Limitar bien las fotos y los caracteres de la descripción y titulo.
