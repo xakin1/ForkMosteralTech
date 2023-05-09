@@ -10,7 +10,6 @@ import es.web.rest.custom.ValidationErrorUtils;
 import es.web.rest.util.HeaderUtil;
 import es.web.rest.util.PaginationUtil;
 import es.web.rest.util.specification_utils.*;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -74,7 +73,7 @@ public class UserResource {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
   }
-  
+
   @GetMapping("/firebaseToken{firebase_token}")
   public ResponseEntity<UserFullDTO> getToken(@RequestParam String firebase_token) {
     try {
@@ -110,12 +109,12 @@ public class UserResource {
       return ResponseEntity.badRequest().body(ValidationErrorUtils.getValidationErrors(errors));
     }
     try {
-  	  if (user.getExpirationDatefirebaseToken() == null) {
-  		user.setExpirationDatefirebaseToken(null);
-  	  }
-  	  if( user.getLocation() == null) {
-  		  user.setLocation(null);
-  	  }
+      if (user.getExpirationDatefirebaseToken() == null) {
+        user.setExpirationDatefirebaseToken(null);
+      }
+      if (user.getLocation() == null) {
+        user.setLocation(null);
+      }
       UserFullDTO result = userService.update(id, user);
       return ResponseEntity.ok().body(result);
     } catch (OperationNotAllowedException e) {
@@ -124,10 +123,11 @@ public class UserResource {
           .body(null);
     }
   }
-  
+
   @PutMapping("/{id}/firebaseToken")
   public ResponseEntity<?> updateFirebaseToken(
-      @PathVariable String id, @Valid @RequestBody String firebsaToken, Errors errors) throws NotFoundException {
+      @PathVariable String id, @Valid @RequestBody String firebsaToken, Errors errors)
+      throws NotFoundException {
     if (errors.hasErrors()) {
       return ResponseEntity.badRequest().body(ValidationErrorUtils.getValidationErrors(errors));
     }

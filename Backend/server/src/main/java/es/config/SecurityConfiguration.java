@@ -1,5 +1,8 @@
 package es.config;
 
+import es.security.Http401UnauthorizedEntryPoint;
+import es.security.jwt.JWTConfigurer;
+import es.security.jwt.TokenProvider;
 import javax.inject.Inject;
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.context.annotation.Bean;
@@ -17,10 +20,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.data.repository.query.SecurityEvaluationContextExtension;
-
-import es.security.Http401UnauthorizedEntryPoint;
-import es.security.jwt.JWTConfigurer;
-import es.security.jwt.TokenProvider;
 
 @Configuration
 @EnableWebSecurity

@@ -1,11 +1,10 @@
 package es.component.quartz_jobs;
 
+import es.model.service.UMUserService;
 import javax.inject.Inject;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-
-import es.model.service.UMUserService;
 
 public class RemoveOldPersistentTokensJob implements Job {
 

@@ -1,9 +1,7 @@
 package es.web.rest.custom;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import es.model.util.jackson.CustomGeometrySerializer;
-
 import java.lang.reflect.*;
 import java.util.HashMap;
 import java.util.Map;

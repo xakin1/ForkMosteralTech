@@ -1,17 +1,5 @@
 package es.model.service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.inject.Inject;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import es.model.domain.Product;
 import es.model.repository.ProductRepository;
 import es.model.service.dto.ProductDTO;
@@ -22,6 +10,15 @@ import es.web.rest.custom.FeatureCollectionJSON;
 import es.web.rest.custom.FeatureJSON;
 import es.web.rest.specifications.ProductSpecification;
 import es.web.rest.util.specification_utils.SpecificationUtil;
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.inject.Inject;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
@@ -69,13 +66,14 @@ public class ProductServiceImpl implements ProductService {
     Product product = findById(id);
     return new ProductFullDTO(product);
   }
-  
-  
-  public Page<ProductFullDTO> getByUserId(String userId, int page, int size) throws NotFoundException {
-	Pageable pageable = PageRequest.of(page, size);
-    Page<Product> products = findByUserId(userId,pageable);
+
+  public Page<ProductFullDTO> getByUserId(String userId, int page, int size)
+      throws NotFoundException {
+    Pageable pageable = PageRequest.of(page, size);
+    Page<Product> products = findByUserId(userId, pageable);
     if (products.isEmpty()) {
-        throw new NotFoundException("No se encontraron transacciones para el comprador con ID " + userId);
+      throw new NotFoundException(
+          "No se encontraron transacciones para el comprador con ID " + userId);
     }
     return products.map(ProductFullDTO::new);
   }
@@ -127,9 +125,8 @@ public class ProductServiceImpl implements ProductService {
         .findById(id)
         .orElseThrow(() -> new NotFoundException("Cannot find Product with id " + id));
   }
-  
+
   private Page<Product> findByUserId(String userId, Pageable pageable) throws NotFoundException {
-	    return productRepository
-	        .findByUserId(userId, pageable);
+    return productRepository.findByUserId(userId, pageable);
   }
 }

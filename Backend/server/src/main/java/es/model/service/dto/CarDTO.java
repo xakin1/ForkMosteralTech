@@ -10,7 +10,7 @@ public class CarDTO {
   private State state;
   private UserDTO owner;
   private Double price;
-  
+
   public CarDTO() {}
 
   public CarDTO(Car car) {

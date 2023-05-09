@@ -1,11 +1,10 @@
 package es.web.rest.custom.user_management.vm;
 
+import es.model.domain.user_management.UMUser;
+import es.model.service.dto.UMUserJSON;
 import java.time.ZonedDateTime;
 import java.util.Set;
 import javax.validation.constraints.Size;
-
-import es.model.domain.user_management.UMUser;
-import es.model.service.dto.UMUserJSON;
 
 /** View Model extending the UserDTO, which is meant to be used in the user management UI. */
 public class UserJSON extends UMUserJSON {

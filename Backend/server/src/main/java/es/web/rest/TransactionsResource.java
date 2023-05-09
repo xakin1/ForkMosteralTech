@@ -1,16 +1,21 @@
 package es.web.rest;
 
+import es.model.service.TransactionsService;
+import es.model.service.dto.TransactionsDTO;
+import es.model.service.dto.TransactionsFullDTO;
+import es.model.service.exceptions.NotFoundException;
+import es.model.service.exceptions.OperationNotAllowedException;
+import es.web.rest.custom.ValidationErrorUtils;
+import es.web.rest.util.HeaderUtil;
+import es.web.rest.util.PaginationUtil;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
@@ -26,16 +31,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import es.model.domain.Transactions;
-import es.model.service.TransactionsService;
-import es.model.service.dto.TransactionsDTO;
-import es.model.service.dto.TransactionsFullDTO;
-import es.model.service.exceptions.NotFoundException;
-import es.model.service.exceptions.OperationNotAllowedException;
-import es.web.rest.custom.ValidationErrorUtils;
-import es.web.rest.util.HeaderUtil;
-import es.web.rest.util.PaginationUtil;
 
 @RestController
 @RequestMapping(TransactionsResource.TRANSACTIONS_RESOURCE_URL)
@@ -66,69 +61,73 @@ public class TransactionsResource {
         PaginationUtil.generatePaginationHttpHeaders(page, TRANSACTIONS_RESOURCE_URL);
     return new ResponseEntity<>(page, headers, HttpStatus.OK);
   }
-  
+
   @GetMapping("/sales")
   public ResponseEntity<Page<TransactionsFullDTO>> getAllSalesTransactions(
-		    @RequestParam String userId,
-	        @RequestParam(defaultValue = "0") int page,
-	        @RequestParam(defaultValue = "10") int size) {
-      try {
-          Page<TransactionsFullDTO> transactions = transactionsService.getTransactionsBySeller(userId, page, size);
-          return new ResponseEntity<>(transactions, HttpStatus.OK);
-      } catch (NotFoundException e) {
-          return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-      }
+      @RequestParam String userId,
+      @RequestParam(defaultValue = "0") int page,
+      @RequestParam(defaultValue = "10") int size) {
+    try {
+      Page<TransactionsFullDTO> transactions =
+          transactionsService.getTransactionsBySeller(userId, page, size);
+      return new ResponseEntity<>(transactions, HttpStatus.OK);
+    } catch (NotFoundException e) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
   }
-  
+
   @GetMapping("/all/{userId}")
   public ResponseEntity<Page<TransactionsFullDTO>> getAllTransactions(
-		    @PathVariable String userId,
-	        @RequestParam(defaultValue = "0") int page,
-	        @RequestParam(defaultValue = "10") int size) {
-      try {
-          Page<TransactionsFullDTO> transactions = transactionsService.getTransactionsBySeller(userId, page, size);
-          return new ResponseEntity<>(transactions, HttpStatus.OK);
-      } catch (NotFoundException e) {
-          return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-      }
+      @PathVariable String userId,
+      @RequestParam(defaultValue = "0") int page,
+      @RequestParam(defaultValue = "10") int size) {
+    try {
+      Page<TransactionsFullDTO> transactions =
+          transactionsService.getTransactionsBySeller(userId, page, size);
+      return new ResponseEntity<>(transactions, HttpStatus.OK);
+    } catch (NotFoundException e) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
   }
-  
+
   @GetMapping("/purchases")
   public ResponseEntity<Page<TransactionsFullDTO>> getAllPurchasesTransactions(
-		    @RequestParam String userId,
-	        @RequestParam(defaultValue = "0") int page,
-	        @RequestParam(defaultValue = "10") int size) {
-      try {
-          Page<TransactionsFullDTO> transactions = transactionsService.getTransactionsByBuyer(userId, page, size);
-          return new ResponseEntity<>(transactions, HttpStatus.OK);
-      } catch (NotFoundException e) {
-          return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-      }
+      @RequestParam String userId,
+      @RequestParam(defaultValue = "0") int page,
+      @RequestParam(defaultValue = "10") int size) {
+    try {
+      Page<TransactionsFullDTO> transactions =
+          transactionsService.getTransactionsByBuyer(userId, page, size);
+      return new ResponseEntity<>(transactions, HttpStatus.OK);
+    } catch (NotFoundException e) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
   }
-  
+
   @GetMapping("/sales/{userId}")
   public ResponseEntity<Long> countAllSalesTransactions(@PathVariable String userId) {
-      Long transactions = transactionsService.countTransactionsBySeller(userId);
-      return new ResponseEntity<>(transactions, HttpStatus.OK);
+    Long transactions = transactionsService.countTransactionsBySeller(userId);
+    return new ResponseEntity<>(transactions, HttpStatus.OK);
   }
-  
+
   @GetMapping("/purchases/{userId}")
   public ResponseEntity<Long> countAllPurchasesTransactions(@PathVariable String userId) {
-      Long transactions = transactionsService.countTransactionsByBuyer(userId);
-      return new ResponseEntity<>(transactions, HttpStatus.OK);
+    Long transactions = transactionsService.countTransactionsByBuyer(userId);
+    return new ResponseEntity<>(transactions, HttpStatus.OK);
   }
-  
+
   @GetMapping("/product/{productId}/transactions")
   public ResponseEntity<Page<TransactionsFullDTO>> getAllProductTransactions(
-	        @PathVariable Long productId,
-	        @RequestParam(defaultValue = "0") int page,
-	        @RequestParam(defaultValue = "10") int size) {
-      try {
-          Page<TransactionsFullDTO> transactions = transactionsService.getTransactionsByProduct(productId, page, size);
-          return new ResponseEntity<>(transactions, HttpStatus.OK);
-      } catch (NotFoundException e) {
-          return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-      }
+      @PathVariable Long productId,
+      @RequestParam(defaultValue = "0") int page,
+      @RequestParam(defaultValue = "10") int size) {
+    try {
+      Page<TransactionsFullDTO> transactions =
+          transactionsService.getTransactionsByProduct(productId, page, size);
+      return new ResponseEntity<>(transactions, HttpStatus.OK);
+    } catch (NotFoundException e) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
   }
 
   @GetMapping("/{id}")

@@ -5,7 +5,6 @@ import es.model.service.dto.UserFullDTO;
 import es.model.service.exceptions.NotFoundException;
 import es.model.service.exceptions.OperationNotAllowedException;
 import es.web.rest.custom.FeatureCollectionJSON;
-
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +16,7 @@ public interface UserService {
   FeatureCollectionJSON getLocation(Boolean properties, List<String> filters);
 
   UserFullDTO get(String id) throws NotFoundException;
-  
+
   UserFullDTO getFirebaseToken(String token) throws NotFoundException;
 
   UserFullDTO create(UserFullDTO user) throws OperationNotAllowedException;

@@ -1,5 +1,6 @@
 package es.model.service;
 
+import es.model.domain.user_management.UMUser;
 import java.util.Locale;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -17,8 +18,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
-
-import es.model.domain.user_management.UMUser;
 
 @Service
 public class MailService {

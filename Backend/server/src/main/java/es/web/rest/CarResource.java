@@ -9,7 +9,6 @@ import es.web.rest.custom.ValidationErrorUtils;
 import es.web.rest.util.HeaderUtil;
 import es.web.rest.util.PaginationUtil;
 import es.web.rest.util.specification_utils.*;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;

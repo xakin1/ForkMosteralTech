@@ -53,15 +53,15 @@ public class ProductDTO {
     this.state = state;
   }
 
-   public Double getPrice() {
-	return price;
+  public Double getPrice() {
+    return price;
   }
 
   public void setPrice(Double price) {
-	this.price = price;
+    this.price = price;
   }
 
-public Product toProduct() {
+  public Product toProduct() {
     Product product = new Product();
     product.setId(this.getId());
     product.setName(this.getName());

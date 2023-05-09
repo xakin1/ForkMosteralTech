@@ -3,7 +3,6 @@ package es.model.service.dto;
 import es.config.Constants;
 import es.model.domain.user_management.Authority;
 import es.model.domain.user_management.UMUser;
-
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.validation.constraints.Pattern;

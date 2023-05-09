@@ -1,11 +1,10 @@
 package es.config;
 
+import es.model.util.EnumAwareConvertUtilsBean;
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.ConvertUtilsBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import es.model.util.EnumAwareConvertUtilsBean;
 
 @Configuration
 public class ConvertersConfiguration {

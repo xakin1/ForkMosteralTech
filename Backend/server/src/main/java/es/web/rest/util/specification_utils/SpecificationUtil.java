@@ -1,12 +1,11 @@
 package es.web.rest.util.specification_utils;
 
+import es.web.rest.util.DateTimeValidator;
+import es.web.rest.util.DateTimeValidatorImpl;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
-
-import es.web.rest.util.DateTimeValidator;
-import es.web.rest.util.DateTimeValidatorImpl;
 
 public class SpecificationUtil {
 

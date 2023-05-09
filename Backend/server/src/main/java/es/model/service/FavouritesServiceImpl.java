@@ -8,7 +8,6 @@ import es.model.service.exceptions.NotFoundException;
 import es.model.service.exceptions.OperationNotAllowedException;
 import es.web.rest.specifications.FavouritesSpecification;
 import es.web.rest.util.specification_utils.*;
-
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.data.domain.Page;

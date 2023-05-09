@@ -1,5 +1,6 @@
 package com.apm.monsteraltech.ui.add
 
+import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.content.Context
@@ -14,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
@@ -48,6 +50,14 @@ class AddFragment : Fragment() {
     private var MAX_TITLE_LENGTH = 50
 
 
+    val startForResult = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result: ActivityResult ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            Log.d("AddFragment", "onActivityResult: ${result.data?.data}")
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -78,7 +88,7 @@ class AddFragment : Fragment() {
         // Controlamos el boton de agregar imagenes
         addImageButton.setOnClickListener {
             val intent = Intent(requireContext(), CameraActivity::class.java)
-            startActivity(intent)
+            startForResult.launch(intent)
         }
 
 

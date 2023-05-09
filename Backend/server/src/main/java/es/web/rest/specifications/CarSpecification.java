@@ -2,7 +2,6 @@ package es.web.rest.specifications;
 
 import es.model.domain.Car;
 import es.web.rest.util.specification_utils.SpecificationUtil;
-
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.*;

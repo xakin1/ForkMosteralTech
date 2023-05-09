@@ -10,7 +10,6 @@ import es.web.rest.custom.FeatureCollectionJSON;
 import es.web.rest.custom.FeatureJSON;
 import es.web.rest.specifications.UserSpecification;
 import es.web.rest.util.specification_utils.*;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,8 +51,9 @@ public class UserServiceImpl implements UserService {
                   } else {
                     geoJSON.setProperties(new HashMap());
                   }
-//                  geoJSON.setId(e.getId());
-//                  geoJSON.getProperties().put("displayString", "" + e.getId() + "");
+                  //                  geoJSON.setId(e.getId());
+                  //                  geoJSON.getProperties().put("displayString", "" + e.getId() +
+                  // "");
                   geoJSON.setGeometry(e.getLocation());
                   return geoJSON;
                 })
@@ -90,8 +90,6 @@ public class UserServiceImpl implements UserService {
     AppUser userUpdated = userRepository.save(userToUpdate);
     return new UserFullDTO(userUpdated);
   }
-  
-  
 
   @Transactional(readOnly = false, rollbackFor = Exception.class)
   public void delete(Long id) {
@@ -107,13 +105,13 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserFullDTO getFirebaseToken(String token) throws NotFoundException {
-	    AppUser user = findByFirebaseToken(token);
-	    return new UserFullDTO(user);
+    AppUser user = findByFirebaseToken(token);
+    return new UserFullDTO(user);
   }
 
   private AppUser findByFirebaseToken(String token) throws NotFoundException {
     return userRepository
-            .findByFirebaseToken(token)
-            .orElseThrow(() -> new NotFoundException("Cannot find User with id " + token));
+        .findByFirebaseToken(token)
+        .orElseThrow(() -> new NotFoundException("Cannot find User with id " + token));
   }
 }

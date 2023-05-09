@@ -2,11 +2,9 @@ package es.model.service.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import es.model.domain.*;
 import es.model.util.jackson.CustomGeometryDeserializer;
 import es.model.util.jackson.CustomGeometrySerializer;
-
 import org.locationtech.jts.geom.Point;
 
 public class ProductFullDTO {
@@ -85,14 +83,14 @@ public class ProductFullDTO {
   }
 
   public Double getPrice() {
-	return price;
- }
+    return price;
+  }
 
- public void setPrice(Double price) {
-	this.price = price;
- }
+  public void setPrice(Double price) {
+    this.price = price;
+  }
 
- public Product toProduct() {
+  public Product toProduct() {
     Product product = new Product();
     product.setId(this.getId());
     product.setName(this.getName());

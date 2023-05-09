@@ -63,18 +63,16 @@ public class FurnitureDTO {
   public void setOwner(UserDTO owner) {
     this.owner = owner;
   }
-  
-  
 
   public Double getPrice() {
-	return price;
-  } 
-
-  public void setPrice(Double price) {
-	this.price = price;
+    return price;
   }
 
-public Furniture toFurniture() {
+  public void setPrice(Double price) {
+    this.price = price;
+  }
+
+  public Furniture toFurniture() {
     Furniture furniture = new Furniture();
     furniture.setId(this.getId());
     furniture.setName(this.getName());

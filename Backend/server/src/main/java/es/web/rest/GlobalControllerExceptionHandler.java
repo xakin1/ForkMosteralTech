@@ -2,7 +2,6 @@ package es.web.rest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import es.model.service.exceptions.AppException;
 import es.model.service.exceptions.AppRuntimeException;
 import es.model.service.exceptions.account.CredentialsAreNotValidException;

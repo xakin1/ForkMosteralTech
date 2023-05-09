@@ -65,14 +65,14 @@ public class AppliancesDTO {
   }
 
   public Double getPrice() {
-	return price;
+    return price;
   }
 
   public void setPrice(Double price) {
-	this.price = price;
+    this.price = price;
   }
 
-public Appliances toAppliances() {
+  public Appliances toAppliances() {
     Appliances appliances = new Appliances();
     appliances.setId(this.getId());
     appliances.setName(this.getName());

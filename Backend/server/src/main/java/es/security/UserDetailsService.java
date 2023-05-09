@@ -1,5 +1,7 @@
 package es.security;
 
+import es.model.domain.user_management.UMUser;
+import es.model.repository.user_management.UMUserRepository;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -13,9 +15,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import es.model.domain.user_management.UMUser;
-import es.model.repository.user_management.UMUserRepository;
 
 /** Authenticate a user from the database. */
 @Component("userDetailsService")

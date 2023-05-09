@@ -1,9 +1,8 @@
 package es.model.service.dto;
 
-import java.time.LocalDateTime;
-
 import es.model.domain.State;
 import es.model.domain.Transactions;
+import java.time.LocalDateTime;
 
 public class TransactionsDTO {
 
@@ -16,7 +15,6 @@ public class TransactionsDTO {
   private State state;
   private String name;
   private String description;
-
 
   public TransactionsDTO() {}
 
@@ -35,7 +33,7 @@ public class TransactionsDTO {
       this.buyer = new UserDTO(transactions.getBuyer());
     }
     if (transactions.getSeller() != null) {
-        this.seller = new UserDTO(transactions.getSeller());
+      this.seller = new UserDTO(transactions.getSeller());
     }
   }
 
@@ -61,57 +59,57 @@ public class TransactionsDTO {
 
   public void setProduct(ProductDTO product) {
     this.product = product;
-  } 
+  }
 
   public UserDTO getSeller() {
-	return seller;
+    return seller;
   }
 
   public void setSeller(UserDTO seller) {
-	this.seller = seller;
+    this.seller = seller;
   }
 
   public UserDTO getBuyer() {
-	return buyer;
+    return buyer;
   }
 
   public void setBuyer(UserDTO buyer) {
-	this.buyer = buyer;
+    this.buyer = buyer;
   }
-  
+
   public Double getPrice() {
-	return price;
+    return price;
   }
 
   public void setPrice(Double price) {
-	this.price = price;
+    this.price = price;
   }
 
   public State getState() {
-	return state;
+    return state;
   }
 
   public void setState(State state) {
-	this.state = state;
+    this.state = state;
   }
 
   public String getName() {
-	return name;
+    return name;
   }
 
   public void setName(String name) {
-	this.name = name;
+    this.name = name;
   }
 
   public String getDescription() {
-	return description;
+    return description;
   }
 
   public void setDescription(String description) {
-	this.description = description;
+    this.description = description;
   }
 
-public Transactions toTransactions() {
+  public Transactions toTransactions() {
     Transactions transactions = new Transactions();
     transactions.setId(this.getId());
     transactions.setDate(this.getDate());
@@ -119,16 +117,16 @@ public Transactions toTransactions() {
     transactions.setState(this.getState());
     transactions.setDescription(this.getDescription());
     transactions.setName(this.getName());
-    
+
     if (this.getProduct() != null) {
       transactions.setProduct(this.getProduct().toProduct());
     }
     if (this.getBuyer() != null) {
       transactions.setBuyer(this.getBuyer().toUser());
     }
-    
+
     if (this.getSeller() != null) {
-        transactions.setSeller(this.getSeller().toUser());
+      transactions.setSeller(this.getSeller().toUser());
     }
     return transactions;
   }

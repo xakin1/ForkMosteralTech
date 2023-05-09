@@ -1,13 +1,12 @@
 package es.model.service;
 
-import java.util.List;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
 import es.model.service.dto.FurnitureDTO;
 import es.model.service.dto.FurnitureFullDTO;
 import es.model.service.exceptions.NotFoundException;
 import es.model.service.exceptions.OperationNotAllowedException;
+import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface FurnitureService {
 

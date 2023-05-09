@@ -2,7 +2,6 @@ package es.web.rest.specifications;
 
 import es.model.domain.user_management.UMUser;
 import es.web.rest.util.specification_utils.SpecificationUtil;
-
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;

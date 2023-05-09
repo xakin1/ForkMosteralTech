@@ -5,7 +5,6 @@ import es.model.repository.user_management.UMUserRepository;
 import es.model.service.UMUserService;
 import es.model.service.exceptions.account.AccountException;
 import es.security.AuthoritiesConstants;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;

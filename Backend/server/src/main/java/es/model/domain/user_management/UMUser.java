@@ -1,10 +1,8 @@
 package es.model.domain.user_management;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import es.config.Constants;
 import es.model.domain.AbstractAuditingEntity;
-
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.HashSet;

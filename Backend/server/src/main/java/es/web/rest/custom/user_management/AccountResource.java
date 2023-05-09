@@ -1,58 +1,58 @@
-//package es.web.rest.custom.user_management;
+// package es.web.rest.custom.user_management;
 //
-//import es.config.Properties;
-//import es.model.domain.user_management.UMUser;
-//import es.model.repository.user_management.PersistentTokenRepository;
-//import es.model.repository.user_management.UMUserRepository;
-//import es.model.service.MailService;
-//import es.model.service.UMUserService;
-//import es.model.service.dto.UMMailJSON;
-//import es.model.service.dto.UMPasswordJSON;
-//import es.model.service.dto.UMUserJSON;
-//import es.model.service.exceptions.AppRuntimeException;
-//import es.model.service.exceptions.NotFoundException;
-//import es.model.service.exceptions.account.AccountEmailInUseException;
-//import es.model.service.exceptions.account.AccountEmailNotRegisteredException;
-//import es.model.service.exceptions.account.AccountException;
-//import es.model.service.exceptions.account.AccountIncorrectPasswordException;
-//import es.model.service.exceptions.account.AccountPasswordResetKeyExpiredException;
-//import es.model.service.exceptions.account.CredentialsAreNotValidException;
-//import es.security.SecurityUtils;
-//import es.security.jwt.JWTConfigurer;
-//import es.security.jwt.JWTToken;
-//import es.security.jwt.TokenProvider;
-//import es.web.rest.custom.user_management.vm.KeyAndPasswordJSON;
-//import es.web.rest.custom.user_management.vm.UserJSON;
+// import es.config.Properties;
+// import es.model.domain.user_management.UMUser;
+// import es.model.repository.user_management.PersistentTokenRepository;
+// import es.model.repository.user_management.UMUserRepository;
+// import es.model.service.MailService;
+// import es.model.service.UMUserService;
+// import es.model.service.dto.UMMailJSON;
+// import es.model.service.dto.UMPasswordJSON;
+// import es.model.service.dto.UMUserJSON;
+// import es.model.service.exceptions.AppRuntimeException;
+// import es.model.service.exceptions.NotFoundException;
+// import es.model.service.exceptions.account.AccountEmailInUseException;
+// import es.model.service.exceptions.account.AccountEmailNotRegisteredException;
+// import es.model.service.exceptions.account.AccountException;
+// import es.model.service.exceptions.account.AccountIncorrectPasswordException;
+// import es.model.service.exceptions.account.AccountPasswordResetKeyExpiredException;
+// import es.model.service.exceptions.account.CredentialsAreNotValidException;
+// import es.security.SecurityUtils;
+// import es.security.jwt.JWTConfigurer;
+// import es.security.jwt.JWTToken;
+// import es.security.jwt.TokenProvider;
+// import es.web.rest.custom.user_management.vm.KeyAndPasswordJSON;
+// import es.web.rest.custom.user_management.vm.UserJSON;
 //
-//import java.util.Optional;
-//import javax.inject.Inject;
-//import javax.servlet.http.HttpServletRequest;
-//import javax.validation.Valid;
-//import org.apache.commons.lang3.StringUtils;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-//import org.springframework.http.HttpHeaders;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.MediaType;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.security.authentication.AuthenticationManager;
-//import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-//import org.springframework.security.core.Authentication;
-//import org.springframework.security.core.AuthenticationException;
-//import org.springframework.security.core.context.SecurityContextHolder;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.PathVariable;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.PutMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
-//import org.springframework.web.bind.annotation.RestController;
+// import java.util.Optional;
+// import javax.inject.Inject;
+// import javax.servlet.http.HttpServletRequest;
+// import javax.validation.Valid;
+// import org.apache.commons.lang3.StringUtils;
+// import org.slf4j.Logger;
+// import org.slf4j.LoggerFactory;
+// import org.springframework.http.HttpHeaders;
+// import org.springframework.http.HttpStatus;
+// import org.springframework.http.MediaType;
+// import org.springframework.http.ResponseEntity;
+// import org.springframework.security.authentication.AuthenticationManager;
+// import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+// import org.springframework.security.core.Authentication;
+// import org.springframework.security.core.AuthenticationException;
+// import org.springframework.security.core.context.SecurityContextHolder;
+// import org.springframework.web.bind.annotation.GetMapping;
+// import org.springframework.web.bind.annotation.PathVariable;
+// import org.springframework.web.bind.annotation.PostMapping;
+// import org.springframework.web.bind.annotation.PutMapping;
+// import org.springframework.web.bind.annotation.RequestBody;
+// import org.springframework.web.bind.annotation.RequestMapping;
+// import org.springframework.web.bind.annotation.RequestParam;
+// import org.springframework.web.bind.annotation.RestController;
 //
-///** REST controller for managing the current user's account. */
-//@RestController
-//@RequestMapping("/api")
-//public class AccountResource {
+/// ** REST controller for managing the current user's account. */
+// @RestController
+// @RequestMapping("/api")
+// public class AccountResource {
 //
 //  private static final Logger log = LoggerFactory.getLogger(AccountResource.class);
 //
@@ -227,7 +227,8 @@
 //   *     (Bad Request) or 500 (Internal Server Error) if the password could not be reset
 //   */
 //  @PostMapping(path = "/account/reset_password/finish", produces = MediaType.TEXT_PLAIN_VALUE)
-//  public ResponseEntity<String> finishPasswordReset(@RequestBody KeyAndPasswordJSON keyAndPassword)
+//  public ResponseEntity<String> finishPasswordReset(@RequestBody KeyAndPasswordJSON
+// keyAndPassword)
 //      throws AccountException {
 //    log.debug("POST request to finish a password reset");
 //    if (!checkPasswordLength(keyAndPassword.getNewPassword())) {
@@ -251,4 +252,4 @@
 //        && password.length() >= UserJSON.PASSWORD_MIN_LENGTH
 //        && password.length() <= UserJSON.PASSWORD_MAX_LENGTH);
 //  }
-//}
+// }

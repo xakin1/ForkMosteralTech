@@ -2,7 +2,6 @@ package es.model.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,8 +17,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import org.locationtech.jts.geom.Point;
+
 @Entity(name = "t_product")
 @Table(name = "t_product")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -31,7 +30,7 @@ public class Product {
 
   @Column(name = "name")
   private String name;
-  
+
   @Column(name = "price")
   private Double price;
 
@@ -40,11 +39,11 @@ public class Product {
 
   @Column(name = "description")
   private String description;
-  
+
   @Enumerated(EnumType.STRING)
   @Column(name = "state")
   private State state;
-  
+
   @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<ProductImage> images = new ArrayList<>();
 
@@ -123,21 +122,20 @@ public class Product {
   public void setFavourites(List<Favourites> favourites) {
     this.favourites = favourites;
   }
-  
-   
+
   public List<ProductImage> getImages() {
-  	return images;
+    return images;
   }
-  
+
   public void setImages(List<ProductImage> images) {
-  	this.images = images;
+    this.images = images;
   }
 
   public Double getPrice() {
-	return price;
+    return price;
   }
 
   public void setPrice(Double price) {
-	this.price = price;
+    this.price = price;
   }
 }

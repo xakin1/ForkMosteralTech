@@ -15,7 +15,6 @@ import es.security.AuthoritiesConstants;
 import es.security.SecurityUtils;
 import es.web.rest.custom.user_management.vm.UserJSON;
 import es.web.rest.specifications.UMUserSpecification;
-
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Arrays;

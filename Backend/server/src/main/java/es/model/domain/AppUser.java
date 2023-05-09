@@ -2,14 +2,12 @@ package es.model.domain;
 
 import java.time.LocalDate;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import org.locationtech.jts.geom.Point;
 
 @Entity(name = "appuser")
@@ -24,10 +22,10 @@ public class AppUser {
 
   @Column(name = "surname")
   private String surname;
-  
-  @Column(name = "firebaseToken", length =1500)
+
+  @Column(name = "firebaseToken", length = 1500)
   private String firebaseToken;
-  
+
   @Column(name = "expirationDatefirebaseToken")
   private LocalDate expirationDatefirebaseToken;
 
@@ -45,6 +43,7 @@ public class AppUser {
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "buyer")
   private List<Transactions> buyerTransactions;
+
   public AppUser() {}
 
   public String getId() {
@@ -96,36 +95,34 @@ public class AppUser {
   }
 
   public String getFirebaseToken() {
-	return firebaseToken;
+    return firebaseToken;
   }
 
   public void setFirebaseToken(String firebaseToken) {
-	this.firebaseToken = firebaseToken;
+    this.firebaseToken = firebaseToken;
   }
 
   public LocalDate getExpirationDatefirebaseToken() {
-	return expirationDatefirebaseToken;
+    return expirationDatefirebaseToken;
   }
 
   public void setExpirationDatefirebaseToken(LocalDate expirationDatefirebaseToken) {
-	this.expirationDatefirebaseToken = expirationDatefirebaseToken;
+    this.expirationDatefirebaseToken = expirationDatefirebaseToken;
   }
 
   public List<Transactions> getSelletTransactions() {
-	return sellerTransactions;
+    return sellerTransactions;
   }
 
   public void setSelletTransactions(List<Transactions> selletTransactions) {
-	this.sellerTransactions = selletTransactions;
+    this.sellerTransactions = selletTransactions;
   }
 
   public List<Transactions> getBuyerTransactions() {
-	return buyerTransactions;
+    return buyerTransactions;
   }
 
   public void setBuyerTransactions(List<Transactions> buyerTransactions) {
-	this.buyerTransactions = buyerTransactions;
+    this.buyerTransactions = buyerTransactions;
   }
-  
-  
 }

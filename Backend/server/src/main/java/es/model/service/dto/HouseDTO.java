@@ -10,6 +10,7 @@ public class HouseDTO {
   private State state;
   private UserDTO owner;
   private Double price;
+
   public HouseDTO() {}
 
   public HouseDTO(House house) {
@@ -62,16 +63,16 @@ public class HouseDTO {
   public void setOwner(UserDTO owner) {
     this.owner = owner;
   }
-  
+
   public Double getPrice() {
-	return price;
+    return price;
   }
 
   public void setPrice(Double price) {
-	this.price = price;
+    this.price = price;
   }
 
-public House toHouse() {
+  public House toHouse() {
     House house = new House();
     house.setId(this.getId());
     house.setName(this.getName());
