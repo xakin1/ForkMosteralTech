@@ -5,14 +5,14 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.lifecycle.lifecycleScope
 import com.apm.monsteraltech.R
-import com.apm.monsteraltech.data.dto.ProductResponse
+import com.apm.monsteraltech.data.dto.LikedProductResponse
 import com.apm.monsteraltech.services.ProductService
 import com.apm.monsteraltech.services.ServiceFactory
 import com.apm.monsteraltech.ui.activities.main.fragments.products.categories.filters.ElectronicFilterActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ShowElectronicActivity : BaseProductsActivity() {
+class ShowAppliancesActivity : BaseProductsActivity() {
 
     private var typeOfFilter: String? = null
     private val serviceFactory = ServiceFactory()
@@ -22,7 +22,7 @@ class ShowElectronicActivity : BaseProductsActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_house_home)
         super.recyclerViewProducts = findViewById(R.id.RecyclerViewProducts)
-        super.context = this@ShowElectronicActivity
+        super.context = this@ShowAppliancesActivity
         setToolBar()
         applyFilters()
         lifecycleScope.launch(Dispatchers.IO) {
@@ -32,13 +32,13 @@ class ShowElectronicActivity : BaseProductsActivity() {
         var filter = findViewById<Button>(R.id.button_filter)
 
         filter.setOnClickListener {
-            var intent = Intent(this@ShowElectronicActivity, ElectronicFilterActivity::class.java)
+            var intent = Intent(this@ShowAppliancesActivity, ElectronicFilterActivity::class.java)
             startActivity(intent)
         }
     }
 
-    override suspend fun getSpecificProducts(page: Number, size: Number): ProductResponse {
-        return productService.getAllAppliances(page,size)
+    override suspend fun getSpecificProducts(userId: String, page: Number, size: Number): LikedProductResponse {
+        return productService.getAppliancesWithFavourites(userId,page,size)
     }
 
 }

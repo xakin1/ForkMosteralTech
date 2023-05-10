@@ -19,11 +19,11 @@ public interface CarRepository extends JpaRepository<Car, Long>, JpaSpecificatio
 
   Page<Car> findByIdIn(List<Long> pk, Pageable pageable);
   
-  @Query("SELECT p, CASE WHEN f.id IS NOT NULL THEN TRUE ELSE FALSE END AS isFavourite FROM t_car p LEFT JOIN t_favourites f ON f.product.id = p.id AND f.appuser.id = :userId")
+  @Query("SELECT p AS product, CASE WHEN f.id IS NOT NULL THEN TRUE ELSE FALSE END AS isFavourite FROM t_car p LEFT JOIN t_favourites f ON f.product.id = p.id AND f.appuser.id = :userId")
   Page<CarProjection> findCarsWithFavouritesByUserId(@Param("userId") String userId, Pageable pageable);
   
   public interface CarProjection {
 	  Car getProduct();
-	    Boolean getIsFavourite();
+	  Boolean getIsFavourite();
 	}
 }

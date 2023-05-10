@@ -47,10 +47,10 @@
         <activity
             android:name=".ui.activities.main.fragments.products.categories.filters.ElectronicFilterActivity"
             android:exported="false"
-            android:parentActivityName=".ui.activities.main.fragments.products.categories.ShowElectronicActivity">
+            android:parentActivityName=".ui.activities.main.fragments.products.categories.ShowAppliancesActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activities.main.fragments.products.categories.ShowElectronicActivity" />
+                android:value=".ui.activities.main.fragments.products.categories.ShowAppliancesActivity" />
         </activity>
         <activity
             android:name=".ui.activities.main.fragments.products.categories.filters.HouseFilterActivity"
@@ -86,7 +86,7 @@
                 android:value=".ui.activities.main.MainActivity" />
         </activity>
         <activity
-            android:name=".ui.activities.main.fragments.products.categories.ShowElectronicActivity"
+            android:name=".ui.activities.main.fragments.products.categories.ShowAppliancesActivity"
             android:exported="false"
             android:parentActivityName=".ui.activities.main.MainActivity"
             android:screenOrientation="sensor">

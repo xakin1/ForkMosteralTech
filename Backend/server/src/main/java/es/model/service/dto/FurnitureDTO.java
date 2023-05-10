@@ -12,7 +12,7 @@ public class FurnitureDTO {
 	private State state;
 	private UserDTO owner;
 	private Double price;
-	private Boolean isFavourite;
+	private boolean isFavourite;
 
 	public FurnitureDTO() {
 	}
@@ -27,9 +27,6 @@ public class FurnitureDTO {
 		this.name = furniture.getName();
 		this.description = furniture.getDescription();
 		this.state = furniture.getState();
-		if (furniture.getOwner() != null) {
-			this.owner = new UserDTO(furniture.getOwner());
-		}
 		this.price = furniture.getPrice();
 	}
 
@@ -81,11 +78,11 @@ public class FurnitureDTO {
 		this.price = price;
 	}
 
-	public Boolean getIsFavourite() {
+	public boolean isFavourite() {
 		return isFavourite;
 	}
 
-	public void setIsFavourite(Boolean isFavourite) {
+	public void setIsFavourite(boolean isFavourite) {
 		this.isFavourite = isFavourite;
 	}
 
@@ -95,9 +92,6 @@ public class FurnitureDTO {
 		furniture.setName(this.getName());
 		furniture.setDescription(this.getDescription());
 		furniture.setState(this.getState());
-		if (this.getOwner() != null) {
-			furniture.setOwner(this.getOwner().toUser());
-		}
 		furniture.setPrice(this.getPrice());
 		return furniture;
 	}

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.lifecycle.lifecycleScope
 import com.apm.monsteraltech.R
+import com.apm.monsteraltech.data.dto.LikedProductResponse
 import com.apm.monsteraltech.data.dto.ProductResponse
 import com.apm.monsteraltech.services.ProductService
 import com.apm.monsteraltech.services.ServiceFactory
@@ -19,7 +20,7 @@ class ShowCarActivity : BaseProductsActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_show_house_home)
+        setContentView(R.layout.activity_show_car_home)
         super.recyclerViewProducts = findViewById(R.id.RecyclerViewProducts)
         super.context = this@ShowCarActivity
         setToolBar()
@@ -37,7 +38,7 @@ class ShowCarActivity : BaseProductsActivity() {
         }
     }
 
-    override suspend fun getSpecificProducts(page: Number, size: Number): ProductResponse {
-        return productService.getAllCars(page,size)
+    override suspend fun getSpecificProducts(userId : String, page: Number, size: Number): LikedProductResponse {
+        return productService.getCarsWithFavourites(userId,page,size)
     }
 }

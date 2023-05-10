@@ -15,14 +15,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.data.adapter.AdapterFilters
-import com.apm.monsteraltech.data.adapter.AdapterProductsHome
-import com.apm.monsteraltech.data.dto.Product
-import com.apm.monsteraltech.data.dto.ProductResponse
+import com.apm.monsteraltech.data.adapter.AdapterLikedProduct
+import com.apm.monsteraltech.data.dto.LikedProduct
+import com.apm.monsteraltech.data.dto.LikedProductResponse
 import com.apm.monsteraltech.services.ProductService
 import com.apm.monsteraltech.services.ServiceFactory
 import com.apm.monsteraltech.ui.activities.actionBar.Searchable
 import com.apm.monsteraltech.ui.activities.main.fragments.products.categories.ShowCarActivity
-import com.apm.monsteraltech.ui.activities.main.fragments.products.categories.ShowElectronicActivity
+import com.apm.monsteraltech.ui.activities.main.fragments.products.categories.ShowAppliancesActivity
 import com.apm.monsteraltech.ui.activities.main.fragments.products.categories.ShowFurnitureActivity
 import com.apm.monsteraltech.ui.activities.main.fragments.products.categories.ShowHouseActivity
 import com.apm.monsteraltech.ui.activities.productDetail.ProductDetail
@@ -37,8 +37,8 @@ import java.util.*
 class ProductsFragment : Fragment(), Searchable {
     private lateinit var filterRecyclerView: RecyclerView
     private lateinit var productRecyclerView: RecyclerView
-    private lateinit var productsList: ArrayList<Product>
-    private lateinit var adapterProduct: AdapterProductsHome
+    private lateinit var productsList: ArrayList<LikedProduct>
+    private lateinit var adapterProduct: AdapterLikedProduct
     private val serviceFactory = ServiceFactory()
     private val productService = serviceFactory.createService(ProductService::class.java)
 
@@ -54,8 +54,6 @@ class ProductsFragment : Fragment(), Searchable {
         savedInstanceState: Bundle?
     ): View {
         val view : View = inflater.inflate(R.layout.fragment_products, container, false)
-
-
         lifecycleScope.launch(Dispatchers.IO) {
             setProdructs(view)
         }
@@ -82,7 +80,7 @@ class ProductsFragment : Fragment(), Searchable {
                         startActivity(sendIntent)
                     }
                     "Electrodomésticos"-> {
-                        sendIntent = Intent(context, ShowElectronicActivity::class.java)
+                        sendIntent = Intent(context, ShowAppliancesActivity::class.java)
                         startActivity(sendIntent)
                     }
                     "Muebles" -> {
@@ -104,35 +102,32 @@ class ProductsFragment : Fragment(), Searchable {
     private suspend fun setProdructs(view: View){
         this.productsList = getProductList()
         val layoutManager = LinearLayoutManager(context)
-        this.adapterProduct = AdapterProductsHome(productsList)
+        this.adapterProduct = AdapterLikedProduct(productsList)
         productRecyclerView = view.findViewById(R.id.recycler_view_products)
         productRecyclerView.adapter = this.adapterProduct
         productRecyclerView.layoutManager = layoutManager
         var currentPage = 1;
         var pageSize: Number = 10;
 
-        adapterProduct.setOnItemClickListener(object: AdapterProductsHome.OnItemClickedListener {
+        adapterProduct.setOnItemClickListener(object: AdapterLikedProduct.OnItemClickedListener {
             override fun onItemClick(position: Int) {
                 val intent = Intent(context,
                     ProductDetail::class.java)
                 //TODO: ver que información es necesario pasarle
                 intent.putExtra("Product", adapterProduct.getProduct(position).name)
-                intent.putExtra("Owner", adapterProduct.getProduct(position).owner?.name)
                 intent.putExtra("Price", adapterProduct.getProduct(position).price)
                 Log.d("HomeFragment", "Price: " + adapterProduct.getProduct(position).price)
-                Log.d("HomeFragment", "Owner: " + adapterProduct.getProduct(position).owner)
                 //intent.putExtra("Description", adapterProduct.getProduct(position)?.description)
                 startActivity(intent)
             }
         })
 
         //LLamamos a la actividad producto detail
-        adapterProduct.setOnItemClickListener(object: AdapterProductsHome.OnItemClickedListener{
+        adapterProduct.setOnItemClickListener(object: AdapterLikedProduct.OnItemClickedListener{
             override fun onItemClick(position: Int) {
                 val intent = Intent(context, ProductDetail::class.java)
                 //TODO: ver que información es necesario pasarle
                 intent.putExtra("Product", adapterProduct.getProduct(position).name)
-                intent.putExtra("Owner", adapterProduct.getProduct(position).owner?.name)
                 intent.putExtra("Price", adapterProduct.getProduct(position).price)
                 //TODO: ver si ponerle la flecha para volver atrás (la documentación no lo recomienda)
                 startActivity(intent)
@@ -148,8 +143,8 @@ class ProductsFragment : Fragment(), Searchable {
                     currentPage ++
                     lifecycleScope.launch(Dispatchers.IO) {
                         // Cargar más elementos y actualizar el adaptador
-                        val newData: ProductResponse =
-                            productService.getAllProducts(currentPage, pageSize)
+                        val newData: LikedProductResponse =
+                            productService.getProductsWithFavourites("fAsTAzll1fbLRMczYPlOKOcdw6H3",currentPage, pageSize)
                         productsList.addAll(newData.content)
                         productRecyclerView.post {
                             adapterProduct.notifyDataSetChanged()
@@ -175,21 +170,23 @@ class ProductsFragment : Fragment(), Searchable {
         return filterList
     }
 
-    private suspend fun getProductList(): ArrayList<Product> {
+    private suspend fun getProductList(): ArrayList<LikedProduct> {
         return withContext(lifecycleScope.coroutineContext + Dispatchers.IO) {
-            val productList: ArrayList<Product> = ArrayList()
+            val productList: ArrayList<LikedProduct> = ArrayList()
 
             // Obtiene las transacciones del usuario
-            val userProducts: ProductResponse = productService.getAllProducts(0, 10)
+            val userProducts: LikedProductResponse = productService.getProductsWithFavourites("fAsTAzll1fbLRMczYPlOKOcdw6H3",0, 10)
 
             // Agrega las transacciones del usuario a la lista
             for (product in userProducts.content) {
-                val productItem = Product(
+                val productItem = LikedProduct(
                     product.id,
                     product.name,
                     product.price,
                     product.description,
-                    product.state)
+                    product.state,
+                    product.images,
+                    product.favourite)
                 productList.add(productItem)
             }
             // Devuelve la lista completa
@@ -198,7 +195,7 @@ class ProductsFragment : Fragment(), Searchable {
     }
 
     override fun onSearch(query: String?) {
-        val filteredlist = ArrayList<Product>()
+        val filteredlist = ArrayList<LikedProduct>()
         for (item in productsList) {
             if (query != null) {
                 if (item.name.lowercase(Locale.getDefault()).contains(query.lowercase(Locale.getDefault()))) {

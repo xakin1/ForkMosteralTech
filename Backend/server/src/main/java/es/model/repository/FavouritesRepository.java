@@ -14,4 +14,6 @@ public interface FavouritesRepository
   Optional<Favourites> findById(Long pk);
 
   Page<Favourites> findByIdIn(List<Long> pk, Pageable pageable);
+
+  Page<Favourites> findByAppuserId(String userId, Pageable pageable);
 }

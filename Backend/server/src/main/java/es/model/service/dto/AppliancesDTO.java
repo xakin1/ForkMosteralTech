@@ -12,22 +12,20 @@ public class AppliancesDTO {
   private State state;
   private UserDTO owner;
   private Double price;
-private Boolean isFavourite;
+  private boolean isFavourite;
 
   public AppliancesDTO() {}
   
   public AppliancesDTO(AppliancesProjection product) {
-	    this.isFavourite = product.getIsFavourite();
-	  }
+    this(product.getAppliances());
+    this.isFavourite = product.getIsFavourite();
+  }
 
   public AppliancesDTO(Appliances appliances) {
     this.id = appliances.getId();
     this.name = appliances.getName();
     this.description = appliances.getDescription();
     this.state = appliances.getState();
-	if (appliances.getOwner() != null) {
-		this.owner = new UserDTO(appliances.getOwner());
-	}
 	this.price = appliances.getPrice();
 }
 
@@ -79,11 +77,11 @@ public void setPrice(Double price) {
 	this.price = price;
 }
 
-public Boolean getIsFavourite() {
+public boolean isFavourite() {
 	return isFavourite;
 }
 
-public void setIsFavourite(Boolean isFavourite) {
+public void setIsFavourite(boolean isFavourite) {
 	this.isFavourite = isFavourite;
 }
 
@@ -93,9 +91,6 @@ public Appliances toAppliances() {
     appliances.setName(this.getName());
     appliances.setDescription(this.getDescription());
     appliances.setState(this.getState());
-    if (this.getOwner() != null) {
-      appliances.setOwner(this.getOwner().toUser());
-    }
     appliances.setPrice(this.getPrice());
     return appliances;
   }

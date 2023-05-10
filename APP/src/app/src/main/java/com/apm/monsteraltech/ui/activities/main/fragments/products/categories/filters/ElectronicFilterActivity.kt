@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.ui.activities.actionBar.ActionBarActivity
-import com.apm.monsteraltech.ui.activities.main.fragments.products.categories.ShowElectronicActivity
+import com.apm.monsteraltech.ui.activities.main.fragments.products.categories.ShowAppliancesActivity
 import com.google.android.material.button.MaterialButtonToggleGroup
 
 
@@ -32,7 +32,7 @@ class ElectronicFilterActivity : ActionBarActivity() {
             R.id.btn_seminuevo -> "Reacondicionado"
             else -> null
         }
-        val intent = Intent(this, ShowElectronicActivity::class.java)
+        val intent = Intent(this, ShowAppliancesActivity::class.java)
         intent.putExtra("precio_desde", precioDesde)
         intent.putExtra("precio_hasta", precioHasta)
         intent.putExtra("estado_coche", estado)

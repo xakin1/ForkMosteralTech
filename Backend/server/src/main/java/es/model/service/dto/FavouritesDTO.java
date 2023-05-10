@@ -16,7 +16,7 @@ public class FavouritesDTO {
     this.id = favourites.getId();
     this.date = favourites.getDate();
     if (favourites.getProduct() != null) {
-      this.product = new ProductDTO(favourites.getProduct());
+      this.product = new ProductDTO(favourites.getProduct(),true);
     }
     if (favourites.getAppUser() != null) {
       this.user = new UserDTO(favourites.getAppUser());

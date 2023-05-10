@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.lifecycle.lifecycleScope
 import com.apm.monsteraltech.R
+import com.apm.monsteraltech.data.dto.LikedProductResponse
 import com.apm.monsteraltech.data.dto.ProductResponse
 import com.apm.monsteraltech.services.ProductService
 import com.apm.monsteraltech.services.ServiceFactory
@@ -37,7 +38,7 @@ class ShowFurnitureActivity : BaseProductsActivity() {
         }
     }
 
-    override suspend fun getSpecificProducts(page: Number, size: Number): ProductResponse {
-        return productService.getAllFurnitures(page, size)
+    override suspend fun getSpecificProducts(userId : String,page: Number, size: Number): LikedProductResponse {
+        return productService.getFurnituresWithFavourites(userId, page, size)
     }
 }

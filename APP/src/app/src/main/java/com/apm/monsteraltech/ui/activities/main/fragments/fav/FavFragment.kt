@@ -5,17 +5,36 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.R
+import com.apm.monsteraltech.data.adapter.AdapterLikedProduct
+import com.apm.monsteraltech.data.adapter.AdapterProduct
 import com.apm.monsteraltech.data.adapter.AdapterProductsData
+import com.apm.monsteraltech.data.dto.FavouritesResponse
+import com.apm.monsteraltech.data.dto.LikedProduct
+import com.apm.monsteraltech.data.dto.LikedProductResponse
 import com.apm.monsteraltech.data.dto.Product
+import com.apm.monsteraltech.services.FavouriteService
+import com.apm.monsteraltech.services.ProductService
+import com.apm.monsteraltech.services.ServiceFactory
 import com.apm.monsteraltech.ui.activities.productDetail.ProductDetail
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.produce
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.internal.wait
+import retrofit2.HttpException
 
 class FavFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapterProduct: AdapterProductsData
+    private lateinit var adapterProduct: AdapterLikedProduct
+    private lateinit var productsList: ArrayList<LikedProduct>
+    private val serviceFactory = ServiceFactory()
+    private val favouriteService = serviceFactory.createService(FavouriteService::class.java)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = inflater.inflate(R.layout.fragment_fav, container, false)
@@ -25,38 +44,47 @@ class FavFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         // Inicialmente muestra la lista de productos
-        showProductList()
-
-        //LLamamos a la actividad producto detail
-        this.adapterProduct.setOnItemClickListener(object: AdapterProductsData.OnItemClickedListener{
-            override fun onItemClick(position: Int) {
-                recyclerView.getChildAt(position)
-                val intent = Intent(requireContext(), ProductDetail::class.java)
-                intent.putExtra("Product", adapterProduct.getProduct(position).name)
-                intent.putExtra("Owner", adapterProduct.getProduct(position).owner?.name)
-                intent.putExtra("Price", adapterProduct.getProduct(position).price)
-                startActivity(intent)
-            }
-        })
+        lifecycleScope.launch(Dispatchers.IO) {
+            showProductList()
+        }
 
         return view
     }
 
-    private fun showProductList() {
-        this.adapterProduct = AdapterProductsData(getProductList())
-        recyclerView.adapter = adapterProduct
+    private suspend fun showProductList() {
+        this.productsList = getProductList()
+        this.adapterProduct = AdapterLikedProduct(productsList)
+        withContext(Dispatchers.Main) {
+            recyclerView.adapter = adapterProduct
+        }
+        //LLamamos a la actividad producto detail
+        this.adapterProduct.setOnItemClickListener(object: AdapterLikedProduct.OnItemClickedListener{
+            override fun onItemClick(position: Int) {
+                recyclerView.getChildAt(position)
+                val intent = Intent(requireContext(), ProductDetail::class.java)
+                intent.putExtra("Product", adapterProduct.getProduct(position).name)
+                intent.putExtra("Price", adapterProduct.getProduct(position).price)
+                startActivity(intent)
+            }
+        })
     }
 
-    private fun getProductList(): ArrayList<Product> {
-        //TODO: Cargar los productos desde la base de datos o de otro recurso externo
-        val productList: ArrayList<Product> = arrayListOf()
+    private suspend fun getProductList(): ArrayList<LikedProduct> {
+        return withContext(lifecycleScope.coroutineContext + Dispatchers.IO) {
+            val productList: ArrayList<LikedProduct> = ArrayList()
 
-        // Agrega algunos productos a la lista para mockear la respuesta
-/*        for (i in 0 until 10) {
-            val product = Product("Producto $i","", "Owner", "99.99")
-            productList.add(product)
-        }*/
-
-        return productList
+            // Obtiene las transacciones del usuario
+            val newData: FavouritesResponse =
+                favouriteService.getAllFavouriteProductsOfUser(
+                    "fAsTAzll1fbLRMczYPlOKOcdw6H3",
+                    0, 10
+                )
+            newData.content.forEach { favourites ->
+                productList.add(favourites.product)
+            }
+            // Devuelve la lista completa
+            productList
+        }
     }
+
 }

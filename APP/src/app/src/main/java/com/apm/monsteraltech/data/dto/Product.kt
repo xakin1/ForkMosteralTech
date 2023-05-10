@@ -53,6 +53,30 @@ data class ProductResponse(
     val first: Boolean,
     val empty: Boolean
 )
+data class LikedProductResponse(
+    val content: List<LikedProduct>,
+    val pageable: Pageable,
+    val last: Boolean,
+    val totalPages: Int,
+    val totalElements: Long,
+    val size: Int,
+    val number: Int,
+    val numberOfElements: Int,
+    val sort: Sort,
+    val first: Boolean,
+    val empty: Boolean
+)
+
+
+data class LikedProduct(
+    val id: Long,
+    val name: String,
+    val price: Double,
+    val description: String?,
+    val state: State?,
+    val images: List<ProductImage>?,
+    val favourite: Boolean
+)
 
 data class Product(
     val id: Long,

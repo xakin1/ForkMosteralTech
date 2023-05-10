@@ -5,27 +5,27 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.widget.Toast
-import androidx.annotation.NonNull
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.R
-import com.apm.monsteraltech.data.adapter.AdapterProductsHome
-import com.apm.monsteraltech.data.dto.Product
-import com.apm.monsteraltech.data.dto.ProductResponse
+import com.apm.monsteraltech.data.adapter.AdapterLikedProduct
+import com.apm.monsteraltech.data.dto.LikedProduct
+import com.apm.monsteraltech.data.dto.LikedProductResponse
 import com.apm.monsteraltech.ui.activities.actionBar.ActionBarActivity
 import com.apm.monsteraltech.ui.activities.productDetail.ProductDetail
 import com.apm.monsteraltech.ui.home.categories.Filtros
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 import java.util.*
 
 abstract class BaseProductsActivity : ActionBarActivity() {
-    protected lateinit var adapterProduct: AdapterProductsHome
+    protected lateinit var adapterProduct: AdapterLikedProduct
     protected lateinit var productRecyclerView: RecyclerView
-    protected lateinit var productsList: ArrayList<Product>
+    protected lateinit var productsList: ArrayList<LikedProduct>
     protected lateinit var context: Context
     protected lateinit var recyclerViewProducts: RecyclerView
 
@@ -82,14 +82,14 @@ abstract class BaseProductsActivity : ActionBarActivity() {
 
         withContext(Dispatchers.Main) {
             val layoutManager = LinearLayoutManager(context)
-            adapterProduct = AdapterProductsHome(productsList)
+            adapterProduct = AdapterLikedProduct(productsList)
             productRecyclerView = recyclerViewProducts
             productRecyclerView.adapter = adapterProduct
             productRecyclerView.layoutManager = layoutManager
             var currentPage = 1;
             var pageSize: Number = 10;
 
-            adapterProduct.setOnItemClickListener(object: AdapterProductsHome.OnItemClickedListener {
+            adapterProduct.setOnItemClickListener(object: AdapterLikedProduct.OnItemClickedListener {
                 override fun onItemClick(position: Int) {
                     val intent = Intent(
                         context,
@@ -102,19 +102,36 @@ abstract class BaseProductsActivity : ActionBarActivity() {
             })
 
             productRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrolled(@NonNull recyclerView: RecyclerView, dx: Int, dy: Int) {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
 
                     // Comprobar si el usuario ha llegado al final de la lista
                     if (!recyclerView.canScrollVertically(1)) {
                         currentPage ++
                         lifecycleScope.launch(Dispatchers.IO) {
-                            // Cargar más elementos y actualizar el adaptador
-                            val newData: ProductResponse =
-                                getSpecificProducts(currentPage, pageSize)
-                            productsList.addAll(newData.content)
-                            productRecyclerView.post {
-                                adapterProduct.notifyDataSetChanged()
+                            try {
+                                // Cargar más elementos y actualizar el adaptador
+                                val newData: LikedProductResponse =
+                                    getSpecificProducts(
+                                        "fAsTAzll1fbLRMczYPlOKOcdw6H3",
+                                        currentPage,
+                                        pageSize
+                                    )
+                                productsList.addAll(newData.content)
+                                productRecyclerView.post {
+                                    adapterProduct.notifyDataSetChanged()
+                                }
+                            }
+                            catch (e: HttpException){
+                                if (e.code() == 404) {
+                                    runOnUiThread {
+                                        Toast.makeText(
+                                            applicationContext,
+                                            "No hay más productos disponibles",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
                             }
                         }
                     }
@@ -124,7 +141,7 @@ abstract class BaseProductsActivity : ActionBarActivity() {
     }
 
     override fun performSearch(newText: String?) {
-        val filteredlist = ArrayList<Product>()
+        val filteredlist = ArrayList<LikedProduct>()
         for (item in productsList) {
             if (newText != null) {
                 if (item.name.lowercase(Locale.getDefault()).contains(newText.lowercase(
@@ -140,24 +157,24 @@ abstract class BaseProductsActivity : ActionBarActivity() {
         }
     }
 
-    private suspend fun getProductList(): ArrayList<Product> {
+    private suspend fun getProductList(): ArrayList<LikedProduct> {
         //TODO: Cargar los productos desde la base de datos o de otro recurso externo
         return withContext(lifecycleScope.coroutineContext + Dispatchers.IO) {
-            val productList: ArrayList<Product> = ArrayList()
+            val productList: ArrayList<LikedProduct> = ArrayList()
 
             // Obtiene las transacciones del usuario
-            val products: ProductResponse = getSpecificProducts(0 ,10)
+            val products: LikedProductResponse = getSpecificProducts("fAsTAzll1fbLRMczYPlOKOcdw6H3",0 ,10)
 
             // Agrega las transacciones del usuario a la lista
             for (product in products.content) {
-                val productItem = Product(
+                val productItem = LikedProduct(
                     product.id,
                     product.name,
                     product.price,
                     product.description,
                     product.state,
                     product.images,
-                    product.owner
+                    product.favourite
                 )
                 productList.add(productItem)
             }
@@ -166,5 +183,5 @@ abstract class BaseProductsActivity : ActionBarActivity() {
         }
     }
 
-    abstract suspend fun getSpecificProducts(page: Number, size: Number): ProductResponse
+    abstract suspend fun getSpecificProducts(userId : String,page: Number, size: Number): LikedProductResponse
 }

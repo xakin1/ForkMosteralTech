@@ -1,5 +1,7 @@
 package com.apm.monsteraltech.services
 
+import com.apm.monsteraltech.data.dto.LikedProduct
+import com.apm.monsteraltech.data.dto.LikedProductResponse
 import com.apm.monsteraltech.data.dto.Product
 import com.apm.monsteraltech.data.dto.ProductResponse
 import retrofit2.http.GET
@@ -24,4 +26,19 @@ interface ProductService {
 
     @GET("/api/entities/appliances")
     suspend fun getAllAppliances(@Query("page") page: Number, @Query("size") size: Number): ProductResponse
+
+    @GET("/api/entities/products/all/favourites/{userId}")
+    suspend fun getProductsWithFavourites(@Path("userId") userId: String, @Query("page") page: Number, @Query("size") size: Number): LikedProductResponse
+
+    @GET("/api/entities/cars/all/favourites/{userId}")
+    suspend fun getCarsWithFavourites(@Path("userId") userId: String, @Query("page") page: Number, @Query("size") size: Number): LikedProductResponse
+
+    @GET("/api/entities/furnitures/all/favourites/{userId}")
+    suspend fun getFurnituresWithFavourites(@Path("userId") userId: String, @Query("page") page: Number, @Query("size") size: Number): LikedProductResponse
+
+    @GET("/api/entities/houses/all/favourites/{userId}")
+    suspend fun getHousesWithFavourites(@Path("userId") userId: String, @Query("page") page: Number, @Query("size") size: Number): LikedProductResponse
+
+    @GET("/api/entities/appliances/all/favourites/{userId}")
+    suspend fun getAppliancesWithFavourites(@Path("userId") userId: String, @Query("page") page: Number, @Query("size") size: Number): LikedProductResponse
 }

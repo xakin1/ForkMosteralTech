@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.data.dto.Product
 
-class AdapterProductsHome(private var productList: List<Product>): RecyclerView.Adapter<AdapterProductsHome.ViewHolder>() {
+class AdapterProduct(private var productList: List<Product>): RecyclerView.Adapter<AdapterProduct.ViewHolder>() {
     private lateinit var listener: OnItemClickedListener
 
     interface OnItemClickedListener{

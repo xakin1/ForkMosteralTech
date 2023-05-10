@@ -312,3 +312,98 @@ VALUES (LASTVAL(), 'Honda', 'Civic', 2010, 150000, 'SECOND_HAND', 'pfpY9jg25hfdK
 
 INSERT INTO t_car (id, brand, model, year, kms, state, owner, price)
 VALUES (LASTVAL(), 'Chevrolet', 'Spark', 2020, 5000, 'NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 12000.00);
+
+
+--Favoritos
+
+INSERT INTO public.t_favourites
+("date", appuser, product)
+VALUES('2023-05-10 14:30:00', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 1);
+
+INSERT INTO public.t_favourites
+("date", appuser, product)
+VALUES('2023-05-10 14:30:00', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 3);
+
+INSERT INTO public.t_favourites
+("date", appuser, product)
+VALUES('2023-05-10 14:30:00', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 4);
+
+INSERT INTO public.t_favourites
+("date", appuser, product)
+VALUES('2023-05-10 14:30:00', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 7);
+
+INSERT INTO public.t_favourites
+("date", appuser, product)
+VALUES('2023-05-10 14:30:00', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 12);
+
+INSERT INTO public.t_favourites
+("date", appuser, product)
+VALUES('2023-05-10 14:30:00', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 19);
+
+INSERT INTO public.t_favourites
+("date", appuser, product)
+VALUES('2023-05-10 14:30:00', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 22);
+
+INSERT INTO public.t_favourites
+("date", appuser, product)
+VALUES('2023-05-10 14:30:00', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 24);
+
+
+INSERT INTO public.t_favourites
+("date", appuser, product)
+VALUES('2023-05-10 14:30:00', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 29);
+
+INSERT INTO public.t_favourites
+("date", appuser, product)
+VALUES('2023-05-10 14:30:00', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 33);
+
+INSERT INTO public.t_favourites
+("date", appuser, product)
+VALUES('2023-05-10 14:30:00', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 43);
+
+
+INSERT INTO public.t_favourites
+("date", appuser, product)
+VALUES('2023-05-10 14:30:00', 'fAsTAzll1fbLRMczYPlOKOcdw6H3', 1);
+
+INSERT INTO public.t_favourites
+("date", appuser, product)
+VALUES('2023-05-10 14:30:00', 'fAsTAzll1fbLRMczYPlOKOcdw6H3', 2);
+
+INSERT INTO public.t_favourites
+("date", appuser, product)
+VALUES('2023-05-10 14:30:00', 'fAsTAzll1fbLRMczYPlOKOcdw6H3', 6);
+
+INSERT INTO public.t_favourites
+("date", appuser, product)
+VALUES('2023-05-10 14:30:00', 'fAsTAzll1fbLRMczYPlOKOcdw6H3', 9);
+
+INSERT INTO public.t_favourites
+("date", appuser, product)
+VALUES('2023-05-10 14:30:00', 'fAsTAzll1fbLRMczYPlOKOcdw6H3', 14);
+
+INSERT INTO public.t_favourites
+("date", appuser, product)
+VALUES('2023-05-10 14:30:00', 'fAsTAzll1fbLRMczYPlOKOcdw6H3', 21);
+
+INSERT INTO public.t_favourites
+("date", appuser, product)
+VALUES('2023-05-10 14:30:00', 'fAsTAzll1fbLRMczYPlOKOcdw6H3', 23);
+
+INSERT INTO public.t_favourites
+("date", appuser, product)
+VALUES('2023-05-10 14:30:00', 'fAsTAzll1fbLRMczYPlOKOcdw6H3', 24);
+
+
+INSERT INTO public.t_favourites
+("date", appuser, product)
+VALUES('2023-05-10 14:30:00', 'fAsTAzll1fbLRMczYPlOKOcdw6H3', 25);
+
+INSERT INTO public.t_favourites
+("date", appuser, product)
+VALUES('2023-05-10 14:30:00', 'fAsTAzll1fbLRMczYPlOKOcdw6H3', 35);
+
+INSERT INTO public.t_favourites
+("date", appuser, product)
+VALUES('2023-05-10 14:30:00', 'fAsTAzll1fbLRMczYPlOKOcdw6H3', 45);
+

@@ -9,6 +9,7 @@
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp"
     android:clickable="true"
+    android:clipToPadding="false"
     app:cardUseCompatPadding="true">
 
     <GridLayout
@@ -16,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:rowCount="2"
+        android:clipToPadding="false"
         android:columnCount="6"
         android:padding="16dp">
 

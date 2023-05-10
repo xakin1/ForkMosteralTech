@@ -27,6 +27,15 @@ public class ProductDTO {
 	    this.state = product.getState();
 	    this.price = product.getPrice();
   }
+  
+  public ProductDTO(Product product, boolean isFavourite) {
+	    this.id = product.getId();
+	    this.name = product.getName();
+	    this.description = product.getDescription();
+	    this.state = product.getState();
+	    this.price = product.getPrice();
+	    this.isFavourite = isFavourite;
+}
 
   public Long getId() {
     return id;

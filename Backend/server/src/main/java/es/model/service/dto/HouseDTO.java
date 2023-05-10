@@ -12,7 +12,7 @@ public class HouseDTO {
   private State state;
   private UserDTO owner;
   private Double price;
-  private Boolean isFavourite;
+  private boolean isFavourite;
   public HouseDTO() {}
   
   public HouseDTO(HouseProjection product) {
@@ -25,9 +25,6 @@ public class HouseDTO {
     this.name = house.getName();
     this.description = house.getDescription();
     this.state = house.getState();
-    if (house.getOwner() != null) {
-      this.owner = new UserDTO(house.getOwner());
-    }
     this.price = house.getPrice();
   }
 
@@ -81,11 +78,11 @@ public class HouseDTO {
   
   
 
-public Boolean getIsFavourite() {
+public boolean isFavourite() {
 	return isFavourite;
 }
 
-public void setIsFavourite(Boolean isFavourite) {
+public void setIsFavourite(boolean isFavourite) {
 	this.isFavourite = isFavourite;
 }
 
@@ -95,9 +92,6 @@ public House toHouse() {
     house.setName(this.getName());
     house.setDescription(this.getDescription());
     house.setState(this.getState());
-    if (this.getOwner() != null) {
-      house.setOwner(this.getOwner().toUser());
-    }
     house.setPrice(this.getPrice());
 
     return house;

@@ -12,7 +12,7 @@ public class CarDTO {
 	private State state;
 	private UserDTO owner;
 	private Double price;
-	private Boolean isFavourite;
+	private boolean isFavourite;
 
 	public CarDTO() {
 	}
@@ -27,9 +27,6 @@ public class CarDTO {
 		this.name = car.getName();
 		this.description = car.getDescription();
 		this.state = car.getState();
-		if (car.getOwner() != null) {
-			this.owner = new UserDTO(car.getOwner());
-		}
 		this.price = car.getPrice();
 	}
 
@@ -81,11 +78,11 @@ public class CarDTO {
 		this.price = price;
 	}
 
-	public Boolean getIsFavourite() {
+	public boolean isFavourite() {
 		return isFavourite;
 	}
 
-	public void setIsFavourite(Boolean isFavourite) {
+	public void setIsFavourite(boolean isFavourite) {
 		this.isFavourite = isFavourite;
 	}
 
@@ -96,9 +93,6 @@ public class CarDTO {
 		car.setDescription(this.getDescription());
 		car.setState(this.getState());
 		car.setPrice(this.getPrice());
-		if (this.getOwner() != null) {
-			car.setOwner(this.getOwner().toUser());
-		}
 		return car;
 	}
 }

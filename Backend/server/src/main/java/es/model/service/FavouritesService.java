@@ -12,7 +12,7 @@ public interface FavouritesService {
 
   Page<FavouritesDTO> getAll(Pageable pageable, List<String> filters, String search);
 
-  FavouritesFullDTO get(Long id) throws NotFoundException;
+  Page<FavouritesDTO> get(String userId, Pageable pageable) throws NotFoundException;
 
   FavouritesFullDTO create(FavouritesFullDTO favourites) throws OperationNotAllowedException;
 

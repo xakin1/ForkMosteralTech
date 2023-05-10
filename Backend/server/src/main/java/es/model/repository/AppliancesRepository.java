@@ -21,12 +21,11 @@ public interface AppliancesRepository
 
   Page<Appliances> findByIdIn(List<Long> pk, Pageable pageable);
 
-  @Query("SELECT p, CASE WHEN f.id IS NOT NULL THEN TRUE ELSE FALSE END AS isFavourite FROM t_appliances p LEFT JOIN t_favourites f ON f.product.id = p.id AND f.appuser.id = :userId")
+  @Query("SELECT p AS appliances, CASE WHEN f.id IS NOT NULL THEN TRUE ELSE FALSE END AS isFavourite FROM t_appliances p LEFT JOIN t_favourites f ON f.product.id = p.id AND f.appuser.id = :userId")
   Page<AppliancesProjection> findAppliancesWithFavouritesByUserId(@Param("userId") String userId, Pageable pageable);
-  
   public interface AppliancesProjection {
-	  Product getProduct();
-	  Boolean getIsFavourite();
+	    Appliances getAppliances();
+	    Boolean getIsFavourite();
 	}
 }
 
