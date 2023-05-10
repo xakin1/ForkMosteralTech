@@ -1,5 +1,6 @@
 package com.apm.monsteraltech.ui.activities.camera
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -10,10 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
@@ -27,7 +25,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.R
-import com.apm.monsteraltech.ui.activities.main.fragments.add.AddFragment
 import com.bumptech.glide.Glide
 import java.io.File
 import java.text.SimpleDateFormat
@@ -46,6 +43,7 @@ class CameraActivity : AppCompatActivity() {
     private var PICK_IMAGE_MULTIPLE = 8
     private var MAX_DESCRIPTION_LENGTH = 200
     private var MAX_TITLE_LENGTH = 50
+    private val returnIntent = Intent()
 
 
     private val openGalleryForImages = registerForActivityResult(
@@ -108,6 +106,7 @@ class CameraActivity : AppCompatActivity() {
 
         imageRecyclerView = findViewById(R.id.image_recycler_view)
 
+        PICK_IMAGE_MULTIPLE = intent.getIntExtra("MAX_IMAGES", 8)
 
         // Inicializa el adaptador de imágenes
         selectedImages = ArrayList()
@@ -159,9 +158,12 @@ class CameraActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.ok_button).setOnClickListener {
-            //Pasar selectedImages al fragmento addProduct
-            val intent = Intent(this, AddFragment::class.java)
-            startActivity(intent)
+            //Devolver los valores de selectedimages a addfragment
+            Log.d("CameraActivity", "Imagenes seleccionadas: ${selectedImages.size}")
+
+            returnIntent.putExtra("selectedImages", selectedImages)
+            setResult(Activity.RESULT_OK, returnIntent)
+            finish()
         }
 
         outputDirectory = getOutputDirectory()
@@ -169,6 +171,7 @@ class CameraActivity : AppCompatActivity() {
         cameraExecutor = Executors.newSingleThreadExecutor()
 
     }
+
 
     private fun takePhoto() {
 

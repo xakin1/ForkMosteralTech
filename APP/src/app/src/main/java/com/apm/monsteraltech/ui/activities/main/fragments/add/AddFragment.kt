@@ -1,18 +1,24 @@
 package com.apm.monsteraltech.ui.activities.main.fragments.add
 
+import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.InputFilter
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+
 import androidx.fragment.app.Fragment
-import com.apm.monsteraltech.R
 import com.apm.monsteraltech.ui.activities.camera.CameraActivity
+import com.apm.monsteraltech.R
 import com.bumptech.glide.Glide
+import kotlin.collections.ArrayList
 
 //TODO: Limitar bien las fotos y los caracteres de la descripción y titulo.
 class AddFragment : Fragment() {
@@ -21,11 +27,27 @@ class AddFragment : Fragment() {
 
     private lateinit var imageGridView: GridView
     private lateinit var imageAdapter: ImageAdapter
-    private lateinit var selectedImages: ArrayList<Uri>
+    private var selectedImages: ArrayList<Uri> = ArrayList()
     private var PICK_IMAGE_MULTIPLE = 8
     private var MAX_DESCRIPTION_LENGTH = 200
     private var MAX_TITLE_LENGTH = 50
 
+
+    private val startForResult = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result: ActivityResult ->
+        if (result.resultCode == RESULT_OK) {
+            val data = result.data
+            data?.let { intentData ->
+                val images = intentData.getParcelableArrayListExtra<Uri>("selectedImages")
+                if (images != null) {
+                    selectedImages.addAll(images)
+                    imageAdapter.notifyDataSetChanged()
+                }
+            }
+            Log.d("AddFragment", "Imagenes seleccionadas: ${selectedImages.size}")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,23 +74,24 @@ class AddFragment : Fragment() {
         imageGridView.adapter = imageAdapter
 
 
-
-
         // Controlamos el boton de agregar imagenes
         addImageButton.setOnClickListener {
-            val intent = Intent(requireContext(), CameraActivity::class.java)
-            startActivity(intent)
+            if (selectedImages.size >= PICK_IMAGE_MULTIPLE) {
+                Toast.makeText(
+                    requireContext(),
+                    "No puedes tener más de 8 imágenes",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            } else {
+                val intent = Intent(requireContext(), CameraActivity::class.java)
+                intent.putExtra("MAX_IMAGES", PICK_IMAGE_MULTIPLE - selectedImages.size)
+                startForResult.launch(intent)
+            }
         }
-
-
-
-
 
         // Inflate the layout for this fragment
         return view
-
-
-
     }
 
     private class ImageAdapter(private val context: Context, private val images: ArrayList<Uri>) : BaseAdapter() {
@@ -95,7 +118,7 @@ class AddFragment : Fragment() {
             return position.toLong()
         }
 
-        override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             var view = convertView
             if (view == null) {
                 view = LayoutInflater.from(context).inflate(R.layout.grid_item_image, parent, false)
