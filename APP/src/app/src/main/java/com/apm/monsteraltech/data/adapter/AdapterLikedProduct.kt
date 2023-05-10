@@ -12,9 +12,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.data.dto.LikedProduct
+import com.apm.monsteraltech.services.FavouriteService
+import com.apm.monsteraltech.services.ProductService
+import com.apm.monsteraltech.services.ServiceFactory
+import java.time.LocalDate
 
 class AdapterLikedProduct(private var productList: List<LikedProduct>): RecyclerView.Adapter<AdapterLikedProduct.ViewHolder>() {
     private lateinit var listener: OnItemClickedListener
+
 
     interface OnItemClickedListener{
         fun onItemClick(position: Int)
@@ -24,6 +29,8 @@ class AdapterLikedProduct(private var productList: List<LikedProduct>): Recycler
         this.listener = listener
     }
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val serviceFactory = ServiceFactory()
+        private val favouriteService = serviceFactory.createService(FavouriteService::class.java)
         private val textProductName: TextView = itemView.findViewById(R.id.product_name)
         private val imageProduct: ImageView = itemView.findViewById(R.id.product_image_imageview)
         private val textPrice: TextView = itemView.findViewById(R.id.product_price)
@@ -58,8 +65,8 @@ class AdapterLikedProduct(private var productList: List<LikedProduct>): Recycler
             return trimmedDescription
         }
         private fun likeAnimation(imageView: LottieAnimationView,
-                                  animation: Int,
-                                  like: Boolean) : Boolean {
+                                          animation: Int,
+                                          like: Boolean) : Boolean {
 
             if (!like) {
                 imageView.setAnimation(animation)
@@ -79,6 +86,8 @@ class AdapterLikedProduct(private var productList: List<LikedProduct>): Recycler
                     })
 
             }
+
+
 
             return !like
         }

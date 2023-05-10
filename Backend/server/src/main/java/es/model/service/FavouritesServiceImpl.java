@@ -91,4 +91,9 @@ public class FavouritesServiceImpl implements FavouritesService {
 	    return favouritesRepository
 	        .findByAppuserId(userId, pageable);
 	  }
+
+	@Override
+	public void deleteFavouriteAppuserIdAndProductId(String appuserId, Long productId) {
+		favouritesRepository.deleteFavouriteByAppuserIdAndProductId(appuserId,productId);		
+	}
 }

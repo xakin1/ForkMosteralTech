@@ -20,4 +20,6 @@ public interface FavouritesService {
       throws OperationNotAllowedException;
 
   void delete(Long id);
+
+  void deleteFavouriteAppuserIdAndProductId(String appuserId, Long productId);
 }

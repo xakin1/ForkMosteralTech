@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -111,10 +112,10 @@ public class FavouritesResource {
     }
   }
 
-  @DeleteMapping("/{id}")
-  public ResponseEntity<Void> delete(@PathVariable Long id) {
+  @DeleteMapping("/{appuserId}")
+  public ResponseEntity<Void> delete(@PathVariable String appuserId, @RequestParam Long productId) {
     try {
-      favouritesService.delete(id);
+      favouritesService.deleteFavouriteAppuserIdAndProductId(appuserId,productId);
     } catch (Exception e) {
       logger.error(e.getMessage(), e);
       return ResponseEntity.status(HttpStatus.BAD_REQUEST)
