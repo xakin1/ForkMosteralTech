@@ -135,18 +135,6 @@
             android:exported="false"
             android:screenOrientation="sensor" />
         <activity
-            android:name=".ui.activities.actionBar.SearchActivity"
-            android:exported="false"
-            android:label="@string/title_activity_search"
-            android:screenOrientation="sensor"
-            android:theme="@style/Theme.MonsteralTech.NoActionBar" />
-        <activity
-            android:name=".ui.activities.favorites.FavoritesActivity"
-            android:exported="false"
-            android:label="@string/title_activity_favorites"
-            android:screenOrientation="sensor"
-            android:theme="@style/Theme.MonsteralTech.NoActionBar" />
-        <activity
             android:name=".ui.activities.login.register.RegisterActivity"
             android:exported="false"
             android:screenOrientation="sensor" />

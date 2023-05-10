@@ -94,9 +94,6 @@ class ProductDetail : ActionBarActivity() {
 
         // Agregar las imágenes del producto a la lista recuperandolas del servidor
         getDrawable(R.drawable.recyclerbin)?.let { imagenes.add(it) }
-        getDrawable(R.drawable.ebay_icon)?.let { imagenes.add(it) }
-        getDrawable(R.drawable.wallapopicon)?.let { imagenes.add(it) }
-
         return imagenes
     }
 

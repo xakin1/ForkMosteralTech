@@ -79,8 +79,6 @@ class AddFragment : Fragment() {
         imageGridView.adapter = imageAdapter
 
 
-
-
         // Controlamos el boton de agregar imagenes
         addImageButton.setOnClickListener {
             if (selectedImages.size >= PICK_IMAGE_MULTIPLE) {
@@ -95,19 +93,10 @@ class AddFragment : Fragment() {
                 intent.putExtra("MAX_IMAGES", PICK_IMAGE_MULTIPLE - selectedImages.size)
                 startForResult.launch(intent)
             }
-
-
         }
-
-
-
-
 
         // Inflate the layout for this fragment
         return view
-
-
-
     }
 
     private class ImageAdapter(private val context: Context, private val images: ArrayList<Uri>) : BaseAdapter() {
@@ -134,7 +123,7 @@ class AddFragment : Fragment() {
             return position.toLong()
         }
 
-        override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             var view = convertView
             if (view == null) {
                 view = LayoutInflater.from(context).inflate(R.layout.grid_item_image, parent, false)
