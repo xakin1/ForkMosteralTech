@@ -6,7 +6,6 @@ import android.widget.Button
 import androidx.lifecycle.lifecycleScope
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.data.dto.LikedProductResponse
-import com.apm.monsteraltech.data.dto.ProductResponse
 import com.apm.monsteraltech.services.ProductService
 import com.apm.monsteraltech.services.ServiceFactory
 import com.apm.monsteraltech.ui.activities.main.fragments.products.categories.filters.FurnitureFilterActivity
@@ -21,7 +20,7 @@ class ShowFurnitureActivity : BaseProductsActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_show_house_home)
+        setContentView(R.layout.activity_show_house)
         super.recyclerViewProducts = findViewById(R.id.RecyclerViewProducts)
         super.context = this@ShowFurnitureActivity
         setToolBar()

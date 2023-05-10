@@ -13,7 +13,7 @@ import com.google.android.material.button.MaterialButtonToggleGroup
 class HouseFilterActivity : ActionBarActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home_filter)
+        setContentView(R.layout.activity_house_filter)
         setToolBar()
         var button = findViewById<Button>(R.id.applyFilter)
         button.setOnClickListener{applyFilter()}

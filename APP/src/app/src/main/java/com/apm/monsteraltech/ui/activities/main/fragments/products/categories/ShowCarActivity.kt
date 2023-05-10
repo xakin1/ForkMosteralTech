@@ -6,7 +6,6 @@ import android.widget.Button
 import androidx.lifecycle.lifecycleScope
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.data.dto.LikedProductResponse
-import com.apm.monsteraltech.data.dto.ProductResponse
 import com.apm.monsteraltech.services.ProductService
 import com.apm.monsteraltech.services.ServiceFactory
 import com.apm.monsteraltech.ui.activities.main.fragments.products.categories.filters.CarFilterActivity
@@ -20,7 +19,7 @@ class ShowCarActivity : BaseProductsActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_show_car_home)
+        setContentView(R.layout.activity_show_car)
         super.recyclerViewProducts = findViewById(R.id.RecyclerViewProducts)
         super.context = this@ShowCarActivity
         setToolBar()
