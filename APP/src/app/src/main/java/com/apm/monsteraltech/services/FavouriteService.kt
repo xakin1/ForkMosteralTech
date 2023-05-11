@@ -1,8 +1,6 @@
 package com.apm.monsteraltech.services
 
-import com.apm.monsteraltech.data.dto.FavouritesResponse
-import com.apm.monsteraltech.data.dto.Product
-import com.apm.monsteraltech.data.dto.User
+import com.apm.monsteraltech.data.dto.*
 import retrofit2.http.*
 import java.time.LocalDate
 
@@ -13,9 +11,7 @@ interface FavouriteService {
 
     @POST("/api/entities/favourites/")
     suspend fun makeFavourite(
-        @Body user: User,
-        @Body product: Product,
-        @Body date: LocalDate
+        @Body favouriteRequest: FavouriteRequest
     )
 
     @DELETE("/api/entities/favourites/{appuserId}")
@@ -23,8 +19,4 @@ interface FavouriteService {
         @Path("appuserId") appuserId: String,
         @Query("productId") productId: Number
     )
-
-    @GET("/api/entities/favourites/{userId}")
-    suspend fun deleteFavourite(@Path("userId") userId: String,@Query("productId") productId: Number)
-
 }

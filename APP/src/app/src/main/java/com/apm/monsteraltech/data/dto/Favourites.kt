@@ -17,6 +17,11 @@ data class FavouritesResponse(
     val empty: Boolean
 )
 
+data class FavouriteRequest(
+    val user: User,
+    val product: LikedProduct,
+    val date: String
+)
 
 data class Favourites(
     val id: Long,

@@ -11,11 +11,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.apm.monsteraltech.R
+import com.apm.monsteraltech.data.dto.FavouriteRequest
 import com.apm.monsteraltech.data.dto.LikedProduct
 import com.apm.monsteraltech.services.FavouriteService
-import com.apm.monsteraltech.services.ProductService
 import com.apm.monsteraltech.services.ServiceFactory
+import com.apm.monsteraltech.services.UserService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class AdapterLikedProduct(private var productList: List<LikedProduct>): RecyclerView.Adapter<AdapterLikedProduct.ViewHolder>() {
     private lateinit var listener: OnItemClickedListener
@@ -36,6 +41,8 @@ class AdapterLikedProduct(private var productList: List<LikedProduct>): Recycler
         private val textPrice: TextView = itemView.findViewById(R.id.product_price)
         private val textDescription: TextView = itemView.findViewById(R.id.product_description)
         private val likeButton: LottieAnimationView = itemView.findViewById(R.id.product_like_button)
+        private val userService = serviceFactory.createService(UserService::class.java)
+
 
 
         @SuppressLint("StringFormatMatches")
@@ -51,7 +58,7 @@ class AdapterLikedProduct(private var productList: List<LikedProduct>): Recycler
                 likeButton.setImageResource(R.drawable.like_empty);
             }
             likeButton.setOnClickListener {
-                likeAnimation(likeButton, R.raw.bandai_dokkan, product.favourite)
+                likeAnimation(likeButton, R.raw.bandai_dokkan, product)
             }
         }
 
@@ -66,11 +73,17 @@ class AdapterLikedProduct(private var productList: List<LikedProduct>): Recycler
         }
         private fun likeAnimation(imageView: LottieAnimationView,
                                           animation: Int,
-                                          like: Boolean) : Boolean {
+                                          product: LikedProduct) : Boolean {
 
-            if (!like) {
+            if (!product.favourite) {
                 imageView.setAnimation(animation)
                 imageView.playAnimation()
+                CoroutineScope(Dispatchers.IO).launch {
+                    var user = userService.getUserById("fAsTAzll1fbLRMczYPlOKOcdw6H3")
+                    val currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+
+                    favouriteService.makeFavourite(FavouriteRequest(user, product, currentDate))
+                }
             } else {
                 imageView.animate()
                     .alpha(0f)
@@ -82,16 +95,15 @@ class AdapterLikedProduct(private var productList: List<LikedProduct>): Recycler
                             imageView.setImageResource(R.drawable.like_empty)
                             imageView.alpha = 1f
                         }
-
                     })
-
+                CoroutineScope(Dispatchers.IO).launch {
+                    var user = userService.getUserById("fAsTAzll1fbLRMczYPlOKOcdw6H3")
+                    favouriteService.quitFavourite(user.id, product.id)
+                }
             }
-
-
-
-            return !like
+            product.favourite = !product.favourite
+            return product.favourite
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

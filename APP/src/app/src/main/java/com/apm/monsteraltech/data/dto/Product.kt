@@ -75,7 +75,7 @@ data class LikedProduct(
     val description: String?,
     val state: State?,
     val images: List<ProductImage>?,
-    val favourite: Boolean
+    var favourite: Boolean
 )
 
 data class Product(

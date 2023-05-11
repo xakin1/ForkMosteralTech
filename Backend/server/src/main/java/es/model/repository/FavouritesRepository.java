@@ -21,7 +21,6 @@ public interface FavouritesRepository
 
   Page<Favourites> findByAppuserId(String userId, Pageable pageable);
 
-  @Transactional
   void deleteFavouriteByAppuserIdAndProductId(String appuserId, Long productId);
 
 }

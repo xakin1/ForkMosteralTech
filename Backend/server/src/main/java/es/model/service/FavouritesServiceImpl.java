@@ -92,7 +92,7 @@ public class FavouritesServiceImpl implements FavouritesService {
 	        .findByAppuserId(userId, pageable);
 	  }
 
-	@Override
+  	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public void deleteFavouriteAppuserIdAndProductId(String appuserId, Long productId) {
 		favouritesRepository.deleteFavouriteByAppuserIdAndProductId(appuserId,productId);		
 	}
