@@ -90,6 +90,10 @@ class AddFragment : Fragment() {
             }
         }
 
+        addButton.setOnClickListener {
+
+        }
+
         // Inflate the layout for this fragment
         return view
     }

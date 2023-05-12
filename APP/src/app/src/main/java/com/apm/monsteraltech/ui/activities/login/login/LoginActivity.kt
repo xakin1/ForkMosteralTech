@@ -40,9 +40,8 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.map
 
 val Context.dataStore by preferencesDataStore(name = "USER")
 
@@ -188,20 +187,25 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun getKeyFromDatabase(user: FirebaseUser?) {
-        CoroutineScope(Dispatchers.IO).launch {
+            CoroutineScope(Dispatchers.IO).launch {
 
             var response: User = user?.let { userService.getUserById(it.uid) } as User
             user.getIdToken(true).addOnSuccessListener { result ->
                 val idToken = result.token.toString()
                 lifecycleScope.launch(Dispatchers.IO) {
-                    response.firebaseToken = idToken
-                    response.id.let { userService.updateUser(it,response) }
-                    response.surname.let { saveUserOnDatastore(response.name, it, idToken) }
-                    //userService.updateUserToken(userKey, idToken)
+                    withContext(Dispatchers.Main) {
+                        try {
+                            response.firebaseToken = idToken
+                            saveUserOnDatastore(response.name, response.surname, idToken)
+                            userService.updateUser(response.id, response)
+                            moveToMainMenu()
+                        } catch (e: Exception) {
+                            Log.d("ERROR LOGIN", e.toString())
+                        }
+                    }
                 }
             }
         }
-
     }
 
     private suspend fun saveUserOnDatastore(userName: String, userLastname: String, userFirebaseKey: String) {
@@ -210,6 +214,16 @@ class LoginActivity : AppCompatActivity() {
             preferences[stringPreferencesKey("userLastname")] = userLastname
             preferences[stringPreferencesKey("userFirebaseKey")] = userFirebaseKey
         }
+    }
+    private suspend fun getUserDataFromDatastore()  = this.dataStore.data.map { preferences  ->
+        User(
+            id = "",
+            name = preferences[stringPreferencesKey("userName")].orEmpty(),
+            surname = preferences[stringPreferencesKey("userLastname")].orEmpty(),
+            firebaseToken = preferences[stringPreferencesKey("userFirebaseKey")].orEmpty(),
+            location = null,
+            expirationDatefirebaseToken = null
+        )
     }
 
 
@@ -301,7 +315,6 @@ class LoginActivity : AppCompatActivity() {
         if(user != null) {
             val userId = user.uid
             getKeyFromDatabase(user)
-            moveToMainMenu()
         }
     }
 

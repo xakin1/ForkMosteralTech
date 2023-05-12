@@ -22,6 +22,7 @@ class ProductDetail : ActionBarActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_detail)
+        setToolBar()
         //TODO: Si price o productDescription son null hay que recoger los datos de la base de datos
         //TODO: Deberiamos pasarle un id de producto cuando lo tengamos
         val productName = intent.getStringExtra("Product")

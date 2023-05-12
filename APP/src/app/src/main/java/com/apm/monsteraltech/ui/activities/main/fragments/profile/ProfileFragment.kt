@@ -1,6 +1,7 @@
 package com.apm.monsteraltech.ui.activities.main.fragments.profile
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,6 +31,7 @@ import com.apm.monsteraltech.ui.activities.productDetail.ProductDetail
 import com.apm.monsteraltech.ui.activities.user.detailUserProfile.DetailedProfileActivity
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.map
+
 
 @Suppress("DEPRECATION")
 class ProfileFragment : Fragment() {
@@ -87,9 +90,9 @@ class ProfileFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         // Inicialmente muestra la lista de productos
-        lifecycleScope.launch(Dispatchers.IO) {
+/*        lifecycleScope.launch(Dispatchers.IO) {
             showProductList()
-        }
+        }*/
         btnTransaction.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_700))
         btnProducts.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
 
@@ -140,7 +143,7 @@ class ProfileFragment : Fragment() {
         btnTransaction.setOnClickListener(onClickListener)
 
         //LLamamos a la actividad producto detail
-        this.adapterProduct.setOnItemClickListener(object:
+/*        this.adapterProduct.setOnItemClickListener(object:
             AdapterProductsData.OnItemClickedListener {
             override fun onItemClick(position: Int) {
                 recyclerView.getChildAt(position)
@@ -150,7 +153,7 @@ class ProfileFragment : Fragment() {
                 intent.putExtra("Price", adapterProduct.getProduct(position).price)
                 startActivity(intent)
             }
-        })
+        })*/
 
         profileLayout = view.findViewById(R.id.profile)
         profileLayout.setOnClickListener {
@@ -248,7 +251,7 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun getUserDataFromDatastore()  = context?.dataStore?.data?.map { preferences  ->
+    private fun getUserDataFromDatastore()  = requireContext().dataStore.data.map { preferences  ->
         User(
             id = "",
             name = preferences[stringPreferencesKey("userName")].orEmpty(),

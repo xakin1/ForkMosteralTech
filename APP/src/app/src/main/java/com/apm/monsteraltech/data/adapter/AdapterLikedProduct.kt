@@ -53,9 +53,10 @@ class AdapterLikedProduct(private var productList: List<LikedProduct>): Recycler
             textPrice.text = itemView.context.getString(R.string.product_price, product.price)
             textDescription.text = trimText(product.description.toString())
             if (product.favourite) {
-                likeButton.setImageResource(R.drawable.like_full);
+                likeButton.setImageResource(R.drawable.like_full)
+                likeButton.
             } else {
-                likeButton.setImageResource(R.drawable.like_empty);
+                likeButton.setImageResource(R.drawable.like_empty)
             }
             likeButton.setOnClickListener {
                 likeAnimation(likeButton, R.raw.bandai_dokkan, product)
