@@ -83,4 +83,10 @@ public class ProductImage {
   public void setEntity(Product product) {
     this.product = product;
   }
+
+public void setProduct(Product product) {
+	this.product = product;
+}
+  
+  
 }

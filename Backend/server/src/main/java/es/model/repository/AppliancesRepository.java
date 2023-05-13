@@ -1,6 +1,5 @@
 package es.model.repository;
 
-import es.model.domain.Appliances;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +11,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import es.model.domain.Appliances;
-import es.model.domain.Product;
 
 public interface AppliancesRepository
     extends JpaRepository<Appliances, Long>, JpaSpecificationExecutor<Appliances> {
