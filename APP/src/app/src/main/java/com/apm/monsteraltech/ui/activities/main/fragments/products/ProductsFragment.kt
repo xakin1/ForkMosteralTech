@@ -3,12 +3,11 @@ package com.apm.monsteraltech.ui.activities.main.fragments.products
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.NonNull
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,9 +17,12 @@ import com.apm.monsteraltech.data.adapter.AdapterFilters
 import com.apm.monsteraltech.data.adapter.AdapterLikedProduct
 import com.apm.monsteraltech.data.dto.LikedProduct
 import com.apm.monsteraltech.data.dto.LikedProductResponse
+import com.apm.monsteraltech.data.dto.User
 import com.apm.monsteraltech.services.ProductService
 import com.apm.monsteraltech.services.ServiceFactory
+import com.apm.monsteraltech.services.UserService
 import com.apm.monsteraltech.ui.activities.actionBar.Searchable
+import com.apm.monsteraltech.ui.activities.login.login.dataStore
 import com.apm.monsteraltech.ui.activities.main.fragments.products.categories.ShowCarActivity
 import com.apm.monsteraltech.ui.activities.main.fragments.products.categories.ShowAppliancesActivity
 import com.apm.monsteraltech.ui.activities.main.fragments.products.categories.ShowFurnitureActivity
@@ -28,6 +30,7 @@ import com.apm.monsteraltech.ui.activities.main.fragments.products.categories.Sh
 import com.apm.monsteraltech.ui.activities.productDetail.ProductDetail
 import com.apm.monsteraltech.ui.home.categories.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
@@ -41,7 +44,8 @@ class ProductsFragment : Fragment(), Searchable {
     private lateinit var adapterProduct: AdapterLikedProduct
     private val serviceFactory = ServiceFactory()
     private val productService = serviceFactory.createService(ProductService::class.java)
-
+    private val userService = serviceFactory.createService(UserService::class.java)
+    private lateinit var user: User
     private var context: Context? = null
 
     override fun onAttach(context: Context) {
@@ -55,7 +59,10 @@ class ProductsFragment : Fragment(), Searchable {
     ): View {
         val view : View = inflater.inflate(R.layout.fragment_products, container, false)
         lifecycleScope.launch(Dispatchers.IO) {
-            setProdructs(view)
+            getUserDataFromDatastore()?.collect { userData: User ->
+                user = userData.firebaseToken.let { userService.getUserByToken(it) }
+                setProducts(view)
+            }
         }
 
         setFilters(view)
@@ -99,7 +106,7 @@ class ProductsFragment : Fragment(), Searchable {
         })
     }
 
-    private suspend fun setProdructs(view: View){
+    private suspend fun setProducts(view: View){
         this.productsList = getProductList()
         val layoutManager = LinearLayoutManager(context)
         this.adapterProduct = AdapterLikedProduct(productsList)
@@ -109,33 +116,19 @@ class ProductsFragment : Fragment(), Searchable {
         var currentPage = 1;
         var pageSize: Number = 10;
 
-        adapterProduct.setOnItemClickListener(object: AdapterLikedProduct.OnItemClickedListener {
-            override fun onItemClick(position: Int) {
-                val intent = Intent(context,
-                    ProductDetail::class.java)
-                //TODO: ver que información es necesario pasarle
-                intent.putExtra("Product", adapterProduct.getProduct(position).name)
-                intent.putExtra("Price", adapterProduct.getProduct(position).price)
-                Log.d("HomeFragment", "Price: " + adapterProduct.getProduct(position).price)
-                //intent.putExtra("Description", adapterProduct.getProduct(position)?.description)
-                startActivity(intent)
-            }
-        })
-
         //LLamamos a la actividad producto detail
         adapterProduct.setOnItemClickListener(object: AdapterLikedProduct.OnItemClickedListener{
             override fun onItemClick(position: Int) {
+                val product = adapterProduct.getProduct(position)
                 val intent = Intent(context, ProductDetail::class.java)
-                //TODO: ver que información es necesario pasarle
-                intent.putExtra("Product", adapterProduct.getProduct(position).name)
-                intent.putExtra("Price", adapterProduct.getProduct(position).price)
-                //TODO: ver si ponerle la flecha para volver atrás (la documentación no lo recomienda)
+                intent.putExtra("Product", product.name)
+                intent.putExtra("Price", product.price)
                 startActivity(intent)
             }
         })
 
         productRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(@NonNull recyclerView: RecyclerView, dx: Int, dy: Int) {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
                 // Comprobar si el usuario ha llegado al final de la lista
@@ -175,7 +168,7 @@ class ProductsFragment : Fragment(), Searchable {
             val productList: ArrayList<LikedProduct> = ArrayList()
 
             // Obtiene las transacciones del usuario
-            val userProducts: LikedProductResponse = productService.getProductsWithFavourites("fAsTAzll1fbLRMczYPlOKOcdw6H3",0, 10)
+            val userProducts: LikedProductResponse = productService.getProductsWithFavourites(user.id,0, 10)
 
             // Agrega las transacciones del usuario a la lista
             for (product in userProducts.content) {
@@ -208,5 +201,16 @@ class ProductsFragment : Fragment(), Searchable {
         } else {
             adapterProduct.filterList(filteredlist)
         }
+    }
+
+    private fun getUserDataFromDatastore()  = context?.dataStore?.data?.map { preferences  ->
+        User(
+            id = "",
+            name = preferences[stringPreferencesKey("userName")].orEmpty(),
+            surname = preferences[stringPreferencesKey("userLastname")].orEmpty(),
+            firebaseToken = preferences[stringPreferencesKey("userFirebaseKey")].orEmpty(),
+            location = null,
+            expirationDatefirebaseToken = null
+        )
     }
 }

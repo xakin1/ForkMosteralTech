@@ -8,7 +8,7 @@ import com.apm.monsteraltech.R
 import com.apm.monsteraltech.data.dto.LikedProductResponse
 import com.apm.monsteraltech.services.ProductService
 import com.apm.monsteraltech.services.ServiceFactory
-import com.apm.monsteraltech.ui.activities.main.fragments.products.categories.filters.ElectronicFilterActivity
+import com.apm.monsteraltech.ui.activities.main.fragments.products.categories.filters.ApplianceFilterActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -20,7 +20,7 @@ class ShowAppliancesActivity : BaseProductsActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_show_house)
+        setContentView(R.layout.activity_show_appliances)
         super.recyclerViewProducts = findViewById(R.id.RecyclerViewProducts)
         super.context = this@ShowAppliancesActivity
         setToolBar()
@@ -32,7 +32,7 @@ class ShowAppliancesActivity : BaseProductsActivity() {
         var filter = findViewById<Button>(R.id.button_filter)
 
         filter.setOnClickListener {
-            var intent = Intent(this@ShowAppliancesActivity, ElectronicFilterActivity::class.java)
+            var intent = Intent(this@ShowAppliancesActivity, ApplianceFilterActivity::class.java)
             startActivity(intent)
         }
     }

@@ -45,7 +45,7 @@
                 android:value=".ui.activities.main.fragments.products.categories.ShowFurnitureActivity" />
         </activity>
         <activity
-            android:name=".ui.activities.main.fragments.products.categories.filters.ElectronicFilterActivity"
+            android:name=".ui.activities.main.fragments.products.categories.filters.ApplianceFilterActivity"
             android:exported="false"
             android:parentActivityName=".ui.activities.main.fragments.products.categories.ShowAppliancesActivity">
             <meta-data

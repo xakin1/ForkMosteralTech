@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,16 +15,17 @@ import com.apm.monsteraltech.R
 import com.apm.monsteraltech.data.adapter.AdapterLikedProduct
 import com.apm.monsteraltech.data.adapter.AdapterProduct
 import com.apm.monsteraltech.data.adapter.AdapterProductsData
-import com.apm.monsteraltech.data.dto.FavouritesResponse
-import com.apm.monsteraltech.data.dto.LikedProduct
-import com.apm.monsteraltech.data.dto.LikedProductResponse
-import com.apm.monsteraltech.data.dto.Product
+import com.apm.monsteraltech.data.dto.*
 import com.apm.monsteraltech.services.FavouriteService
 import com.apm.monsteraltech.services.ProductService
 import com.apm.monsteraltech.services.ServiceFactory
+import com.apm.monsteraltech.services.UserService
+import com.apm.monsteraltech.ui.activities.login.login.dataStore
 import com.apm.monsteraltech.ui.activities.productDetail.ProductDetail
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.produce
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.internal.wait
@@ -35,6 +37,9 @@ class FavFragment : Fragment() {
     private lateinit var productsList: ArrayList<LikedProduct>
     private val serviceFactory = ServiceFactory()
     private val favouriteService = serviceFactory.createService(FavouriteService::class.java)
+    private val userService = serviceFactory.createService(UserService::class.java)
+    private lateinit var user: User
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = inflater.inflate(R.layout.fragment_fav, container, false)
@@ -44,9 +49,13 @@ class FavFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         // Inicialmente muestra la lista de productos
-        lifecycleScope.launch(Dispatchers.IO) {
-            showProductList()
+        lifecycleScope.launch(Dispatchers.Main) {
+            getUserDataFromDatastore().collect { userData: User ->
+                user = userData.firebaseToken.let { userService.getUserByToken(it) }
+                showProductList()
+            }
         }
+
 
         return view
     }
@@ -76,7 +85,7 @@ class FavFragment : Fragment() {
             // Obtiene las transacciones del usuario
             val newData: FavouritesResponse =
                 favouriteService.getAllFavouriteProductsOfUser(
-                    "fAsTAzll1fbLRMczYPlOKOcdw6H3",
+                    user.id,
                     0, 10
                 )
             newData.content.forEach { favourites ->
@@ -85,6 +94,17 @@ class FavFragment : Fragment() {
             // Devuelve la lista completa
             productList
         }
+    }
+
+    private fun getUserDataFromDatastore()  = requireContext().dataStore.data.map { preferences  ->
+        User(
+            id = "",
+            name = preferences[stringPreferencesKey("userName")].orEmpty(),
+            surname = preferences[stringPreferencesKey("userLastname")].orEmpty(),
+            firebaseToken = preferences[stringPreferencesKey("userFirebaseKey")].orEmpty(),
+            location = null,
+            expirationDatefirebaseToken = null
+        )
     }
 
 }

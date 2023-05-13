@@ -11,10 +11,10 @@ import com.apm.monsteraltech.ui.activities.main.fragments.products.categories.Sh
 import com.google.android.material.button.MaterialButtonToggleGroup
 
 
-class ElectronicFilterActivity : ActionBarActivity() {
+class ApplianceFilterActivity : ActionBarActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_electronic_filter)
+        setContentView(R.layout.activity_appliance_filter)
         setToolBar()
         var button = findViewById<Button>(R.id.applyFilter)
         button.setOnClickListener{applyFilter()}

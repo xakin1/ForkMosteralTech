@@ -41,7 +41,7 @@ class ProfileFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapterProduct: AdapterProductsData
     private lateinit var userBd: User
-    private  var productList:  ArrayList<com.apm.monsteraltech.data.dto.Product>? = null
+    private  var productList:  ArrayList<Product>? = null
     private  var transactionList: ArrayList<Transaction>? = null
     private val serviceFactory = ServiceFactory()
     private val userService = serviceFactory.createService(UserService::class.java)
@@ -58,15 +58,15 @@ class ProfileFragment : Fragment() {
 
         lifecycleScope.launch(Dispatchers.IO) {
             withContext(Dispatchers.Main) {
-                getUserDataFromDatastore()?.collect { userData : User ->
-                        profileNameEditText.text = userData.name + " " + userData.surname
-                        userBd = userData.firebaseToken.let { userService.getUserByToken(it) }
-                        textPurchases.text=
-                            context?.getString(R.string.purchases,
-                                userBd.id.let { transactionService.countPurchases(it).toString() })
-                        textSales.text=
-                            context?.getString(R.string.sales,
-                                userBd.id.let { transactionService.countSales(it).toString() })
+                getUserDataFromDatastore().collect { userData : User ->
+                    profileNameEditText.text = userData.name + " " + userData.surname
+                    userBd = userData.firebaseToken.let { userService.getUserByToken(it) }
+                    textPurchases.text=
+                        context?.getString(R.string.purchases,
+                            userBd.id.let { transactionService.countPurchases(it).toString() })
+                    textSales.text=
+                        context?.getString(R.string.sales,
+                            userBd.id.let { transactionService.countSales(it).toString() })
                 }
             }
         }

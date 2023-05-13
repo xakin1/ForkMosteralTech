@@ -8,16 +8,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.data.dto.FavouriteRequest
 import com.apm.monsteraltech.data.dto.LikedProduct
+import com.apm.monsteraltech.data.dto.User
 import com.apm.monsteraltech.services.FavouriteService
 import com.apm.monsteraltech.services.ServiceFactory
 import com.apm.monsteraltech.services.UserService
+import com.apm.monsteraltech.ui.activities.login.login.dataStore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -43,8 +47,6 @@ class AdapterLikedProduct(private var productList: List<LikedProduct>): Recycler
         private val likeButton: LottieAnimationView = itemView.findViewById(R.id.product_like_button)
         private val userService = serviceFactory.createService(UserService::class.java)
 
-
-
         @SuppressLint("StringFormatMatches")
         fun setData(product: LikedProduct) {
             textProductName.text = product.name
@@ -54,7 +56,6 @@ class AdapterLikedProduct(private var productList: List<LikedProduct>): Recycler
             textDescription.text = trimText(product.description.toString())
             if (product.favourite) {
                 likeButton.setImageResource(R.drawable.like_full)
-                likeButton.
             } else {
                 likeButton.setImageResource(R.drawable.like_empty)
             }
@@ -79,11 +80,12 @@ class AdapterLikedProduct(private var productList: List<LikedProduct>): Recycler
             if (!product.favourite) {
                 imageView.setAnimation(animation)
                 imageView.playAnimation()
-                CoroutineScope(Dispatchers.IO).launch {
-                    var user = userService.getUserById("fAsTAzll1fbLRMczYPlOKOcdw6H3")
-                    val currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-
-                    favouriteService.makeFavourite(FavouriteRequest(user, product, currentDate))
+                CoroutineScope(Dispatchers.Main).launch {
+                    getUserDataFromDatastore().collect { userData : User ->
+                        val user = userData.firebaseToken.let { userService.getUserByToken(it) }
+                        val currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                        favouriteService.makeFavourite(FavouriteRequest(user, product, currentDate))
+                    }
                 }
             } else {
                 imageView.animate()
@@ -97,13 +99,26 @@ class AdapterLikedProduct(private var productList: List<LikedProduct>): Recycler
                             imageView.alpha = 1f
                         }
                     })
-                CoroutineScope(Dispatchers.IO).launch {
-                    var user = userService.getUserById("fAsTAzll1fbLRMczYPlOKOcdw6H3")
-                    favouriteService.quitFavourite(user.id, product.id)
+                CoroutineScope(Dispatchers.Main).launch {
+                    getUserDataFromDatastore().collect { userData : User ->
+                        val user = userData.firebaseToken.let { userService.getUserByToken(it) }
+                        favouriteService.quitFavourite(user.id, product.id)
+                    }
                 }
             }
             product.favourite = !product.favourite
             return product.favourite
+        }
+
+        private fun getUserDataFromDatastore()  = itemView.context.dataStore.data.map { preferences  ->
+            User(
+                id = "",
+                name = preferences[stringPreferencesKey("userName")].orEmpty(),
+                surname = preferences[stringPreferencesKey("userLastname")].orEmpty(),
+                firebaseToken = preferences[stringPreferencesKey("userFirebaseKey")].orEmpty(),
+                location = null,
+                expirationDatefirebaseToken = null
+            )
         }
     }
 

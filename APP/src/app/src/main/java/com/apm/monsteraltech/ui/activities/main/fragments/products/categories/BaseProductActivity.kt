@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,10 +14,15 @@ import com.apm.monsteraltech.R
 import com.apm.monsteraltech.data.adapter.AdapterLikedProduct
 import com.apm.monsteraltech.data.dto.LikedProduct
 import com.apm.monsteraltech.data.dto.LikedProductResponse
+import com.apm.monsteraltech.data.dto.User
+import com.apm.monsteraltech.services.ServiceFactory
+import com.apm.monsteraltech.services.UserService
 import com.apm.monsteraltech.ui.activities.actionBar.ActionBarActivity
+import com.apm.monsteraltech.ui.activities.login.login.dataStore
 import com.apm.monsteraltech.ui.activities.productDetail.ProductDetail
 import com.apm.monsteraltech.ui.home.categories.Filtros
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
@@ -28,6 +34,9 @@ abstract class BaseProductsActivity : ActionBarActivity() {
     protected lateinit var productsList: ArrayList<LikedProduct>
     protected lateinit var context: Context
     protected lateinit var recyclerViewProducts: RecyclerView
+    private val serviceFactory = ServiceFactory()
+    private val userService = serviceFactory.createService(UserService::class.java)
+    private lateinit var user: User
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +44,8 @@ abstract class BaseProductsActivity : ActionBarActivity() {
 
         applyFilters()
         lifecycleScope.launch(Dispatchers.IO) {
-            withContext(Dispatchers.Main) {
+            getUserDataFromDatastore()?.collect { userData: User ->
+                user = userData.firebaseToken.let { userService.getUserByToken(it) }
                 setProducts()
             }
         }
@@ -113,7 +123,7 @@ abstract class BaseProductsActivity : ActionBarActivity() {
                                 // Cargar más elementos y actualizar el adaptador
                                 val newData: LikedProductResponse =
                                     getSpecificProducts(
-                                        "fAsTAzll1fbLRMczYPlOKOcdw6H3",
+                                        user.id,
                                         currentPage,
                                         pageSize
                                     )
@@ -183,5 +193,15 @@ abstract class BaseProductsActivity : ActionBarActivity() {
         }
     }
 
+    private fun getUserDataFromDatastore()  = this.dataStore.data.map { preferences  ->
+        User(
+            id = "",
+            name = preferences[stringPreferencesKey("userName")].orEmpty(),
+            surname = preferences[stringPreferencesKey("userLastname")].orEmpty(),
+            firebaseToken = preferences[stringPreferencesKey("userFirebaseKey")].orEmpty(),
+            location = null,
+            expirationDatefirebaseToken = null
+        )
+    }
     abstract suspend fun getSpecificProducts(userId : String,page: Number, size: Number): LikedProductResponse
 }

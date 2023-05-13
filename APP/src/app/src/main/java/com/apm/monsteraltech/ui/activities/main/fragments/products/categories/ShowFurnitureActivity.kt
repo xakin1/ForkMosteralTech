@@ -20,7 +20,7 @@ class ShowFurnitureActivity : BaseProductsActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_show_house)
+        setContentView(R.layout.activity_show_furniture)
         super.recyclerViewProducts = findViewById(R.id.RecyclerViewProducts)
         super.context = this@ShowFurnitureActivity
         setToolBar()
