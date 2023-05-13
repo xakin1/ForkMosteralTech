@@ -3,8 +3,8 @@ package com.apm.monsteraltech.data.dto
 import com.apm.monsteraltech.enumerados.State
 import java.time.LocalDateTime
 
-data class transactionsResponse(
-    val content: List<User>,
+data class TransactionsResponse(
+    val content: List<Transaction>,
     val pageable: Pageable,
     val totalElements: Int,
     val totalPages: Int,

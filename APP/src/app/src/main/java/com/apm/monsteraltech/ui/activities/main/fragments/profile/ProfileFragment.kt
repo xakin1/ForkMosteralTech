@@ -1,7 +1,6 @@
 package com.apm.monsteraltech.ui.activities.main.fragments.profile
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,28 +8,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.data.adapter.AdapterProductsData
-import com.apm.monsteraltech.data.dto.Product
-import com.apm.monsteraltech.data.dto.Transaction
-import com.apm.monsteraltech.data.dto.User
+import com.apm.monsteraltech.data.dto.*
 import com.apm.monsteraltech.services.ProductService
 import com.apm.monsteraltech.services.ServiceFactory
 import com.apm.monsteraltech.services.TransactionService
 import com.apm.monsteraltech.services.UserService
 import com.apm.monsteraltech.ui.activities.login.login.dataStore
-import com.apm.monsteraltech.ui.activities.productDetail.ProductDetail
 import com.apm.monsteraltech.ui.activities.user.detailUserProfile.DetailedProfileActivity
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.map
+import retrofit2.HttpException
 
 
 @Suppress("DEPRECATION")
@@ -44,6 +41,7 @@ class ProfileFragment : Fragment() {
     private  var productList:  ArrayList<Product>? = null
     private  var transactionList: ArrayList<Transaction>? = null
     private val serviceFactory = ServiceFactory()
+    private lateinit var user: User
     private val userService = serviceFactory.createService(UserService::class.java)
     private val transactionService = serviceFactory.createService(TransactionService::class.java)
     private val productService = serviceFactory.createService(ProductService::class.java)
@@ -90,9 +88,13 @@ class ProfileFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         // Inicialmente muestra la lista de productos
-/*        lifecycleScope.launch(Dispatchers.IO) {
-            showProductList()
-        }*/
+        lifecycleScope.launch(Dispatchers.IO) {
+            getUserDataFromDatastore().collect { userData: User ->
+                user = userData.firebaseToken.let { userService.getUserByToken(it) }
+                showProductList()
+
+            }
+        }
         btnTransaction.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_700))
         btnProducts.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.teal_200))
 
@@ -181,30 +183,31 @@ class ProfileFragment : Fragment() {
 
 
     private suspend fun showProductList() {
-        productList = productList ?: getProductList().await()
-
-        this.adapterProduct = AdapterProductsData(productList!!)
-        recyclerView.adapter = adapterProduct
+        withContext(Dispatchers.Main) {
+            productList = productList ?: getProductList()
+            adapterProduct = AdapterProductsData(productList!!)
+            recyclerView.adapter = adapterProduct
+        }
     }
 
     private suspend fun showTransactionList() {
-        transactionList = transactionList ?: getTransactionList().await()
-        recyclerView.adapter = AdapterTransactionData(transactionList!!)
+        withContext(Dispatchers.Main) {
+            transactionList = transactionList ?: getTransactionList()
+            recyclerView.adapter = AdapterTransactionData(transactionList!!)
+        }
     }
 
-    private fun getTransactionList(): Deferred<ArrayList<Transaction>> {
-        //TODO: Cargar los productos desde la base de datos o de otro recurso externo
-        // Agrega algunas transacciones a la lista para mockear la respuesta
+    private suspend fun getTransactionList(): ArrayList<Transaction> {
 
-        return lifecycleScope.async(Dispatchers.IO) {
+        return withContext(lifecycleScope.coroutineContext + Dispatchers.Main) {
             val transactionList: ArrayList<Transaction> = ArrayList()
-
             // Obtiene las transacciones del usuario
-            val userTransaction: List<Transaction> =transactionService.getAllTransactions(0, 10, userBd.id )
-
-            // Agrega las transacciones del usuario a la lista
-            for (transaction in userTransaction) {
-                val transactionItem =
+            try{
+                val userTransaction: TransactionsResponse =
+                    transactionService.getAllTransactions(userBd.id,0, 10)
+                // Agrega las transacciones del usuario a la lista
+                for (transaction in userTransaction.content) {
+                    val transactionItem =
                         Transaction(
                             transaction.id,
                             transaction.date,
@@ -216,35 +219,70 @@ class ProfileFragment : Fragment() {
                             transaction.description,
                             transaction.date.toString()
                         )
-                transactionList.add(transactionItem)
+                    transactionList.add(transactionItem)
+                }
+                // Devuelve la lista completa
+                return@withContext transactionList
+            } catch (e: HttpException){
+                if (e.code() == 404) {
+                        Toast.makeText(
+                            requireContext(),
+                            "No hay transacciones disponibles",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                }
+                else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Ha ocurrido un error inesperado",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
-            // Devuelve la lista completa
             transactionList
         }
     }
 
-    private fun getProductList(): Deferred<ArrayList<Product>> {
+    private suspend fun getProductList(): ArrayList<Product> {
         // Agrega algunas transacciones a la lista para mockear la respuesta
 
-        return lifecycleScope.async(Dispatchers.IO) {
+        return withContext(lifecycleScope.coroutineContext + Dispatchers.IO) {
             val productList: ArrayList<Product> = ArrayList()
+            try {
+                // Obtiene las transacciones del usuario
+                val userProducts: ProductResponse =
+                    productService.getAllProductsOfUser(user.id, 0, 10)
 
-            // Obtiene las transacciones del usuario
-            val userProducts: List<Product> =
-                userBd.let { productService.getAllProductsOfUser(it.id,0, 10) }
-
-            // Agrega las transacciones del usuario a la lista
-            for (product in userProducts) {
-                val productItem = Product(
-                    product.id,
-                    product.name,
-                    product.price,
-                    product.description,
-                    product.state,
-                    product.images,
-                    product.owner
-                )
-                productList.add(productItem)
+                // Agrega las transacciones del usuario a la lista
+                for (product in userProducts.content) {
+                    val productItem = Product(
+                        product.id,
+                        product.name,
+                        product.price,
+                        product.description,
+                        product.state,
+                        product.images,
+                        product.owner
+                    )
+                    productList.add(productItem)
+                }
+                return@withContext productList
+            }
+            catch (e: HttpException){
+                if (e.code() == 404) {
+                    Toast.makeText(
+                        requireContext(),
+                        "No hay Productos disponibles",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Ha ocurrido un error inesperado",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
             // Devuelve la lista completa
             productList
