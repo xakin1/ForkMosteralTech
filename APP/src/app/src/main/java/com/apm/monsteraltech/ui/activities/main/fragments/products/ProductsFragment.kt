@@ -141,7 +141,7 @@ class ProductsFragment : Fragment(), Searchable {
                     lifecycleScope.launch(Dispatchers.IO) {
                         // Cargar más elementos y actualizar el adaptador
                         val newData: LikedProductResponse =
-                            productService.getProductsWithFavourites("fAsTAzll1fbLRMczYPlOKOcdw6H3",currentPage, pageSize)
+                            productService.getProductsWithFavourites(user.id,currentPage, pageSize)
                         productsList.addAll(newData.content)
                         productRecyclerView.post {
                             adapterProduct.notifyDataSetChanged()

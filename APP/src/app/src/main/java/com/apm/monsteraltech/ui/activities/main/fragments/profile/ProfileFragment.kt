@@ -38,6 +38,7 @@ class ProfileFragment : Fragment() {
     private lateinit var profileLayout: ConstraintLayout
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapterProduct: AdapterProductsData
+    private lateinit var adapterTransaction: AdapterTransactionData
     private lateinit var userBd: User
     private  var productList:  ArrayList<Product>? = null
     private  var transactionList: ArrayList<Transaction>? = null
@@ -67,9 +68,9 @@ class ProfileFragment : Fragment() {
                         context?.getString(R.string.sales,
                             userBd.id.let { transactionService.countSales(it).toString() })
                 }
+
             }
         }
-
 
 
         if (savedInstanceState != null) {
@@ -172,11 +173,19 @@ class ProfileFragment : Fragment() {
     }
 
 
+    private fun updateButtonBackground(button: Button, colorResId: Int) {
+        button.setBackgroundColor(ContextCompat.getColor(requireContext(), colorResId))
+    }
+
     private suspend fun showProductList() {
         withContext(Dispatchers.Main) {
-            productList = productList ?: getProductList()
-            adapterProduct = AdapterProductsData(productList!!)
-            recyclerView.adapter = adapterProduct
+            var currentPage = 0
+            val pageSize = 10
+            if (productList.isNullOrEmpty()) {
+                productList = productList ?: getProductList()
+                adapterProduct = AdapterProductsData(productList!!)
+                recyclerView.adapter = adapterProduct
+            }
 
             //LLamamos a la actividad producto detail
             adapterProduct.setOnItemClickListener(object:
@@ -192,15 +201,107 @@ class ProfileFragment : Fragment() {
                     startActivity(intent)
                 }
             })
+
+            recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+
+                    // Check if the user has reached the end of the list
+                    if (dy < 0 && !recyclerView.canScrollVertically(1)) {
+                        currentPage++
+                        lifecycleScope.launch(Dispatchers.Main) {
+                            try {
+                                // Load more items and update the adapter
+                                val newData: ProductResponse =
+                                    productService.getAllProductsOfUser(
+                                        user.id,
+                                        currentPage,
+                                        pageSize
+                                    )
+                                productList!!.addAll(newData.content)
+                                adapterProduct.notifyDataSetChanged()
+                            } catch (e: HttpException){
+                                if (e.code() == 404) {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "No hay más productos",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                                else {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Ha ocurrido un error inesperado",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+                        }
+                    }
+                }
+            })
         }
     }
 
     private suspend fun showTransactionList() {
         withContext(Dispatchers.Main) {
-            transactionList = transactionList ?: getTransactionList()
-            recyclerView.adapter = AdapterTransactionData(transactionList!!)
+            var currentPage = 0
+            val pageSize = 10
+
+            // Verificar si ya se ha cargado la primera página de transacciones
+            if (transactionList.isNullOrEmpty()) {
+                transactionList = getTransactionList()
+                adapterTransaction = AdapterTransactionData(transactionList!!)
+                recyclerView.adapter = adapterTransaction
+            }
+
+            recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+
+                    // Comprobar si el usuario ha llegado al final de la lista
+                    if (dy < 0 && !recyclerView.canScrollVertically(1)) {
+                        currentPage++
+                        lifecycleScope.launch(Dispatchers.Main) {
+                            try {
+                                // Cargar más elementos y actualizar el adaptador
+                                val newData: TransactionsResponse =
+                                    transactionService.getAllTransactions(
+                                        user.id,
+                                        currentPage,
+                                        pageSize
+                                    )
+
+                                // Verificar si los datos ya existen en la lista de transacciones
+                                if (newData.content.none { transactionList?.contains(it) == true }) {
+                                    transactionList!!.addAll(newData.content)
+                                    recyclerView.post {
+                                        adapterTransaction.notifyDataSetChanged()
+                                    }
+                                }
+                            } catch (e: HttpException) {
+                                if (e.code() == 404) {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "No hay más transacciones disponibles",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                } else {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Ha ocurrido un error inesperado",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+                        }
+                    }
+                }
+            })
         }
     }
+
+
 
     private suspend fun getTransactionList(): ArrayList<Transaction> {
 
