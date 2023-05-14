@@ -12,11 +12,11 @@ interface TransactionService {
 
     @GET("/api/entities/transactions/purchases")
     suspend fun getPurchases(@Query("page") page: Number, @Query("size") size: Number,
-                               @Query("userId") userId: String): List<Transaction>
+                               @Query("userId") userId: String): TransactionsResponse
 
     @GET("/api/entities/transactions/sales")
     suspend fun getSales(@Query("page") page: Number, @Query("size") size: Number,
-                               @Query("userId") userId: String): List<Transaction>
+                               @Query("userId") userId: String): TransactionsResponse
 
     @GET("/api/entities/transactions/all/{userId}")
     suspend fun getAllTransactions(@Path("userId") userId: String, @Query("page") page: Number, @Query("size") size: Number,

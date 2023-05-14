@@ -24,6 +24,7 @@ import com.apm.monsteraltech.services.ServiceFactory
 import com.apm.monsteraltech.services.TransactionService
 import com.apm.monsteraltech.services.UserService
 import com.apm.monsteraltech.ui.activities.login.login.dataStore
+import com.apm.monsteraltech.ui.activities.productDetail.ProductDetail
 import com.apm.monsteraltech.ui.activities.user.detailUserProfile.DetailedProfileActivity
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.map
@@ -91,7 +92,9 @@ class ProfileFragment : Fragment() {
         lifecycleScope.launch(Dispatchers.IO) {
             getUserDataFromDatastore().collect { userData: User ->
                 user = userData.firebaseToken.let { userService.getUserByToken(it) }
-                showProductList()
+                withContext(Dispatchers.Main){
+                    showProductList()
+                }
 
             }
         }
@@ -144,19 +147,6 @@ class ProfileFragment : Fragment() {
         btnProducts.setOnClickListener(onClickListener)
         btnTransaction.setOnClickListener(onClickListener)
 
-        //LLamamos a la actividad producto detail
-/*        this.adapterProduct.setOnItemClickListener(object:
-            AdapterProductsData.OnItemClickedListener {
-            override fun onItemClick(position: Int) {
-                recyclerView.getChildAt(position)
-                val intent = Intent(requireContext(), ProductDetail::class.java)
-                intent.putExtra("Product", adapterProduct.getProduct(position).name)
-                intent.putExtra("Owner", adapterProduct.getProduct(position).owner?.name)
-                intent.putExtra("Price", adapterProduct.getProduct(position).price)
-                startActivity(intent)
-            }
-        })*/
-
         profileLayout = view.findViewById(R.id.profile)
         profileLayout.setOnClickListener {
             val intent = Intent(requireContext(), DetailedProfileActivity::class.java)
@@ -187,6 +177,21 @@ class ProfileFragment : Fragment() {
             productList = productList ?: getProductList()
             adapterProduct = AdapterProductsData(productList!!)
             recyclerView.adapter = adapterProduct
+
+            //LLamamos a la actividad producto detail
+            adapterProduct.setOnItemClickListener(object:
+                AdapterProductsData.OnItemClickedListener {
+                override fun onItemClick(position: Int) {
+                    recyclerView.getChildAt(position)
+                    val intent = Intent(requireContext(), ProductDetail::class.java)
+                    val product = adapterProduct.getProduct(position)
+                    intent.putExtra("Product", product.name)
+                    intent.putExtra("Owner", product.owner?.name)
+                    intent.putExtra("Price", product.price)
+                    intent.putExtra("Description", product.description)
+                    startActivity(intent)
+                }
+            })
         }
     }
 
@@ -213,11 +218,12 @@ class ProfileFragment : Fragment() {
                             transaction.date,
                             transaction.price,
                             transaction.state,
+                            transaction.location,
                             transaction.product,
                             transaction.seller,
                             transaction.buyer,
                             transaction.description,
-                            transaction.date.toString()
+                            transaction.name
                         )
                     transactionList.add(transactionItem)
                 }

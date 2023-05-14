@@ -27,7 +27,7 @@ class AdapterTransactionData(
             val userSeller = transaction.seller.name
             val userCustomer = transaction.buyer.name
             val item = transaction.product.name
-            val date = transaction.date
+            val date = transaction.getDate()
             val transactionMessage = context.getString(R.string.transaction_template, userSeller, userCustomer, item, date)
 
             val spannableString = SpannableString(transactionMessage)

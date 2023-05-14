@@ -13,6 +13,7 @@ public class FurnitureDTO {
 	private UserDTO owner;
 	private Double price;
 	private boolean isFavourite;
+	private ProductOwner productOwner;
 
 	public FurnitureDTO() {
 	}
@@ -28,6 +29,8 @@ public class FurnitureDTO {
 		this.description = furniture.getDescription();
 		this.state = furniture.getState();
 		this.price = furniture.getPrice();
+		this.productOwner = new ProductOwner(furniture.getOwner().getId(), furniture.getOwner().getName(),furniture.getOwner().getSurname());
+
 	}
 
 	public Long getId() {
@@ -94,5 +97,13 @@ public class FurnitureDTO {
 		furniture.setState(this.getState());
 		furniture.setPrice(this.getPrice());
 		return furniture;
+	}
+
+	public ProductOwner getProductOwner() {
+		return productOwner;
+	}
+
+	public void setProductOwner(ProductOwner productOwner) {
+		this.productOwner = productOwner;
 	}
 }

@@ -40,3 +40,9 @@ data class User(
     val location: String?,
     val expirationDatefirebaseToken: LocalDate?
 )
+
+data class UserProduct(
+    val id: String,
+    var name: String,
+    val surname: String
+)

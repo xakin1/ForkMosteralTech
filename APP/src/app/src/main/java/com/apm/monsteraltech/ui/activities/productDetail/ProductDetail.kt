@@ -28,7 +28,7 @@ class ProductDetail : ActionBarActivity() {
         val productName = intent.getStringExtra("Product")
         val productOwner = intent.getStringExtra("Owner")
         val productPrice = intent.getDoubleExtra("Price", 0.0).toString() + " €"
-        //val productDescription = intent.getStringExtra("Description")
+        val productDescription = intent.getStringExtra("Description")
         val productNameEditText = findViewById<TextView>(R.id.productTitle)
         val productOwnerButton = findViewById<TextView>(R.id.buttonOwner)
         val productDescriptionEditText = findViewById<TextView>(R.id.productDescription)
@@ -48,7 +48,7 @@ class ProductDetail : ActionBarActivity() {
 
         productNameEditText.text = productName
         productOwnerButton.text = productOwner
-        //productDescription.text = productDescription
+        productDescriptionEditText.text = productDescription
         productPriceEditText.text = productPrice
 
         // Obtener las imágenes del producto desde el servidor

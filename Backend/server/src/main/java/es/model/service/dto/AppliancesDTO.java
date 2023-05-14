@@ -13,12 +13,14 @@ public class AppliancesDTO {
   private UserDTO owner;
   private Double price;
   private boolean isFavourite;
+private ProductOwner productOwner;
 
   public AppliancesDTO() {}
   
   public AppliancesDTO(AppliancesProjection product) {
     this(product.getAppliances());
     this.isFavourite = product.getIsFavourite();
+
   }
 
   public AppliancesDTO(Appliances appliances) {
@@ -27,6 +29,8 @@ public class AppliancesDTO {
     this.description = appliances.getDescription();
     this.state = appliances.getState();
 	this.price = appliances.getPrice();
+	this.productOwner = new ProductOwner(appliances.getOwner().getId(), appliances.getOwner().getName(),appliances.getOwner().getSurname());
+
 }
 
 public Long getId() {
@@ -94,4 +98,12 @@ public Appliances toAppliances() {
     appliances.setPrice(this.getPrice());
     return appliances;
   }
+
+public ProductOwner getProductOwner() {
+	return productOwner;
+}
+
+public void setProductOwner(ProductOwner productOwner) {
+	this.productOwner = productOwner;
+}
 }

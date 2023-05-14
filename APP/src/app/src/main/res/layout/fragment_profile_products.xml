@@ -23,7 +23,8 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="15dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background" />
+            android:src="@drawable/ic_launcher_background"
+            android:contentDescription="@string/foto_del_producto" />
 
         <TextView
             android:id="@+id/product_name"
@@ -32,7 +33,6 @@
             android:layout_alignTop="@+id/product_image_imageview"
             android:layout_marginStart="16dp"
             android:layout_toEndOf="@+id/product_image_imageview"
-            android:text="Product Name"
             android:textColor="#000"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -45,7 +45,6 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_toEndOf="@+id/product_image_imageview"
-            android:text="Product owner"
             android:textColor="#000"
             android:textSize="18sp" />
 
@@ -57,22 +56,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_toEndOf="@+id/product_image_imageview"
-            android:text="Price: $9.99"
             android:textColor="#000"
             android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/product_quantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/product_price"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_toEndOf="@+id/product_image_imageview"
-            android:text="Quantity: 10"
-            android:textColor="#000"
-            android:textSize="16sp" />
-
 
     </RelativeLayout>
 

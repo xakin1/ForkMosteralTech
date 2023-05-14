@@ -13,6 +13,7 @@ public class CarDTO {
 	private UserDTO owner;
 	private Double price;
 	private boolean isFavourite;
+	private ProductOwner productOwner;
 
 	public CarDTO() {
 	}
@@ -20,6 +21,7 @@ public class CarDTO {
 	public CarDTO(CarProjection product) {
 		this(product.getProduct());
 		this.isFavourite = product.getIsFavourite();
+
 	}
 
 	public CarDTO(Car car) {
@@ -28,6 +30,8 @@ public class CarDTO {
 		this.description = car.getDescription();
 		this.state = car.getState();
 		this.price = car.getPrice();
+		this.productOwner = new ProductOwner(car.getOwner().getId(), car.getOwner().getName(),car.getOwner().getSurname());
+
 	}
 
 	public Long getId() {
@@ -94,5 +98,13 @@ public class CarDTO {
 		car.setState(this.getState());
 		car.setPrice(this.getPrice());
 		return car;
+	}
+
+	public ProductOwner getProductOwner() {
+		return productOwner;
+	}
+
+	public void setProductOwner(ProductOwner productOwner) {
+		this.productOwner = productOwner;
 	}
 }

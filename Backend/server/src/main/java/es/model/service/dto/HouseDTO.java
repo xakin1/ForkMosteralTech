@@ -13,6 +13,7 @@ public class HouseDTO {
   private UserDTO owner;
   private Double price;
   private boolean isFavourite;
+  private ProductOwner productOwner;
   public HouseDTO() {}
   
   public HouseDTO(HouseProjection product) {
@@ -26,6 +27,8 @@ public class HouseDTO {
     this.description = house.getDescription();
     this.state = house.getState();
     this.price = house.getPrice();
+	this.productOwner = new ProductOwner(house.getOwner().getId(), house.getOwner().getName(),house.getOwner().getSurname());
+
   }
 
   public Long getId() {
@@ -96,4 +99,12 @@ public House toHouse() {
 
     return house;
   }
+
+public ProductOwner getProductOwner() {
+	return productOwner;
+}
+
+public void setProductOwner(ProductOwner productOwner) {
+	this.productOwner = productOwner;
+}
 }

@@ -44,7 +44,7 @@ abstract class BaseProductsActivity : ActionBarActivity() {
 
         applyFilters()
         lifecycleScope.launch(Dispatchers.IO) {
-            getUserDataFromDatastore()?.collect { userData: User ->
+            getUserDataFromDatastore().collect { userData: User ->
                 user = userData.firebaseToken.let { userService.getUserByToken(it) }
                 setProducts()
             }
@@ -96,8 +96,8 @@ abstract class BaseProductsActivity : ActionBarActivity() {
             productRecyclerView = recyclerViewProducts
             productRecyclerView.adapter = adapterProduct
             productRecyclerView.layoutManager = layoutManager
-            var currentPage = 1;
-            var pageSize: Number = 10;
+            var currentPage = 1
+            val pageSize: Number = 10
 
             adapterProduct.setOnItemClickListener(object: AdapterLikedProduct.OnItemClickedListener {
                 override fun onItemClick(position: Int) {
@@ -105,8 +105,11 @@ abstract class BaseProductsActivity : ActionBarActivity() {
                         context,
                         ProductDetail::class.java
                     )
-                    //TODO: ver que información es necesario pasarle
-                    intent.putExtra("Product", adapterProduct.getProduct(position).name)
+                    val product = adapterProduct.getProduct(position)
+                    intent.putExtra("Product", product.name)
+                    intent.putExtra("Owner", product.productOwner.name)
+                    intent.putExtra("Price", product.price)
+                    intent.putExtra("Description", product.description)
                     startActivity(intent)
                 }
             })
@@ -168,7 +171,6 @@ abstract class BaseProductsActivity : ActionBarActivity() {
     }
 
     private suspend fun getProductList(): ArrayList<LikedProduct> {
-        //TODO: Cargar los productos desde la base de datos o de otro recurso externo
         return withContext(lifecycleScope.coroutineContext + Dispatchers.IO) {
             val productList: ArrayList<LikedProduct> = ArrayList()
 
@@ -184,7 +186,8 @@ abstract class BaseProductsActivity : ActionBarActivity() {
                     product.description,
                     product.state,
                     product.images,
-                    product.favourite
+                    product.favourite,
+                    product.productOwner
                 )
                 productList.add(productItem)
             }

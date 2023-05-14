@@ -61,7 +61,9 @@ class ProductsFragment : Fragment(), Searchable {
         lifecycleScope.launch(Dispatchers.IO) {
             getUserDataFromDatastore()?.collect { userData: User ->
                 user = userData.firebaseToken.let { userService.getUserByToken(it) }
-                setProducts(view)
+                withContext(Dispatchers.Main){
+                    setProducts(view)
+                }
             }
         }
 
@@ -69,7 +71,7 @@ class ProductsFragment : Fragment(), Searchable {
         return view
     }
 
-    fun setFilters(view: View){
+    private fun setFilters(view: View){
         val adapterFilter = AdapterFilters(getFilterList())
 
         //Inicializamos la vista de filtros
@@ -122,7 +124,9 @@ class ProductsFragment : Fragment(), Searchable {
                 val product = adapterProduct.getProduct(position)
                 val intent = Intent(context, ProductDetail::class.java)
                 intent.putExtra("Product", product.name)
+                intent.putExtra("Owner", product.productOwner.name)
                 intent.putExtra("Price", product.price)
+                intent.putExtra("Description", product.description)
                 startActivity(intent)
             }
         })
@@ -148,11 +152,6 @@ class ProductsFragment : Fragment(), Searchable {
         })
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        // outState.putParcelableArrayList("productList", productsList)
-    }
-
     private fun getFilterList(): ArrayList<Filter> {
         val filterList: ArrayList<Filter> = arrayListOf()
 
@@ -164,7 +163,7 @@ class ProductsFragment : Fragment(), Searchable {
     }
 
     private suspend fun getProductList(): ArrayList<LikedProduct> {
-        return withContext(lifecycleScope.coroutineContext + Dispatchers.IO) {
+        return withContext(lifecycleScope.coroutineContext + Dispatchers.Main) {
             val productList: ArrayList<LikedProduct> = ArrayList()
 
             // Obtiene las transacciones del usuario
@@ -179,7 +178,8 @@ class ProductsFragment : Fragment(), Searchable {
                     product.description,
                     product.state,
                     product.images,
-                    product.favourite)
+                    product.favourite,
+                    product.productOwner)
                 productList.add(productItem)
             }
             // Devuelve la lista completa
