@@ -7,68 +7,68 @@ VALUES ('pfpY9jg25hfdKPaDMyKqg5GIkPV2', 'Seller user', 'Demo', 'eyJhbGciOiJSUzI1
 ----------- CASAS----------------
 
 -- Casa 1
-INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Casa de campo', 'Hermosa casa de campo en las afueras de la ciudad', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 150000.00);
+INSERT INTO t_product (name, description, state, owner, price,m2)
+VALUES ('Casa de campo', 'Hermosa casa de campo en las afueras de la ciudad', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 150000.00,100);
 INSERT INTO t_house (id)
 VALUES (LASTVAL());
 
 -- Casa 2
-INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Casa en la monta�a', 'Acogedora casa en la montaña con vista panor�mica', 'NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 200000.00);
+INSERT INTO t_product (name, description, state, owner, price,m2)
+VALUES ('Casa en la monta�a', 'Acogedora casa en la montaña con vista panor�mica', 'NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 200000.00,500);
 INSERT INTO t_house (id)
 VALUES (LASTVAL());
 
 -- Casa 3
-INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Casa en la playa', 'Hermosa casa en la playa con acceso directo a la arena', 'SEMI_NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 350000.00);
+INSERT INTO t_product (name, description, state, owner, price,m2)
+VALUES ('Casa en la playa', 'Hermosa casa en la playa con acceso directo a la arena', 'SEMI_NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 350000.00,750);
 INSERT INTO t_house (id)
 VALUES (LASTVAL());
 
 -- Casa 4
-INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Casa de lujo', 'Exclusiva casa de lujo con amplios espacios y acabados de alta calidad', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 750000.00);
+INSERT INTO t_product (name, description, state, owner, price,m2)
+VALUES ('Casa de lujo', 'Exclusiva casa de lujo con amplios espacios y acabados de alta calidad', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 750000.00,75);
 INSERT INTO t_house (id)
 VALUES (LASTVAL());
 
 -- Casa 5
-INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Casa moderna', 'Impresionante casa de diseño moderno con grandes ventanales y mucha luz natural', 'NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 400000.00);
+INSERT INTO t_product (name, description, state, owner, price,m2)
+VALUES ('Casa moderna', 'Impresionante casa de diseño moderno con grandes ventanales y mucha luz natural', 'NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 400000.00,80);
 INSERT INTO t_house (id)
 VALUES (LASTVAL());
 
 -- Casa 6
-INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Casa en la colina', 'Amplia casa en la cima de la colina con impresionantes vistas de la ciudad', 'SEMI_NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 500000.00);
+INSERT INTO t_product (name, description, state, owner, price,m2)
+VALUES ('Casa en la colina', 'Amplia casa en la cima de la colina con impresionantes vistas de la ciudad', 'SEMI_NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 500000.00,100);
 INSERT INTO t_house (id)
 VALUES (LASTVAL());
 
 -- Casa 7
-INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Casa de estilo colonial', 'Elegante casa de estilo colonial con hermoso jardín', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 600000.00);
+INSERT INTO t_product (name, description, state, owner, price,m2)
+VALUES ('Casa de estilo colonial', 'Elegante casa de estilo colonial con hermoso jardín', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 600000.00,100);
 INSERT INTO t_house (id)
 VALUES (LASTVAL());
 
 -- Casa 8
-INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Casa con piscina', 'Casa con piscina climatizada y zona de barbacoa', 'NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 450000.00);
+INSERT INTO t_product (name, description, state, owner, price,m2)
+VALUES ('Casa con piscina', 'Casa con piscina climatizada y zona de barbacoa', 'NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 450000.00,100);
 INSERT INTO t_house (id)
 VALUES (LASTVAL());
 
 -- Casa 9
-INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Casa de campo renovada', 'Casa de campo renovada con estilo rústico y comodidades modernas', 'SEMI_NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 250000.00);
+INSERT INTO t_product (name, description, state, owner, price,m2)
+VALUES ('Casa de campo renovada', 'Casa de campo renovada con estilo rústico y comodidades modernas', 'SEMI_NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 250000.00,100);
 INSERT INTO t_house (id)
 VALUES (LASTVAL());
 
 -- Casa 10
-INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Casa en la ciudad', 'Casa ubicada en el centro de la ciudad con f�cil acceso a todos los servicios', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 300000.00);
+INSERT INTO t_product (name, description, state, owner, price,m2)
+VALUES ('Casa en la ciudad', 'Casa ubicada en el centro de la ciudad con f�cil acceso a todos los servicios', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 300000.00,100);
 INSERT INTO t_house (id)
 VALUES (LASTVAL());
 
 -- Casa 11
-INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Casa minimalista', 'Casa minimalista con diseño funcional y acabados de alta calidad', 'NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 550000.00);
+INSERT INTO t_product (name, description, state, owner, price,m2)
+VALUES ('Casa minimalista', 'Casa minimalista con diseño funcional y acabados de alta calidad', 'NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 550000.00,100);
 INSERT INTO t_house (id)
 VALUES (LASTVAL());
 
@@ -246,72 +246,72 @@ VALUES (LASTVAL());
 
 -- Coche 1
 
-INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Mercedes Clase A', 'Coche en perfecto estado', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 12000.00);
+INSERT INTO t_product (name, description, state, owner, price,km)
+VALUES ('Mercedes Clase A', 'Coche en perfecto estado', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 12000.00,2000);
 INSERT INTO t_car (id) VALUES (LASTVAL());
 
 -- Coche 2
 
-INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Volkswagen Golf', 'Coche como nuevo', 'SEMI_NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 8000.00);
+INSERT INTO t_product (name, description, state, owner, price,km)
+VALUES ('Volkswagen Golf', 'Coche como nuevo', 'SEMI_NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 8000.00,2000);
 INSERT INTO t_car (id) VALUES (LASTVAL());
 
 -- Coche 3
 
-INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Ford Focus', 'Coche usado en buen estado', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 5000.00);
+INSERT INTO t_product (name, description, state, owner, price,km)
+VALUES ('Ford Focus', 'Coche usado en buen estado', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 5000.00,2000);
 INSERT INTO t_car (id) VALUES (LASTVAL());
 
 -- Coche 4
 
-INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('BMW Serie 3', 'Coche en excelente estado', 'NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 22000.00);
+INSERT INTO t_product (name, description, state, owner, price,km)
+VALUES ('BMW Serie 3', 'Coche en excelente estado', 'NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 22000.00,2000);
 INSERT INTO t_car (id) VALUES (LASTVAL());
 
 -- Coche 5
 
-INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Audi A4', 'Coche en buen estado', 'SEMI_NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 13000.00);
+INSERT INTO t_product (name, description, state, owner, price,km)
+VALUES ('Audi A4', 'Coche en buen estado', 'SEMI_NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 13000.00,2000);
 INSERT INTO t_car (id) VALUES (LASTVAL());
 
 -- Coche 6
 
-INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Renault Megane', 'Coche usado con algunos arreglos', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 3500.00);
+INSERT INTO t_product (name, description, state, owner, price,km)
+VALUES ('Renault Megane', 'Coche usado con algunos arreglos', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 3500.00,2000);
 INSERT INTO t_car (id) VALUES (LASTVAL());
 
 -- Coche 7
 
-INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Toyota Corolla', 'Coche en excelente estado', 'NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 18000.00);
+INSERT INTO t_product (name, description, state, owner, price,km)
+VALUES ('Toyota Corolla', 'Coche en excelente estado', 'NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 18000.00,2000);
 INSERT INTO t_car (id) VALUES (LASTVAL());
 
 -- Coche 8
 
-INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Honda Civic', 'Coche semi nuevo', 'SEMI_NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 11000.00);
+INSERT INTO t_product (name, description, state, owner, price,km)
+VALUES ('Honda Civic', 'Coche semi nuevo', 'SEMI_NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 11000.00,2000);
 INSERT INTO t_car (id) VALUES (LASTVAL());
 
 -- Coche 9
 
-INSERT INTO t_product (name, description, state, owner, price)
-VALUES ('Citroen C3', 'Coche usado en buen estado', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 4000.00);
+INSERT INTO t_product (name, description, state, owner, price,km)
+VALUES ('Citroen C3', 'Coche usado en buen estado', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 4000.00,2000);
 INSERT INTO t_car (id) VALUES (LASTVAL());
 
 -- Coche 10
 
-INSERT INTO t_car (id, brand, model, year, kms, state, owner, price)
-VALUES (LASTVAL(), 'Toyota', 'Corolla', 2015, 100000, 'SEMI_NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 9000.00);
+INSERT INTO t_car (id, brand, model, year, kms, state, owner, price,km)
+VALUES (LASTVAL(), 'Toyota', 'Corolla', 2015, 100000, 'SEMI_NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 9000.00,2000);
 
 -- Coche 11
 
-INSERT INTO t_car (id, brand, model, year, kms, state, owner, price)
-VALUES (LASTVAL(), 'Honda', 'Civic', 2010, 150000, 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 5000.00);
+INSERT INTO t_car (id, brand, model, year, kms, state, owner, pricekm)
+VALUES (LASTVAL(), 'Honda', 'Civic', 2010, 150000, 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 5000.00,2000);
 
 -- Coche 12
 
-INSERT INTO t_car (id, brand, model, year, kms, state, owner, price)
-VALUES (LASTVAL(), 'Chevrolet', 'Spark', 2020, 5000, 'NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 12000.00);
+INSERT INTO t_car (id, brand, model, year, kms, state, owner, pricekm)
+VALUES (LASTVAL(), 'Chevrolet', 'Spark', 2020, 5000, 'NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 12000.00,0);
 
 
 --Favoritos
