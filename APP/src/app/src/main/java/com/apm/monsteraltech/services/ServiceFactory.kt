@@ -2,6 +2,8 @@ package com.apm.monsteraltech.services
 
 import android.util.Log
 import com.apm.monsteraltech.BuildConfig
+import com.apm.monsteraltech.enumerados.State
+import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -16,7 +18,6 @@ class ServiceFactory {
     val loggingInterceptor = HttpLoggingInterceptor { message -> Log.d("OkHttp", message) }.apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
-
 
     private val okHttpClient = OkHttpClient.Builder()
         .connectTimeout(60, TimeUnit.SECONDS)

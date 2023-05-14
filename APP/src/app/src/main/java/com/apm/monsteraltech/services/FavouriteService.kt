@@ -2,7 +2,6 @@ package com.apm.monsteraltech.services
 
 import com.apm.monsteraltech.data.dto.*
 import retrofit2.http.*
-import java.time.LocalDate
 
 interface FavouriteService {
 

@@ -18,6 +18,7 @@ import com.apm.monsteraltech.data.adapter.AdapterLikedProduct
 import com.apm.monsteraltech.data.dto.LikedProduct
 import com.apm.monsteraltech.data.dto.LikedProductResponse
 import com.apm.monsteraltech.data.dto.User
+import com.apm.monsteraltech.enumerados.State
 import com.apm.monsteraltech.services.ProductService
 import com.apm.monsteraltech.services.ServiceFactory
 import com.apm.monsteraltech.services.UserService
@@ -168,15 +169,16 @@ class ProductsFragment : Fragment(), Searchable {
 
             // Obtiene las transacciones del usuario
             val userProducts: LikedProductResponse = productService.getProductsWithFavourites(user.id,0, 10)
-
             // Agrega las transacciones del usuario a la lista
             for (product in userProducts.content) {
+                val state = State.values().find { it.stateString == product.state.toString() } ?: State.UNKNOWN
+
                 val productItem = LikedProduct(
                     product.id,
                     product.name,
                     product.price,
                     product.description,
-                    product.state,
+                    state.toString(),
                     product.images,
                     product.favourite,
                     product.productOwner)

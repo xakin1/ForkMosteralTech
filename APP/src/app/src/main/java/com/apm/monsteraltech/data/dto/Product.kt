@@ -73,7 +73,7 @@ data class LikedProduct(
     val name: String,
     val price: Double,
     val description: String?,
-    val state: State?,
+    val state: String,
     val images: List<ProductImage>?,
     var favourite: Boolean,
     var productOwner: UserProduct
@@ -84,11 +84,11 @@ data class Product(
     val name: String,
     val price: Double,
     val description: String?,
-    val state: State?,
+    val state: String,
     val images: List<ProductImage>?,
     val owner: User?,
 ){
-    constructor(id: Long, name: String, price: Double, description: String?, state: State?) :
+    constructor(id: Long, name: String, price: Double, description: String?, state: String) :
             this(id, name, price, description, state, null, null)
 }
 

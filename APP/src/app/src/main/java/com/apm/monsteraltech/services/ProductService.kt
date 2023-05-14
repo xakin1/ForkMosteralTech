@@ -30,6 +30,7 @@ interface ProductService {
     @GET("/api/entities/products/all/favourites/{userId}")
     suspend fun getProductsWithFavourites(@Path("userId") userId: String, @Query("page") page: Number, @Query("size") size: Number): LikedProductResponse
 
+
     @GET("/api/entities/cars/all/favourites/{userId}")
     suspend fun getCarsWithFavourites(@Path("userId") userId: String, @Query("page") page: Number, @Query("size") size: Number): LikedProductResponse
 

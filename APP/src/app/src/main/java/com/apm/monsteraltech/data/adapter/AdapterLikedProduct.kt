@@ -15,6 +15,7 @@ import com.apm.monsteraltech.R
 import com.apm.monsteraltech.data.dto.FavouriteRequest
 import com.apm.monsteraltech.data.dto.LikedProduct
 import com.apm.monsteraltech.data.dto.User
+import com.apm.monsteraltech.enumerados.State
 import com.apm.monsteraltech.services.FavouriteService
 import com.apm.monsteraltech.services.ServiceFactory
 import com.apm.monsteraltech.services.UserService
@@ -41,6 +42,7 @@ class AdapterLikedProduct(private var productList: List<LikedProduct>): Recycler
         private val serviceFactory = ServiceFactory()
         private val favouriteService = serviceFactory.createService(FavouriteService::class.java)
         private val textProductName: TextView = itemView.findViewById(R.id.product_name)
+        private val textProductStatus: TextView = itemView.findViewById(R.id.product_status)
         private val imageProduct: ImageView = itemView.findViewById(R.id.product_image_imageview)
         private val textPrice: TextView = itemView.findViewById(R.id.product_price)
         private val textDescription: TextView = itemView.findViewById(R.id.product_description)
@@ -50,6 +52,13 @@ class AdapterLikedProduct(private var productList: List<LikedProduct>): Recycler
         @SuppressLint("StringFormatMatches")
         fun setData(product: LikedProduct) {
             textProductName.text = product.name
+            var state = State.valueOf(product.state)
+            textProductStatus.text = when(state){
+                State.NEW-> itemView.context.getString(R.string.product_state, "nuevo")
+                State.SEMI_NEW-> itemView.context.getString(R.string.product_state, "semi nuevo")
+                State.SECOND_HAND-> itemView.context.getString(R.string.product_state, "segunda mano")
+                State.UNKNOWN -> itemView.context.getString(R.string.product_state, "desconocido")
+            }
             //TODO: Cargar imagenes de los productos aquí
             // Si hicieramos "$${product.price}" tendríamos una vulnerabilidad de inyección de código
             textPrice.text = itemView.context.getString(R.string.product_price, product.price)
