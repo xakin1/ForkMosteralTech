@@ -6,105 +6,120 @@ import es.model.repository.HouseRepository.HouseProjection;
 
 public class HouseDTO {
 
-  private Long id;
-  private String name;
-  private String description;
-  private State state;
-  private UserDTO owner;
-  private Double price;
-  private boolean isFavourite;
-  private ProductOwner productOwner;
-  public HouseDTO() {}
-  
-  public HouseDTO(HouseProjection product) {
-    this(product.getProduct());
-    this.isFavourite = product.getIsFavourite();
-  }
+	private Long id;
+	private String name;
+	private String description;
+	private int m2;
+	private State state;
+	private UserDTO owner;
+	private Double price;
+	private boolean isFavourite;
+	private ProductOwner productOwner;
 
-  public HouseDTO(House house) {
-    this.id = house.getId();
-    this.name = house.getName();
-    this.description = house.getDescription();
-    this.state = house.getState();
-    this.price = house.getPrice();
-	this.productOwner = new ProductOwner(house.getOwner().getId(), house.getOwner().getName(),house.getOwner().getSurname());
+	public HouseDTO() {
+	}
 
-  }
+	public HouseDTO(HouseProjection product) {
+		this(product.getProduct());
+		this.isFavourite = product.getIsFavourite();
+	}
 
-  public Long getId() {
-    return id;
-  }
+	public HouseDTO(House house) {
+		this.id = house.getId();
+		this.name = house.getName();
+		this.description = house.getDescription();
+		this.state = house.getState();
+		this.price = house.getPrice();
+		this.m2 = house.getM2();
+		this.productOwner = new ProductOwner(house.getOwner().getId(), house.getOwner().getName(),
+				house.getOwner().getSurname());
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+	}
 
-  public String getName() {
-    return name;
-  }
+	public Long getId() {
+		return id;
+	}
 
-  public void setName(String name) {
-    this.name = name;
-  }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-  public String getDescription() {
-    return description;
-  }
+	public String getName() {
+		return name;
+	}
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-  public State getState() {
-    return state;
-  }
+	public String getDescription() {
+		return description;
+	}
 
-  public void setState(State state) {
-    this.state = state;
-  }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-  public UserDTO getOwner() {
-    return owner;
-  }
+	public State getState() {
+		return state;
+	}
 
-  public void setOwner(UserDTO owner) {
-    this.owner = owner;
-  }
+	public void setState(State state) {
+		this.state = state;
+	}
 
-  public Double getPrice() {
-    return price;
-  }
+	public UserDTO getOwner() {
+		return owner;
+	}
 
-  public void setPrice(Double price) {
-    this.price = price;
-  }
-  
-  
+	public void setOwner(UserDTO owner) {
+		this.owner = owner;
+	}
 
-public boolean isFavourite() {
-	return isFavourite;
-}
+	public Double getPrice() {
+		return price;
+	}
 
-public void setIsFavourite(boolean isFavourite) {
-	this.isFavourite = isFavourite;
-}
+	public void setPrice(Double price) {
+		this.price = price;
+	}
 
-public House toHouse() {
-    House house = new House();
-    house.setId(this.getId());
-    house.setName(this.getName());
-    house.setDescription(this.getDescription());
-    house.setState(this.getState());
-    house.setPrice(this.getPrice());
+	public int getM2() {
+		return m2;
+	}
 
-    return house;
-  }
+	public void setM2(int m2) {
+		this.m2 = m2;
+	}
 
-public ProductOwner getProductOwner() {
-	return productOwner;
-}
+	public void setFavourite(boolean isFavourite) {
+		this.isFavourite = isFavourite;
+	}
 
-public void setProductOwner(ProductOwner productOwner) {
-	this.productOwner = productOwner;
-}
+	public boolean isFavourite() {
+		return isFavourite;
+	}
+
+	public void setIsFavourite(boolean isFavourite) {
+		this.isFavourite = isFavourite;
+	}
+
+	public House toHouse() {
+		House house = new House();
+		house.setId(this.getId());
+		house.setName(this.getName());
+		house.setDescription(this.getDescription());
+		house.setState(this.getState());
+		house.setPrice(this.getPrice());
+
+		return house;
+	}
+
+	public ProductOwner getProductOwner() {
+		return productOwner;
+	}
+
+	public void setProductOwner(ProductOwner productOwner) {
+		this.productOwner = productOwner;
+	}
 }

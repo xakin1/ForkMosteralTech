@@ -14,6 +14,7 @@ public class CarDTO {
 	private Double price;
 	private boolean isFavourite;
 	private ProductOwner productOwner;
+	private int km;
 
 	public CarDTO() {
 	}
@@ -30,7 +31,9 @@ public class CarDTO {
 		this.description = car.getDescription();
 		this.state = car.getState();
 		this.price = car.getPrice();
-		this.productOwner = new ProductOwner(car.getOwner().getId(), car.getOwner().getName(),car.getOwner().getSurname());
+		this.km = car.getKm();
+		this.productOwner = new ProductOwner(car.getOwner().getId(), car.getOwner().getName(),
+				car.getOwner().getSurname());
 
 	}
 
@@ -90,6 +93,18 @@ public class CarDTO {
 		this.isFavourite = isFavourite;
 	}
 
+	public int getKm() {
+		return km;
+	}
+
+	public void setKm(int km) {
+		this.km = km;
+	}
+
+	public void setFavourite(boolean isFavourite) {
+		this.isFavourite = isFavourite;
+	}
+
 	public Car toCar() {
 		Car car = new Car();
 		car.setId(this.getId());
@@ -97,6 +112,7 @@ public class CarDTO {
 		car.setDescription(this.getDescription());
 		car.setState(this.getState());
 		car.setPrice(this.getPrice());
+		this.setKm(this.km);
 		return car;
 	}
 
