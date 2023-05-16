@@ -1,20 +1,12 @@
 package es.web.rest;
 
-import es.model.service.CarService;
-import es.model.service.dto.CarDTO;
-import es.model.service.dto.CarFullDTO;
-import es.model.service.dto.FurnitureDTO;
-import es.model.service.exceptions.NotFoundException;
-import es.model.service.exceptions.OperationNotAllowedException;
-import es.web.rest.custom.ValidationErrorUtils;
-import es.web.rest.util.HeaderUtil;
-import es.web.rest.util.PaginationUtil;
-import es.web.rest.util.specification_utils.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+
 import javax.inject.Inject;
 import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -24,7 +16,25 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import es.model.domain.State;
+import es.model.service.CarService;
+import es.model.service.dto.CarDTO;
+import es.model.service.dto.CarFullDTO;
+import es.model.service.exceptions.NotFoundException;
+import es.model.service.exceptions.OperationNotAllowedException;
+import es.web.rest.custom.ValidationErrorUtils;
+import es.web.rest.util.HeaderUtil;
+import es.web.rest.util.PaginationUtil;
 
 @RestController
 @RequestMapping(CarResource.CAR_RESOURCE_URL)
@@ -58,8 +68,13 @@ public class CarResource {
   @GetMapping("all/favourites/{userId}")
   public ResponseEntity<Page<CarDTO>> getProductsWithFavourites(
 		  @PathVariable String userId,
-      @PageableDefault(page = 0, size = 100000, sort = "id") Pageable pageable) throws NotFoundException {
-    Page<CarDTO> page = carService.getAllCarWithFavourites(userId, pageable);
+      @PageableDefault(page = 0, size = 100000, sort = "id") Pageable pageable,
+      @RequestParam(value = "minPrice", required = false) Double minPrice,
+      @RequestParam(value = "maxPrice", required = false) Double maxPrice,
+      @RequestParam(value = "minKm", required = false) Integer minKm,
+      @RequestParam(value = "maxKm", required = false) Integer maxKm,
+      @RequestParam(value = "state", required = false) State state) throws NotFoundException {
+    Page<CarDTO> page = carService.getAllCarWithFavourites(userId, pageable, minPrice, maxPrice, maxKm, maxKm, state);
     HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, CAR_RESOURCE_URL);
     return new ResponseEntity<>(page, headers, HttpStatus.OK);
   }

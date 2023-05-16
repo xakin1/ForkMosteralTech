@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.model.domain.Furniture;
+import es.model.domain.State;
 import es.model.repository.FurnitureRepository;
 import es.model.repository.FurnitureRepository.FurnitureProjection;
 import es.model.service.dto.FurnitureDTO;
@@ -37,9 +38,17 @@ public class FurnitureServiceImpl implements FurnitureService {
 	}
 
 	@Override
-	public Page<FurnitureDTO> getAllFurnituresWithFavourites(String userId, Pageable pageable)
-			throws NotFoundException {
-		Page<FurnitureProjection> products = findProductsWithFavourites(userId, pageable);
+	public Page<FurnitureDTO> getAllFurnituresWithFavourites(String userId, Pageable pageable, Double minPrice,
+			Double maxPrice, State state) throws NotFoundException {
+		if (minPrice == null) {
+			minPrice = 0.0;
+		}
+
+		if (maxPrice == null) {
+			maxPrice = Double.MAX_VALUE;
+		}
+
+		Page<FurnitureProjection> products = findProductsWithFavourites(userId, pageable, minPrice, maxPrice, state);
 		if (products.isEmpty()) {
 			throw new NotFoundException("No se encontraron transacciones para el comprador con ID " + userId);
 		}
@@ -87,9 +96,9 @@ public class FurnitureServiceImpl implements FurnitureService {
 				.orElseThrow(() -> new NotFoundException("Cannot find Furniture with id " + id));
 	}
 
-	private Page<FurnitureProjection> findProductsWithFavourites(String userId, Pageable pageable)
-			throws NotFoundException {
-		return furnitureRepository.findFurnituresWithFavouritesByUserId(userId, pageable);
+	private Page<FurnitureProjection> findProductsWithFavourites(String userId, Pageable pageable, Double minPrice,
+			Double maxPrice, State state) throws NotFoundException {
+		return furnitureRepository.findFurnituresWithFavouritesByUserId(userId, minPrice, maxPrice, state, pageable);
 	}
 
 }

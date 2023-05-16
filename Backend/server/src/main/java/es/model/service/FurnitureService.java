@@ -1,5 +1,6 @@
 package es.model.service;
 
+import es.model.domain.State;
 import es.model.service.dto.FurnitureDTO;
 import es.model.service.dto.FurnitureFullDTO;
 import es.model.service.dto.HouseDTO;
@@ -13,7 +14,7 @@ public interface FurnitureService {
 
   Page<FurnitureDTO> getAll(Pageable pageable, List<String> filters, String search);
   
-  Page<FurnitureDTO> getAllFurnituresWithFavourites (String userId, Pageable pageable) throws NotFoundException;
+  Page<FurnitureDTO> getAllFurnituresWithFavourites(String userId, Pageable pageable, Double minPrice, Double maxPrice, State state) throws NotFoundException;
 
   FurnitureFullDTO get(Long id) throws NotFoundException;
 

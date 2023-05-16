@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.model.domain.Appliances;
+import es.model.domain.State;
 import es.model.repository.AppliancesRepository;
 import es.model.repository.AppliancesRepository.AppliancesProjection;
 import es.model.service.dto.AppliancesDTO;
@@ -38,9 +39,9 @@ public class AppliancesServiceImpl implements AppliancesService {
 	}
 
 	@Override
-	public Page<AppliancesDTO> getAllAppliancesWithFavourites(String userId, Pageable pageable)
-			throws NotFoundException {
-		Page<AppliancesProjection> products = findProductsWithFavourites(userId, pageable);
+	public Page<AppliancesDTO> getAllAppliancesWithFavourites(String userId, Pageable pageable, Double minPrice,
+			Double maxPrice, State state) throws NotFoundException {
+		Page<AppliancesProjection> products = findProductsWithFavourites(userId, pageable, minPrice, maxPrice, state);
 		if (products.isEmpty()) {
 			throw new NotFoundException("No se encontraron transacciones para el comprador con ID " + userId);
 		}
@@ -88,8 +89,8 @@ public class AppliancesServiceImpl implements AppliancesService {
 				.orElseThrow(() -> new NotFoundException("Cannot find Appliances with id " + id));
 	}
 
-	private Page<AppliancesProjection> findProductsWithFavourites(String userId, Pageable pageable)
-			throws NotFoundException {
-		return appliancesRepository.findAppliancesWithFavouritesByUserId(userId, pageable);
+	private Page<AppliancesProjection> findProductsWithFavourites(String userId, Pageable pageable, Double minPrice,
+			Double maxPrice, State state) throws NotFoundException {
+		return appliancesRepository.findAppliancesWithFavouritesByUserId(userId, minPrice, maxPrice, state, pageable);
 	}
 }

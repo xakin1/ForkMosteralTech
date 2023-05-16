@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.model.domain.Car;
+import es.model.domain.State;
 import es.model.repository.CarRepository;
 import es.model.repository.CarRepository.CarProjection;
 import es.model.service.dto.CarDTO;
@@ -36,9 +37,28 @@ public class CarServiceImpl implements CarService {
 		return page.map(CarDTO::new);
 	}
 
+	
 	@Override
-	public Page<CarDTO> getAllCarWithFavourites(String userId, Pageable pageable) throws NotFoundException {
-		Page<CarProjection> products = findProductsWithFavourites(userId, pageable);
+	public Page<CarDTO> getAllCarWithFavourites(String userId, Pageable pageable, Double minPrice, Double maxPrice, Integer minKm, Integer maxKm, State state) throws NotFoundException {
+		  
+		  if (minPrice == null) {
+		    minPrice = 0.0;
+		  }
+		  
+		  if (maxPrice == null) {
+		    maxPrice = Double.MAX_VALUE;
+		  }
+		  
+		  if (minKm == null) {
+		    minKm = 0;
+		  }
+		  
+		  if (maxKm == null) {
+			  maxKm = Integer.MAX_VALUE;
+		  }
+		  
+		Page<CarProjection> products = findProductsWithFavourites(userId, pageable, minPrice, maxPrice, minKm, maxKm, state);
+
 		if (products.isEmpty()) {
 			throw new NotFoundException("No se encontraron transacciones para el comprador con ID " + userId);
 		}
@@ -85,7 +105,7 @@ public class CarServiceImpl implements CarService {
 		return carRepository.findById(id).orElseThrow(() -> new NotFoundException("Cannot find Car with id " + id));
 	}
 
-	private Page<CarProjection> findProductsWithFavourites(String userId, Pageable pageable) throws NotFoundException {
-		return carRepository.findCarsWithFavouritesByUserId(userId, pageable);
+	private Page<CarProjection> findProductsWithFavourites(String userId, Pageable pageable, Double minPrice, Double maxPrice, Integer minKm, Integer maxKm, State state) throws NotFoundException {
+		return carRepository.findCarsWithFavouritesByUserId(userId, minPrice, maxPrice, minKm, maxKm, state, pageable);
 	}
 }
