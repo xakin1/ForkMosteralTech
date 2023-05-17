@@ -35,6 +35,8 @@ class ProductDetail : ActionBarActivity() {
         val productDescriptionEditText = findViewById<TextView>(R.id.productDescription)
         val productPriceEditText = findViewById<TextView>(R.id.productPrice)
         val likeButton = findViewById<LottieAnimationView>(R.id.buttonLike)
+        val buyButton = findViewById<LottieAnimationView>(R.id.buttonBuy)
+
         var liked = false
         likeButton.setOnClickListener {
             liked = likeAnimation(likeButton, R.raw.bandai_dokkan, liked)
@@ -45,6 +47,11 @@ class ProductDetail : ActionBarActivity() {
             // Acción para cancelar el registro
             val intent = Intent(this, UserDetail::class.java)
             intent.putExtra("Owner", productOwner)
+            startActivity(intent)
+        }
+
+        buyButton.setOnClickListener {
+            val intent = Intent(this, BuyActivity::class.java)
             startActivity(intent)
         }
 

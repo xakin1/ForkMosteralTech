@@ -53,6 +53,12 @@
         <item>Electrodomésticos</item>
         <item>Muebles</item>
     </array>
+
+    <array name="estados">
+        <item>Nuevo</item>
+        <item>Semi-nuevo</item>
+        <item>Segunda mano</item>
+    </array>
     <string name="link_1_description">Enlace a página 1</string>
     <string name="link_2_description">Enlace a página 2</string>
     <string name="facebook_app_id">561203949493617</string>
