@@ -1,7 +1,0 @@
-spring:
-  datasource:
-    host: localhost
-    port: 5432
-    database: MonsteralTech
-    username: postgres
-    password: admin1234.
