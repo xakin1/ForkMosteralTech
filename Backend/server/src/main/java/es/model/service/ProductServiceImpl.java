@@ -78,10 +78,8 @@ public class ProductServiceImpl implements ProductService {
                   }
                   geoJSON.setId(e.getId());
                   geoJSON.getProperties().put("displayString", "" + e.getId() + "");
-                  geoJSON.setGeometry(e.getLocation());
                   return geoJSON;
                 })
-            .filter(e -> e.getGeometry() != null)
             .collect(Collectors.toList());
     return new FeatureCollectionJSON(ret);
   }

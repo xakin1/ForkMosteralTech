@@ -1,12 +1,12 @@
 spring:
   datasource:
-    host: localhost
+    host: dpg-chif7v1mbg557he48650-a.oregon-postgres.render.com
     port: 5432
-    database: MonsteralTech
-    username: postgres
-    password: admin1234.
+    database: monsteraltech
+    username: udcapmonsteraltech
+    password: 9bE74cT3NjoUkErlO7qfRFTyKkwPOsSn
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.database}?characterEncoding=UTF-8
+    url: jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.database}
     hikari:
       connectionTimeout: 20000
       maximumPoolSize: 5

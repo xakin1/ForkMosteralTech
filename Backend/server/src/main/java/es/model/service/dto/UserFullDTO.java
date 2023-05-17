@@ -1,12 +1,8 @@
 package es.model.service.dto;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import es.model.domain.AppUser;
-import es.model.util.jackson.CustomGeometryDeserializer;
-import es.model.util.jackson.CustomGeometrySerializer;
 import java.time.LocalDate;
-import org.locationtech.jts.geom.Point;
+
+import es.model.domain.AppUser;
 
 public class UserFullDTO {
   private String id;
@@ -15,9 +11,7 @@ public class UserFullDTO {
   private String firebaseToken;
   private LocalDate expirationDatefirebaseToken;
 
-  @JsonSerialize(using = CustomGeometrySerializer.class)
-  @JsonDeserialize(using = CustomGeometryDeserializer.class)
-  private Point location;
+  private String location;
 
   public UserFullDTO() {}
 
@@ -54,11 +48,11 @@ public class UserFullDTO {
     this.surname = surname;
   }
 
-  public Point getLocation() {
+  public String getLocation() {
     return location;
   }
 
-  public void setLocation(Point location) {
+  public void setLocation(String location) {
     this.location = location;
   }
 

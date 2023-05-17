@@ -1,19 +1,13 @@
 package es.model.service.dto;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import es.model.domain.*;
-import es.model.util.jackson.CustomGeometryDeserializer;
-import es.model.util.jackson.CustomGeometrySerializer;
-import org.locationtech.jts.geom.Point;
+import es.model.domain.Product;
+import es.model.domain.State;
 
 public class ProductFullDTO {
   private Long id;
   private String name;
 
-  @JsonSerialize(using = CustomGeometrySerializer.class)
-  @JsonDeserialize(using = CustomGeometryDeserializer.class)
-  private Point location;
+  private String location;
 
   private String description;
   private State state;
@@ -50,11 +44,11 @@ public class ProductFullDTO {
     this.name = name;
   }
 
-  public Point getLocation() {
+  public String getLocation() {
     return location;
   }
 
-  public void setLocation(Point location) {
+  public void setLocation(String location) {
     this.location = location;
   }
 

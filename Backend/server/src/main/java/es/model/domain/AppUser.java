@@ -2,13 +2,13 @@ package es.model.domain;
 
 import java.time.LocalDate;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.locationtech.jts.geom.Point;
 
 @Entity(name = "appuser")
 @Table(name = "appuser")
@@ -29,8 +29,8 @@ public class AppUser {
   @Column(name = "expirationDatefirebaseToken")
   private LocalDate expirationDatefirebaseToken;
 
-  @Column(name = "location", columnDefinition = "geometry(Point, 4326)")
-  private Point location;
+  @Column(name = "location")
+  private String location;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
   private List<Product> products;
@@ -70,11 +70,11 @@ public class AppUser {
     this.surname = surname;
   }
 
-  public Point getLocation() {
+  public String getLocation() {
     return location;
   }
 
-  public void setLocation(Point location) {
+  public void setLocation(String location) {
     this.location = location;
   }
 
