@@ -21,11 +21,11 @@ import com.apm.monsteraltech.services.UserService
 import com.apm.monsteraltech.ui.activities.actionBar.ActionBarActivity
 import com.apm.monsteraltech.ui.activities.login.login.dataStore
 import com.apm.monsteraltech.ui.activities.productDetail.ProductDetail
-import com.apm.monsteraltech.ui.home.categories.Filtros
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okhttp3.internal.wait
 import retrofit2.HttpException
 import java.util.*
 
@@ -35,28 +35,28 @@ abstract class BaseProductsActivity : ActionBarActivity() {
     protected lateinit var productsList: ArrayList<LikedProduct>
     protected lateinit var context: Context
     protected lateinit var recyclerViewProducts: RecyclerView
+    protected var  minPrice : Number = 0
+    protected var maxPrice : Number = Double.MAX_VALUE
+    protected var state: State? = null
     private val serviceFactory = ServiceFactory()
     private val userService = serviceFactory.createService(UserService::class.java)
-    private lateinit var user: User
+    private lateinit var userId: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        applyFilters()
+        userId = intent.getStringExtra("userId").toString()
         lifecycleScope.launch(Dispatchers.IO) {
-            getUserDataFromDatastore().collect { userData: User ->
-                user = userData.firebaseToken.let { userService.getUserByToken(it) }
-                setProducts()
-            }
+            setProducts()
         }
-
-
     }
 
-    fun applyFilters(){
-        val filtros = intent.getParcelableExtra<Filtros>("filtros")
-
+    open fun getFilters(){
+        minPrice = intent.getDoubleExtra("minPrice",0.0)
+        maxPrice = intent.getDoubleExtra("maxPrice", Double.MAX_VALUE)
+        val stateString = intent.getStringExtra("state")
+        if(stateString != null)
+            state    = State.valueOf(stateString)
     }
 
 
@@ -127,7 +127,7 @@ abstract class BaseProductsActivity : ActionBarActivity() {
                                 // Cargar más elementos y actualizar el adaptador
                                 val newData: LikedProductResponse =
                                     getSpecificProducts(
-                                        user.id,
+                                        userId,
                                         currentPage,
                                         pageSize
                                     )
@@ -176,11 +176,11 @@ abstract class BaseProductsActivity : ActionBarActivity() {
             val productList: ArrayList<LikedProduct> = ArrayList()
 
             // Obtiene las transacciones del usuario
-            val products: LikedProductResponse = getSpecificProducts("fAsTAzll1fbLRMczYPlOKOcdw6H3",0 ,10)
+            val products: LikedProductResponse = getSpecificProducts(userId,0 ,10)
 
             // Agrega las transacciones del usuario a la lista
             for (product in products.content) {
-                val state = State.values().find { it.stateString == product.state.toString() } ?: State.UNKNOWN
+                val state = State.values().find { it.stateString == product.state } ?: State.UNKNOWN
 
                 val productItem = LikedProduct(
                     product.id,

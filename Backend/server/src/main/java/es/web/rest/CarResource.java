@@ -74,7 +74,7 @@ public class CarResource {
       @RequestParam(value = "minKm", required = false) Integer minKm,
       @RequestParam(value = "maxKm", required = false) Integer maxKm,
       @RequestParam(value = "state", required = false) State state) throws NotFoundException {
-    Page<CarDTO> page = carService.getAllCarWithFavourites(userId, pageable, minPrice, maxPrice, maxKm, maxKm, state);
+    Page<CarDTO> page = carService.getAllCarWithFavourites(userId, pageable, minPrice, maxPrice, minKm, maxKm, state);
     HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, CAR_RESOURCE_URL);
     return new ResponseEntity<>(page, headers, HttpStatus.OK);
   }

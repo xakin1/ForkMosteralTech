@@ -84,21 +84,26 @@ class ProductsFragment : Fragment(), Searchable {
         adapterFilter.setOnItemClickListener(object: AdapterFilters.OnItemClickedListener{
             override fun onItemClick(position: Int) {
                 val sendIntent: Intent
+                
                 when (adapterFilter.getFilter(position).filterName) {
                     "Coches" -> {
                         sendIntent = Intent(context, ShowCarActivity::class.java)
+                        sendIntent.putExtra("userId", user.id)
                         startActivity(sendIntent)
                     }
                     "Electrodomésticos"-> {
                         sendIntent = Intent(context, ShowAppliancesActivity::class.java)
+                        sendIntent.putExtra("userId", user.id)
                         startActivity(sendIntent)
                     }
                     "Muebles" -> {
                         sendIntent = Intent(context, ShowFurnitureActivity::class.java)
+                        sendIntent.putExtra("userId", user.id)
                         startActivity(sendIntent)
                     }
                     "Casas" -> {
                         sendIntent = Intent(context, ShowHouseActivity::class.java)
+                        sendIntent.putExtra("userId", user.id)
                         startActivity(sendIntent)
                     }
                     else -> {

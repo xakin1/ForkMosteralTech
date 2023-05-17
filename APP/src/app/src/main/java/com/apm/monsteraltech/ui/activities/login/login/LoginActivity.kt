@@ -35,13 +35,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.map
+
 
 val Context.dataStore by preferencesDataStore(name = "USER")
 
@@ -68,13 +68,13 @@ class LoginActivity : AppCompatActivity() {
         val accessToken = AccessToken.getCurrentAccessToken()
         val isLoggedIn = accessToken != null && !accessToken.isExpired
 
-
+        // [START initialize_auth]
+        // Initialize Firebase Auth
+        auth = Firebase.auth
+        // [END initialize_auth]
 
         if(isLoggedIn) {
-            val userUid = auth.currentUser.let { it?.uid.toString() }
-            val userUid2 = Firebase.auth.let { it.uid.toString() }
-            getKeyFromDatabase(auth.currentUser)
-            moveToMainMenu()
+            updateUI(auth.currentUser)
         }
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -158,18 +158,14 @@ class LoginActivity : AppCompatActivity() {
         // [END config_signin]
 
 
-        // [START initialize_auth]
-        // Initialize Firebase Auth
-        auth = Firebase.auth
-        // [END initialize_auth]
+
         val loginButton = findViewById<LoginButton>(R.id.SigUpWithFacebook).also {
 
             // Configura el registro de devolución de llamada
             it.registerCallback(callbackManager, object : FacebookCallback<com.facebook.login.LoginResult> {
                 override fun onSuccess(result: com.facebook.login.LoginResult) {
-                    getKeyFromDatabase(Firebase.auth.currentUser)
-                    // El usuario inició sesión con éxito, obtén el token de acceso de Facebook y realiza acciones adicionales si es necesario.
-                    this@LoginActivity.moveToMainMenu()
+                    handleFacebookAccessToken(result.accessToken);
+
                 }
 
                 override fun onCancel() {
@@ -186,10 +182,27 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
+    // Método para manejar el token de acceso de Facebook y realizar la autenticación en Firebase
+    private fun handleFacebookAccessToken(token: AccessToken) {
+        val credential = FacebookAuthProvider.getCredential(token.token)
+        FirebaseAuth.getInstance().signInWithCredential(credential)
+            .addOnCompleteListener(
+                this
+            ) { task: Task<AuthResult?> ->
+                if (task.isSuccessful) {
+                    // Autenticación exitosa en Firebase
+                    val user = FirebaseAuth.getInstance().currentUser
+                    getKeyFromDatabase(user)
+                } else {
+                    // Error en la autenticación en Firebase
+                }
+            }
+    }
+
     private fun getKeyFromDatabase(user: FirebaseUser?) {
             CoroutineScope(Dispatchers.IO).launch {
 
-            var response: User = user?.let { userService.getUserById(it.uid) } as User
+            val response: User = user?.let { userService.getUserById(it.uid) } as User
             user.getIdToken(true).addOnSuccessListener { result ->
                 val idToken = result.token.toString()
                 lifecycleScope.launch(Dispatchers.IO) {
@@ -313,7 +326,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun updateUI(user: FirebaseUser?) {
         if(user != null) {
-            val userId = user.uid
             getKeyFromDatabase(user)
         }
     }

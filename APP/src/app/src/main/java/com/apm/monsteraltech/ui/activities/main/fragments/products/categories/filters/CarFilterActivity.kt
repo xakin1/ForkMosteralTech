@@ -16,26 +16,26 @@ class CarFilterActivity : ActionBarActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_car_filter)
         setToolBar()
-        var button = findViewById<Button>(R.id.applyFilter)
+        val button = findViewById<Button>(R.id.applyFilter)
         button.setOnClickListener{applyFilter()}
     }
 
     fun applyFilter() {
-        val editPrecioDesde = findViewById<EditText>(R.id.edit_precio_desde)
-        val editPrecioHasta = findViewById<EditText>(R.id.edit_precio_hasta)
-        val editKilometrosDesde = findViewById<EditText>(R.id.edit_quilometros_desde)
-        val editKilometrosHasta = findViewById<EditText>(R.id.edit_quilometros_hasta)
+        val editMinPrice = findViewById<EditText>(R.id.edit_precio_desde)
+        val editMaxPrice = findViewById<EditText>(R.id.edit_precio_hasta)
+        val editMinKm = findViewById<EditText>(R.id.edit_quilometros_desde)
+        val editMaxKm = findViewById<EditText>(R.id.edit_quilometros_hasta)
 
-        val precioDesde = editPrecioDesde.text.toString().toIntOrNull() ?: 0
-        val precioHasta = editPrecioHasta.text.toString().toIntOrNull() ?: Int.MAX_VALUE
+        val minPrice = editMinPrice.text.toString().toIntOrNull() ?: 0
+        val maxPrice = editMaxPrice.text.toString().toIntOrNull() ?: Int.MAX_VALUE
 
-        val kmDesde = editKilometrosDesde.text.toString().toIntOrNull() ?: 0
-        val kmHasta = editKilometrosHasta.text.toString().toIntOrNull() ?: Int.MAX_VALUE
+        val minKm = editMinKm.text.toString().toIntOrNull() ?: 0
+        val maxKm = editMaxKm.text.toString().toIntOrNull() ?: Int.MAX_VALUE
 
-        val estadoCoche: String
+        val state: String
         val checkedButtonId =
             (findViewById<View>(R.id.segmentedButtonGroup_opciones) as MaterialButtonToggleGroup).checkedButtonId
-        estadoCoche = if (checkedButtonId == R.id.btn_nuevo) {
+        state = if (checkedButtonId == R.id.btn_nuevo) {
             "nuevo"
         } else if (checkedButtonId == R.id.btn_seminuevo) {
             "seminuevo"
@@ -45,11 +45,11 @@ class CarFilterActivity : ActionBarActivity() {
             ""
         }
         val intent = Intent(this, ShowCarActivity::class.java)
-        intent.putExtra("precio_desde", precioDesde)
-        intent.putExtra("precio_hasta", precioHasta)
-        intent.putExtra("kilometros_desde", kmDesde)
-        intent.putExtra("kilometros_hasta", kmHasta)
-        intent.putExtra("estado_coche", estadoCoche)
+        intent.putExtra("minPrice", minPrice)
+        intent.putExtra("maxPrice", maxPrice)
+        intent.putExtra("minKm", minKm)
+        intent.putExtra("maxKm", maxKm)
+        intent.putExtra("state", state)
         //indica que, si la actividad de destino ya está en la pila de actividades,
         // se debe eliminar cualquier actividad que se encuentre por encima de ella y
         // se debe reanudar la actividad de destino.

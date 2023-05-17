@@ -10,7 +10,9 @@ import com.apm.monsteraltech.services.ServiceFactory
 import com.apm.monsteraltech.ui.activities.main.fragments.products.categories.filters.HouseFilterActivity
 
 class ShowHouseActivity : BaseProductsActivity() {
-    private var typeOfFilter: String? = null
+
+    private var minM2: Number = 0
+    private var maxM2: Number = Integer.MAX_VALUE
     private val serviceFactory = ServiceFactory()
     private val productService = serviceFactory.createService(ProductService::class.java)
 
@@ -20,17 +22,23 @@ class ShowHouseActivity : BaseProductsActivity() {
         super.recyclerViewProducts = findViewById(R.id.RecyclerViewProducts)
         super.context = this@ShowHouseActivity
         setToolBar()
-        applyFilters()
+        this.getFilters()
 
-        var filter = findViewById<Button>(R.id.button_filter)
+        val filter = findViewById<Button>(R.id.button_filter)
 
         filter.setOnClickListener {
-            var intent = Intent(this@ShowHouseActivity, HouseFilterActivity::class.java)
+            val intent = Intent(this@ShowHouseActivity, HouseFilterActivity::class.java)
             startActivity(intent)
         }
     }
 
+    override fun getFilters(){
+        super.getFilters()
+        minM2 = intent.getIntExtra("minM2",0)
+        maxM2 = intent.getIntExtra("maxM2",Integer.MAX_VALUE)
+    }
+
     override suspend fun getSpecificProducts(userId : String,page: Number, size: Number): LikedProductResponse {
-        return productService.getHousesWithFavourites(userId, page,size)
+        return productService.getHousesWithFavourites(userId, page,size, super.minPrice, super.maxPrice, super.state, minM2, maxM2)
     }
 }

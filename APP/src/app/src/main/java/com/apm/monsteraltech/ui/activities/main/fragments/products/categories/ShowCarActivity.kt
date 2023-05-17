@@ -14,6 +14,8 @@ import kotlinx.coroutines.launch
 
 class ShowCarActivity : BaseProductsActivity() {
 
+    private var minKm: Number = 0
+    private var maxKm: Number = Integer.MAX_VALUE
     private val serviceFactory = ServiceFactory()
     private val productService = serviceFactory.createService(ProductService::class.java)
 
@@ -23,21 +25,26 @@ class ShowCarActivity : BaseProductsActivity() {
         super.recyclerViewProducts = findViewById(R.id.RecyclerViewProducts)
         super.context = this@ShowCarActivity
         setToolBar()
-        applyFilters()
+        this.getFilters()
         lifecycleScope.launch(Dispatchers.IO) {
             setProducts()
         }
 
-
-        var filter = findViewById<Button>(R.id.button_filter)
+        val filter = findViewById<Button>(R.id.button_filter)
 
         filter.setOnClickListener {
-            var intent = Intent(this@ShowCarActivity, CarFilterActivity::class.java)
+            val intent = Intent(this@ShowCarActivity, CarFilterActivity::class.java)
             startActivity(intent)
         }
     }
 
+    override fun getFilters(){
+        super.getFilters()
+        minKm = intent.getIntExtra("minKm",0)
+        maxKm = intent.getIntExtra("maxKm",Integer.MAX_VALUE)
+    }
+
     override suspend fun getSpecificProducts(userId : String, page: Number, size: Number): LikedProductResponse {
-        return productService.getCarsWithFavourites(userId,page,size)
+        return productService.getCarsWithFavourites(userId,page,size, super.minPrice, super.maxPrice, super.state, minKm, maxKm)
     }
 }

@@ -14,7 +14,6 @@ import kotlinx.coroutines.launch
 
 class ShowAppliancesActivity : BaseProductsActivity() {
 
-    private var typeOfFilter: String? = null
     private val serviceFactory = ServiceFactory()
     private val productService = serviceFactory.createService(ProductService::class.java)
 
@@ -24,21 +23,19 @@ class ShowAppliancesActivity : BaseProductsActivity() {
         super.recyclerViewProducts = findViewById(R.id.RecyclerViewProducts)
         super.context = this@ShowAppliancesActivity
         setToolBar()
-        applyFilters()
         lifecycleScope.launch(Dispatchers.IO) {
             setProducts()
         }
 
-        var filter = findViewById<Button>(R.id.button_filter)
+        val filter = findViewById<Button>(R.id.button_filter)
 
         filter.setOnClickListener {
-            var intent = Intent(this@ShowAppliancesActivity, ApplianceFilterActivity::class.java)
+            val intent = Intent(this@ShowAppliancesActivity, ApplianceFilterActivity::class.java)
             startActivity(intent)
         }
     }
 
     override suspend fun getSpecificProducts(userId: String, page: Number, size: Number): LikedProductResponse {
-        return productService.getAppliancesWithFavourites(userId,page,size)
+        return productService.getAppliancesWithFavourites(userId,page,size, super.minPrice, super.maxPrice, super.state)
     }
-
 }

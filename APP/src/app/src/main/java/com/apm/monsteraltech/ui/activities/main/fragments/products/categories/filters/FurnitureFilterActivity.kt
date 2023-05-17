@@ -15,26 +15,26 @@ class FurnitureFilterActivity : ActionBarActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_furniture_filter)
         setToolBar()
-        var button = findViewById<Button>(R.id.applyFilter)
+        val button = findViewById<Button>(R.id.applyFilter)
         button.setOnClickListener{applyFilter()}
     }
 
     private fun applyFilter() {
-        val editPrecioDesde = findViewById<EditText>(R.id.edit_precio_desde)
-        val editPrecioHasta = findViewById<EditText>(R.id.edit_precio_hasta)
+        val editMinPrice = findViewById<EditText>(R.id.edit_precio_desde)
+        val editMaxPrice = findViewById<EditText>(R.id.edit_precio_hasta)
         val segmentedButtonGroupOpciones = (findViewById<View>(R.id.segmentedButtonGroup_opciones) as MaterialButtonToggleGroup)
 
-        val precioDesde = editPrecioDesde.text.toString().toIntOrNull() ?: 0
-        val precioHasta = editPrecioHasta.text.toString().toIntOrNull() ?: Int.MAX_VALUE
-        val estado = when (segmentedButtonGroupOpciones.checkedButtonId) {
+        val minPrice = editMinPrice.text.toString().toIntOrNull() ?: 0
+        val maxPrice = editMaxPrice.text.toString().toIntOrNull() ?: Int.MAX_VALUE
+        val state = when (segmentedButtonGroupOpciones.checkedButtonId) {
             R.id.btn_nuevo -> "Nuevo"
             R.id.btn_seminuevo -> "Reacondicionado"
             else -> null
         }
         val intent = Intent(this, ShowFurnitureActivity::class.java)
-        intent.putExtra("precio_desde", precioDesde)
-        intent.putExtra("precio_hasta", precioHasta)
-        intent.putExtra("estado_coche", estado)
+        intent.putExtra("minPrice", minPrice)
+        intent.putExtra("maxPrice", maxPrice)
+        intent.putExtra("state", state)
         startActivity(intent)
     }
 }
