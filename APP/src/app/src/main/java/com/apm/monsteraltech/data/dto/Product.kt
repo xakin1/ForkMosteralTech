@@ -92,3 +92,37 @@ data class Product(
             this(id, name, price, description, state, null, null)
 }
 
+data class Car(
+    val name: String,
+    val description: String?,
+    val price: Double,
+    val state: String,
+    val km: Int,
+    val owner: User?,
+)
+
+data class House(
+    val name: String,
+    val description: String?,
+    val price: Double,
+    val state: String,
+    val m2: Int,
+    val owner: User?,
+)
+
+data class Furniture(
+    val name: String,
+    val description: String?,
+    val price: Double,
+    val state: String,
+    val owner: User?,
+)
+
+data class Appliance(
+    val name: String,
+    val description: String?,
+    val price: Double,
+    val state: String,
+    val owner: User?,
+)
+

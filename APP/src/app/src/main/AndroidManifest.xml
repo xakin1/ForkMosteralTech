@@ -11,8 +11,12 @@
         android:name="android.permission.CAMERA"
         android:required="true" />
     <uses-permission
-        android:name="android.permission.READ_MEDIA_IMAGES"
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:required="true" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:required="true"
+        tools:ignore="ScopedStorage" />
 
     <application
         android:allowBackup="true"
@@ -24,6 +28,9 @@
         android:theme="@style/Theme.MonsteralTech.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.activities.productDetail.BuyActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.activities.camera.CameraActivity"
             android:exported="false" />

@@ -1,11 +1,8 @@
 package com.apm.monsteraltech.services
 
-import com.apm.monsteraltech.data.dto.LikedProductResponse
-import com.apm.monsteraltech.data.dto.ProductResponse
+import com.apm.monsteraltech.data.dto.*
 import com.apm.monsteraltech.enumerados.State
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ProductService {
     @GET("/api/entities/products/all/{userId}")
@@ -49,4 +46,30 @@ interface ProductService {
     suspend fun getAppliancesWithFavourites(@Path("userId") userId: String, @Query("page") page: Number, @Query("size") size: Number,
                                             @Query("minPrice") minPrice: Number, @Query("maxPrice") maxPrice: Number, @Query("state") state: State?
     ): LikedProductResponse
+
+    @POST("/api/entities/cars")
+    suspend fun addCar(
+        @Body car: Car
+    ) : Product
+
+    @POST("/api/entities/houses")
+    suspend fun addHouse(
+        @Body house: House
+    ) : Product
+
+    @POST("/api/entities/furnitures")
+    suspend fun addFurniture(
+        @Body furniture: Furniture
+    ) : Product
+
+    @POST("/api/entities/appliances")
+    suspend fun addAppliance(
+        @Body appliance: Appliance
+    ) : Product
+
+    @POST("/api/entities/productImages")
+    suspend fun addProductImage(
+        @Body productImage: ProductImage
+    )
+
 }

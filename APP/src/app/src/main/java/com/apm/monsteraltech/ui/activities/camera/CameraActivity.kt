@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -13,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
@@ -83,7 +85,7 @@ class CameraActivity : AppCompatActivity() {
         IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
-            if (allPermissionsGranted()) {
+            if (allCameraPermissionsGranted()) {
                 startCamera()
             } else {
                 Toast.makeText(this,
@@ -97,7 +99,7 @@ class CameraActivity : AppCompatActivity() {
         private const val TAG = "CameraXBasic"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
         private const val REQUEST_CODE_PERMISSIONS = 10
-        private val REQUIRED_PERMISSIONS = arrayOf(android.Manifest.permission.CAMERA)
+        private val REQUIRED_PERMISSIONS = arrayOf(android.Manifest.permission.CAMERA, android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -112,14 +114,14 @@ class CameraActivity : AppCompatActivity() {
         selectedImages = ArrayList()
         imageRecyclerView.adapter = null
         imageAdapter = ImageAdapter(this, selectedImages)
-        val llm = GridLayoutManager(this,4,RecyclerView.VERTICAL,false)
+        val llm = GridLayoutManager(this,8,RecyclerView.VERTICAL,false)
         imageRecyclerView.layoutManager = llm
         imageRecyclerView.adapter = imageAdapter
 
 
 
         // Solicitude dos permisos da cámara
-        if (allPermissionsGranted()) {
+        if (allCameraPermissionsGranted()) {
             startCamera()
         } else {
             ActivityCompat.requestPermissions(
@@ -223,10 +225,11 @@ class CameraActivity : AppCompatActivity() {
         }, ContextCompat.getMainExecutor(this))
     }
 
-    private fun allPermissionsGranted(): Boolean {
+    private fun allCameraPermissionsGranted(): Boolean {
         return ContextCompat.checkSelfPermission(
             this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
     }
+
     private fun getOutputDirectory(): File {
         val mediaDir = this.externalMediaDirs.firstOrNull()?.let {
             File(it, resources.getString(R.string.app_name)).apply { mkdirs() } }
