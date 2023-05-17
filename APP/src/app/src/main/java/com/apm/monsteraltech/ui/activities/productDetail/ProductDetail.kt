@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -39,6 +40,7 @@ class ProductDetail : ActionBarActivity() {
             liked = likeAnimation(likeButton, R.raw.bandai_dokkan, liked)
         }
 
+
         productOwnerButton.setOnClickListener {
             // Acción para cancelar el registro
             val intent = Intent(this, UserDetail::class.java)
@@ -62,6 +64,10 @@ class ProductDetail : ActionBarActivity() {
         val dotsIndicator = findViewById<WormDotsIndicator>(R.id.wormDotsIndicator)
         viewPager.adapter = viewPaperAdapter
         dotsIndicator.attachTo(viewPager)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        return true
     }
 
     private fun likeAnimation(imageView: LottieAnimationView,

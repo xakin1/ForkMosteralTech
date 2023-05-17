@@ -2,6 +2,7 @@ package com.apm.monsteraltech.ui.activities.user.detailUserProfile
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.widget.Button
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.ui.activities.actionBar.ActionBarActivity
@@ -24,4 +25,10 @@ class DetailedProfileActivity : ActionBarActivity() {
         val intent = Intent(this@DetailedProfileActivity, LoginActivity::class.java)
         startActivity(intent)
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        return true
+    }
+
+
 }
