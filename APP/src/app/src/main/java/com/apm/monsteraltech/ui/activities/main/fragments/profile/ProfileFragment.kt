@@ -353,7 +353,7 @@ class ProfileFragment : Fragment() {
     private suspend fun getProductList(): ArrayList<Product> {
         // Agrega algunas transacciones a la lista para mockear la respuesta
 
-        return withContext(lifecycleScope.coroutineContext + Dispatchers.IO) {
+        return withContext(lifecycleScope.coroutineContext + Dispatchers.Main) {
             val productList: ArrayList<Product> = ArrayList()
             try {
                 // Obtiene las transacciones del usuario

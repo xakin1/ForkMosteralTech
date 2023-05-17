@@ -4,6 +4,12 @@ VALUES ('fAsTAzll1fbLRMczYPlOKOcdw6H3', 'Buyer user', 'Demo', 'eyJhbGciOiJSUzI1N
 INSERT INTO appuser (id, name, surname, firebase_token)
 VALUES ('pfpY9jg25hfdKPaDMyKqg5GIkPV2', 'Seller user', 'Demo', 'eyJhbGciOiJSUzI1NiIsImtpZCI6ImI2NzE1ZTJmZjcxZDIyMjQ5ODk1MDAyMzY2ODMwNDc3Mjg2Nzg0ZTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiU2hhayBCZXJtbyIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BR05teXhZM1doZG9DOEF6dWQ1LUhBcHRtY1NTNk11eFEwd1ozQlJLcjlCdD1zOTYtYyIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9tb25zdGVyYWwtdGVjaCIsImF1ZCI6Im1vbnN0ZXJhbC10ZWNoIiwiYXV0aF90aW1lIjoxNjgzMzczNDYzLCJ1c2VyX2lkIjoicGZwWTlqZzI1aGZkS1BhRE15S3FnNUdJa1BWMiIsInN1YiI6InBmcFk5amcyNWhmZEtQYURNeUtxZzVHSWtQVjIiLCJpYXQiOjE2ODM0Nzk4MTIsImV4cCI6MTY4MzQ4MzQxMiwiZW1haWwiOiJ4YWtpbjFAbGl2ZS5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjEwNTUxOTIzNTI1MjQ0Mzk1OTA3MCJdLCJlbWFpbCI6WyJ4YWtpbjFAbGl2ZS5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJnb29nbGUuY29tIn19.HF3gnXr0cb959GighNyLGXJn9TsnGIfGwICDqrTXJqZIOA7KEoqhjNrBuiFBmjin1dHb4TbXjMTTjj93mu0NhztWUVRIOeAmUTfxlx0tOKtT5bhFfylayibY38rlURFSzJ3WZwP6MLvrSht1K5HGaSCNWHV-ILOigap3tlPHhIPS8PaIX7keCgb80fW52GuWX0vk8WHbtuPgKvvUPZRervpNimBAzvhjd');
 
+INSERT INTO appuser (id, name, surname, firebase_token)
+VALUES ('YcwbOWjeNOWrNCqMr36crsKEKP13', 'Facebook user', 'Demo', 'a);
+
+
+
+ 
 ----------- CASAS----------------
 
 -- Casa 1
@@ -254,67 +260,67 @@ INSERT INTO t_car (id,km) VALUES (LASTVAL(),2000);
 
 INSERT INTO t_product (name, description, state, owner, price)
 VALUES ('Volkswagen Golf', 'Coche como nuevo', 'SEMI_NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 8000.00);
-INSERT INTO t_car (id,km) VALUES (LASTVAL(),2000);
+INSERT INTO t_car (id,km) VALUES (LASTVAL(),2500);
 
 -- Coche 3
 
 INSERT INTO t_product (name, description, state, owner, price)
 VALUES ('Ford Focus', 'Coche usado en buen estado', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 5000.00);
-INSERT INTO t_car (id,km) VALUES (LASTVAL(),2000);
+INSERT INTO t_car (id,km) VALUES (LASTVAL(),3000);
 
 -- Coche 4
 
 INSERT INTO t_product (name, description, state, owner, price)
 VALUES ('BMW Serie 3', 'Coche en excelente estado', 'NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 22000.00);
-INSERT INTO t_car (id,km) VALUES (LASTVAL(),2000);
+INSERT INTO t_car (id,km) VALUES (LASTVAL(),0);
 
 -- Coche 5
 
 INSERT INTO t_product (name, description, state, owner, price)
 VALUES ('Audi A4', 'Coche en buen estado', 'SEMI_NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 13000.00);
-INSERT INTO t_car (id,km) VALUES (LASTVAL(),2000);
+INSERT INTO t_car (id,km) VALUES (LASTVAL(),2500);
 
 -- Coche 6
 
 INSERT INTO t_product (name, description, state, owner, price)
 VALUES ('Renault Megane', 'Coche usado con algunos arreglos', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 3500.00);
-INSERT INTO t_car (id,km) VALUES (LASTVAL(),2000);
+INSERT INTO t_car (id,km) VALUES (LASTVAL(),4000);
 
 -- Coche 7
 
 INSERT INTO t_product (name, description, state, owner, price)
 VALUES ('Toyota Corolla', 'Coche en excelente estado', 'NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 18000.00);
-INSERT INTO t_car (id,km) VALUES (LASTVAL(),2000);
+INSERT INTO t_car (id,km) VALUES (LASTVAL(),31000);
 
 -- Coche 8
 
 INSERT INTO t_product (name, description, state, owner, price)
 VALUES ('Honda Civic', 'Coche semi nuevo', 'SEMI_NEW', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 11000.00);
-INSERT INTO t_car (id,km) VALUES (LASTVAL(),2000);
+INSERT INTO t_car (id,km) VALUES (LASTVAL(),15000);
 
 -- Coche 9
 
 INSERT INTO t_product (name, description, state, owner, price)
 VALUES ('Citroen C3', 'Coche usado en buen estado', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 4000.00);
-INSERT INTO t_car (id,km) VALUES (LASTVAL(),2000);
+INSERT INTO t_car (id,km) VALUES (LASTVAL(),7000);
 
 -- Coche 10
 
 INSERT INTO t_product (name, description, state, owner, price)
 VALUES ('Citroen C4', 'Coche usado en buen estado', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 4000.00);
-INSERT INTO t_car (id,km) VALUES (LASTVAL(),2000);
+INSERT INTO t_car (id,km) VALUES (LASTVAL(),12000);
 
 -- Coche 11
 
 INSERT INTO t_product (name, description, state, owner, price)
 VALUES ('Citroen C5', 'Coche usado en buen estado', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 4000.00);
-INSERT INTO t_car (id,km) VALUES (LASTVAL(),2000);
+INSERT INTO t_car (id,km) VALUES (LASTVAL(),22000);
 
 -- Coche 12
 
 INSERT INTO t_product (name, description, state, owner, price)
 VALUES ('Citroen C6', 'Coche usado en buen estado', 'SECOND_HAND', 'pfpY9jg25hfdKPaDMyKqg5GIkPV2', 4000.00);
-INSERT INTO t_car (id,km) VALUES (LASTVAL(),2000);
+INSERT INTO t_car (id,km) VALUES (LASTVAL(),27000);
 
 --Favoritos
 

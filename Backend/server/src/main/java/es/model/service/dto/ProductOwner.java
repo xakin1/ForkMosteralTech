@@ -4,6 +4,9 @@ public class ProductOwner {
 	private String id;
 	private String name;
 	private String surname;
+	
+    public ProductOwner() {
+    }
 
 	public ProductOwner(String id, String name, String surname) {
 		super();

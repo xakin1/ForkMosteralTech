@@ -51,6 +51,8 @@ abstract class BaseProductsActivity : ActionBarActivity() {
         }
     }
 
+
+
     open fun getFilters(){
         minPrice = intent.getDoubleExtra("minPrice",0.0)
         maxPrice = intent.getDoubleExtra("maxPrice", Double.MAX_VALUE)
