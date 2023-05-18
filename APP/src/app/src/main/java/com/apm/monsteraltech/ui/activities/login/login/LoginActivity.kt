@@ -41,6 +41,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.map
+import retrofit2.HttpException
 
 
 val Context.dataStore by preferencesDataStore(name = "USER")
@@ -200,24 +201,45 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun getKeyFromDatabase(user: FirebaseUser?) {
-            CoroutineScope(Dispatchers.IO).launch {
-
-            val response: User = user?.let { userService.getUserById(it.uid) } as User
-            user.getIdToken(true).addOnSuccessListener { result ->
-                val idToken = result.token.toString()
-                lifecycleScope.launch(Dispatchers.IO) {
-                    withContext(Dispatchers.Main) {
-                        try {
-                            response.firebaseToken = idToken
-                            saveUserOnDatastore(response.name, response.surname, idToken)
-                            userService.updateUser(response.id, response)
-                            moveToMainMenu()
-                        } catch (e: Exception) {
-                            Log.d("ERROR LOGIN", e.toString())
+            CoroutineScope(Dispatchers.Main).launch {
+                try {
+                    val response: User = userService.getUserById(user?.uid ?: "")
+                    user?.getIdToken(true)?.addOnSuccessListener { result ->
+                        val idToken = result.token.toString()
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            withContext(Dispatchers.Main) {
+                                try {
+                                    response.firebaseToken = idToken
+                                    response.surname?.let {
+                                        saveUserOnDatastore(response.name,
+                                            it, idToken)
+                                    }
+                                    userService.updateUser(response.id, response)
+                                    moveToMainMenu()
+                                } catch (e: Exception) {
+                                    Log.d("ERROR LOGIN", e.toString())
+                                }
+                            }
                         }
                     }
+                } catch (e: HttpException){
+                    if (e.code() == 404) {
+      //TODO: MOVER AL USUARIO A UNA PANTALLA PARA QUE  REGISTRE SUS DATOS
+      /*                  userService.addUser(
+                            User(
+                                user.uid,
+                                user.displayName!!, null, idToken, null, null
+                            )*/
+
+                    }
+                    else {
+                        Toast.makeText(
+                            this@LoginActivity,
+                            "Ha ocurrido un error inesperado",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
-            }
         }
     }
 
