@@ -1,6 +1,7 @@
 package com.apm.monsteraltech.services
 
 import android.util.Log
+//import androidx.viewbinding.BuildConfig
 import com.apm.monsteraltech.BuildConfig
 import com.apm.monsteraltech.enumerados.State
 import com.google.gson.GsonBuilder
@@ -13,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 class ServiceFactory {
-    private val BASE_URL = "http://192.168.1.144:8080/"
+    private val BASE_URL = "https://monsteraltechbackend.up.railway.app/"
 
     val loggingInterceptor = HttpLoggingInterceptor { message -> Log.d("OkHttp", message) }.apply {
         level = HttpLoggingInterceptor.Level.BODY
