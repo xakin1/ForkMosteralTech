@@ -46,92 +46,25 @@
             android:layout_columnSpan="1"
             android:layout_rowSpan="1"
             android:layout_columnWeight="1"
+            android:inputType="number"
             android:hint="Desde"
-            android:inputType="numberDecimal"
             android:textSize="16sp" />
 
         <EditText
             android:id="@+id/edit_precio_hasta"
             android:layout_height="wrap_content"
             android:layout_columnSpan="1"
+            android:inputType="number"
             android:layout_rowSpan="1"
             android:layout_columnWeight="1"
             android:hint="Hasta"
-            android:inputType="numberDecimal"
             android:textSize="16sp" />
 
     </GridLayout>
 
-    <TextView
-        android:layout_below="@id/gridLayout_precios"
-        android:id="@+id/ubicacion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ubicación"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp" />
-
-    <EditText
-        android:layout_below="@id/ubicacion"
-        android:id="@+id/edit_ubicacion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Introduce una ubicación"
-        android:textSize="16sp"
-        android:inputType="text" />
-
-    <TextView
-        android:layout_below="@id/edit_ubicacion"
-        android:id="@+id/numero_habitaciones"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Número de habitaciones"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp" />
-
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/segmentedButtonGroup_opciones"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/numero_habitaciones"
-        app:singleSelection="true"
-        app:backgroundTint="@android:color/transparent">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_nuevo"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Nuevo"
-            android:textColor="@color/teal_200"/>
-
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_seminuevo"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Seminuevo"
-            android:textColor="@color/teal_200"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_segunda_mano"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Segunda mano"
-            android:textColor="@color/teal_200"
-            />
-
-    </com.google.android.material.button.MaterialButtonToggleGroup>
 
     <GridLayout
-        android:layout_below="@id/segmentedButtonGroup_opciones"
+        android:layout_below="@id/gridLayout_precios"
         android:id="@+id/gridLayout_tamaño"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -162,7 +95,7 @@
             android:layout_rowSpan="1"
             android:layout_columnWeight="1"
             android:hint="Desde"
-            android:inputType="numberDecimal"
+            android:inputType="number"
             android:textSize="16sp" />
 
         <EditText
@@ -172,10 +105,50 @@
             android:layout_rowSpan="1"
             android:layout_columnWeight="1"
             android:hint="Hasta"
-            android:inputType="numberDecimal"
+            android:inputType="number"
             android:textSize="16sp" />
 
     </GridLayout>
+
+    <TextView
+        android:id="@+id/state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gridLayout_tamaño"
+        android:text="Estados"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_gravity="center"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/state"
+        android:padding="16dp"
+        android:id="@+id/radiobutton"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_gravity="center">
+        <RadioButton android:id="@+id/radio_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/New"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/radio_semi_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/SemiNew"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/radio_secondHand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/SecondHand"
+            android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
+
 
     <Button
         android:id="@+id/applyFilter"

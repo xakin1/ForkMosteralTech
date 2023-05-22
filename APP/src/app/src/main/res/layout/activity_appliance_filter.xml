@@ -43,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_columnSpan="1"
             android:layout_rowSpan="1"
+            android:inputType="number"
             android:layout_columnWeight="1"
             android:hint="Desde"
             android:textSize="16sp" />
@@ -51,6 +52,7 @@
             android:id="@+id/edit_precio_hasta"
             android:layout_height="wrap_content"
             android:layout_columnSpan="1"
+            android:inputType="number"
             android:layout_rowSpan="1"
             android:layout_columnWeight="1"
 
@@ -71,33 +73,29 @@
         android:textSize="16sp"
         android:textStyle="bold" />
 
-
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/segmentedButtonGroup_opciones"
+    <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/Marcas"
-        app:singleSelection="true"
-        app:backgroundTint="@android:color/transparent">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_nuevo"
-            android:layout_width="0dp"
+        android:id="@+id/radiobutton"
+        android:orientation="vertical">
+        <RadioButton android:id="@+id/radio_new"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Nuevo"
-            android:textColor="@color/teal_200"/>
-
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_seminuevo"
-            android:layout_width="0dp"
+            android:text="@string/New"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/radio_semi_new"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Reacondicionado"
-            android:textColor="@color/teal_200"
-            />
-    </com.google.android.material.button.MaterialButtonToggleGroup>
+            android:text="@string/SemiNew"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/radio_secondHand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/SecondHand"
+            android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
+
 
     <Button
         android:id="@+id/applyFilter"

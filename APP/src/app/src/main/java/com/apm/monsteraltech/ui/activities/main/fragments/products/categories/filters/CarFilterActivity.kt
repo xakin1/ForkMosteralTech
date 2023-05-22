@@ -6,19 +6,44 @@ import android.view.Menu
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RadioButton
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.ui.activities.actionBar.ActionBarActivity
 import com.apm.monsteraltech.ui.activities.main.fragments.products.categories.ShowCarActivity
-import com.google.android.material.button.MaterialButtonToggleGroup
 
 
 class CarFilterActivity : ActionBarActivity() {
+    private var state: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_car_filter)
         setToolBar()
         val button = findViewById<Button>(R.id.applyFilter)
         button.setOnClickListener{applyFilter()}
+    }
+
+    fun onRadioButtonClicked(view: View) {
+        if (view is RadioButton) {
+            // Is the button now checked?
+            val checked = view.isChecked
+
+            // Check which radio button was clicked
+            when (view.getId()) {
+                R.id.radio_new ->
+                    if (checked) {
+                        state = "NEW"
+                    }
+                R.id.radio_semi_new ->
+                    if (checked) {
+                        state = "SEMI_NEW"
+                    }
+                R.id.radio_secondHand ->
+                    if (checked) {
+                        state = "SECOND_HAND"
+                    }
+            }
+        }
     }
 
     fun applyFilter() {
@@ -33,18 +58,6 @@ class CarFilterActivity : ActionBarActivity() {
         val minKm = editMinKm.text.toString().toIntOrNull() ?: 0
         val maxKm = editMaxKm.text.toString().toIntOrNull() ?: Int.MAX_VALUE
 
-        val state: String
-        val checkedButtonId =
-            (findViewById<View>(R.id.segmentedButtonGroup_opciones) as MaterialButtonToggleGroup).checkedButtonId
-        state = if (checkedButtonId == R.id.btn_nuevo) {
-            "nuevo"
-        } else if (checkedButtonId == R.id.btn_seminuevo) {
-            "seminuevo"
-        } else if (checkedButtonId == R.id.btn_segunda_mano) {
-            "segunda mano"
-        } else {
-            ""
-        }
         val intent = Intent(this, ShowCarActivity::class.java)
         intent.putExtra("minPrice", minPrice)
         intent.putExtra("maxPrice", maxPrice)

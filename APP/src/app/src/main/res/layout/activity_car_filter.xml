@@ -44,6 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_columnSpan="1"
             android:layout_rowSpan="1"
+            android:inputType="number"
             android:layout_columnWeight="1"
             android:hint="Desde"
             android:textSize="16sp" />
@@ -54,7 +55,7 @@
             android:layout_columnSpan="1"
             android:layout_rowSpan="1"
             android:layout_columnWeight="1"
-
+            android:inputType="number"
             android:hint="Hasta"
             android:textSize="16sp" />
 
@@ -72,39 +73,31 @@
         android:textSize="16sp"
         android:textStyle="bold" />
 
-
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/segmentedButtonGroup_opciones"
+    <RadioGroup
+        android:id="@+id/radiobutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/Marcas"
-        app:singleSelection="true"
-        app:backgroundTint="@android:color/transparent">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_nuevo"
-            android:layout_width="0dp"
+        android:padding="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_gravity="center">
+        <RadioButton android:id="@+id/radio_new"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Nuevo"/>
-
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_seminuevo"
-            android:layout_width="0dp"
+            android:text="@string/New"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/radio_semi_new"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Seminuevo"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_segunda_mano"
-            android:layout_width="0dp"
+            android:text="@string/SemiNew"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/radio_secondHand"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Segunda mano"/>
-
-    </com.google.android.material.button.MaterialButtonToggleGroup>
+            android:text="@string/SecondHand"
+            android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
 
     <GridLayout
         android:id="@+id/gridLayout_quilometros"
@@ -115,7 +108,7 @@
         android:alignmentMode="alignMargins"
         android:columnOrderPreserved="false"
         android:padding="16dp"
-        android:layout_below="@id/segmentedButtonGroup_opciones"
+        android:layout_below="@+id/radiobutton"
         android:useDefaultMargins="true"
         android:layout_gravity="center">
 
@@ -135,6 +128,7 @@
             android:id="@+id/edit_quilometros_desde"
             android:layout_height="wrap_content"
             android:layout_columnSpan="1"
+            android:inputType="number"
             android:layout_rowSpan="1"
             android:layout_columnWeight="1"
             android:hint="Desde"
@@ -144,6 +138,7 @@
             android:id="@+id/edit_quilometros_hasta"
             android:layout_height="wrap_content"
             android:layout_columnSpan="1"
+            android:inputType="number"
             android:layout_rowSpan="1"
             android:layout_columnWeight="1"
 

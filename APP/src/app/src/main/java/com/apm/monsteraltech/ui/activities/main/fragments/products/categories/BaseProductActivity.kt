@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,18 +13,12 @@ import com.apm.monsteraltech.R
 import com.apm.monsteraltech.data.adapter.AdapterLikedProduct
 import com.apm.monsteraltech.data.dto.LikedProduct
 import com.apm.monsteraltech.data.dto.LikedProductResponse
-import com.apm.monsteraltech.data.dto.User
 import com.apm.monsteraltech.enumerados.State
-import com.apm.monsteraltech.services.ServiceFactory
-import com.apm.monsteraltech.services.UserService
 import com.apm.monsteraltech.ui.activities.actionBar.ActionBarActivity
-import com.apm.monsteraltech.ui.activities.login.login.dataStore
 import com.apm.monsteraltech.ui.activities.productDetail.ProductDetail
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.internal.wait
 import retrofit2.HttpException
 import java.util.*
 
@@ -36,10 +29,8 @@ abstract class BaseProductsActivity : ActionBarActivity() {
     protected lateinit var context: Context
     protected lateinit var recyclerViewProducts: RecyclerView
     protected var  minPrice : Number = 0
-    protected var maxPrice : Number = Double.MAX_VALUE
+    protected var maxPrice : Number = Integer.MAX_VALUE
     protected var state: State? = null
-    private val serviceFactory = ServiceFactory()
-    private val userService = serviceFactory.createService(UserService::class.java)
     private lateinit var userId: String
 
 
@@ -54,11 +45,11 @@ abstract class BaseProductsActivity : ActionBarActivity() {
 
 
     open fun getFilters(){
-        minPrice = intent.getDoubleExtra("minPrice",0.0)
-        maxPrice = intent.getDoubleExtra("maxPrice", Double.MAX_VALUE)
+        minPrice = intent.getIntExtra("minPrice",0)
+        maxPrice = intent.getIntExtra("maxPrice", Integer.MAX_VALUE)
         val stateString = intent.getStringExtra("state")
         if(stateString != null)
-            state    = State.valueOf(stateString)
+            state = State.valueOf(stateString)
     }
 
 
@@ -174,42 +165,44 @@ abstract class BaseProductsActivity : ActionBarActivity() {
     }
 
     private suspend fun getProductList(): ArrayList<LikedProduct> {
-        return withContext(lifecycleScope.coroutineContext + Dispatchers.IO) {
-            val productList: ArrayList<LikedProduct> = ArrayList()
+        return withContext(lifecycleScope.coroutineContext + Dispatchers.Main) {
+            var productList: ArrayList<LikedProduct> = ArrayList()
 
             // Obtiene las transacciones del usuario
-            val products: LikedProductResponse = getSpecificProducts(userId,0 ,10)
+            try {
+                val products: LikedProductResponse = getSpecificProducts(userId,0 ,10)
 
-            // Agrega las transacciones del usuario a la lista
-            for (product in products.content) {
-                val state = State.values().find { it.stateString == product.state } ?: State.UNKNOWN
+                // Agrega las transacciones del usuario a la lista
+                for (product in products.content) {
+                    val state = State.values().find { it.stateString == product.state } ?: State.UNKNOWN
 
-                val productItem = LikedProduct(
-                    product.id,
-                    product.name,
-                    product.price,
-                    product.description,
-                    state.toString(),
-                    product.images,
-                    product.favourite,
-                    product.productOwner
-                )
-                productList.add(productItem)
+                    val productItem = LikedProduct(
+                        product.id,
+                        product.name,
+                        product.price,
+                        product.description,
+                        state.toString(),
+                        product.images,
+                        product.favourite,
+                        product.productOwner
+                    )
+                    productList.add(productItem)
+                }
+            } catch (e: HttpException){
+                if (e.code() == 404) {
+                    runOnUiThread {
+                        productList = ArrayList()
+                        Toast.makeText(
+                            applicationContext,
+                            "No hay productos disponibles",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
             }
-            // Devuelve la lista completa
             productList
         }
     }
 
-    private fun getUserDataFromDatastore()  = this.dataStore.data.map { preferences  ->
-        User(
-            id = "",
-            name = preferences[stringPreferencesKey("userName")].orEmpty(),
-            surname = preferences[stringPreferencesKey("userLastname")].orEmpty(),
-            firebaseToken = preferences[stringPreferencesKey("userFirebaseKey")].orEmpty(),
-            location = null,
-            expirationDatefirebaseToken = null
-        )
-    }
     abstract suspend fun getSpecificProducts(userId : String,page: Number, size: Number): LikedProductResponse
 }

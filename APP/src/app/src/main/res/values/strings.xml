@@ -65,5 +65,8 @@
     <string name="fb_login_protocol_scheme">fb1234</string>
     <string name="facebook_client_token">56789</string>
     <string name="foto_del_producto">Foto del producto</string>
+    <string name="New">Nuevo</string>
+    <string name="SecondHand">Segunda mano</string>
+    <string name="SemiNew">Seminuevo</string>
 
 </resources>
