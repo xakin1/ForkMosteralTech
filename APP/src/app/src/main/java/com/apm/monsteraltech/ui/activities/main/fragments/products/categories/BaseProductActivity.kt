@@ -157,9 +157,7 @@ abstract class BaseProductsActivity : ActionBarActivity() {
                 }
             }
         }
-        if (filteredlist.isEmpty()) {
-            Toast.makeText(context, "No Data Found..", Toast.LENGTH_SHORT).show()
-        } else {
+        if (!filteredlist.isEmpty()) {
             adapterProduct.filterList(filteredlist)
         }
     }

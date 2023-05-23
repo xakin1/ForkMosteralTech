@@ -3,6 +3,9 @@ package com.apm.monsteraltech.data.adapter
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,8 +62,18 @@ class AdapterLikedProduct(private var productList: List<LikedProduct>): Recycler
                 State.SECOND_HAND-> itemView.context.getString(R.string.product_state, "segunda mano")
                 State.UNKNOWN -> itemView.context.getString(R.string.product_state, "desconocido")
             }
-            //TODO: Cargar imagenes de los productos aquí
-            // Si hicieramos "$${product.price}" tendríamos una vulnerabilidad de inyección de código
+            if(product.name == "dfsdfds")
+            {
+                print("a")
+            }
+
+            if (product.images?.size!! > 0) {
+                val imageData =
+                    product.images[0].content?.let { this.convertStringToBitmap(it) }
+
+                // Establecer el Bitmap en el ImageView
+                imageProduct.setImageBitmap(imageData)
+            }
             textPrice.text = itemView.context.getString(R.string.product_price, product.price)
             textDescription.text = trimText(product.description.toString())
             if (product.favourite) {
@@ -73,6 +86,15 @@ class AdapterLikedProduct(private var productList: List<LikedProduct>): Recycler
             }
         }
 
+        private fun convertStringToBitmap(content: String): Bitmap? {
+            try {
+                val decodedString = Base64.decode(content, Base64.DEFAULT)
+                return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            return null
+        }
         private fun trimText(text: String): String{
             val maxLength = 50
             val trimmedDescription = if (text.length > maxLength) {

@@ -1,6 +1,8 @@
 package com.apm.monsteraltech.data.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,8 +32,17 @@ class AdapterProduct(private var productList: List<Product>): RecyclerView.Adapt
         @SuppressLint("StringFormatMatches")
         fun setData(product: Product) {
             textProductName.text = product.name
-            //TODO: Cargar imagenes de los productos aquí
-            // Si hicieramos "$${product.price}" tendríamos una vulnerabilidad de inyección de código
+            val imageData =
+                product.images?.get(0)?.content
+            if (imageData != null) {
+                val imageBytes = Base64.decode(imageData, Base64.DEFAULT) // Decodificar el array de bits desde Base64
+
+                // Crear un objeto Bitmap a partir de los bytes decodificados
+                val bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+
+                // Establecer el Bitmap en el ImageView
+                imageProduct.setImageBitmap(bitmap)
+            }
             textPrice.text = itemView.context.getString(R.string.product_price, product.price)
             textDescription.text = trimText(product.description.toString())
         }

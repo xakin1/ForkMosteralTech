@@ -1,6 +1,41 @@
 package com.apm.monsteraltech.data.dto
 
-import com.apm.monsteraltech.enumerados.State
+data class LikedProductImage(
+    val id: Long?,
+    val name: String?,
+    val type: String?,
+    val size: Long?,
+    val content: String?,
+    val product: Product?
+) {
+
+
+    override fun hashCode(): Int {
+        var result = id?.hashCode() ?: 0
+        result = 31 * result + (name?.hashCode() ?: 0)
+        result = 31 * result + (type?.hashCode() ?: 0)
+        result = 31 * result + (size?.hashCode() ?: 0)
+        result = 31 * result + (content?.hashCode() ?: 0)
+        result = 31 * result + (product?.hashCode() ?: 0)
+        return result
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as LikedProductImage
+
+        if (id != other.id) return false
+        if (name != other.name) return false
+        if (type != other.type) return false
+        if (size != other.size) return false
+        if (content != other.content) return false
+        if (product != other.product) return false
+
+        return true
+    }
+}
 
 data class ProductImage(
     val id: Long?,
@@ -74,7 +109,7 @@ data class LikedProduct(
     val price: Double,
     val description: String?,
     val state: String,
-    val images: List<ProductImage>?,
+    val images: List<LikedProductImage>?,
     var favourite: Boolean,
     var productOwner: UserProduct
 )

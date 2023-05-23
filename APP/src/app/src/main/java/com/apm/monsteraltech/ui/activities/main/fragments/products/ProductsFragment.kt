@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -29,7 +28,6 @@ import com.apm.monsteraltech.ui.activities.main.fragments.products.categories.Sh
 import com.apm.monsteraltech.ui.activities.main.fragments.products.categories.ShowFurnitureActivity
 import com.apm.monsteraltech.ui.activities.main.fragments.products.categories.ShowHouseActivity
 import com.apm.monsteraltech.ui.activities.productDetail.ProductDetail
-import com.apm.monsteraltech.ui.home.categories.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -203,9 +201,7 @@ class ProductsFragment : Fragment(), Searchable {
                 }
             }
         }
-        if (filteredlist.isEmpty()) {
-            Toast.makeText(requireContext(), "No Data Found..", Toast.LENGTH_SHORT).show()
-        } else {
+        if (!filteredlist.isEmpty()) {
             adapterProduct.filterList(filteredlist)
         }
     }
