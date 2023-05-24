@@ -62,11 +62,6 @@ class AdapterLikedProduct(private var productList: List<LikedProduct>): Recycler
                 State.SECOND_HAND-> itemView.context.getString(R.string.product_state, "segunda mano")
                 State.UNKNOWN -> itemView.context.getString(R.string.product_state, "desconocido")
             }
-            if(product.name == "dfsdfds")
-            {
-                print("a")
-            }
-
             if (product.images?.size!! > 0) {
                 val imageData =
                     product.images[0].content?.let { this.convertStringToBitmap(it) }
