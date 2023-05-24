@@ -4,6 +4,7 @@ import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.text.InputFilter
@@ -15,6 +16,7 @@ import android.widget.*
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.graphics.drawable.toBitmap
+import androidx.core.graphics.drawable.toDrawable
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -27,6 +29,9 @@ import com.apm.monsteraltech.ui.activities.camera.CameraActivity
 import com.apm.monsteraltech.ui.activities.login.login.dataStore
 import com.apm.monsteraltech.ui.activities.main.MainActivity
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
@@ -84,6 +89,7 @@ class AddFragment : Fragment() {
         val editTextKm = view.findViewById<EditText>(R.id.km_edittext)
         val editTextM2 = view.findViewById<EditText>(R.id.m2_edittext)
         val addButton = view.findViewById<Button>(R.id.add_button)
+        val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
 
         descriptionEditText.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(MAX_DESCRIPTION_LENGTH))
         nameEditText.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(MAX_TITLE_LENGTH))
@@ -143,6 +149,19 @@ class AddFragment : Fragment() {
             var estado = estadoSpinner.selectedItem.toString()
             val km = editTextKm.text.toString()
             val m2 = editTextM2.text.toString()
+
+            progressBar.visibility = View.VISIBLE
+
+            
+            addImageButton.isEnabled = false
+            nameEditText.isEnabled = false
+            descriptionEditText.isEnabled = false
+            priceEditText.isEnabled = false
+            categorySpinner.isEnabled = false
+            estadoSpinner.isEnabled = false
+            editTextKm.isEnabled = false
+            editTextM2.isEnabled = false
+            addButton.isEnabled = false
 
             if (name.isEmpty() || description.isEmpty() || price.isEmpty() || (category == "Coches" && km.isEmpty()) || (category == "Casas" && m2.isEmpty())) {
                 Toast.makeText(
@@ -227,6 +246,8 @@ class AddFragment : Fragment() {
                             }
 
                             if (product != null) {
+                                val imageCount = selectedImages.size
+                                var uploadedImageCount = 0
                                 lifecycleScope.launch(Dispatchers.IO) {
                                         for (image in selectedImages) {
                                             try {
@@ -235,29 +256,63 @@ class AddFragment : Fragment() {
                                                     .load(image)
                                                     .submit()
                                                     .get()
-                                                if (drawable != null) {
-                                                    val stream = ByteArrayOutputStream()
-                                                    drawable.compress(
-                                                        Bitmap.CompressFormat.PNG,
-                                                        100,
-                                                        stream
-                                                    )
-                                                    val productImage = ProductImage(
-                                                        null,
-                                                        "imageProduct-" + product.id.toString(),
-                                                        "png",
-                                                        drawable.byteCount.toLong(),
-                                                        stream.toByteArray(),
-                                                        product
-                                                    )
-                                                    productService.addProductImage(productImage)
-                                                }
+                                                Glide.with(requireContext())
+                                                    .asBitmap()
+                                                    .load(image)
+                                                    .into(object : CustomTarget<Bitmap>() {
+                                                        override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                                                            val stream = ByteArrayOutputStream()
+                                                            resource.compress(
+                                                                Bitmap.CompressFormat.JPEG,
+                                                                70,
+                                                                stream
+                                                            )
+                                                            val byteArray = stream.toByteArray()
+                                                            val productImage = ProductImage(
+                                                                null,
+                                                                "imageProduct-" + product.id.toString(),
+                                                                "jpeg",
+                                                                byteArray.size.toLong(),
+                                                                byteArray,
+                                                                product
+                                                            )
+                                                            lifecycleScope.launch(Dispatchers.IO) {
+                                                                productService.addProductImage(
+                                                                    productImage
+                                                                )
+                                                                withContext(Dispatchers.Main) {
+                                                                    uploadedImageCount++
+                                                                    if (uploadedImageCount == imageCount) {
+
+                                                                        progressBar.visibility = View.GONE
+
+
+                                                                        addImageButton.isEnabled = true
+                                                                        nameEditText.isEnabled = true
+                                                                        descriptionEditText.isEnabled = true
+                                                                        priceEditText.isEnabled = true
+                                                                        categorySpinner.isEnabled = true
+                                                                        estadoSpinner.isEnabled = true
+                                                                        editTextKm.isEnabled = true
+                                                                        editTextM2.isEnabled = true
+                                                                        addButton.isEnabled = true
+
+                                                                        // Todas las imágenes se han subido correctamente
+                                                                        val intent = Intent(requireContext(), MainActivity::class.java)
+                                                                        startActivity(intent)
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+
+                                                        override fun onLoadCleared(placeholder: Drawable?) {
+                                                            // Manejar la cancelación de carga aquí
+                                                        }
+                                                    })
                                             } catch (e: Exception) {
                                                 Log.e("Error", e.message.toString())
                                             }
                                         }
-                                        val intent = Intent(requireContext(), MainActivity::class.java)
-                                        startActivity(intent)
                                     }
                             }
 
