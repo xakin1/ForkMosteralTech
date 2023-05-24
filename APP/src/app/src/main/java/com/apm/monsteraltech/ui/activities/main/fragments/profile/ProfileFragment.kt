@@ -151,6 +151,7 @@ class ProfileFragment : Fragment() {
         profileLayout = view.findViewById(R.id.profile)
         profileLayout.setOnClickListener {
             val intent = Intent(requireContext(), DetailedProfileActivity::class.java)
+            intent.putExtra("userName", profileNameEditText.text.toString())
             startActivity(intent)
         }
         return view

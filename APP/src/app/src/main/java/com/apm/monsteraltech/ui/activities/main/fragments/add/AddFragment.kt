@@ -37,8 +37,6 @@ import java.io.ByteArrayOutputStream
 
 //TODO: Limitar bien las fotos y los caracteres de la descripción y titulo.
 class AddFragment : Fragment() {
-/*    private lateinit var btnSubmit: Button
-    private lateinit var btnClear: Button*/
 
     private lateinit var imageGridView: GridView
     private lateinit var imageAdapter: ImageAdapter
@@ -77,7 +75,7 @@ class AddFragment : Fragment() {
 
         // Inicializa los componentes de la UI
         val addImageButton = view.findViewById<Button>(R.id.add_image_button)
-        imageGridView = view.findViewById<GridView>(R.id.image_gridview)
+        imageGridView = view.findViewById(R.id.image_gridview)
         val nameEditText = view.findViewById<EditText>(R.id.name_edittext)
         val descriptionEditText = view.findViewById<EditText>(R.id.description_edittext)
         val priceEditText = view.findViewById<EditText>(R.id.price_edittext)
@@ -229,35 +227,40 @@ class AddFragment : Fragment() {
                             }
 
                             if (product != null) {
-                                for (image in selectedImages) {
-                                    lifecycleScope.launch(Dispatchers.IO) {
-                                        try {
-                                            val drawable = Glide.with(requireContext())
-                                                .asBitmap()
-                                                .load(image)
-                                                .submit()
-                                                .get()
-                                            if (drawable != null) {
-                                                val stream = ByteArrayOutputStream()
-                                                drawable.compress(Bitmap.CompressFormat.PNG, 100, stream)
-                                                val productImage = ProductImage(
-                                                    null,
-                                                    "imageProduct-" + product.id.toString(),
-                                                    "png",
-                                                    drawable.byteCount.toLong(),
-                                                    stream.toByteArray(),
-                                                    product
-                                                )
-                                                productService.addProductImage(productImage)
+                                lifecycleScope.launch(Dispatchers.IO) {
+                                        for (image in selectedImages) {
+                                            try {
+                                                val drawable = Glide.with(requireContext())
+                                                    .asBitmap()
+                                                    .load(image)
+                                                    .submit()
+                                                    .get()
+                                                if (drawable != null) {
+                                                    val stream = ByteArrayOutputStream()
+                                                    drawable.compress(
+                                                        Bitmap.CompressFormat.PNG,
+                                                        100,
+                                                        stream
+                                                    )
+                                                    val productImage = ProductImage(
+                                                        null,
+                                                        "imageProduct-" + product.id.toString(),
+                                                        "png",
+                                                        drawable.byteCount.toLong(),
+                                                        stream.toByteArray(),
+                                                        product
+                                                    )
+                                                    productService.addProductImage(productImage)
+                                                }
+                                            } catch (e: Exception) {
+                                                Log.e("Error", e.message.toString())
                                             }
-                                        } catch (e: Exception) {
-                                            Log.e("Error", e.message.toString())
                                         }
+                                        val intent = Intent(requireContext(), MainActivity::class.java)
+                                        startActivity(intent)
                                     }
-                                }
                             }
-                            val intent = Intent(requireContext(), MainActivity::class.java)
-                            startActivity(intent)
+
                         }
                     }
                 }
@@ -310,6 +313,7 @@ class AddFragment : Fragment() {
                 .load(images[position])
                 .centerCrop()
                 .into(imageView)
+
 
             imageButton.setOnClickListener {
                 images.removeAt(position)

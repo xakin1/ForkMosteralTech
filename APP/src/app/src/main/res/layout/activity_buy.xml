@@ -1,9 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.activities.productDetail.BuyActivity">
+    android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        android:id="@+id/actionBar"
+        layout="@layout/activity_action_bar"
+        tools:context=".ui.activities.actionBar.ActionBarActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- Contenedor principal -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/actionBar">
+
+        <TextView
+            android:id="@+id/text_comprador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comprador:"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp" />
+
+        <TextView
+            android:id="@+id/text_vendedor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vendedor:"
+            android:textSize="18sp"
+            android:layout_below="@id/text_comprador"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp" />
+
+        <TextView
+            android:id="@+id/text_objeto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Objeto a comprar:"
+            android:textSize="18sp"
+            android:layout_below="@id/text_vendedor"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp" />
+
+        <TextView
+            android:id="@+id/text_precio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Precio: $XX.XX"
+            android:textSize="18sp"
+            android:layout_below="@id/text_objeto"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp" />
+
+        <Button
+            android:id="@+id/btn_comprar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comprar"
+            android:layout_below="@id/text_precio"
+            android:layout_marginTop="24dp"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:id="@+id/btn_cancelar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancelar"
+            android:layout_below="@id/text_precio"
+            android:layout_marginTop="24dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/btn_comprar" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
+
+
+

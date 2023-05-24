@@ -36,7 +36,7 @@
     <View
         style="@style/Divider"
         android:layout_marginTop="5dp"
-        android:layout_below="@id/dateOfMemberShip" />
+        android:layout_below="@id/dateOfMemberShip"/>
 
     <TextView
         android:id="@+id/text_info_verify"
@@ -126,14 +126,16 @@
         android:layout_above="@id/log_out_facebook"
         android:text="sing out"
         android:textColor="@android:color/white"
-        android:onClick="onClick"/>
+        android:onClick="onClick"
+        android:visibility="gone"/>
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/log_out_facebook"
         android:layout_above="@id/delete_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp">
+        android:layout_marginBottom="100dp"
+        android:visibility="gone">
     </com.facebook.login.widget.LoginButton>
 
     <View

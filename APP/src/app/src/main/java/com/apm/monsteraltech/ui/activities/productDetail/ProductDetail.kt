@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
@@ -35,7 +36,7 @@ class ProductDetail : ActionBarActivity() {
         val productDescriptionEditText = findViewById<TextView>(R.id.productDescription)
         val productPriceEditText = findViewById<TextView>(R.id.productPrice)
         val likeButton = findViewById<LottieAnimationView>(R.id.buttonLike)
-        val buyButton = findViewById<LottieAnimationView>(R.id.buttonBuy)
+        val buyButton = findViewById<Button>(R.id.buttonBuy)
 
         var liked = false
         likeButton.setOnClickListener {

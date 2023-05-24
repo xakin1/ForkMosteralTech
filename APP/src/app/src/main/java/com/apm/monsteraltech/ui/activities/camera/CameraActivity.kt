@@ -1,11 +1,11 @@
 package com.apm.monsteraltech.ui.activities.camera
 
+import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -14,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
@@ -99,7 +98,22 @@ class CameraActivity : AppCompatActivity() {
         private const val TAG = "CameraXBasic"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
         private const val REQUEST_CODE_PERMISSIONS = 10
-        private val REQUIRED_PERMISSIONS = arrayOf(android.Manifest.permission.CAMERA, android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        private const val READ_STORAGE_PERMISSION_REQUEST_CODE = 41
+        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE)
+    }
+
+    @Throws(java.lang.Exception::class)
+    fun requestPermissionForReadExtertalStorage() {
+        try {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                READ_STORAGE_PERMISSION_REQUEST_CODE
+            )
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+            throw e
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -119,9 +133,8 @@ class CameraActivity : AppCompatActivity() {
         imageRecyclerView.adapter = imageAdapter
 
 
-
         // Solicitude dos permisos da cámara
-        if (allCameraPermissionsGranted()) {
+        if (allCameraPermissionsGranted() && allStoragePermissionsGranted()) {
             startCamera()
         } else {
             ActivityCompat.requestPermissions(
@@ -173,6 +186,8 @@ class CameraActivity : AppCompatActivity() {
         cameraExecutor = Executors.newSingleThreadExecutor()
 
     }
+
+
 
 
     private fun takePhoto() {
@@ -227,7 +242,11 @@ class CameraActivity : AppCompatActivity() {
 
     private fun allCameraPermissionsGranted(): Boolean {
         return ContextCompat.checkSelfPermission(
-            this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+            this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+    }
+    private fun allStoragePermissionsGranted(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun getOutputDirectory(): File {
