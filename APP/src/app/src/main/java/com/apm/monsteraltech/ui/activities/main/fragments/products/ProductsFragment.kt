@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -32,6 +33,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 import java.util.*
 
 
@@ -151,11 +153,28 @@ class ProductsFragment : Fragment(), Searchable {
                     currentPage ++
                     lifecycleScope.launch(Dispatchers.IO) {
                         // Cargar más elementos y actualizar el adaptador
-                        val newData: LikedProductResponse =
-                            productService.getProductsWithFavourites(user.id,currentPage, pageSize)
-                        productsList.addAll(newData.content)
-                        productRecyclerView.post {
-                            adapterProduct.notifyDataSetChanged()
+                        try{
+                            val newData: LikedProductResponse =
+                                productService.getProductsWithFavourites(user.id,currentPage, pageSize)
+                            productsList.addAll(newData.content)
+                            productRecyclerView.post {
+                                adapterProduct.notifyDataSetChanged()
+                            }
+                        } catch (e: HttpException){
+                            if (e.code() == 404) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "No hay más productos",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                            else {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Ha ocurrido un error inesperado",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         }
                     }
                 }
@@ -177,26 +196,43 @@ class ProductsFragment : Fragment(), Searchable {
         return withContext(lifecycleScope.coroutineContext + Dispatchers.Main) {
             val productList: ArrayList<LikedProduct> = ArrayList()
 
-            // Obtiene las transacciones del usuario
-            val userProducts: LikedProductResponse = productService.getProductsWithFavourites(user.id,0, 10)
-            // Agrega las transacciones del usuario a la lista
-            for (product in userProducts.content) {
-                val state = State.values().find { it.stateString == product.state } ?: State.UNKNOWN
+            try{
+                // Obtiene las transacciones del usuario
+                val userProducts: LikedProductResponse = productService.getProductsWithFavourites(user.id,0, 10)
+                // Agrega las transacciones del usuario a la lista
+                for (product in userProducts.content) {
+                    val state = State.values().find { it.stateString == product.state } ?: State.UNKNOWN
 
-                val productItem = LikedProduct(
-                    product.id,
-                    product.name,
-                    product.price,
-                    product.description,
-                    state.toString(),
-                    product.images,
-                    product.favourite,
-                    product.productOwner)
-                productList.add(productItem)
+                    val productItem = LikedProduct(
+                        product.id,
+                        product.name,
+                        product.price,
+                        product.description,
+                        state.toString(),
+                        product.images,
+                        product.favourite,
+                        product.productOwner)
+                    productList.add(productItem)
+                }
+            } catch (e: HttpException){
+                if (e.code() == 404) {
+                    Toast.makeText(
+                        requireContext(),
+                        "No hay productos",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Ha ocurrido un error inesperado",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
-            // Devuelve la lista completa
-            productList
-        }
+                // Devuelve la lista completa
+                productList
+            }
     }
 
     override fun onSearch(query: String?) {

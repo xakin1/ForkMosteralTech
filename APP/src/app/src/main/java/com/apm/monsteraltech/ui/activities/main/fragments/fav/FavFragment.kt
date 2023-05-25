@@ -82,15 +82,31 @@ class FavFragment : Fragment() {
     private suspend fun getProductList(): ArrayList<LikedProduct> {
         return withContext(lifecycleScope.coroutineContext + Dispatchers.IO) {
             val productList: ArrayList<LikedProduct> = ArrayList()
-
-            // Obtiene las transacciones del usuario
-            val newData: FavouritesResponse =
-                favouriteService.getAllFavouriteProductsOfUser(
-                    user.id,
-                    0, 10
-                )
-            newData.content.forEach { favourites ->
-                productList.add(favourites.product)
+            try{
+                // Obtiene las transacciones del usuario
+                val newData: FavouritesResponse =
+                    favouriteService.getAllFavouriteProductsOfUser(
+                        user.id,
+                        0, 10
+                    )
+                newData.content.forEach { favourites ->
+                    productList.add(favourites.product)
+                }
+            } catch (e: HttpException){
+                if (e.code() == 404) {
+                    Toast.makeText(
+                        requireContext(),
+                        "No hay favoritos",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Ha ocurrido un error inesperado",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
             // Devuelve la lista completa
             productList
