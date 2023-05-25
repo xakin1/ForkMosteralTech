@@ -21,6 +21,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -98,17 +99,19 @@ class DetailedProfileActivity : ActionBarActivity() {
     }
 
     private fun deleteUser() {
-        CoroutineScope(Dispatchers.Main).launch {
-            getUserDataFromDatastore().map { user ->
-                val userId : String = userService.getUserByToken(user.firebaseToken).id
-                val response = userService.deleteUser(userId)
-                if (response.isSuccessful) {
-                    Firebase.auth.currentUser?.delete()
-                    Toast.makeText(this@DetailedProfileActivity, "Usuario eliminado", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@DetailedProfileActivity, LoginActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    Toast.makeText(this@DetailedProfileActivity, "Error al eliminar usuario", Toast.LENGTH_SHORT).show()
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.Main) {
+                getUserDataFromDatastore().collect { userData : User ->
+                    val userId : String = userService.getUserByToken(userData.firebaseToken).id
+                    val response = userService.deleteUser(userId)
+                    if (response.isSuccessful) {
+                        Firebase.auth.currentUser?.delete()
+                        Toast.makeText(this@DetailedProfileActivity, "Usuario eliminado", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@DetailedProfileActivity, LoginActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(this@DetailedProfileActivity, "Error al eliminar usuario", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
