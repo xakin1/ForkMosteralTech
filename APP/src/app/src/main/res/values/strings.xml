@@ -24,6 +24,8 @@
     <string name="nav_fav">Favorites</string>
     <string name="nav_add">Add Product</string>
     <string name="nav_profile">Profile</string>
+    <!-- Strings realted to home -->
+    <string name="outstanding_product">Productos destacados</string>
     <!-- Strings realted to favorites -->
     <string name="title_activity_favorites">Tus productos favoritos</string>
     <string name="action_settings">Settings</string>
