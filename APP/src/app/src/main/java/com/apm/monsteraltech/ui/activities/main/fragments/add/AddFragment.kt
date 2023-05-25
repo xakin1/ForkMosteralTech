@@ -15,8 +15,6 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.graphics.drawable.toBitmap
-import androidx.core.graphics.drawable.toDrawable
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -33,7 +31,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -251,29 +248,22 @@ class AddFragment : Fragment() {
                                 lifecycleScope.launch(Dispatchers.IO) {
                                         for (image in selectedImages) {
                                             try {
-                                                val drawable = Glide.with(requireContext())
-                                                    .asBitmap()
-                                                    .load(image)
-                                                    .submit()
-                                                    .get()
                                                 Glide.with(requireContext())
                                                     .asBitmap()
                                                     .load(image)
+                                                    .apply(RequestOptions.overrideOf(1280, 720))
+                                                    .apply(RequestOptions().encodeQuality(75))
+                                                    .apply(RequestOptions().encodeFormat(Bitmap.CompressFormat.JPEG))
                                                     .into(object : CustomTarget<Bitmap>() {
                                                         override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                                                            val stream = ByteArrayOutputStream()
-                                                            resource.compress(
-                                                                Bitmap.CompressFormat.JPEG,
-                                                                70,
-                                                                stream
-                                                            )
-                                                            val byteArray = stream.toByteArray()
+                                                            var content = resource.byteCount
+                                                            content /= (1024*3) //Esta en MB
                                                             val productImage = ProductImage(
                                                                 null,
                                                                 "imageProduct-" + product.id.toString(),
                                                                 "jpeg",
-                                                                byteArray.size.toLong(),
-                                                                byteArray,
+                                                                content.toLong(),
+                                                                resource,
                                                                 product
                                                             )
                                                             lifecycleScope.launch(Dispatchers.IO) {

@@ -1,5 +1,6 @@
 package com.apm.monsteraltech.data.dto
 
+import android.graphics.Bitmap
 import java.io.Serializable
 
 
@@ -43,7 +44,7 @@ data class ProductImage(
     val name: String?,
     val type: String?,
     val size: Long?,
-    val content: ByteArray?,
+    val content: Bitmap,
     val product: Product?
 ) {
     override fun equals(other: Any?): Boolean {
@@ -56,10 +57,7 @@ data class ProductImage(
         if (name != other.name) return false
         if (type != other.type) return false
         if (size != other.size) return false
-        if (content != null) {
-            if (other.content == null) return false
-            if (!content.contentEquals(other.content)) return false
-        } else if (other.content != null) return false
+        if (content != other.content) return false
         if (product != other.product) return false
 
         return true
@@ -70,7 +68,7 @@ data class ProductImage(
         result = 31 * result + (name?.hashCode() ?: 0)
         result = 31 * result + (type?.hashCode() ?: 0)
         result = 31 * result + (size?.hashCode() ?: 0)
-        result = 31 * result + (content?.contentHashCode() ?: 0)
+        result = 31 * result + (content.hashCode() ?: 0)
         result = 31 * result + (product?.hashCode() ?: 0)
         return result
     }

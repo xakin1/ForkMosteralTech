@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.data.dto.Product
+import com.bumptech.glide.Glide
 
 class AdapterProduct(private var productList: List<Product>): RecyclerView.Adapter<AdapterProduct.ViewHolder>() {
     private lateinit var listener: OnItemClickedListener
@@ -35,13 +36,7 @@ class AdapterProduct(private var productList: List<Product>): RecyclerView.Adapt
             val imageData =
                 product.images?.get(0)?.content
             if (imageData != null) {
-                val imageBytes = Base64.decode(imageData, Base64.DEFAULT) // Decodificar el array de bits desde Base64
-
-                // Crear un objeto Bitmap a partir de los bytes decodificados
-                val bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-
-                // Establecer el Bitmap en el ImageView
-                imageProduct.setImageBitmap(bitmap)
+                Glide.with(itemView.context).load(imageData).into(imageProduct)
             }
             textPrice.text = itemView.context.getString(R.string.product_price, product.price)
             textDescription.text = trimText(product.description.toString())

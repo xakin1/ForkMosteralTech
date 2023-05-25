@@ -169,10 +169,9 @@ class ProfileFragment : Fragment() {
                     recyclerView.getChildAt(position)
                     val intent = Intent(requireContext(), ProductDetail::class.java)
                     val product = adapterProduct.getProduct(position)
-                    intent.putExtra("ProductName", product.name)
-                    intent.putExtra("Owner", product.productOwner?.name)
-                    intent.putExtra("Price", product.price)
-                    intent.putExtra("Description", product.description)
+                    val bundle = Bundle()
+                    bundle.putSerializable("Product", product)
+                    intent.putExtra("bundle", bundle)
                     startActivity(intent)
                 }
             })

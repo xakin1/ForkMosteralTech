@@ -50,14 +50,14 @@ class ProductDetail : ActionBarActivity() {
         setContentView(R.layout.activity_product_detail)
         setToolBar()
 
-        var productId : Long = -1
-
+        var productId : Long
+        productId = -1
         val productNameEditText = findViewById<TextView>(R.id.productTitle)
         var productName: String
         productName = ""
         val productStateEditText = findViewById<TextView>(R.id.productState)
-        var productState : String
-        productState = ""
+        var productState : State
+        productState = State.NEW
         val productDescriptionEditText = findViewById<TextView>(R.id.productDescription)
         var productDescription : String
         productDescription = ""
@@ -101,7 +101,7 @@ class ProductDetail : ActionBarActivity() {
 
             productId = product.id
             productName = product.name
-            productState = product.state
+            productState = State.valueOf(product.state)
             productDescription = product.description.toString()
             productPrice = product.price
             productOwnerButton.text = product.productOwner.name
@@ -115,7 +115,7 @@ class ProductDetail : ActionBarActivity() {
 
             productId = product.id
             productName = product.name
-            productState = product.state
+            productState = State.valueOf(product.state)
             productDescription = product.description.toString()
             productPrice = product.price
             productOwnerButton.text = product.productOwner?.name ?: "Desconocido"
@@ -132,13 +132,12 @@ class ProductDetail : ActionBarActivity() {
         }
 
 
-        val state = productState?.let { State.valueOf(it) }
+        val state = productState
         productStateEditText.text = when(state){
             State.NEW-> this.getString(R.string.product_state, "nuevo")
             State.SEMI_NEW-> this.getString(R.string.product_state, "semi nuevo")
             State.SECOND_HAND-> this.getString(R.string.product_state, "segunda mano")
             State.UNKNOWN -> this.getString(R.string.product_state, "desconocido")
-            else -> ({}).toString()
         }
         productNameEditText.text = productName
         productOwnerButton.text = productOwner?.name
