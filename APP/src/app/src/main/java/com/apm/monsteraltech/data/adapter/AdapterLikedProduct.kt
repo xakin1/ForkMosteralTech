@@ -55,7 +55,7 @@ class AdapterLikedProduct(private var productList: List<LikedProduct>): Recycler
         @SuppressLint("StringFormatMatches")
         fun setData(product: LikedProduct) {
             textProductName.text = product.name
-            var state = State.valueOf(product.state)
+            val state = State.valueOf(product.state)
             textProductStatus.text = when(state){
                 State.NEW-> itemView.context.getString(R.string.product_state, "nuevo")
                 State.SEMI_NEW-> itemView.context.getString(R.string.product_state, "semi nuevo")

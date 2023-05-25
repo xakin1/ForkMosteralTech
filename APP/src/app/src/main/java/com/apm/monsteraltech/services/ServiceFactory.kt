@@ -1,14 +1,9 @@
 package com.apm.monsteraltech.services
 
 import android.util.Log
-//import androidx.viewbinding.BuildConfig
 import com.apm.monsteraltech.BuildConfig
-import com.apm.monsteraltech.enumerados.State
-import com.google.gson.GsonBuilder
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit

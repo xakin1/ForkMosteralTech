@@ -23,10 +23,12 @@
 
         <ImageView
             android:id="@+id/product_image_imageview"
-            android:layout_row="0"
-            android:layout_column="0"
-            android:layout_rowSpan="2"
+            android:layout_width="109dp"
             android:layout_height="match_parent"
+            android:layout_row="0"
+            android:layout_rowSpan="1"
+            android:layout_column="0"
+            android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_launcher_background" />
 
