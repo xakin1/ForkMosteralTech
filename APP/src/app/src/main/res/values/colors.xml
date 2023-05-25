@@ -23,14 +23,14 @@
     <color name="textColorSecondary">#757575</color>
 
     <!-- Modo oscuro -->
-    <color name="colorPrimaryDark">#1A237E</color>
-    <color name="colorPrimaryVariantDark">#000051</color>
+
+    <color name="colorPrimaryDark">#303030</color>
+    <color name="colorPrimaryVariantDark">#212121</color>
     <color name="colorOnPrimaryDark">#FFFFFF</color>
-    <color name="colorSecondaryDark">#FF1744</color>
-    <color name="colorSecondaryVariantDark">#D50000</color>
+    <color name="colorSecondaryDark">#FF4081</color>
+    <color name="colorSecondaryVariantDark">#F50057</color>
     <color name="colorOnSecondaryDark">#FFFFFF</color>
     <color name="textColorPrimaryDark">#FFFFFF</color>
     <color name="textColorSecondaryDark">#BDBDBD</color>
-
 </resources>
 
