@@ -64,7 +64,7 @@
 
 
             <TextView
-                android:id="@+id/buys"
+                android:id="@+id/textPurchases"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -75,7 +75,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/ubication" />
 
             <TextView
-                android:id="@+id/sales"
+                android:id="@+id/textSales"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -83,7 +83,7 @@
                 android:text="Ventas: 8"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/profileImage"
-                app:layout_constraintTop_toBottomOf="@+id/buys" />
+                app:layout_constraintTop_toBottomOf="@+id/textPurchases" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -95,24 +95,24 @@
             android:layout_marginRight="22dp">
 
             <Button
-                android:id="@+id/productButton"
+                android:id="@+id/product_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
                 android:layout_weight="1"
                 android:onClick="onClick"
                 android:text="Productos"
                 android:textColor="@android:color/white" />
 
             <Button
-                android:id="@+id/transactionButton"
+                android:id="@+id/transaccions_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
                 android:layout_weight="1"
+                android:onClick="onClick"
                 android:text="Transacciones"
-                android:layout_marginRight="16dp"
-                android:textColor="@android:color/white"
-                android:onClick="onClick"/>
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
 

@@ -11,8 +11,6 @@ data class LikedProductImage(
     val content: String?,
     val product: Product?
 ) {
-
-
     override fun hashCode(): Int {
         var result = id?.hashCode() ?: 0
         result = 31 * result + (name?.hashCode() ?: 0)

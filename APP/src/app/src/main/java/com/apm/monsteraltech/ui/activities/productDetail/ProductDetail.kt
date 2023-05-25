@@ -145,19 +145,17 @@ class ProductDetail : ActionBarActivity() {
         productDescriptionEditText.text = productDescription
         productPriceEditText.text = productPrice.toString() + " €"
 
-        // Obtener las imágenes del producto desde el servidor
+        // Obtener las imágenes del prºoducto desde el servidor
         CoroutineScope(Dispatchers.Main).launch {
             val productImages = GetImagesOfProducts(productId)
-            if (productImages != null) {
-                // Crear el adaptador del ViewPager
-                val viewPaperAdapter = ViewPaperAdapter(productImages)
+            // Crear el adaptador del ViewPager
+            val viewPaperAdapter = ViewPaperAdapter(productImages)
 
-                // Configurar el ViewPager y los dots
-                val viewPager = findViewById<ViewPager>(R.id.viewPaperImages)
-                val dotsIndicator = findViewById<WormDotsIndicator>(R.id.wormDotsIndicator)
-                viewPager.adapter = viewPaperAdapter
-                dotsIndicator.attachTo(viewPager)
-            }
+            // Configurar el ViewPager y los dots
+            val viewPager = findViewById<ViewPager>(R.id.viewPaperImages)
+            val dotsIndicator = findViewById<WormDotsIndicator>(R.id.wormDotsIndicator)
+            viewPager.adapter = viewPaperAdapter
+            dotsIndicator.attachTo(viewPager)
         }
 
     }

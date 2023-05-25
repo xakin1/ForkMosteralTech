@@ -72,15 +72,6 @@ class ProfileFragment : Fragment() {
             }
         }
 
-
-        if (savedInstanceState != null) {
-            // Si no estan inicializadas
-            //TODO: Mirar estas optimizaciones
-/*            this.productList = (savedInstanceState.getParcelableArrayList<Product>("productList")
-                ?.toList() ?: getProductList()) as ArrayList<Product>
-            this.transactionList = (savedInstanceState.getParcelableArrayList<Transaction>("transactionList")
-                ?.toList() ?: getTransactionList()) as ArrayList<Transaction>*/
-        }
         // Inicializa los botones
         btnProducts = view.findViewById(R.id.products_button)
         btnTransaction = view.findViewById(R.id.transacciones_button)
@@ -157,23 +148,6 @@ class ProfileFragment : Fragment() {
         return view
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        //TODO: revisar si al que haga una transacción en alguna otra actividad esto varia
-        //por lo que a lo mejor esto no renta guardarlo
-        // Only save the Parcelable arrays if they have been initialized
-
-        //Esto lp hacemos en caso de que una de las dos no este inicializada
-        //TODO: mIRAR ESTO
-/*        productList?.let {
-            outState.putParcelableArrayList("productList", it)
-        }*/
-/*        transactionList?.let {
-            outState.putParcelableArrayList("transactionList", it)
-        }*/
-    }
-
-
     private fun updateButtonBackground(button: Button, colorResId: Int) {
         button.setBackgroundColor(ContextCompat.getColor(requireContext(), colorResId))
     }
@@ -184,9 +158,9 @@ class ProfileFragment : Fragment() {
             val pageSize = 10
             if (productList.isNullOrEmpty()) {
                 productList = productList ?: getProductList()
-                adapterProduct = AdapterProductsData(productList!!)
-                recyclerView.adapter = adapterProduct
             }
+            adapterProduct = AdapterProductsData(productList!!)
+            recyclerView.adapter = adapterProduct
 
             //LLamamos a la actividad producto detail
             adapterProduct.setOnItemClickListener(object:

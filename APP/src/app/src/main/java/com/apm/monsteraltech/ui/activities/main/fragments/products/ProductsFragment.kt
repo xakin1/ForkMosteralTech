@@ -181,7 +181,7 @@ class ProductsFragment : Fragment(), Searchable {
             val userProducts: LikedProductResponse = productService.getProductsWithFavourites(user.id,0, 10)
             // Agrega las transacciones del usuario a la lista
             for (product in userProducts.content) {
-                val state = State.values().find { it.stateString == product.state.toString() } ?: State.UNKNOWN
+                val state = State.values().find { it.stateString == product.state } ?: State.UNKNOWN
 
                 val productItem = LikedProduct(
                     product.id,
