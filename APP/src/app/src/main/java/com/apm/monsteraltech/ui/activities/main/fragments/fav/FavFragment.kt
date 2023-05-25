@@ -13,22 +13,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.data.adapter.AdapterLikedProduct
-import com.apm.monsteraltech.data.adapter.AdapterProduct
-import com.apm.monsteraltech.data.adapter.AdapterProductsData
 import com.apm.monsteraltech.data.dto.*
 import com.apm.monsteraltech.services.FavouriteService
-import com.apm.monsteraltech.services.ProductService
 import com.apm.monsteraltech.services.ServiceFactory
 import com.apm.monsteraltech.services.UserService
 import com.apm.monsteraltech.ui.activities.login.login.dataStore
 import com.apm.monsteraltech.ui.activities.productDetail.ProductDetail
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.channels.produce
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.internal.wait
 import retrofit2.HttpException
 
 class FavFragment : Fragment() {
@@ -80,7 +74,7 @@ class FavFragment : Fragment() {
     }
 
     private suspend fun getProductList(): ArrayList<LikedProduct> {
-        return withContext(lifecycleScope.coroutineContext + Dispatchers.IO) {
+        return withContext(lifecycleScope.coroutineContext + Dispatchers.Main) {
             val productList: ArrayList<LikedProduct> = ArrayList()
             try{
                 // Obtiene las transacciones del usuario

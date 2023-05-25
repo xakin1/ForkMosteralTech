@@ -151,7 +151,7 @@ class ProductsFragment : Fragment(), Searchable {
                 // Comprobar si el usuario ha llegado al final de la lista
                 if (!recyclerView.canScrollVertically(1)) {
                     currentPage ++
-                    lifecycleScope.launch(Dispatchers.IO) {
+                    lifecycleScope.launch(Dispatchers.Main) {
                         // Cargar más elementos y actualizar el adaptador
                         try{
                             val newData: LikedProductResponse =
