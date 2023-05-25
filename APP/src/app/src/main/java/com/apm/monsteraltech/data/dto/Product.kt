@@ -1,5 +1,8 @@
 package com.apm.monsteraltech.data.dto
 
+import java.io.Serializable
+
+
 data class LikedProductImage(
     val id: Long?,
     val name: String?,
@@ -75,6 +78,20 @@ data class ProductImage(
     }
 }
 
+data class ProductImageResponse(
+    val content: List<ProductImage>,
+    val pageable: Pageable,
+    val last: Boolean,
+    val totalPages: Int,
+    val totalElements: Long,
+    val size: Int,
+    val number: Int,
+    val numberOfElements: Int,
+    val sort: Sort,
+    val first: Boolean,
+    val empty: Boolean
+)
+
 data class ProductResponse(
     val content: List<Product>,
     val pageable: Pageable,
@@ -112,7 +129,7 @@ data class LikedProduct(
     val images: List<LikedProductImage>?,
     var favourite: Boolean,
     var productOwner: UserProduct
-)
+) : Serializable
 
 data class Product(
     val id: Long,
@@ -121,8 +138,8 @@ data class Product(
     val description: String?,
     val state: String,
     val images: List<ProductImage>?,
-    val owner: User?,
-){
+    val productOwner: UserProduct?,
+) : Serializable {
     constructor(id: Long, name: String, price: Double, description: String?, state: String) :
             this(id, name, price, description, state, null, null)
 }

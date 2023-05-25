@@ -127,10 +127,17 @@ class ProductsFragment : Fragment(), Searchable {
             override fun onItemClick(position: Int) {
                 val product = adapterProduct.getProduct(position)
                 val intent = Intent(context, ProductDetail::class.java)
-                intent.putExtra("Product", product.name)
+                val bundle = Bundle()
+                bundle.putSerializable("Product", product)
+                intent.putExtra("bundle", bundle)
+
+                intent.putExtra("ProductId", product.id)
+                intent.putExtra("ProductName", product.name)
                 intent.putExtra("Owner", product.productOwner.name)
                 intent.putExtra("Price", product.price)
                 intent.putExtra("Description", product.description)
+                intent.putExtra("State", product.favourite)
+                intent.putExtra("Favorite", product.favourite)
                 startActivity(intent)
             }
         })

@@ -19,4 +19,7 @@ interface UserService {
     )
     @PUT("/api/entities/users/{id}")
     suspend fun updateUser( @Path("id") userId: String,@Body user: User): User
+
+    @DELETE("/api/entities/users/{id}")
+    suspend fun deleteUser( @Path("id") userId: String): Response<Void>
 }

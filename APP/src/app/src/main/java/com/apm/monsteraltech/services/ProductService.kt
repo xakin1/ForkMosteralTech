@@ -2,6 +2,7 @@ package com.apm.monsteraltech.services
 
 import com.apm.monsteraltech.data.dto.*
 import com.apm.monsteraltech.enumerados.State
+import retrofit2.Response
 import retrofit2.http.*
 
 interface ProductService {
@@ -46,6 +47,12 @@ interface ProductService {
     suspend fun getAppliancesWithFavourites(@Path("userId") userId: String, @Query("page") page: Number, @Query("size") size: Number,
                                             @Query("minPrice") minPrice: Number, @Query("maxPrice") maxPrice: Number, @Query("state") state: State?
     ): LikedProductResponse
+
+    @GET("/api/entities/productImages/all/{productId}")
+    suspend fun getProductImages(
+        @Path("productId") productId: Long
+    ): Response<ProductImageResponse>
+
 
     @POST("/api/entities/cars")
     suspend fun addCar(

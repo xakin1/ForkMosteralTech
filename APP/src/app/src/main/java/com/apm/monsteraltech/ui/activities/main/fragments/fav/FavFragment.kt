@@ -71,7 +71,8 @@ class FavFragment : Fragment() {
             override fun onItemClick(position: Int) {
                 recyclerView.getChildAt(position)
                 val intent = Intent(requireContext(), ProductDetail::class.java)
-                intent.putExtra("Product", adapterProduct.getProduct(position).name)
+                intent.putExtra("Product", adapterProduct.getProduct(position))
+                intent.putExtra("ProductName", adapterProduct.getProduct(position).name)
                 intent.putExtra("Price", adapterProduct.getProduct(position).price)
                 startActivity(intent)
             }

@@ -1,6 +1,7 @@
 package com.apm.monsteraltech.data.dto
 
 
+import java.io.Serializable
 import java.time.LocalDate
 
 data class UserResponse(
@@ -45,4 +46,4 @@ data class UserProduct(
     val id: String,
     var name: String,
     val surname: String
-)
+) : Serializable

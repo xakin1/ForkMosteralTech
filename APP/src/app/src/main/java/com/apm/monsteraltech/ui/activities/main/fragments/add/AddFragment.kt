@@ -152,7 +152,7 @@ class AddFragment : Fragment() {
 
             progressBar.visibility = View.VISIBLE
 
-            
+
             addImageButton.isEnabled = false
             nameEditText.isEnabled = false
             descriptionEditText.isEnabled = false

@@ -58,6 +58,7 @@ class AdapterTransactionData(
             val itemLink = object : ClickableSpan() {
                 override fun onClick(widget: View) {
                     val intent = Intent(widget.context, ProductDetail::class.java)
+
                     intent.putExtra("Product",item)
                     intent.putExtra("Owner", userCustomer)
                     widget.context.startActivity(intent)

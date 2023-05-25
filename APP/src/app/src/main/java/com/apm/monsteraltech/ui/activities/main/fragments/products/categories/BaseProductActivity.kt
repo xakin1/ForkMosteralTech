@@ -100,7 +100,7 @@ abstract class BaseProductsActivity : ActionBarActivity() {
                         ProductDetail::class.java
                     )
                     val product = adapterProduct.getProduct(position)
-                    intent.putExtra("Product", product.name)
+                    intent.putExtra("Product", product)
                     intent.putExtra("Owner", product.productOwner.name)
                     intent.putExtra("Price", product.price)
                     intent.putExtra("Description", product.description)

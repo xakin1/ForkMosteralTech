@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +15,7 @@ import com.apm.monsteraltech.R
 import com.apm.monsteraltech.data.adapter.AdapterProductsData
 import com.apm.monsteraltech.data.dto.Product
 import com.apm.monsteraltech.data.dto.Transaction
+import com.apm.monsteraltech.data.dto.UserProduct
 import com.apm.monsteraltech.ui.activities.actionBar.ActionBarActivity
 import com.apm.monsteraltech.ui.activities.main.fragments.profile.AdapterTransactionData
 import com.apm.monsteraltech.ui.activities.productDetail.ProductDetail
@@ -34,9 +36,21 @@ class UserDetail : ActionBarActivity() {
         setToolBar()
 
         //TODO: Recoger un id de usuario
-        val productOwner = intent.getStringExtra("Owner")
+
+        val userBundle = intent.getBundleExtra("bundle")
+
+        val user = userBundle?.getSerializable("User") as UserProduct
+        if (user == null) {
+            Toast.makeText(
+                this,
+                "Ha ocurrido un error inesperado",
+                Toast.LENGTH_SHORT
+            ).show()
+            finish()
+        }
+
         val productOwnerEditText = findViewById<TextView>(R.id.profileName)
-        productOwnerEditText.text = productOwner
+        productOwnerEditText.text = user.name + " " + user.surname
 
         // Inicializa los botones
         btnProducts = findViewById(R.id.productButton)
@@ -80,9 +94,10 @@ class UserDetail : ActionBarActivity() {
             override fun onItemClick(position: Int) {
                 recyclerView.getChildAt(position)
                 val intent = Intent(this@UserDetail, ProductDetail::class.java)
-                intent.putExtra("Product", adapterProduct.getProduct(position).name)
-                intent.putExtra("Owner", adapterProduct.getProduct(position).owner?.name)
-                intent.putExtra("Price", adapterProduct.getProduct(position).price)
+                val product = adapterProduct.getProduct(position)
+                val bundle = Bundle()
+                bundle.putSerializable("Product", product)
+                intent.putExtra("bundle", bundle)
                 startActivity(intent)
             }
         })
