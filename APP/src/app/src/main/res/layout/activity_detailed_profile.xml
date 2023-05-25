@@ -105,13 +105,13 @@
         android:src="@drawable/baseline_person_24"/>
     <View
         style="@style/Divider"
-        android:layout_above="@id/text_log_out" />
+        android:layout_below="@id/profile_image" />
 
     <TextView
         android:id="@+id/text_log_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/log_out"
+        android:layout_below="@id/profile_image"
         android:layout_marginTop="10dp"
         android:textSize="30dp"
         android:layout_marginBottom="15dp"
@@ -123,7 +123,10 @@
         android:id="@+id/log_out"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/log_out_facebook"
+        android:layout_below="@id/text_log_out"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="10dp"
         android:text="sing out"
         android:textColor="@android:color/white"
         android:onClick="onClick"
@@ -131,10 +134,12 @@
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/log_out_facebook"
-        android:layout_above="@id/delete_account"
+        android:layout_below="@id/log_out"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="10dp"
         android:visibility="gone">
     </com.facebook.login.widget.LoginButton>
 

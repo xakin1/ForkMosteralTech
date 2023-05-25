@@ -5,12 +5,15 @@ import android.os.Bundle
 import android.view.Menu
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.apm.monsteraltech.ui.activities.actionBar.ActionBarActivity
 import com.apm.monsteraltech.ui.activities.login.login.LoginActivity
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.data.dto.FavouriteRequest
 import com.apm.monsteraltech.data.dto.User
+import com.apm.monsteraltech.services.ServiceFactory
+import com.apm.monsteraltech.services.UserService
 import com.apm.monsteraltech.ui.activities.login.login.dataStore
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -23,6 +26,11 @@ import java.time.format.DateTimeFormatter
 
 
 class DetailedProfileActivity : ActionBarActivity() {
+
+
+    private val serviceFactory = ServiceFactory()
+    private val userService = serviceFactory.createService(UserService::class.java)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailed_profile)
@@ -62,6 +70,14 @@ class DetailedProfileActivity : ActionBarActivity() {
         findViewById<Button>(R.id.log_out).setOnClickListener{
             signOut()
         }
+
+        findViewById<Button>(R.id.log_out_facebook).setOnClickListener{
+            signOut()
+        }
+
+        findViewById<Button>(R.id.delete_account).setOnClickListener{
+            deleteUser()
+        }
     }
 
     private fun signOut() {
@@ -79,6 +95,23 @@ class DetailedProfileActivity : ActionBarActivity() {
             location = null,
             expirationDatefirebaseToken = null
         )
+    }
+
+    private fun deleteUser() {
+        CoroutineScope(Dispatchers.Main).launch {
+            getUserDataFromDatastore().map { user ->
+                val userId : String = userService.getUserByToken(user.firebaseToken).id
+                val response = userService.deleteUser(userId)
+                if (response.isSuccessful) {
+                    Firebase.auth.currentUser?.delete()
+                    Toast.makeText(this@DetailedProfileActivity, "Usuario eliminado", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@DetailedProfileActivity, LoginActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(this@DetailedProfileActivity, "Error al eliminar usuario", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
