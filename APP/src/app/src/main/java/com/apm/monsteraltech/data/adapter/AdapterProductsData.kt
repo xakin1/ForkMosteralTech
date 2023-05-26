@@ -1,5 +1,8 @@
 package com.apm.monsteraltech.data.adapter
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,10 +30,25 @@ class AdapterProductsData(private val productList: ArrayList<com.apm.monsteralte
 
         fun setData(product: Product) {
             textProductName.text = product.name
-            //TODO: Cargar imagenes de los productos aquí
+            if (product.images?.size!! > 0) {
+                val imageData =
+                    product.images[0].content?.let { this.convertStringToBitmap(it) }
+                // Establecer el Bitmap en el ImageView
+                imageProduct.setImageBitmap(imageData)
+            }
             textOwner.text = product.productOwner?.name
             // Si hicieramos "$${product.price}" tendríamos una vulnerabilidad de inyección de código
             textPrice.text = itemView.context.getString(R.string.product_price, product.price)
+        }
+
+        private fun convertStringToBitmap(content: String): Bitmap? {
+            try {
+                val decodedString = Base64.decode(content, Base64.DEFAULT)
+                return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            return null
         }
     }
 
