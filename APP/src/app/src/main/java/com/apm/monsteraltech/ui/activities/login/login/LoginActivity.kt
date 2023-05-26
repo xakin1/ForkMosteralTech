@@ -224,13 +224,8 @@ class LoginActivity : AppCompatActivity() {
                     }
                 } catch (e: HttpException){
                     if (e.code() == 404) {
-      //TODO: MOVER AL USUARIO A UNA PANTALLA PARA QUE  REGISTRE SUS DATOS
-      /*                  userService.addUser(
-                            User(
-                                user.uid,
-                                user.displayName!!, null, idToken, null, null
-                            )*/
-
+                        val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+                        startActivity(intent)
                     }
                     else {
                         Toast.makeText(
@@ -322,12 +317,40 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithCredential:success")
                     val user = auth.currentUser
-                    CoroutineScope(Dispatchers.IO).launch {
-                        userService.getUserById(user?.uid.toString())
-                        updateUI(user)
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        withContext(Dispatchers.Main) {
+                            try {
+                                // Check if the user already exists
+                                val existingUser: User =
+                                    userService.getUserById(user?.uid.toString())
+                                updateUI(user)
+                            } catch (e: HttpException) {
+                                if (e.code() == 404) {
+                                    // User does not exist, add a new user
+                                    val newUser = User(
+                                        user?.uid ?: "",
+                                        user?.displayName ?: "",
+                                        "",
+                                        idToken,
+                                        null,
+                                        null
+                                    )
+                                    userService.addUser(newUser)
+                                    saveUserOnDatastore(newUser.name, "", idToken)
+                                    moveToMainMenu()
+                                } else {
+                                    // Error occurred while checking user or adding a new user
+                                    runOnUiThread {
+                                        Toast.makeText(
+                                            this@LoginActivity,
+                                            "An unexpected error occurred",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+                            }
+                        }
                     }
                 } else {
                     // If sign in fails, display a message to the user.
