@@ -1,21 +1,18 @@
 package com.apm.monsteraltech.ui.activities.productDetail
 
+
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.PagerAdapter
@@ -39,6 +36,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+
 
 class ProductDetail : ActionBarActivity() {
 
@@ -71,8 +69,8 @@ class ProductDetail : ActionBarActivity() {
         var productOwner: UserProduct? = null
         val likeButton = findViewById<LottieAnimationView>(R.id.buttonLike)
         val buyButton = findViewById<Button>(R.id.buttonBuy)
-
-
+        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
+        progressBar.visibility = View.VISIBLE
 
         val productBundle = intent.getBundleExtra("bundle")
 
@@ -153,6 +151,7 @@ class ProductDetail : ActionBarActivity() {
         // Crear el adaptador del ViewPager
         lifecycleScope.launch(Dispatchers.Main) {
             productImages = GetImagesOfProducts(productId)
+            progressBar.visibility = View.GONE
             val viewPaperAdapter = ViewPaperAdapter(productImages)
 
             // Configurar el ViewPager y los dots
@@ -225,47 +224,6 @@ class ProductDetail : ActionBarActivity() {
             e.printStackTrace()
         }
         return null
-    }
-
-    private fun getImagesDrawableFromLikedProduct(productImage: List<LikedProductImage>?) : List<Bitmap> {
-            val images = ArrayList<Bitmap>()
-            if (productImage != null) {
-                if (productImage.isEmpty()) {
-                    return emptyList()
-                }
-                for (image in productImage) {
-                    val bitmapImage = image.content
-                    if (bitmapImage != null) {
-                        val imageData =
-                            bitmapImage.let { this.convertStringToBitmap(it) }
-                        if (imageData != null) {
-                            images.add(imageData)
-                        }
-                    }
-                }
-            }
-            return images
-    }
-
-    private fun getImagesDrawableFromProduct(productImage: List<ProductImage>?) : List<Bitmap> {
-        val images = ArrayList<Bitmap>()
-        if (productImage != null) {
-            if (productImage.isEmpty()) {
-                return emptyList()
-            }
-
-            for (image in productImage) {
-                val bitmapImage = image.content
-                if (bitmapImage != null) {
-                    val imageData =
-                        bitmapImage.let { this.convertStringToBitmap(it) }
-                    if (imageData != null) {
-                        images.add(imageData)
-                    }
-                }
-            }
-        }
-        return images
     }
 
     private suspend fun GetImagesOfProducts(productId : Long): List<Bitmap> {
