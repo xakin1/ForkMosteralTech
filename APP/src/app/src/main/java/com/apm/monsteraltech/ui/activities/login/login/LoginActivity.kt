@@ -184,18 +184,52 @@ class LoginActivity : AppCompatActivity() {
     }
 
     // Método para manejar el token de acceso de Facebook y realizar la autenticación en Firebase
-    private fun handleFacebookAccessToken(token: AccessToken) {
-        val credential = FacebookAuthProvider.getCredential(token.token)
+    private fun handleFacebookAccessToken(idToken: AccessToken) {
+        val credential = FacebookAuthProvider.getCredential(idToken.token)
         FirebaseAuth.getInstance().signInWithCredential(credential)
             .addOnCompleteListener(
                 this
             ) { task: Task<AuthResult?> ->
                 if (task.isSuccessful) {
-                    // Autenticación exitosa en Firebase
-                    val user = FirebaseAuth.getInstance().currentUser
-                    getKeyFromDatabase(user)
+                    val user = auth.currentUser
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        withContext(Dispatchers.Main) {
+                            try {
+                                // Check if the user already exists
+                                val existingUser: User =
+                                    userService.getUserById(user?.uid.toString())
+                                updateUI(user)
+                            } catch (e: HttpException) {
+                                if (e.code() == 404) {
+                                    // User does not exist, add a new user
+                                    val newUser = User(
+                                        user?.uid ?: "",
+                                        user?.displayName ?: "",
+                                        "",
+                                        idToken.token,
+                                        null,
+                                        null
+                                    )
+                                    userService.addUser(newUser)
+                                    saveUserOnDatastore(newUser.name, "", idToken.token)
+                                    moveToMainMenu()
+                                } else {
+                                    // Error occurred while checking user or adding a new user
+                                    runOnUiThread {
+                                        Toast.makeText(
+                                            this@LoginActivity,
+                                            "An unexpected error occurred",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+                            }
+                        }
+                    }
                 } else {
-                    // Error en la autenticación en Firebase
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    updateUI(null)
                 }
             }
     }
