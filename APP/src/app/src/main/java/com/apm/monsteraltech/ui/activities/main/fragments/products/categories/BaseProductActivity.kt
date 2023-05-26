@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
@@ -32,6 +34,8 @@ abstract class BaseProductsActivity : ActionBarActivity() {
     protected var maxPrice : Number = Integer.MAX_VALUE
     protected var state: State? = null
     private lateinit var userId: String
+    protected lateinit var progressBar: ProgressBar
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -114,10 +118,11 @@ abstract class BaseProductsActivity : ActionBarActivity() {
                     super.onScrolled(recyclerView, dx, dy)
 
                     // Comprobar si el usuario ha llegado al final de la lista
-                    if (!recyclerView.canScrollVertically(1)) {
-                        currentPage ++
-                        lifecycleScope.launch(Dispatchers.IO) {
+                    if (dy > 0 && !recyclerView.canScrollVertically(1)) {
+                        lifecycleScope.launch(Dispatchers.Main) {
                             try {
+                                currentPage ++
+                                progressBar.visibility = View.VISIBLE
                                 // Cargar más elementos y actualizar el adaptador
                                 val newData: LikedProductResponse =
                                     getSpecificProducts(
@@ -126,11 +131,13 @@ abstract class BaseProductsActivity : ActionBarActivity() {
                                         pageSize
                                     )
                                 productsList.addAll(newData.content)
+                                progressBar.visibility = View.GONE
                                 productRecyclerView.post {
                                     adapterProduct.notifyDataSetChanged()
                                 }
                             }
                             catch (e: HttpException){
+                                progressBar.visibility = View.GONE
                                 if (e.code() == 404) {
                                     runOnUiThread {
                                         Toast.makeText(
@@ -199,6 +206,7 @@ abstract class BaseProductsActivity : ActionBarActivity() {
                     }
                 }
             }
+            progressBar.visibility = View.GONE
             productList
         }
     }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
@@ -33,11 +34,12 @@ class FavFragment : Fragment() {
     private val favouriteService = serviceFactory.createService(FavouriteService::class.java)
     private val userService = serviceFactory.createService(UserService::class.java)
     private lateinit var user: User
+    private lateinit var progressBar: ProgressBar
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = inflater.inflate(R.layout.fragment_fav, container, false)
-
+        progressBar = view.findViewById(R.id.progressBar)
         // Necesitamos configurar un Layout al Recycler para que funcione
         recyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -55,6 +57,7 @@ class FavFragment : Fragment() {
     }
 
     private suspend fun showProductList() {
+        progressBar.visibility = View.VISIBLE
         this.productsList = getProductList()
         this.adapterProduct = AdapterLikedProduct(productsList)
         withContext(Dispatchers.Main) {
@@ -103,6 +106,7 @@ class FavFragment : Fragment() {
                     ).show()
                 }
             }
+            progressBar.visibility = View.GONE
             // Devuelve la lista completa
             productList
         }

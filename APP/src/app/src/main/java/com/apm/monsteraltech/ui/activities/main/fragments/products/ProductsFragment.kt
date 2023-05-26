@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
@@ -48,6 +49,8 @@ class ProductsFragment : Fragment(), Searchable {
     private val userService = serviceFactory.createService(UserService::class.java)
     private lateinit var user: User
     private var context: Context? = null
+    private lateinit var progressBar: ProgressBar
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -59,6 +62,7 @@ class ProductsFragment : Fragment(), Searchable {
         savedInstanceState: Bundle?
     ): View {
         val view : View = inflater.inflate(R.layout.fragment_products, container, false)
+        progressBar = view.findViewById(R.id.progressBar)
         lifecycleScope.launch(Dispatchers.IO) {
             getUserDataFromDatastore()?.collect { userData: User ->
                 user = userData.firebaseToken.let { userService.getUserByToken(it) }
@@ -73,6 +77,7 @@ class ProductsFragment : Fragment(), Searchable {
     }
 
     private fun setFilters(view: View){
+        progressBar.visibility = View.VISIBLE
         val adapterFilter = AdapterFilters(getFilterList())
 
         //Inicializamos la vista de filtros
@@ -121,8 +126,8 @@ class ProductsFragment : Fragment(), Searchable {
         productRecyclerView = view.findViewById(R.id.recycler_view_products)
         productRecyclerView.adapter = this.adapterProduct
         productRecyclerView.layoutManager = layoutManager
-        var currentPage = 1;
-        var pageSize: Number = 10;
+        var currentPage = 0;
+        val pageSize: Number = 10;
 
         //LLamamos a la actividad producto detail
         adapterProduct.setOnItemClickListener(object: AdapterLikedProduct.OnItemClickedListener{
@@ -141,18 +146,21 @@ class ProductsFragment : Fragment(), Searchable {
                 super.onScrolled(recyclerView, dx, dy)
 
                 // Comprobar si el usuario ha llegado al final de la lista
-                if (!recyclerView.canScrollVertically(1)) {
-                    currentPage ++
+                if (dy > 0 && !recyclerView.canScrollVertically(1)) {
                     lifecycleScope.launch(Dispatchers.Main) {
                         // Cargar más elementos y actualizar el adaptador
                         try{
+                            currentPage ++
+                            progressBar.visibility = View.VISIBLE
                             val newData: LikedProductResponse =
                                 productService.getProductsWithFavourites(user.id,currentPage, pageSize)
                             productsList.addAll(newData.content)
+                            progressBar.visibility = View.GONE
                             productRecyclerView.post {
                                 adapterProduct.notifyDataSetChanged()
                             }
                         } catch (e: HttpException){
+                            progressBar.visibility = View.GONE
                             if (e.code() == 404) {
                                 Toast.makeText(
                                     requireContext(),
@@ -222,6 +230,7 @@ class ProductsFragment : Fragment(), Searchable {
                     ).show()
                 }
             }
+                progressBar.visibility = View.GONE
                 // Devuelve la lista completa
                 productList
             }

@@ -2,6 +2,7 @@ package com.apm.monsteraltech.ui.activities.main.fragments.products.categories
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import androidx.lifecycle.lifecycleScope
 import com.apm.monsteraltech.R
@@ -23,6 +24,8 @@ class ShowCarActivity : BaseProductsActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_car)
         super.recyclerViewProducts = findViewById(R.id.RecyclerViewProducts)
+        super.progressBar = findViewById(R.id.progressBar)
+        progressBar.visibility = View.VISIBLE
         super.context = this@ShowCarActivity
         setToolBar()
         this.getFilters()

@@ -2,6 +2,7 @@ package com.apm.monsteraltech.ui.activities.main.fragments.products.categories
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.data.dto.LikedProductResponse
@@ -20,6 +21,8 @@ class ShowHouseActivity : BaseProductsActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_house)
         super.recyclerViewProducts = findViewById(R.id.RecyclerViewProducts)
+        super.progressBar = findViewById(R.id.progressBar)
+        progressBar.visibility = View.VISIBLE
         super.context = this@ShowHouseActivity
         setToolBar()
         this.getFilters()
