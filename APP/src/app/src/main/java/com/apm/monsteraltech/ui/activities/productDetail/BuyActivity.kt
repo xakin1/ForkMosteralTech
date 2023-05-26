@@ -8,9 +8,9 @@ import android.widget.Toast
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.apm.monsteraltech.R
 import com.apm.monsteraltech.data.dto.*
-import com.apm.monsteraltech.enumerados.State
 import com.apm.monsteraltech.services.ServiceFactory
 import com.apm.monsteraltech.services.TransactionService
+import com.apm.monsteraltech.services.UserService
 import com.apm.monsteraltech.ui.activities.actionBar.ActionBarActivity
 import com.apm.monsteraltech.ui.activities.login.login.dataStore
 import com.apm.monsteraltech.ui.activities.main.MainActivity
@@ -18,6 +18,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.util.Date
 
 
@@ -25,6 +26,7 @@ class BuyActivity : ActionBarActivity() {
 
     private val serviceFactory = ServiceFactory()
     private val transactionService = serviceFactory.createService(TransactionService::class.java)
+    private val userService = serviceFactory.createService(UserService::class.java)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_buy)
@@ -47,7 +49,8 @@ class BuyActivity : ActionBarActivity() {
         val buyerText = findViewById<TextView>(R.id.text_comprador)
         CoroutineScope(Dispatchers.Main).launch {
             getUserDataFromDatastore().collect { userData: User ->
-                buyerUser = userData
+                buyerUser = userService.getUserByToken(userData.firebaseToken)
+
                 buyerText.text = "Comprador: " + userData.name + " " + userData.surname
             }
         }
@@ -64,10 +67,13 @@ class BuyActivity : ActionBarActivity() {
 
 
         buyButton.setOnClickListener {
+            val fecha = Date()
 
+            val formato = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", java.util.Locale.getDefault())
+            val fechaFormateada = formato.format(fecha)
             val transaction : LikedTransaction? = buyerUser?.let { it1 ->
                 LikedTransaction(
-                    date = Date(),
+                    date = fechaFormateada,
                     product = product,
                     seller = product.productOwner,
                     buyer = it1

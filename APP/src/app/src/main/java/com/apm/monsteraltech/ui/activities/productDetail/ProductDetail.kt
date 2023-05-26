@@ -84,6 +84,16 @@ class ProductDetail : ActionBarActivity() {
             finish()
         }
         if (product is LikedProduct) {
+            CoroutineScope(Dispatchers.Main).launch {
+                getUserDataFromDatastore().collect { userData : User ->
+                    val user = userData.firebaseToken.let { userService.getUserByToken(it) }
+                    if (product.productOwner.id == user.id) {
+                        likeButton.visibility = View.GONE
+                        buyButton.visibility = View.GONE
+                    }
+                }
+            }
+
             if (product.favourite) {
                 likeButton.setImageResource(R.drawable.like_full)
             } else {
@@ -101,13 +111,14 @@ class ProductDetail : ActionBarActivity() {
                 startActivity(intent)
             }
 
-            productId = product.id
-            productName = product.name
-            productState = State.valueOf(product.state)
-            productDescription = product.description.toString()
-            productPrice = product.price
-            productOwnerButton.text = product.productOwner.name
-            productOwner = product.productOwner
+
+        productId = product.id
+        productName = product.name
+        productState = State.valueOf(product.state)
+        productDescription = product.description.toString()
+        productPrice = product.price
+        productOwnerButton.text = product.productOwner.name
+        productOwner = product.productOwner
 
 
         } else if (product is Product)
@@ -165,6 +176,17 @@ class ProductDetail : ActionBarActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         return true
+    }
+
+    private fun getUserId() : String {
+        var userId = ""
+        CoroutineScope(Dispatchers.Main).launch {
+            getUserDataFromDatastore().collect { userData : User ->
+                val user = userData.firebaseToken.let { userService.getUserByToken(it) }
+                userId = user.id
+            }
+        }
+        return userId
     }
 
     private fun likeAnimation(imageView: LottieAnimationView,
