@@ -7,9 +7,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.apm.monsteraltech.R
-import com.apm.monsteraltech.data.dto.LikedProduct
-import com.apm.monsteraltech.data.dto.Product
-import com.apm.monsteraltech.data.dto.User
+import com.apm.monsteraltech.data.dto.*
+import com.apm.monsteraltech.enumerados.State
 import com.apm.monsteraltech.services.ServiceFactory
 import com.apm.monsteraltech.services.TransactionService
 import com.apm.monsteraltech.ui.activities.actionBar.ActionBarActivity
@@ -19,6 +18,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import java.util.Date
 
 
 class BuyActivity : ActionBarActivity() {
@@ -33,7 +33,7 @@ class BuyActivity : ActionBarActivity() {
         val productBundle = intent.getBundleExtra("bundle")
 
         val product =  productBundle?.getSerializable("Product") as LikedProduct
-
+        var buyerUser : User? = null
 
         if (product == null) {
          Toast.makeText(
@@ -47,6 +47,7 @@ class BuyActivity : ActionBarActivity() {
         val buyerText = findViewById<TextView>(R.id.text_comprador)
         CoroutineScope(Dispatchers.Main).launch {
             getUserDataFromDatastore().collect { userData: User ->
+                buyerUser = userData
                 buyerText.text = "Comprador: " + userData.name + " " + userData.surname
             }
         }
@@ -64,15 +65,35 @@ class BuyActivity : ActionBarActivity() {
 
         buyButton.setOnClickListener {
 
-            //TODO: Realizar Transacción
+            val transaction : LikedTransaction? = buyerUser?.let { it1 ->
+                LikedTransaction(
+                    date = Date(),
+                    product = product,
+                    seller = product.productOwner,
+                    buyer = it1
+                )
+            }
 
-            Toast.makeText(
-                this,
-                "Compra realizada con éxito",
-                Toast.LENGTH_SHORT
-            ).show()
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            CoroutineScope(Dispatchers.Main).launch {
+                if (transaction != null) {
+                    val response = transactionService.addTransaction(transaction)
+                    if(response.isSuccessful){
+                        Toast.makeText(
+                            this@BuyActivity,
+                            "Compra realizada con éxito",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        val intent = Intent(this@BuyActivity, MainActivity::class.java)
+                        startActivity(intent)
+                    }else{
+                        Toast.makeText(
+                            this@BuyActivity,
+                            "Ha ocurrido un error inesperado",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
         }
 
         cancelButton.setOnClickListener {

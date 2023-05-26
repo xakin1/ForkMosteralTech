@@ -3,6 +3,7 @@ package com.apm.monsteraltech.data.dto
 import com.apm.monsteraltech.enumerados.State
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 data class TransactionsResponse(
     val content: List<Transaction>,
@@ -34,3 +35,10 @@ class Transaction(
         return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
     }
 }
+
+class LikedTransaction(
+    val date: Date,
+    val product: LikedProduct,
+    val seller: UserProduct,
+    val buyer: User,
+)
