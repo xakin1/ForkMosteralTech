@@ -201,9 +201,9 @@ class UserDetail : ActionBarActivity() {
             // Verificar si ya se ha cargado la primera página de transacciones
             if (transactionList.isNullOrEmpty()) {
                 transactionList = getTransactionList()
-                adapterTransaction = AdapterTransactionData(transactionList!!)
-                recyclerView.adapter = adapterTransaction
             }
+            adapterTransaction = AdapterTransactionData(transactionList!!)
+            recyclerView.adapter = adapterTransaction
 
             recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {

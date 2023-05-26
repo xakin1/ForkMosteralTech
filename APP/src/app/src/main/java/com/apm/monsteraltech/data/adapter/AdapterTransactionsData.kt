@@ -32,57 +32,6 @@ class AdapterTransactionData(
 
             val spannableString = SpannableString(transactionMessage)
 
-            val userSellerLink = object : ClickableSpan() {
-                override fun onClick(widget: View) {
-                    val intent = Intent(widget.context, UserDetail::class.java)
-                    intent.putExtra("Owner", userSeller)
-                    widget.context.startActivity(intent)
-
-
-                }
-//          Añadir esto si nos interesa cambiar el color una vez pulsado
-/*                override fun updateDrawState(ds: TextPaint) {
-                    super.updateDrawState(ds)
-                    ds.color = Color.RED
-                }*/
-            }
-
-            val userCustomerLink = object : ClickableSpan() {
-                override fun onClick(widget: View) {
-                    val intent = Intent(widget.context, UserDetail::class.java)
-                    intent.putExtra("Owner", userCustomer)
-                    widget.context.startActivity(intent)
-                }
-            }
-
-            val itemLink = object : ClickableSpan() {
-                override fun onClick(widget: View) {
-                    val intent = Intent(widget.context, ProductDetail::class.java)
-
-                    intent.putExtra("Product",item)
-                    intent.putExtra("Owner", userCustomer)
-                    widget.context.startActivity(intent)
-                }
-            }
-
-            val dateLink = object : ClickableSpan() {
-                override fun onClick(widget: View) {
-                    //TODO: FALTARIÍA VER SI ESTO TIENE QUE SER UN CLICKABLE Y SI SÍ QUE MUESTRA
-                }
-            }
-
-            //  SPAN_EXCLUSIVE_EXCLUSIVE indica que el ClickableSpan solo se aplicará al rango de texto especificado y no se extenderá automáticamente si se agrega más texto alrededor del mismo.
-            spannableString.setSpan(userSellerLink, transactionMessage.indexOf(userSeller), transactionMessage.indexOf(userSeller) + userSeller.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            //Por si hay que cambiarle el color sería así
-            //spannableString.setSpan(ForegroundColorSpan(Color.RED), transactionMessage.indexOf(userSeller), transactionMessage.indexOf(userSeller) + userSeller.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            spannableString.setSpan(userCustomerLink, transactionMessage.indexOf(userCustomer), transactionMessage.indexOf(userCustomer) + userCustomer.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            item.let { transactionMessage.indexOf(it) }.let {
-                spannableString.setSpan(itemLink,
-                    it, transactionMessage.indexOf(item) + item.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            }
-            spannableString.setSpan(dateLink, transactionMessage.indexOf(date.toString()), transactionMessage.indexOf(date.toString()) + date.toString().length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-
-
             transactionMessageTextView.text = spannableString
             // Para hacer que los enlaces sean clickables
             transactionMessageTextView.movementMethod = LinkMovementMethod.getInstance()

@@ -50,7 +50,6 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: ActivityLoginBinding
-    private val EMAIL = "email"
     private lateinit var callbackManager: CallbackManager
     private val serviceFactory = ServiceFactory()
     private val userService = serviceFactory.createService(UserService::class.java)
@@ -165,7 +164,7 @@ class LoginActivity : AppCompatActivity() {
             // Configura el registro de devolución de llamada
             it.registerCallback(callbackManager, object : FacebookCallback<com.facebook.login.LoginResult> {
                 override fun onSuccess(result: com.facebook.login.LoginResult) {
-                    handleFacebookAccessToken(result.accessToken);
+                    handleFacebookAccessToken(result.accessToken)
 
                 }
 
@@ -195,9 +194,6 @@ class LoginActivity : AppCompatActivity() {
                     lifecycleScope.launch(Dispatchers.IO) {
                         withContext(Dispatchers.Main) {
                             try {
-                                // Check if the user already exists
-                                val existingUser: User =
-                                    userService.getUserById(user?.uid.toString())
                                 updateUI(user)
                             } catch (e: HttpException) {
                                 if (e.code() == 404) {
@@ -279,18 +275,6 @@ class LoginActivity : AppCompatActivity() {
             preferences[stringPreferencesKey("userFirebaseKey")] = userFirebaseKey
         }
     }
-    private suspend fun getUserDataFromDatastore()  = this.dataStore.data.map { preferences  ->
-        User(
-            id = "",
-            name = preferences[stringPreferencesKey("userName")].orEmpty(),
-            surname = preferences[stringPreferencesKey("userLastname")].orEmpty(),
-            firebaseToken = preferences[stringPreferencesKey("userFirebaseKey")].orEmpty(),
-            location = null,
-            expirationDatefirebaseToken = null
-        )
-    }
-
-
 
     private fun signInEmailPassword(email: String, password: String) {
         // [START sign_in_with_email]
@@ -300,8 +284,6 @@ class LoginActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithEmail:success")
                     val user = auth.currentUser
-                    val userUid = auth.currentUser.let { it?.uid.toString() }
-                    val userUid2 = Firebase.auth.currentUser.let { it?.uid.toString() }
                     updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
@@ -355,9 +337,6 @@ class LoginActivity : AppCompatActivity() {
                     lifecycleScope.launch(Dispatchers.IO) {
                         withContext(Dispatchers.Main) {
                             try {
-                                // Check if the user already exists
-                                val existingUser: User =
-                                    userService.getUserById(user?.uid.toString())
                                 updateUI(user)
                             } catch (e: HttpException) {
                                 if (e.code() == 404) {

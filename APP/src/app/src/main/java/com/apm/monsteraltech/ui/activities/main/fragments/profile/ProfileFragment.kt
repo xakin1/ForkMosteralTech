@@ -148,10 +148,6 @@ class ProfileFragment : Fragment() {
         return view
     }
 
-    private fun updateButtonBackground(button: Button, colorResId: Int) {
-        button.setBackgroundColor(ContextCompat.getColor(requireContext(), colorResId))
-    }
-
     private suspend fun showProductList() {
         withContext(Dispatchers.Main) {
             var currentPage = 0
@@ -225,9 +221,10 @@ class ProfileFragment : Fragment() {
             // Verificar si ya se ha cargado la primera página de transacciones
             if (transactionList.isNullOrEmpty()) {
                 transactionList = getTransactionList()
+            }
                 adapterTransaction = AdapterTransactionData(transactionList!!)
                 recyclerView.adapter = adapterTransaction
-            }
+
 
             recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {

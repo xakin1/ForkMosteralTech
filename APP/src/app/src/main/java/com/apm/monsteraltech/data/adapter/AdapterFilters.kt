@@ -47,10 +47,6 @@ class AdapterFilters(private val filterList: ArrayList<Filter>) : RecyclerView.A
         return filterList.size
     }
 
-    fun getButton(position: Int): Button {
-        return buttonList[position]
-    }
-
     fun getFilter(position: Int): Filter {
         return filterList[position]
     }
