@@ -54,6 +54,14 @@ class AdapterLikedProduct(private var productList: List<LikedProduct>): Recycler
 
         @SuppressLint("StringFormatMatches")
         fun setData(product: LikedProduct) {
+            CoroutineScope(Dispatchers.Main).launch {
+                getUserDataFromDatastore().collect { userData : User ->
+                    val user = userData.firebaseToken.let { userService.getUserByToken(it) }
+                    if (product.productOwner.id == user.id) {
+                        likeButton.visibility = View.GONE
+                    }
+                }
+            }
             textProductName.text = product.name
             val state = State.valueOf(product.state)
             textProductStatus.text = when(state){
