@@ -2,6 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Monsteral_Tech.iml" filepath="$PROJECT_DIR$/.idea/modules/Monsteral_Tech.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Monsteral_Tech.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Monsteral_Tech.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Monsteral_Tech.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Monsteral_Tech.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Monsteral_Tech.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Monsteral_Tech.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Monsteral_Tech.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Monsteral_Tech.app.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/monsteral-tech.iml" filepath="$PROJECT_DIR$/.idea/monsteral-tech.iml" />
     </modules>
   </component>
