@@ -147,6 +147,60 @@ class AddFragment : Fragment() {
             val km = editTextKm.text.toString()
             val m2 = editTextM2.text.toString()
 
+            if (name.length > 20 || name.isEmpty()) {
+                Toast.makeText(
+                    requireContext(),
+                    "El nombre debe tener como máximo 20 caracteres y como minimo 1",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
+            if (description.length > 100 || description.isEmpty()) {
+                Toast.makeText(
+                    requireContext(),
+                    "La descripción debe tener como máximo 100 caracteres y como minimo 1",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
+            if (selectedImages.isEmpty()) {
+                Toast.makeText(
+                    requireContext(),
+                    "Debes seleccionar al menos una imagen",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
+            if ((price.toDoubleOrNull() ?: 0.0) <= 0) {
+                Toast.makeText(
+                    requireContext(),
+                    "El precio debe ser mayor a 0",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
+            if (category == "Coches" && (km.toIntOrNull() ?: 0) <= 0) {
+                Toast.makeText(
+                    requireContext(),
+                    "Los kilómetros deben ser mayores a 0",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
+            if (category == "Casas" && (m2.toIntOrNull() ?: 0) <= 0) {
+                Toast.makeText(
+                    requireContext(),
+                    "Los metros cuadrados deben ser mayores a 0",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
             progressBar.visibility = View.VISIBLE
 
 
@@ -252,18 +306,22 @@ class AddFragment : Fragment() {
                                                     .asBitmap()
                                                     .load(image)
                                                     .apply(RequestOptions.overrideOf(1280, 720))
-                                                    .apply(RequestOptions().encodeQuality(75))
-                                                    .apply(RequestOptions().encodeFormat(Bitmap.CompressFormat.JPEG))
                                                     .into(object : CustomTarget<Bitmap>() {
                                                         override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                                                            var content = resource.byteCount
-                                                            content /= (1024*3) //Esta en MB
-                                                            val productImage = ProductImage(
+                                                            val stream = ByteArrayOutputStream()
+                                                            resource.compress(
+                                                                Bitmap.CompressFormat.JPEG,
+                                                                70,
+                                                                stream
+                                                            )
+                                                            val byteArray = stream.toByteArray()
+
+                                                            val productImage = ProductImageToDatabase(
                                                                 null,
                                                                 "imageProduct-" + product.id.toString(),
                                                                 "jpeg",
-                                                                content.toLong(),
-                                                                resource,
+                                                                byteArray.size.toLong(),
+                                                                byteArray,
                                                                 product
                                                             )
                                                             lifecycleScope.launch(Dispatchers.IO) {

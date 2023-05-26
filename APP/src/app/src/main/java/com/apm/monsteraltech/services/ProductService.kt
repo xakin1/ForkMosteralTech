@@ -76,7 +76,7 @@ interface ProductService {
 
     @POST("/api/entities/productImages")
     suspend fun addProductImage(
-        @Body productImage: ProductImage
+        @Body productImage: ProductImageToDatabase
     )
 
 }

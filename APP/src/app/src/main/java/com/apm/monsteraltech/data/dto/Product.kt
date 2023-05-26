@@ -1,6 +1,5 @@
 package com.apm.monsteraltech.data.dto
 
-import android.graphics.Bitmap
 import java.io.Serializable
 
 
@@ -11,7 +10,7 @@ data class LikedProductImage(
     val size: Long?,
     val content: String?,
     val product: Product?
-) {
+) : Serializable {
     override fun hashCode(): Int {
         var result = id?.hashCode() ?: 0
         result = 31 * result + (name?.hashCode() ?: 0)
@@ -44,9 +43,9 @@ data class ProductImage(
     val name: String?,
     val type: String?,
     val size: Long?,
-    val content: Bitmap,
+    val content: String?,
     val product: Product?
-) {
+) : Serializable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -58,6 +57,40 @@ data class ProductImage(
         if (type != other.type) return false
         if (size != other.size) return false
         if (content != other.content) return false
+        if (product != other.product) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = id?.hashCode() ?: 0
+        result = 31 * result + (name?.hashCode() ?: 0)
+        result = 31 * result + (type?.hashCode() ?: 0)
+        result = 31 * result + (size?.hashCode() ?: 0)
+        result = 31 * result + (content.hashCode() ?: 0)
+        result = 31 * result + (product?.hashCode() ?: 0)
+        return result
+    }
+}
+
+data class ProductImageToDatabase(
+    val id: Long?,
+    val name: String?,
+    val type: String?,
+    val size: Long?,
+    val content: ByteArray?,
+    val product: Product?
+) : Serializable {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as ProductImage
+
+        if (id != other.id) return false
+        if (name != other.name) return false
+        if (type != other.type) return false
+        if (size != other.size) return false
         if (product != other.product) return false
 
         return true

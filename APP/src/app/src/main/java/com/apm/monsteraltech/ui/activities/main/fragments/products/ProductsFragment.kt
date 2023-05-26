@@ -132,14 +132,6 @@ class ProductsFragment : Fragment(), Searchable {
                 val bundle = Bundle()
                 bundle.putSerializable("Product", product)
                 intent.putExtra("bundle", bundle)
-
-                intent.putExtra("ProductId", product.id)
-                intent.putExtra("ProductName", product.name)
-                intent.putExtra("Owner", product.productOwner.name)
-                intent.putExtra("Price", product.price)
-                intent.putExtra("Description", product.description)
-                intent.putExtra("State", product.favourite)
-                intent.putExtra("Favorite", product.favourite)
                 startActivity(intent)
             }
         })

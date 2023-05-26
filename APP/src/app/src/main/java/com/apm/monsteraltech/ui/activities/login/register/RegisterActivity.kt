@@ -24,6 +24,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -95,14 +96,19 @@ class RegisterActivity : AppCompatActivity() {
 
                         val idToken = result.token.toString()
                         lifecycleScope.launch(Dispatchers.IO) {
-                            createUserDataBase(name, lastName, user.uid, idToken)
+                            withContext(Dispatchers.Main) {
+                                createUserDataBase(name, lastName, user.uid, idToken)
 
-                            saveUserOnDatastore(name, lastName, idToken)
+                                saveUserOnDatastore(name, lastName, idToken)
+                                updateUI(user)
+                            }
+
                         }
                         Log.d(TAG, "GetTokenResult result = $idToken")
+
                     }
 
-                    updateUI(user)
+
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)

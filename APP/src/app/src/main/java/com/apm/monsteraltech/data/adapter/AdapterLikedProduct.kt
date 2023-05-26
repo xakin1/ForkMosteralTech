@@ -65,7 +65,6 @@ class AdapterLikedProduct(private var productList: List<LikedProduct>): Recycler
             if (product.images?.size!! > 0) {
                 val imageData =
                     product.images[0].content?.let { this.convertStringToBitmap(it) }
-
                 // Establecer el Bitmap en el ImageView
                 imageProduct.setImageBitmap(imageData)
             }

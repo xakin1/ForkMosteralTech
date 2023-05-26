@@ -2,10 +2,12 @@ package com.apm.monsteraltech.ui.activities.productDetail
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.Menu
 import android.view.View
@@ -15,7 +17,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.airbnb.lottie.LottieAnimationView
@@ -50,6 +52,7 @@ class ProductDetail : ActionBarActivity() {
         setContentView(R.layout.activity_product_detail)
         setToolBar()
 
+        var productImages : List<Bitmap> = emptyList()
         var productId : Long
         productId = -1
         val productNameEditText = findViewById<TextView>(R.id.productTitle)
@@ -68,6 +71,7 @@ class ProductDetail : ActionBarActivity() {
         var productOwner: UserProduct? = null
         val likeButton = findViewById<LottieAnimationView>(R.id.buttonLike)
         val buyButton = findViewById<Button>(R.id.buttonBuy)
+
 
 
         val productBundle = intent.getBundleExtra("bundle")
@@ -119,6 +123,8 @@ class ProductDetail : ActionBarActivity() {
             productDescription = product.description.toString()
             productPrice = product.price
             productOwnerButton.text = product.productOwner?.name ?: "Desconocido"
+
+
         }
 
 
@@ -144,10 +150,9 @@ class ProductDetail : ActionBarActivity() {
         productDescriptionEditText.text = productDescription
         productPriceEditText.text = productPrice.toString() + " €"
 
-        // Obtener las imágenes del prºoducto desde el servidor
-        CoroutineScope(Dispatchers.Main).launch {
-            val productImages = GetImagesOfProducts(productId)
-            // Crear el adaptador del ViewPager
+        // Crear el adaptador del ViewPager
+        lifecycleScope.launch(Dispatchers.Main) {
+            productImages = GetImagesOfProducts(productId)
             val viewPaperAdapter = ViewPaperAdapter(productImages)
 
             // Configurar el ViewPager y los dots
@@ -212,30 +217,83 @@ class ProductDetail : ActionBarActivity() {
         )
     }
 
-    private suspend fun GetImagesOfProducts(productId : Long): List<Drawable> {
-        val imagenes = ArrayList<Drawable>()
+    private fun convertStringToBitmap(content: String): Bitmap? {
         try {
+            val decodedString = Base64.decode(content, Base64.DEFAULT)
+            return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
+    }
+
+    private fun getImagesDrawableFromLikedProduct(productImage: List<LikedProductImage>?) : List<Bitmap> {
+            val images = ArrayList<Bitmap>()
+            if (productImage != null) {
+                if (productImage.isEmpty()) {
+                    return emptyList()
+                }
+                for (image in productImage) {
+                    val bitmapImage = image.content
+                    if (bitmapImage != null) {
+                        val imageData =
+                            bitmapImage.let { this.convertStringToBitmap(it) }
+                        if (imageData != null) {
+                            images.add(imageData)
+                        }
+                    }
+                }
+            }
+            return images
+    }
+
+    private fun getImagesDrawableFromProduct(productImage: List<ProductImage>?) : List<Bitmap> {
+        val images = ArrayList<Bitmap>()
+        if (productImage != null) {
+            if (productImage.isEmpty()) {
+                return emptyList()
+            }
+
+            for (image in productImage) {
+                val bitmapImage = image.content
+                if (bitmapImage != null) {
+                    val imageData =
+                        bitmapImage.let { this.convertStringToBitmap(it) }
+                    if (imageData != null) {
+                        images.add(imageData)
+                    }
+                }
+            }
+        }
+        return images
+    }
+
+    private suspend fun GetImagesOfProducts(productId : Long): List<Bitmap> {
+        val imagenes = ArrayList<Bitmap>()
+        try {
+
             val response = productService.getProductImages(productId)
             if (response.isSuccessful) {
                 val productImages = response.body()!!
                 productImages.content.forEach { productImage ->
-                    val image = Glide.with(this)
-                        .load(productImage.content).submit().get()
-                    imagenes.add(image)
+                    val bitmapImage = productImage.content
+                    if (bitmapImage != null) {
+                        val imageData =
+                            bitmapImage.let { this.convertStringToBitmap(it) }
+                        if (imageData != null) {
+                            imagenes.add(imageData)
+                        }
+                    }
                 }
             }
         } catch (e: Exception) {
             Log.e("Error", e.message.toString())
         }
-
-        if (imagenes.isEmpty()) {
-            getDrawable(R.drawable.recyclerbin)?.let { imagenes.add(it) }
-        }
         return imagenes
     }
 
 
-    private class ViewPaperAdapter(private val imagenes: List<Drawable>) :
+    private class ViewPaperAdapter(private val imagenes: List<Bitmap>) :
         PagerAdapter() {
 
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
@@ -245,7 +303,6 @@ class ProductDetail : ActionBarActivity() {
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
             imageView.adjustViewBounds = true
-            imageView.setImageDrawable(imagenes[position])
             Glide.with(container.context)
                 .load(imagenes[position])
                 .centerCrop()
